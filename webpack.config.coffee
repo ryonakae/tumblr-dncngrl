@@ -1,6 +1,7 @@
 webpack = require 'webpack'
 BowerWebpackPlugin = require 'bower-webpack-plugin'
 path = require 'path'
+koutoSwiss = require('kouto-swiss').includePaths
 
 module.exports =
   # entry: ''
@@ -10,13 +11,23 @@ module.exports =
 
   resolve:
     root: [path.join(__dirname, 'bower_components')]
-    moduleDirectories: ['bower_components']
+    moduleDirectories: ['bower_components', 'node_modules']
     extensions: ['', '.js', '.jsx', '.coffee']
 
   module:
     loaders: [
-      { test: /\.coffee$/, loader: 'coffee' },
-      { test: /\.jsx$/, loader: 'jsx-loader' }
+      {
+        test: /\.coffee$/
+        loader: 'coffee-loader'
+      }
+      {
+        test: /\.jsx$/
+        loader: 'jsx-loader?harmony'
+      }
+      {
+        test: /\.styl$/
+        loader: 'style-loader!css-loader!stylus-loader!autoprefixer-loader?{browsers:["last 2 version"]}'
+      }
     ]
 
   plugins: [

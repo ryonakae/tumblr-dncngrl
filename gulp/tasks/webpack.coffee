@@ -13,7 +13,7 @@ gulp.task 'webpack', ->
     .src config.source.javascripts + 'main.jsx'
     .pipe plumber()
     .pipe webpack require '../../webpack.config.coffee'
-    # .pipe uglify
-    #   preserveComments: saveLicense
+    .pipe uglify
+      preserveComments: saveLicense
     .pipe gulp.dest config.build.javascripts
     .pipe browserSync.stream()
