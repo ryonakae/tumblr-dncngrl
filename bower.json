@@ -1,0 +1,16 @@
+{
+  "name": "tumblr-dncngrl",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ryonakae/tumblr-dncngrl",
+  "authors": [
+    "RYO NAKAE <ryo.n.1129@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
