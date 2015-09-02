@@ -5,9 +5,9 @@ runSequence  = require 'run-sequence'
 
 # Default Task
 gulp.task 'watch', ->
-  runSequence 'cleanBuild', ['jade', 'webpack'], 'browserSync'
+  runSequence 'cleanBuild', 'imageSprite', 'imageMin', ['jade', 'webpack']
 
   gulp.watch config.source.root + '**/*.jade', ['jade']
   gulp.watch config.source.stylesheets + '**/*.styl', ['webpack']
   gulp.watch config.source.javascripts + '**/*.jsx', ['webpack']
-  # gulp.watch config.source.iamges + '*', ['imageMin']
+  gulp.watch config.source.iamges + '*', ['imageMin']
