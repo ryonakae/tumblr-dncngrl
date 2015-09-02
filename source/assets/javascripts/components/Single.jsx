@@ -31,7 +31,10 @@ var Single = React.createClass({
       .get(tumblrUrl)
       .query({
         api_key: apiKey,
-        id: params.id
+        id: params.id,
+        reblog_info: true,
+        notes_info: true,
+        format: 'html'
       })
       .jsonp()
       .end(function(err, data){
