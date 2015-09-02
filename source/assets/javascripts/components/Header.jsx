@@ -30,7 +30,7 @@ var Header = React.createClass({
               <Link to={'/about'}>ABOUT</Link>
             </li>
             <li className="header__naviItem">
-              <Link to={'/archive'}>ARCHIVE</Link>
+              <a href="/archive">ARCHIVE</a>
             </li>
           </ul>
         </div>

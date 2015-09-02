@@ -21,7 +21,10 @@ var ArticleList = React.createClass({
       .get(this.props.url)
       .query({
         api_key: this.props.apiKey,
-        limit: this.props.limit
+        limit: this.props.limit,
+        reblog_info: false,
+        notes_info: false,
+        format: 'html'
       })
       .jsonp()
       .end(function(err, data){
@@ -31,7 +34,7 @@ var ArticleList = React.createClass({
         this.setState({
           data: data.body.response.posts
         });
-        console.log(this.state.data);
+        console.log(data.body.response);
       }.bind(this));
   },
 
