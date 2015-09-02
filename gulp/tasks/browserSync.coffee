@@ -7,6 +7,6 @@ browserSync = require 'browser-sync'
 gulp.task 'browserSync', ->
   browserSync.init
     open: false
-    notify: false
+    notify: true
     server:
       baseDir: config.build.root
