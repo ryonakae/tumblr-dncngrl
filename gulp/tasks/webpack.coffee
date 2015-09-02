@@ -4,6 +4,7 @@ webpack = require 'gulp-webpack'
 plumber = require 'gulp-plumber'
 uglify = require 'gulp-uglify'
 saveLicense = require 'uglify-save-license'
+browserSync = require 'browser-sync'
 
 
 # webpack
@@ -15,3 +16,4 @@ gulp.task 'webpack', ->
     .pipe uglify
       preserveComments: saveLicense
     .pipe gulp.dest config.build.javascripts
+    .pipe browserSync.stream()

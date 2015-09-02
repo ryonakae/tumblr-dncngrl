@@ -1,6 +1,5 @@
 webpack = require 'webpack'
 BowerWebpackPlugin = require 'bower-webpack-plugin'
-BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 path = require 'path'
 
 module.exports =
@@ -44,17 +43,11 @@ module.exports =
       jQuery: "jquery"
       $: "jquery"
       jquery: "jquery"
-
-    # BrowserSync
-    new BrowserSyncPlugin
-      open: false
-      notify: true
-      host: 'localhost'
-      port: 3000
-      server:
-        baseDir: 'build/'
   ]
+
+  externals:
+    'react': 'React'
 
   devtool: 'inline-source-map'
 
-  watch: true
+  # watch: true
