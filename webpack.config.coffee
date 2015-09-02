@@ -1,7 +1,7 @@
 webpack = require 'webpack'
 BowerWebpackPlugin = require 'bower-webpack-plugin'
+BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 path = require 'path'
-koutoSwiss = require('kouto-swiss').includePaths
 
 module.exports =
   # entry: ''
@@ -28,16 +28,33 @@ module.exports =
         test: /\.styl$/
         loader: 'style-loader!css-loader!stylus-loader!autoprefixer-loader?{browsers:["last 2 version"]}'
       }
+      {
+        test: /\.(png|woff)$/
+        loader: 'url-loader'
+      }
     ]
 
   plugins: [
+    # Bower
     new BowerWebpackPlugin()
+
     # jQueryをグローバルに出す
     # requireしなくてもjQueryが使える
     new webpack.ProvidePlugin
       jQuery: "jquery"
       $: "jquery"
       jquery: "jquery"
+
+    # BrowserSync
+    new BrowserSyncPlugin
+      open: false
+      notify: true
+      host: 'localhost'
+      port: 3000
+      server:
+        baseDir: 'build/'
   ]
 
   devtool: 'inline-source-map'
+
+  watch: true

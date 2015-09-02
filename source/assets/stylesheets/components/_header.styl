@@ -1,3 +1,72 @@
+@import '../_config'
+@import '../_sprite'
+
+
+.header
+  background-color $color_bg_inverse
+  margin 20px 0 0 20px
+  padding 20px 0 0 40px
+  width calc('100%-20px')
+  height 210px
+
+.header__inner
+  clearfix()
+  border-bottom 1px solid $color_border_light
+  padding-bottom 18px
+
+
 .header__title
+  float left
+  margin 0
+
+.header__titleLink
+  display block
+  hide-text()
+  retinaSprite($logo_group)
+
+
+.header_sns
+  float right
+  clearfix()
+  list-style-type none
+  margin 5px 50px 0 0
+  padding 0
+
+.header__snsItem
+  float left
+  margin 0
+  padding 0
+  width 30px
+  height 30px
+  text-align center
+  line-height 32px
+  border 1px solid $color_border_default
+
+  &:first-child
+    border-right none
+
+.header__snsItemLink
+  hide-text()
+  display inline-block
+
+  &--twitter
+    retinaSprite($icon_header_twitter_group)
+
+  &--pixiv
+    retinaSprite($icon_header_pixiv_group)
+
+
+.header__navi
+  float right
+  list-style-type none
+  margin 14px 0 0 0
+  padding 0
+  clearfix()
+
+.header__naviItem
+  float left
+  margin-right 40px
+
   a
+    color inherit
     text-decoration none

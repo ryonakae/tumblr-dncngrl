@@ -1,14 +1,17 @@
 @import '../../../node_modules/kouto-swiss/index'
+@import '_config'
 
 normalize()
+box-sizing-reset()
 
 body
-  background-color #f0f0f0
-  color #666
-  font-size 12px
+  font-family $fontFamily
+  font-size $fontSize_default
+  background-color $color_bg_default
+  color $color_text_default
 
 a
-  color #8dcddb
+  color $color_text_link
 
   &:hover
     opacity 0.7
