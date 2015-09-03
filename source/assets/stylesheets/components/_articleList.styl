@@ -1,5 +1,41 @@
+@import '../_config'
+@import '../_sprite'
+
 .articleList
-  &__item
-    &Title
-      a
-        text-decoration none
+  clearfix()
+
+.articleList__item
+  position relative
+  margin-top 90px
+
+  &:first-child
+    margin-top 0
+
+  &:nth-child(odd)
+    float left
+
+    .articleList__itemInfo
+      left 500 - 35px
+
+  &:nth-child(even)
+    float right
+
+    .articleList__itemInfo
+      right 500 - 35px
+
+.articleList__itemImage
+  width 500px
+  display block
+
+  img
+    width 100%
+    height auto
+    vertical-align top
+
+.articleList__itemInfo
+  position absolute
+  bottom 40px
+
+.articleList__itemInfoContent
+  background-color $color_bg_inverse
+  width 300px
