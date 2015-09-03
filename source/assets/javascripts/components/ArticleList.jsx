@@ -1,8 +1,14 @@
 'use strict';
 
 var React = require('react');
+var config = require('../config');
 var request = require('superagent');
 require('superagent-jsonp')(request);
+
+// tumblr api
+var tumblrUrl = config.tumblrUrl;
+var apiKey = config.apiKey;
+var limit = 5;
 
 // components
 var ArticleListItem = require('./ArticleListItem');
@@ -19,11 +25,11 @@ module.exports = React.createClass({
   // Ajax
   loadAjax: function(){
     request
-      .get(this.props.url)
+      .get(tumblrUrl)
       .query({
-        api_key: this.props.apiKey,
-        limit: this.props.limit,
-        offset: this.state.page * this.props.limit - this.props.limit,
+        api_key: apiKey,
+        limit: limit,
+        offset: this.state.page * limit - limit,
         reblog_info: false,
         notes_info: false,
         format: 'html'
@@ -70,20 +76,52 @@ module.exports = React.createClass({
     // 1ページ目のデータを取得
     this.loadAjax();
 
-    // スクロールイベントを追加
+    // windowにイベントを追加
     window.addEventListener('scroll', this.nextPage);
+    window.addEventListener('resize', this.nextPage);
   },
 
   // レンダリング
   render: function(){
+    // ArticleListItemコンポーネントを配列分作成し、
+    // データを子コンポーネント(ArticleListItem)に渡す
     var articleNodes = this.state.data.map(function(article){
-      return (
-        <ArticleListItem title={article.title} date={article.date} slug={article.slug} body={article.body} id={article.id} key={article.id} />
-      );
+      // 投稿タイプがtextのとき
+      if (article.type === 'text') {
+        return (
+          <ArticleListItem
+            title={article.title}
+            date={article.date}
+            slug={article.slug}
+            body={article.body}
+            id={article.id}
+            key={article.id}
+            type={article.type}
+            noteCount={article.note_count}
+          />
+        );
+      }
+
+      // 投稿タイプがphotoのとき
+      else if (article.type === 'photo') {
+        return (
+          <ArticleListItem
+            title={article.title}
+            date={article.date}
+            slug={article.slug}
+            body={article.body}
+            id={article.id}
+            key={article.id}
+            type={article.type}
+            noteCount={article.note_count}
+            photos={article.photos}
+          />
+        );
+      }
     });
 
     return (
-      <div className="entryList" onScroll={this.nextPage}>
+      <div className="articleList" onScroll={this.nextPage} onResize={this.nextPage}>
         {articleNodes}
       </div>
     );
