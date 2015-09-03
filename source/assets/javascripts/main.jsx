@@ -14,7 +14,7 @@ var Redirect = Router.Redirect;
 
 // components
 var App = require('./components/App');
-var Article = require('./components/Article');
+var Index = require('./components/Index');
 var Single = require('./components/Single');
 var About = require('./components/About');
 var NotFound = require('./components/NotFound');
@@ -22,7 +22,7 @@ var NotFound = require('./components/NotFound');
 // routes
 var routes = (
   <Route name="App" path="/" handler={App}>
-    <DefaultRoute handler={Article} />
+    <DefaultRoute handler={Index} />
 
     <Route name="Single" path='/post/:id/:slug' handler={Single} />
 
@@ -34,6 +34,7 @@ var routes = (
 
 // render
 Router.run(routes, Router.HistoryLocation, function(Handler){
+// Router.run(routes, function(Handler){
   React.render(
     <Handler />, document.body
   );

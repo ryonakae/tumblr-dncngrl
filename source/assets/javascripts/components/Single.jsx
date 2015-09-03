@@ -12,7 +12,7 @@ require('superagent-jsonp')(request);
 var tumblrUrl = config.tumblrUrl;
 var apiKey = config.apiKey;
 
-var Single = React.createClass({
+module.exports = React.createClass({
   // mixin
   mixins: [ State ],
 
@@ -67,5 +67,3 @@ var Single = React.createClass({
     );
   }
 });
-
-module.exports = Single;

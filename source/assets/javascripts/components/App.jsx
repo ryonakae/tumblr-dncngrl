@@ -8,7 +8,7 @@ var RouteHandler = Router.RouteHandler;
 var Header = require('./Header');
 var Footer = require('./Footer');
 
-var App = React.createClass({
+module.exports = React.createClass({
   render: function(){
     return (
       <div className='app'>
@@ -19,5 +19,3 @@ var App = React.createClass({
     );
   }
 });
-
-module.exports = App;

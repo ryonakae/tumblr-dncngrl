@@ -11,14 +11,12 @@ var tumblrUrl = config.tumblrUrl;
 var apiKey = config.apiKey;
 var limit = 5;
 
-var Article = React.createClass({
+module.exports = React.createClass({
   render: function(){
     return (
-      <div className="article">
+      <div className="article article--index">
         <ArticleList url={tumblrUrl} apiKey={apiKey} limit={limit} />
       </div>
     );
   }
 });
-
-module.exports = Article;

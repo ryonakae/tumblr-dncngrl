@@ -1,0 +1,20 @@
+@import '../_config'
+@import '../_sprite'
+
+.article
+  width 900px
+  margin 0 auto
+
+
+.article--index
+  position relative
+  margin-top -40px
+
+  &:after
+    content ''
+    position absolute
+    retinaSprite($copy_group)
+    top -35px
+    right 0
+    z-index 100
+    pointer-events none
