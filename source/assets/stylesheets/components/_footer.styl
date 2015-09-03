@@ -1,0 +1,70 @@
+@import '../_config'
+@import '../_sprite'
+
+
+.footer
+  margin 90px 0 40px 60px
+  border-bottom 1px solid $color_border_default
+  padding-bottom 30px
+  clearfix()
+
+
+.footer__logo
+  float left
+
+  a
+    display block
+    hide-text()
+    retinaSprite($logo_footer_group)
+
+
+.footer_sns
+  float left
+  list-style-type none
+  margin 0
+  padding 0
+  clearfix()
+
+.footer_snsItem
+  float left
+  margin-left 10px
+
+  a
+    display block
+    width 150px
+    height 40px
+    background-color $color_bg_inverse
+    line-height 40px
+    position relative
+    padding-left 20px
+    font-size $fontSize_xsmall
+    color $color_text_sub
+
+    &:after
+      content ''
+      position absolute
+      right 20px
+      top 50%
+      transform: translateY(-50%)
+
+  &--twitter
+    a:after
+      retinaSprite($icon_footer_twitter_group)
+
+  &--pixiv
+    a:after
+      retinaSprite($icon_footer_pixiv_group)
+
+
+.footer__backTop
+  float right
+  retinaSprite($icon_arrow_backtop_group)
+  margin 15px 50px 0 0
+
+
+.footer__copyright
+  float right
+  text-align right
+  font-size $fontSize_xsmall
+  color $color_text_sub
+  margin 5px 20px 0 0

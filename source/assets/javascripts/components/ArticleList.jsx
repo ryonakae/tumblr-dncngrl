@@ -7,7 +7,7 @@ require('superagent-jsonp')(request);
 // components
 var ArticleListItem = require('./ArticleListItem');
 
-var ArticleList = React.createClass({
+module.exports = React.createClass({
   // 初期化
   getInitialState: function(){
     return {
@@ -58,5 +58,3 @@ var ArticleList = React.createClass({
     );
   }
 });
-
-module.exports = ArticleList;

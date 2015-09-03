@@ -5,7 +5,7 @@ var Router = require('react-router');
 var Link = Router.Link;
 var moment = require('moment');
 
-var ArticleListItem = React.createClass({
+module.exports = React.createClass({
   render: function(){
     return (
       <div className="entryList__item">
@@ -19,5 +19,3 @@ var ArticleListItem = React.createClass({
     );
   }
 });
-
-module.exports = ArticleListItem;

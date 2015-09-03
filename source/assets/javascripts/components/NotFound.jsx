@@ -2,7 +2,7 @@
 
 var React = require('react');
 
-var NotFound = React.createClass({
+module.exports = React.createClass({
   render: function(){
     return (
       <div className="article article--notFound">
@@ -11,5 +11,3 @@ var NotFound = React.createClass({
     );
   }
 });
-
-module.exports = NotFound;
