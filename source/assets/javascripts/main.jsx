@@ -1,8 +1,5 @@
 'use strict';
 
-// load stylus
-require('../stylesheets/style.styl');
-
 var React = require('react');
 var Router = require('react-router');
 var Route = Router.Route;
@@ -33,8 +30,8 @@ var routes = (
 );
 
 // render
-Router.run(routes, Router.HistoryLocation, function(Handler){
-// Router.run(routes, function(Handler){
+// Router.run(routes, Router.HistoryLocation, function(Handler){
+Router.run(routes, function(Handler){
   React.render(
     <Handler />, document.body
   );

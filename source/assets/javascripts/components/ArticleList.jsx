@@ -4,6 +4,7 @@ var React = require('react');
 var config = require('../config');
 var request = require('superagent');
 require('superagent-jsonp')(request);
+require('jquery');
 
 // tumblr api
 var tumblrUrl = config.tumblrUrl;
