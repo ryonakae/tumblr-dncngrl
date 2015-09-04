@@ -20,6 +20,9 @@
   "overrides": {
     "react": {
       "main": "react-with-addons.min.js"
+    },
+    "jquery": {
+      "main": "dist/jquery.min.js"
     }
   }
 }

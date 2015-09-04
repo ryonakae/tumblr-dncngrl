@@ -1,8 +1,5 @@
 'use strict';
 
-// load stylus
-require('../stylesheets/style.styl');
-
 var React = require('react');
 var Router = require('react-router');
 var Route = Router.Route;
