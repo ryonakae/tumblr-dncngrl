@@ -4,7 +4,8 @@
   "description": "Tumblr theme of Dancing GIrl.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watchify": "watchify --verbose --debug --extension=.jsx -t reactify source/assets/javascripts/main.jsx -o build/assets/javascripts/bundle.js"
   },
   "repository": {
     "type": "git",
