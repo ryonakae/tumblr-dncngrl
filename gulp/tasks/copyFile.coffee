@@ -7,8 +7,7 @@ browserSync = require 'browser-sync'
 gulp.task 'copyFile', ->
   gulp.src(
     [
-      # config.source.root + 'index.html'
-      # config.source.fonts + '**/*'
+      config.source.fonts + '**/*'
     ]
     base: config.source.root
   )
