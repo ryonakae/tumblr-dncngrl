@@ -9,15 +9,15 @@ autoprefixer = require 'autoprefixer-stylus'
 koutoSwiss = require 'kouto-swiss'
 
 
-# stylus
 gulp.task 'stylus', ->
   gulp
     .src [
       config.source.stylesheets + '**/*.styl'
       '!' + config.source.stylesheets + '**/_*.styl'
     ]
-    .pipe sourcemaps.init()
     .pipe plumber()
+    .pipe sourcemaps.init
+      loadMaps: true
     .pipe stylus
       use: [
         koutoSwiss()
@@ -28,6 +28,6 @@ gulp.task 'stylus', ->
         "include css": true
     .pipe minifyCss
       keepSpecialComments: 0
-    .pipe sourcemaps.write '.'
+    .pipe sourcemaps.write './'
     .pipe gulp.dest config.build.stylesheets
     .pipe browserSync.stream()

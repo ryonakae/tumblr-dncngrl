@@ -8,5 +8,6 @@ gulp.task 'inline', ->
     .pipe inline
       compress: false
       inlineJS: true
+      inlineCSS: true
       pretty: true
     .pipe gulp.dest 'build/'
