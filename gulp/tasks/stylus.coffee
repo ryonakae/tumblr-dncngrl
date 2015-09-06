@@ -7,6 +7,7 @@ browserSync = require 'browser-sync'
 minifyCss = require 'gulp-minify-css'
 autoprefixer = require 'autoprefixer-stylus'
 koutoSwiss = require 'kouto-swiss'
+base64 = require 'gulp-base64'
 
 
 gulp.task 'stylus', ->
@@ -26,6 +27,10 @@ gulp.task 'stylus', ->
       ]
       set:
         "include css": true
+    .pipe base64
+      extensions: ['jpg', 'png', 'woff', 'ttf', 'svg']
+      maxImageSize: 2000*1024 # 20MB
+      debug: true
     .pipe minifyCss
       keepSpecialComments: 0
     .pipe sourcemaps.write './'
