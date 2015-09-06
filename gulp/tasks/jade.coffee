@@ -6,7 +6,6 @@ browserSync = require 'browser-sync'
 inline = require 'gulp-inline-source'
 
 
-# jade
 gulp.task 'jade', ->
   gulp
     .src [
