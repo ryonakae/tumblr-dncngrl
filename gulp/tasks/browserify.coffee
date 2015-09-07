@@ -13,8 +13,9 @@ browserSync = require 'browser-sync'
 
 
 # path
-srcPath = config.source.javascripts + 'main.jsx'
-destPath = config.build.javascripts
+# パスの先頭に ./ をつけないと何故かエラー出る
+srcPath = './' + config.source.javascripts + 'main.jsx'
+destPath = './' + config.build.javascripts
 
 
 # watchify
