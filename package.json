@@ -68,7 +68,8 @@
     ]
   },
   "browser": {
-    "jquery": "./build/assets/javascripts/libs/jquery.min.js"
+    "jquery": "./build/assets/javascripts/libs/jquery.min.js",
+    "velocity": "./build/assets/javascripts/libs/velocity.min.js"
   },
   "browserify-shim": {
     "jquery": "$"
