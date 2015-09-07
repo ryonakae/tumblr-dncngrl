@@ -3,8 +3,18 @@
 var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
+require('jquery');
+require('velocity');
 
 module.exports = React.createClass({
+  // scrolltop function
+  backTop: function(){
+    $('html').velocity('scroll', {
+      duration: 1000,
+      easing: 'easeOutExpo'
+    });
+  },
+
   render: function(){
     return (
       <footer className='footer'>
@@ -21,7 +31,7 @@ module.exports = React.createClass({
           </li>
         </ul>
 
-        <div className="footer__backTop"></div>
+        <div className="footer__backTop js-backTop" onClick={this.backTop} />
 
         <small className="footer__copyright">
           &copy; Dancing Girl.<br />

@@ -56,20 +56,15 @@ module.exports = React.createClass({
       }.bind(this));
   },
 
-  // 無限スクロール用関数
+  // 次ページ読み込み用関数
   nextPage: function(e){
-    var documentHeight = $(document).height();
-    var scrollPosition = $(window).height() + $(window).scrollTop();
+    // ページ番号をアップデート
+    this.setState({
+      page: this.state.page + 1
+    });
 
-    if (documentHeight - scrollPosition === 0) {
-      // ページ番号をアップデート
-      this.setState({
-        page: this.state.page + 1
-      });
-
-      // 次ページのデータを取得
-      this.loadAjax();
-    }
+    // 次ページのデータを取得
+    this.loadAjax();
   },
 
   // コンポーネントの準備完了
@@ -77,9 +72,12 @@ module.exports = React.createClass({
     // 1ページ目のデータを取得
     this.loadAjax();
 
-    // windowにイベントを追加
-    window.addEventListener('scroll', this.nextPage);
-    window.addEventListener('resize', this.nextPage);
+    // 1ページ目が読み込まれたらページ番号を更新しておく
+    // スクロールによる読み込みでなく、ボタンクリックでの次ページ呼び出しの場合、
+    // こうしないと同じページが呼ばれてしまう
+    this.setState({
+      page: this.state.page + 1
+    });
   },
 
   // レンダリング
@@ -122,8 +120,20 @@ module.exports = React.createClass({
     });
 
     return (
-      <div className="articleList" onScroll={this.nextPage} onResize={this.nextPage}>
+      <div className="articleList" onResize={this.nextPage}>
         {articleNodes}
+        <div
+          className="articleList__more"
+          onClick={this.nextPage}
+          style={{
+            marginTop: '50px',
+            'clear': 'both',
+            'float': 'left',
+            'display': 'inline-block',
+            'background': '#666',
+            'color': '#fff',
+            'padding': '10px 30px'
+          }}>Load More</div>
       </div>
     );
   }

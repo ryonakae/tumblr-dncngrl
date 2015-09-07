@@ -14,8 +14,9 @@
     "tests"
   ],
   "dependencies": {
+    "jquery": "~2.1.4",
     "react": "~0.13.3",
-    "jquery": "~2.1.4"
+    "velocity": "~1.2.2"
   },
   "overrides": {
     "react": {
@@ -23,6 +24,12 @@
     },
     "jquery": {
       "main": "dist/jquery.min.js"
+    },
+    "velocity": {
+      "main": [
+        "./velocity.min.js",
+        "./velocity.ui.min.js"
+      ]
     }
   }
 }
