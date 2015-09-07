@@ -1,8 +1,10 @@
 @import '../_config'
 @import '../_sprite'
 
+
 .articleList
   clearfix()
+
 
 .articleList__item
   position relative
@@ -23,19 +25,90 @@
     .articleList__itemInfo
       right 500 - 35px
 
+
 .articleList__itemImage
   width 500px
   display block
+  position relative
 
   img
     width 100%
     height auto
     vertical-align top
 
+
+.articleList__itemNotes
+  position absolute
+  bottom 20px
+  border 1px solid $color_border_default
+  padding 5px 10px
+  color $color_text_sub
+  font-size $fontSize_xsmall
+
+.articleList__item
+  &:nth-child(odd)
+    .articleList__itemNotes
+      left 20px
+
+  &:nth-child(even)
+    .articleList__itemNotes
+      right 20px
+
+
 .articleList__itemInfo
   position absolute
   bottom 40px
 
+
 .articleList__itemInfoContent
   background-color $color_bg_inverse
   width 300px
+  padding 30px 40px
+
+
+.articleList__itemInfoDate
+  font-size $fontSize_large
+
+
+.articleList__itemInfoTag
+  margin 5px 0 0 0
+  padding 0
+  list-style-type none
+  font-size $fontSize_small
+  color $color_text_sub
+
+
+.articleList__itemInfoTagItem
+  display inline
+  margin-left 5px
+
+  &:after
+    content ','
+
+  &:first-child
+    margin-left 0
+
+  &:last-child
+    &:after
+      content ''
+
+
+.articleList__itemInfoMore
+  clearfix()
+
+  a
+    display block
+    float right
+    width 180px
+    position relative
+    background-color $color_text_link
+    color $color_text_inverse
+    padding 20px 30px
+
+    &:after
+      content ''
+      retinaSprite($icon_arrow_more_group)
+      position absolute
+      right 20px
+      top 50%
+      transform translateY(-50%)

@@ -7,6 +7,12 @@ var moment = require('moment');
 
 module.exports = React.createClass({
   render: function(){
+    // tags
+    var tags = [];
+    for (var i = 0; i < this.props.tags.length; i++) {
+      tags.push(<li className='articleList__itemInfoTagItem'>{this.props.tags[i]}</li>);
+    }
+
     // post type: textのとき
     if (this.props.type === 'text') {
       return (
@@ -33,13 +39,10 @@ module.exports = React.createClass({
           <div className="articleList__itemInfo">
             <div className="articleList__itemInfoContent">
               <div className='articleList__itemInfoDate'>{moment(new Date(this.props.date)).format('LL')}</div>
-              <ul className="articleList__itemInfoTag">
-                <li className="articleList__itemInfoTagItem">Aikatsu!</li>
-                <li className="articleList__itemInfoTagItem">Ran Shibuki</li>
-              </ul>
+              <ul className="articleList__itemInfoTag">{tags}</ul>
             </div>
             <div className="articleList__itemInfoMore">
-              <Link to={`/post/${this.props.id}/${this.props.slug}`} params={{id:this.props.id, slug:this.props.slug}}>More</Link>
+              <Link to={`/post/${this.props.id}/${this.props.slug}`} params={{id:this.props.id, slug:this.props.slug}}>MORE</Link>
             </div>
           </div>
         </div>
