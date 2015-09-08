@@ -17,11 +17,23 @@ module.exports = React.createClass({
     if (this.props.type === 'text') {
       return (
         <div className="articleList__item articleList__item--text">
-          <h2 className="articleList__itemTitle">
-            <Link to={`/post/${this.props.id}/${this.props.slug}`} params={{id:this.props.id, slug:this.props.slug}}>{this.props.title}</Link>
-          </h2>
-          <div className="articleList__itemDate">
-            <small>{moment(new Date(this.props.date)).format('LL')}</small>
+          <div className="articleList__itemContent">
+            <h2 className="articleList__itemTitle">
+              <Link to={`/post/${this.props.id}/${this.props.slug}`} params={{id:this.props.id, slug:this.props.slug}}>{this.props.title}</Link>
+            </h2>
+            <div className="articleList__itemBody" dangerouslySetInnerHTML={{__html: this.props.body}} />
+            <div className="articleList__itemNotes">{this.props.noteCount} NOTES</div>
+          </div>
+
+
+          <div className="articleList__itemInfo">
+            <div className="articleList__itemInfoContent">
+              <div className='articleList__itemInfoDate'>{moment(new Date(this.props.date)).format('LL')}</div>
+              <ul className="articleList__itemInfoTag">{tags}</ul>
+            </div>
+            <div className="articleList__itemInfoMore">
+              <Link to={`/post/${this.props.id}/${this.props.slug}`} params={{id:this.props.id, slug:this.props.slug}}>MORE</Link>
+            </div>
           </div>
         </div>
       );

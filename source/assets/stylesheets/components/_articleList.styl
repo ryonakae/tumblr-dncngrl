@@ -17,13 +17,13 @@
     float left
 
     .articleList__itemInfo
-      left 500 - 35px
+      left 500 - 20px
 
   &:nth-child(even)
     float right
 
     .articleList__itemInfo
-      right 500 - 35px
+      right 500 - 20px
 
 
 .articleList__itemImage
@@ -39,11 +39,20 @@
 
 .articleList__itemNotes
   position absolute
+  z-index 100
   bottom 20px
-  border 1px solid $color_border_default
   padding 5px 10px
-  color $color_text_sub
   font-size $fontSize_xsmall
+
+.articleList__item--text
+  .articleList__itemNotes
+    background-color $color_bg_default
+    color $color_text_sub
+
+.articleList__item--photo
+  .articleList__itemNotes
+    background-color rgba($color_bg_inverse, 0.4)
+    color $color_text_inverse
 
 .articleList__item
   &:nth-child(odd)
@@ -112,3 +121,41 @@
       right 20px
       top 50%
       transform translateY(-50%)
+
+
+.articleList__itemContent
+  background-color $color_bg_inverse
+  position relative
+  padding 30px 40px 40px
+  width 500px
+  height 705px
+  overflow hidden
+
+  &:after
+    content ''
+    position absolute
+    left 0
+    bottom 0
+    width 100%
+    height 100px
+    background-image: linear-gradient( transparent 0%, rgba($color_bg_inverse,0.7) 45%, rgba($color_bg_inverse,0.95) 80%, rgba($color_bg_inverse,1) 100% )
+
+
+.articleList__itemTitle
+  margin 0
+
+  a
+    font-size $fontSize_large
+    color $color_text_default
+
+.articleList__itemBody
+  margin-top 25px
+  font-size $fontSize_small
+
+  img
+    max-width 100%
+    height auto
+    vertical-align top
+
+  > ul
+    padding-left 1.5em
