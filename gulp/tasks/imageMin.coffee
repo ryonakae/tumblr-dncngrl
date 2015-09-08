@@ -2,7 +2,7 @@ gulp = require 'gulp'
 config = require '../config'
 imagemin = require 'gulp-imagemin'
 pngcrush = require 'imagemin-pngcrush'
-changed = require 'gulp-changed'
+cache = require 'gulp-cache'
 browserSync = require 'browser-sync'
 
 
@@ -13,8 +13,7 @@ gulp.task 'imageMin', ->
       config.source.images + '**/*'
       '!' + config.source.images + 'sprite/*'
     ]
-    .pipe changed config.build.images
-    .pipe imagemin
+    .pipe cache imagemin
       optimizationLevel: 7
       progressive: true
       interlaced: true
