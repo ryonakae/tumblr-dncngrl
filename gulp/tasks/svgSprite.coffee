@@ -10,4 +10,5 @@ gulp.task 'svgSprite', ->
     .src config.source.sprite + '*.svg'
     .pipe svgSprites
       mode: 'symbols'
+      preview: false
     .pipe gulp.dest config.build.images
