@@ -1,5 +1,4 @@
 @import '../_config'
-@import '../_sprite'
 
 
 .header
@@ -84,8 +83,11 @@
       transform translate(-50%, -50%)
       background-color $color_text_default
 
-    &:hover:after
-      background-color $color_text_link
+    &:hover
+      border-color $color_border_link
+
+      &:after
+        background-color $color_text_link
 
   &--twitter
     a:after

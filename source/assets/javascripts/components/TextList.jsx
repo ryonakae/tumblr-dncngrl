@@ -9,10 +9,10 @@ require('jquery');
 // tumblr api
 var tumblrUrl = config.tumblrUrl;
 var apiKey = config.apiKey;
-var limit = 5;
+var limit = 4;
 
 // components
-var ArticleListItem = require('./ArticleListItem');
+var TextListItem = require('./TextListItem');
 
 module.exports = React.createClass({
   // 初期化
@@ -33,7 +33,8 @@ module.exports = React.createClass({
         offset: this.state.page * limit - limit,
         reblog_info: false,
         notes_info: false,
-        format: 'html'
+        format: 'html',
+        type: 'text'
       })
       .jsonp()
       .end(function(err, data){
@@ -85,44 +86,23 @@ module.exports = React.createClass({
     // ArticleListItemコンポーネントを配列分作成し、
     // データを子コンポーネント(ArticleListItem)に渡す
     var articleNodes = this.state.data.map(function(article){
-      // 投稿タイプがtextのとき
-      if (article.type === 'text') {
-        return (
-          <ArticleListItem
-            title={article.title}
-            date={article.date}
-            slug={article.slug}
-            tags={article.tags}
-            body={article.body}
-            id={article.id}
-            key={article.id}
-            type={article.type}
-            noteCount={article.note_count}
-          />
-        );
-      }
-
-      // 投稿タイプがphotoのとき
-      else if (article.type === 'photo') {
-        return (
-          <ArticleListItem
-            title={article.title}
-            date={article.date}
-            slug={article.slug}
-            tags={article.tags}
-            body={article.body}
-            id={article.id}
-            key={article.id}
-            type={article.type}
-            noteCount={article.note_count}
-            photos={article.photos}
-          />
-        );
-      }
+      return (
+        <TextListItem
+          title={article.title}
+          date={article.date}
+          slug={article.slug}
+          tags={article.tags}
+          body={article.body}
+          id={article.id}
+          key={article.id}
+          type={article.type}
+          noteCount={article.note_count}
+        />
+      );
     });
 
     return (
-      <div className="articleList" onResize={this.nextPage}>
+      <div className="articleTextList" onResize={this.nextPage}>
         {articleNodes}
         <div
           className="articleList__more"
