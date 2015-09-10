@@ -8,29 +8,31 @@ module.exports = React.createClass({
   render: function(){
     return (
       <header className='header'>
-        <div className="header__inner">
-          <h1 className="header__title">
-            <Link className="header__titleLink" to={'/'}>Dancing Girl.</Link>
-          </h1>
+        <div className="header__bg"></div>
 
-          <ul className="header_sns">
-            <li className="header__snsItem">
-              <Link className='header__snsItemLink header__snsItemLink--twitter' to={'/'} target='_blank'>Twitter</Link>
+        <h1 className="header__title">
+          <Link to={'/'}>Dancing Girl.</Link>
+        </h1>
+
+        <div className="header__navi">
+          <ul className="header__link">
+            <li className="header__linkItem">
+              <Link to={'/'}>TOP</Link>
             </li>
-            <li className="header__snsItem">
-              <Link className='header__snsItemLink header__snsItemLink--pixiv' to={'/'} target='_blank'>Pixiv</Link>
+            <li className="header__linkItem">
+              <Link to={'/about'}>ABOUT</Link>
+            </li>
+            <li className="header__linkItem">
+              <a href="/archive">ARCHIVE</a>
             </li>
           </ul>
 
-          <ul className="header__navi">
-            <li className="header__naviItem">
-              <Link to={'/'}>TOP</Link>
+          <ul className="header_sns">
+            <li className="header__snsItem header__snsItem--twitter">
+              <Link to={'/'} target='_blank'>Twitter</Link>
             </li>
-            <li className="header__naviItem">
-              <Link to={'/about'}>ABOUT</Link>
-            </li>
-            <li className="header__naviItem">
-              <a href="/archive">ARCHIVE</a>
+            <li className="header__snsItem header__snsItem--pixiv">
+              <Link to={'/'} target='_blank'>Pixiv</Link>
             </li>
           </ul>
         </div>
