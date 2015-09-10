@@ -33,9 +33,10 @@
   a
     display block
     hide-text()
-    background-image url('../images/logo.svg')
+    mask url('../images/logo.svg')
     width 170px
     height 39px
+    background-color $color_text_default
 
 
 .header__navi
@@ -81,10 +82,14 @@
       top 50%
       left 50%
       transform translate(-50%, -50%)
+      background-color $color_text_default
+
+    &:hover:after
+      background-color $color_text_link
 
   &--twitter
     a:after
-      background-image url('../images/icon_twitter.svg')
+      mask url('../images/icon_twitter.svg')
       width 13px
       height 10px
 
@@ -92,6 +97,6 @@
     margin-left -1px
 
     a:after
-      background-image url('../images/icon_pixiv.svg')
+      mask url('../images/icon_pixiv.svg')
       width 11px
       height 10px
