@@ -4,12 +4,12 @@ runSequence  = require 'run-sequence'
 
 
 gulp.task 'watch', ->
-  runSequence 'cleanBuild', 'imageSprite', 'imageMin', ['jade', 'stylus', 'watchify', 'copyFile'], 'browserSync'
+  runSequence 'cleanBuild', ['jade', 'stylus', 'watchify', 'copyFile', 'svgSprite'], 'include','browserSync'
 
-  gulp.watch config.source.root + '**/*.jade', ['jade']
+  gulp.watch config.source.root + '**/*.jade', ->
+    runSequence 'jade', 'include'
   gulp.watch config.source.stylesheets + '**/*.styl', ['stylus']
-  gulp.watch config.source.iamges + '*', ['imageMin']
-  gulp.watch config.source.sprite + '*', ['imageSprite']
+  gulp.watch config.source.sprite + '*.svg', ['svgSprite']
 
 
 gulp.task 'default', ['watch']
