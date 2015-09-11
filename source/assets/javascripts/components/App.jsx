@@ -7,6 +7,7 @@ var RouteHandler = Router.RouteHandler;
 // components
 var Header = require('./Header');
 var Footer = require('./Footer');
+var FixedContent = require('./FixedContent');
 
 module.exports = React.createClass({
   render: function(){
@@ -15,6 +16,7 @@ module.exports = React.createClass({
         <Header />
         <RouteHandler />
         <Footer />
+        <FixedContent />
       </div>
     );
   }
