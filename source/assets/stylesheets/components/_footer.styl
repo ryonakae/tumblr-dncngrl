@@ -1,4 +1,166 @@
-@import '../_config'
+.footer
+  background-color $color_bg_inverse
+  padding 85px $margin_page
 
 
-// .footer
+.footer__top
+  clearfix()
+  overflow hidden
+  position relative
+
+  &:after
+    content ''
+    position absolute
+    top 17px
+    left 50%
+    width 40px
+    height 6px
+    mask url('../images/border_wave.svg') no-repeat
+    background-color #e6e6e6
+    transform translateX(-50%)
+
+
+.footer__logo
+  display block
+  float left
+  height 40px
+  border 1px solid $color_border_default
+  position relative
+
+  // symbol
+  &:before
+    content ''
+    width 18px
+    height 22px
+    background url('../images/logo_footer_symbol.svg') no-repeat
+    background-size 18px 22px
+    position absolute
+    left 11px
+    top 50%
+    transform translateY(-50%)
+
+  // border
+  &:after
+    content ''
+    position absolute
+    top 0
+    left 40px
+    width 1px
+    height 100%
+    border-left 1px solid $color_border_default
+
+
+.footer__logoTitle
+  hide-text()
+  background url('../images/logo_footer_text.svg') no-repeat
+  background-size 97px 15px
+  width 97px
+  height 15px
+  position relative
+  top 50%
+  transform translateY(-45%)
+  margin 0 10px 0 50px
+
+
+.footer_sns
+  float right
+  margin 0
+  padding 0
+  list-style-type none
+  clearfix()
+
+.footer__snsItem
+  float left
+  margin-left 10px
+
+  &:first-child
+    margin-left 0
+
+  a
+    display block
+    width 150px
+    height 40px
+    line-height 40px
+    border 1px solid $color_border_link
+    color $color_text_link
+    padding 0 20px
+    font-size $fontSize_small
+    position relative
+
+    &:after
+      content ''
+      position absolute
+      right 20px
+      top 50%
+      transform translateY(-50%)
+
+  &--twitter
+    a:after
+      mask url('../images/icon_twitter.svg') no-repeat
+      width 13px
+      height 10px
+      background-color $color_text_link
+
+  &--pixiv
+    a:after
+      mask url('../images/icon_pixiv.svg') no-repeat
+      width 11px
+      height 10px
+      background-color $color_text_link
+
+
+.footer__bottom
+  margin-top 40px
+  clearfix()
+  overflow hidden
+
+
+.footer__poetry
+  float left
+  border-left 3px solid $color_border_link
+  padding-left 10px
+  width 770px
+
+.footer__poetryTitle
+  margin 0
+
+.footer__poetryText
+  font-size $fontSize_small
+  margin 10px 0 0
+  line-height 1.3
+
+
+.footer__brdrLogo
+  float right
+  margin-top 30px
+
+  a
+    display block
+    hide-text()
+    mask url('../images/logo_brdr.svg') no-repeat
+    width 28px
+    height 38px
+    // background-color $color_text_link
+
+    position relative
+
+    &:after
+      content ''
+      position absolute
+      top 0
+      left 0
+      width 1000%
+      height 100%
+      background-image linear-gradient( 70deg, #a7e0fd, #ff95d7, #93ff8c, #ffb2b4, #a7e0fd, #ff95d7, #93ff8c, #ffb2b4, #a7e0fd, #ff95d7 )
+      animation-name rainbow
+      animation-duration 10s
+      animation-timing-function cubic-bezier(0.25, 0.25, 0.75, 0.75)
+      animation-iteration-count infinite
+      animation-direction alternate
+      animation-fill-mode both
+
+@keyframes rainbow
+  0%
+    left 0
+  100%
+    left -900%

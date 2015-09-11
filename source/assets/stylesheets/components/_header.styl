@@ -1,8 +1,6 @@
-@import '../_config'
-
-
 .header
   clearfix()
+  overflow hidden
 
   &:after
     content ''
@@ -32,7 +30,7 @@
   a
     display block
     hide-text()
-    mask url('../images/logo.svg')
+    mask url('../images/logo.svg') no-repeat
     width 170px
     height 39px
     background-color $color_text_default
@@ -92,7 +90,7 @@
 
   &--twitter
     a:after
-      mask url('../images/icon_twitter.svg')
+      mask url('../images/icon_twitter.svg') no-repeat
       width 13px
       height 10px
 
@@ -100,6 +98,6 @@
     margin-left -1px
 
     a:after
-      mask url('../images/icon_pixiv.svg')
+      mask url('../images/icon_pixiv.svg') no-repeat
       width 11px
       height 10px

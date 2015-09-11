@@ -9,7 +9,7 @@ require('jquery');
 // tumblr api
 var tumblrUrl = config.tumblrUrl;
 var apiKey = config.apiKey;
-var limit = 4;
+var limit = 3;
 
 // components
 var TextListItem = require('./TextListItem');
