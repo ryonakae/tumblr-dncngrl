@@ -6,6 +6,9 @@ var Link = Router.Link;
 
 module.exports = React.createClass({
   render: function(){
+    // svg
+    var svg_logoBrdr = '<use xlink:href="#logo_brdr" />'
+
     return (
       <footer className='footer'>
         <div className="footer__top">
@@ -29,9 +32,9 @@ module.exports = React.createClass({
             <p className="footer__poetryText">The story is the account of the star-crossed romance between a German dancing girl, Elise, and the protagonist, Toyotarō Ōta a Japanese exchange student who must choose between his career and his feelings for the dancer. The Japanese student eventually chooses his career, sending the dancing girl into a nervous breakdown. He leaves the girl alone and pregnant with his child, ending the story.</p>
           </div>
 
-          <div className="footer__brdrLogo">
-            <Link to={'/'} target='_blank'>Border/</Link>
-          </div>
+          <Link className="footer__brdrLogo" to={'/'} target='_blank'>
+            <svg dangerouslySetInnerHTML={{__html:svg_logoBrdr}}></svg>
+          </Link>
         </div>
       </footer>
     );

@@ -25,8 +25,10 @@ module.exports = React.createClass({
           </div>
         </div>
 
-        <div className="fixedContent__backTop" onClick={this.backTop}>
-          <span>BACK TO TOP</span>
+        <div className="fixedContent__backTop">
+          <div>
+            <span onClick={this.backTop}>BACK TO TOP</span>
+          </div>
         </div>
       </div>
     );

@@ -15,8 +15,9 @@
     left 50%
     width 40px
     height 6px
-    mask url('../images/border_wave.svg') no-repeat
-    background-color #e6e6e6
+    background url('../images/border_wave.svg') no-repeat
+    background-size 40px 6px
+    opacity 0.1
     transform translateX(-50%)
 
 
@@ -132,32 +133,34 @@
 
 .footer__brdrLogo
   float right
-  margin-top 30px
+  margin-top 26px
+  display block
+  width 24px
+  height 38px
+  overflow hidden
+  position relative
 
-  a
-    display block
-    hide-text()
-    mask url('../images/logo_brdr.svg') no-repeat
-    width 28px
+  svg
+    width 24px
     height 38px
-    // background-color $color_text_link
-
+    fill #fff
     position relative
+    z-index 1
 
-    &:after
-      content ''
-      position absolute
-      top 0
-      left 0
-      width 1000%
-      height 100%
-      background-image linear-gradient( 70deg, #a7e0fd, #ff95d7, #93ff8c, #ffb2b4, #a7e0fd, #ff95d7, #93ff8c, #ffb2b4, #a7e0fd, #ff95d7 )
-      animation-name rainbow
-      animation-duration 10s
-      animation-timing-function cubic-bezier(0.25, 0.25, 0.75, 0.75)
-      animation-iteration-count infinite
-      animation-direction alternate
-      animation-fill-mode both
+  &:after
+    content ''
+    position absolute
+    top 0
+    left 0
+    width 1000%
+    height 100%
+    background-image linear-gradient( 70deg, #a7e0fd, #ff95d7, #93ff8c, #ffb2b4, #a7e0fd, #ff95d7, #93ff8c, #ffb2b4, #a7e0fd, #ff95d7 )
+    animation-name rainbow
+    animation-duration 10s
+    animation-timing-function cubic-bezier(0.25, 0.25, 0.75, 0.75)
+    animation-iteration-count infinite
+    animation-direction alternate
+    animation-fill-mode both
 
 @keyframes rainbow
   0%

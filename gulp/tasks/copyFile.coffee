@@ -8,6 +8,7 @@ gulp.task 'copyFile', ->
   gulp.src(
     [
       config.source.fonts + '**/*'
+      config.source.images + '*.svg'
     ]
     base: config.source.root
   )
