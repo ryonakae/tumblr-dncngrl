@@ -102,20 +102,14 @@ module.exports = React.createClass({
     });
 
     return (
-      <div className="articleTextList" onResize={this.nextPage}>
-        {articleNodes}
-        <div
-          className="articleList__more"
-          onClick={this.nextPage}
-          style={{
-            marginTop: '50px',
-            'clear': 'both',
-            'float': 'left',
-            'display': 'inline-block',
-            'background': '#666',
-            'color': '#fff',
-            'padding': '10px 30px'
-          }}>Load More</div>
+      <div className="textList" onResize={this.nextPage}>
+        <div className="textList__items">
+          {articleNodes}
+        </div>
+
+        <div className="textList__more">
+          <div className='button' onClick={this.nextPage}>MORE</div>
+        </div>
       </div>
     );
   }
