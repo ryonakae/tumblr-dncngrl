@@ -7,23 +7,43 @@ var Link = Router.Link;
 module.exports = React.createClass({
   render: function(){
     // svg
-    var svg_logoBrdr = '<use xlink:href="#logo_brdr" />'
+    var svg_logoFooterSymbol = '<use xlink:href="#logo_footer_symbol" />';
+    var svg_logoFooterText = '<title>Dancing Girl.</title><use xlink:href="#logo_footer_text" />';
+    var svg_logoBrdr = '<title>Border/</title><use xlink:href="#logo_brdr" />';
+    var svg_iconTwitter = '<use xlink:href="#icon_twitter" />';
+    var svg_iconPixiv = '<use xlink:href="#icon_pixiv" />';
+    var svg_border = '<use xlink:href="#border_wave" />';
 
     return (
       <footer className='footer'>
         <div className="footer__top">
           <Link className="footer__logo" to={'/'}>
-            <h3 className='footer__logoTitle'>Dancing Girl.</h3>
+            <div className='footer__logoSymbol'>
+              <svg dangerouslySetInnerHTML={{__html:svg_logoFooterSymbol}}></svg>
+            </div>
+            <h3 className='footer__logoText'>
+              <svg dangerouslySetInnerHTML={{__html:svg_logoFooterText}}></svg>
+            </h3>
           </Link>
 
           <ul className="footer_sns">
             <li className="footer__snsItem footer__snsItem--twitter">
-              <Link to={'/'} target='_blank'>TWITTER</Link>
+              <Link to={'/'} target='_blank'>
+                <span>TWITTER</span>
+                <svg dangerouslySetInnerHTML={{__html:svg_iconTwitter}}></svg>
+              </Link>
             </li>
             <li className="footer__snsItem footer__snsItem--pixiv">
-              <Link to={'/'} target='_blank'>PIXIV</Link>
+              <Link to={'/'} target='_blank'>
+                <span>PIXIV</span>
+                <svg dangerouslySetInnerHTML={{__html:svg_iconPixiv}}></svg>
+              </Link>
             </li>
           </ul>
+
+          <div className="footer__border">
+            <svg dangerouslySetInnerHTML={{__html:svg_border}}></svg>
+          </div>
         </div>
 
         <div className="footer__bottom">
@@ -34,6 +54,7 @@ module.exports = React.createClass({
 
           <Link className="footer__brdrLogo" to={'/'} target='_blank'>
             <svg dangerouslySetInnerHTML={{__html:svg_logoBrdr}}></svg>
+            <div className="footer__brdrLogoBg"></div>
           </Link>
         </div>
       </footer>
