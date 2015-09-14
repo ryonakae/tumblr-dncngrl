@@ -91,7 +91,7 @@ var canvas = function(){
   var degree = 0;
   function position() {
     // グループをふわふわ
-    degree = degree + 1;
+    degree = degree + 0.5;
     var radian = degree * Math.PI / 180;
     var positionY = Math.cos(radian) * 10;
     group.position.y = positionY;
