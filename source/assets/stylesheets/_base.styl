@@ -1,17 +1,25 @@
+@import 'kouto-swiss'
+
 @import '_config'
+
 
 normalize()
 box-sizing-reset()
 
+
 body
+  min-width 1200px
   font-family $fontFamily
   font-size $fontSize_default
   background-color $color_bg_default
   color $color_text_default
   line-height $lineHeight_default
+  letter-spacing $letterSpacing
+  text-rendering optimizeLegibility
 
   +retina-query( only screen, 2 )
     -webkit-font-smoothing antialiased
+
 
 a
   transition: all 300ms ease
@@ -21,3 +29,7 @@ a
   &:hover
     color $color_text_link
     opacity 0.7
+
+
+h1, h2, h3, h4, h5, h6
+  line-height $lineHeight_title

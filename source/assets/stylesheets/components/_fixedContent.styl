@@ -1,0 +1,41 @@
+@import '../_config'
+
+
+.fixedContent
+  position fixed
+  top 45%
+  width 100%
+  clearfix()
+  font-size $fontSize_small
+  line-height 1.3
+  pointer-events none
+
+
+.fixedContent__copyright
+  float left
+  margin-left -60px
+
+  div
+    display block
+    width 300px
+    transform rotate(90deg)
+
+    span, a
+      pointer-events auto
+
+
+.fixedContent__backTop
+  float right
+  margin-right -65px
+
+  div
+    display block
+    width 300px
+    transform rotate(90deg)
+
+    span
+      cursor pointer
+      pointer-events auto
+
+      &:hover
+        color $color_text_link
