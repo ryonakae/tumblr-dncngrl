@@ -5,8 +5,8 @@ require('jquery');
 
 var canvas = function(){
   // 設定
-  var width = 600;
-  var height = 400;
+  var width = $(document).width();
+  var height = $(document).height();
   var bgColor = 0xf8f8f8;
   var bgAlpha = 0;
 
@@ -104,18 +104,10 @@ var canvas = function(){
   }
 
 
-
   // アニメーション発火
   rotate();
   position();
-
-
-  // $(window).on('load resize', function(){
-  //   $('#canvas').css({
-  //     width: width,
-  //     height: height
-  //   });
-  // });
+  console.log('canvas描画');
 }();
 
 module.exports = canvas;

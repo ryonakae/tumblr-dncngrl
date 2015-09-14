@@ -36,6 +36,3 @@ Router.run(routes, function(Handler){
     <Handler />, document.getElementById('dncngrl')
   );
 });
-
-// canvas
-require('./canvas');
