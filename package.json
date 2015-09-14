@@ -71,7 +71,7 @@
   "browser": {
     "jquery": "./build/assets/javascripts/libs/jquery.min.js",
     "velocity": "./build/assets/javascripts/libs/velocity.min.js",
-    "pixi": "./build/assets/javascripts/libs/pixi.min.js"
+    "threejs": "./build/assets/javascripts/libs/three.min.js"
   },
   "browserify-shim": {
     "jquery": "$"

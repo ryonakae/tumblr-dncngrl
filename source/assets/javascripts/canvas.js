@@ -1,32 +1,46 @@
 'use strict';
 
-var PIXI = require('pixi');
+var THREE = require('threejs');
+require('jquery');
 
 var canvas = function(){
   console.log('canvas dayo~~');
 
-  var width = 600;
-  var height = 400;
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+  var bgColor = 0xf8f8f8;
 
-  var stage = new PIXI.Container();
-  var renderer = new PIXI.autoDetectRenderer(width, height, {
-    backgroundColor: 0xffffff,
-    antialias: true
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(75, width/height, 0.1, 1000 );
+  camera.position.set(0,0,250);
+
+  var renderer = new THREE.WebGLRenderer({
+    antialias:true
   });
+  renderer.setClearColor( bgColor );
+  renderer.setSize(width, height);
+  document.getElementById('canvas').appendChild(renderer.domElement);
 
-  document.getElementById('canvas').appendChild(renderer.view);
+  var geometry = new THREE.Geometry();
+  geometry.vertices[0] = new THREE.Vector3(150,0,0);
+  geometry.vertices[1] = new THREE.Vector3(0,150,0);
+  geometry.vertices[2] = new THREE.Vector3(0,0,150);
+  geometry.faces[0] = new THREE.Face3(0,1,2);
 
-  var triangle = new PIXI.Graphics();
+  var material =  new THREE.MeshBasicMaterial({ color: 0x0000ff });
+  var Triangle =  new THREE.Mesh(geometry,material);
 
-  triangle.beginFill(0x00FF00);
-  triangle.moveTo(300,0);
-  triangle.lineTo(600,400);
-  triangle.lineTo(0,400);
-  triangle.endFill();
+  scene.add(Triangle);
 
-  stage.addChild(triangle);
+  camera.lookAt(scene.position);
+  renderer.render(scene,camera);
 
-  renderer.render(stage);
+  $('window').on('load resize', function(){
+    $('#canvas').css({
+      width: width,
+      height: height
+    });
+  });
 }();
 
 module.exports = canvas;
