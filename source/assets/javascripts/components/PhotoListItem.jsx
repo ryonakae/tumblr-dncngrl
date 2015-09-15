@@ -35,7 +35,13 @@ module.exports = React.createClass({
       },
       {
         duration: 800,
-        easing: 'easeInOutQuart'
+        easing: 'easeInOutQuart',
+        begin: function(){
+          $(this).off('mouseenter');
+        },
+        complete: function(){
+          $(this).on('mouseenter');
+        }
       }
     );
   },
@@ -72,16 +78,16 @@ module.exports = React.createClass({
     }
 
     return (
-      <article className="photoList__item" onMouseOver={this.mouseOver} onMouseOut={this.mouseOut} ref='item' style={{backgroundImage:`url(${this.props.photos[0].original_size.url})`}}>
-        <div className="photoList__itemOverlay" ref='overlay'>
-          <Link to={`/post/${this.props.id}/${this.props.slug}`} params={{id:this.props.id, slug:this.props.slug}}>
+      <article className="photoList__item" onMouseEnter={this.mouseOver} onMouseLeave={this.mouseOut} ref='item' style={{backgroundImage:`url(${this.props.photos[0].original_size.url})`}}>
+        <Link to={`/post/${this.props.id}/${this.props.slug}`} params={{id:this.props.id, slug:this.props.slug}}>
+          <div className="photoList__itemOverlay" ref='overlay'>
             <div className="photoList__itemOverlayInner">
               <h2 className='photoList__itemDate'>{moment(new Date(this.props.date)).format('YYYY.M.D')}</h2>
               <ul className="photoList__itemTag">{tags}</ul>
               <div className="photoList__itemNotes">{this.props.noteCount} NOTES</div>
             </div>
-          </Link>
-        </div>
+          </div>
+        </Link>
       </article>
     );
   }
