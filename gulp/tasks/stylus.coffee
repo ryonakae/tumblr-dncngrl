@@ -35,4 +35,4 @@ gulp.task 'stylus', ->
       keepSpecialComments: 0
     .pipe sourcemaps.write './'
     .pipe gulp.dest config.build.stylesheets
-    .pipe browserSync.stream()
+    # .pipe browserSync.stream()

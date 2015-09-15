@@ -39,7 +39,7 @@ gulp.task 'watchify', ['bower'], ->
           loadMaps: true
         .pipe sourcemaps.write './'
         .pipe gulp.dest destPath
-        .pipe browserSync.stream()
+        # .pipe browserSync.stream()
 
     bundle()
 

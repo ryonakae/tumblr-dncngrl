@@ -16,4 +16,4 @@ gulp.task 'jade', ->
     .pipe jade
       pretty: true
     .pipe gulp.dest config.build.root
-    .pipe browserSync.stream()
+    # .pipe browserSync.stream()
