@@ -18,13 +18,8 @@ module.exports = React.createClass({
   mouseOver: function(){
     console.log('over');
 
-    this.setState({
-      hover: true
-    });
-
     // Native DOM取得してからjQueryオブジェクトに変換
     // ref属性で指定した名前でrefsからcomponentを参照できる(つらい)
-    var item = $(React.findDOMNode(this.refs.item));
     var overlay = $(React.findDOMNode(this.refs.overlay));
 
     // velocity
@@ -35,13 +30,7 @@ module.exports = React.createClass({
       },
       {
         duration: 800,
-        easing: 'easeInOutQuart',
-        begin: function(){
-          $(this).off('mouseenter');
-        },
-        complete: function(){
-          $(this).on('mouseenter');
-        }
+        easing: 'easeInOutQuart'
       }
     );
   },
@@ -50,24 +39,10 @@ module.exports = React.createClass({
   mouseOut: function(){
     console.log('out');
 
-    this.setState({
-      hover: false
-    });
-
-    var item = $(React.findDOMNode(this.refs.item));
     var overlay = $(React.findDOMNode(this.refs.overlay));
 
     // velocity
-    overlay.velocity(
-      {
-        opacity: 0,
-        top: '100%'
-      },
-      {
-        duration: 800,
-        easing: 'easeInOutQuart'
-      }
-    );
+    overlay.velocity('stop').velocity('reverse', 400);
   },
 
   render: function(){
@@ -78,7 +53,7 @@ module.exports = React.createClass({
     }
 
     return (
-      <article className="photoList__item" onMouseEnter={this.mouseOver} onMouseLeave={this.mouseOut} ref='item' style={{backgroundImage:`url(${this.props.photos[0].original_size.url})`}}>
+      <article className="photoList__item" onMouseEnter={this.mouseOver} onMouseLeave={this.mouseOut} style={{backgroundImage:`url(${this.props.photos[0].original_size.url})`}}>
         <Link to={`/post/${this.props.id}/${this.props.slug}`} params={{id:this.props.id, slug:this.props.slug}}>
           <div className="photoList__itemOverlay" ref='overlay'>
             <div className="photoList__itemOverlayInner">
