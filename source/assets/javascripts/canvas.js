@@ -5,8 +5,8 @@ require('jquery');
 
 module.exports = function(){
   // 設定
-  var width = 2000;
-  var height = 2500;
+  var width = $(window).width();
+  var height = $(window).height();
   var bgColor = 0xf8f8f8;
   var bgAlpha = 0;
 
@@ -16,9 +16,13 @@ module.exports = function(){
 
 
   // カメラ
+  // ピクセル等倍にする(canvasのサイズでオブジェクトの大きさを変えない)
+  // http://ikeryou.jp/log/?p=242
   var camera = new THREE.PerspectiveCamera(80, width/height, 1, 1000);
-  camera.position.set(0,0,-600); //手前に
+  var cameraZ = -(height / 2) / Math.tan( (camera.fov * Math.PI/180) / 2 )
+  camera.position.set(0,0,cameraZ); //手前に
   camera.lookAt(scene.position);
+  console.log(cameraZ);
 
 
   // レンダラ
@@ -69,15 +73,18 @@ module.exports = function(){
   // triangle1: 右中央ちょい下くらいに置く
   var group1 = new THREE.Object3D();
   group1.add(triangle1);
-  group1.position.x = -170;
-  group1.position.y = 50;
+  group1.position.x = -450;
+  group1.position.y = height*0.2;
   group1.position.z = 0;
+  group1.scale.set(1.9,1.9,1.9);
+
   // triangle2: 左下くらいに置く
   var group2 = new THREE.Object3D();
   group2.add(triangle2);
-  group2.position.x = 220;
-  group2.position.y = -450;
+  group2.position.x = 550;
+  group2.position.y = height*-0.4;
   group2.position.z = 0;
+  group2.scale.set(2,2,2);
 
 
   // シーンに要素を追加
@@ -89,66 +96,41 @@ module.exports = function(){
 
 
   // アニメーション関数
-  var degree = 0; //角度初期化
+  var rotateDeg = 0;
+  var fuwaDeg = 0;
 
-  // くるくる
-  function kurukuru1() {
-    degree = degree + 0.01;
-    var radian = degree * Math.PI / 180;
-    var rotateX = group1.rotation.x + 0;
-    var rotateY = group1.rotation.y + Math.sin(radian) * 0.0005;
-    var rotateZ = group1.rotation.z + Math.sin(radian) * 0.0001;
+  function animation(){
+    rotateDeg = rotateDeg + 0.005; //くるくるの速度
+    var rotateRadian = rotateDeg * Math.PI / 180;
+    fuwaDeg = fuwaDeg + 0.3; //ふわふわの速度
+    var fuwaRadian = fuwaDeg * Math.PI / 180;
 
-    group1.rotation.set( rotateX, rotateY, rotateZ );
-    // レンダリング
+    // group1
+    (function(){
+      var rotateY = Math.sin(rotateRadian) * 1; //くるくるの振れ幅
+      var rotateZ = Math.sin(rotateRadian) * 0.2;
+      var positionY = Math.sin(fuwaRadian) * 10; //ふわふわの振れ幅
+
+      group1.rotation.set( 0, rotateY, rotateZ );
+      triangle1.position.y = positionY;
+    })();
+
+    // group2
+    (function(){
+      var rotateY = Math.sin(rotateRadian) * 1.5; //くるくるの振れ幅
+      var rotateZ = Math.sin(rotateRadian) * 0.15;
+      var positionY = Math.sin(fuwaRadian) * 5; //ふわふわの振れ幅
+
+      group2.rotation.set( 0, -rotateY, -rotateZ );
+      triangle2.position.y = -positionY;
+    })();
+
     renderer.render(scene,camera);
-    // 次のアニメーション呼び出す
-    requestAnimationFrame(kurukuru1);
-  };
-  function kurukuru2() {
-    degree = degree + 0.01;
-    var radian = degree * Math.PI / 180;
-    var rotateX = group2.rotation.x + 0;
-    var rotateY = group2.rotation.y + Math.sin(radian) * -0.0005;
-    var rotateZ = group2.rotation.z + Math.sin(radian) * -0.0001;
-
-    group2.rotation.set( rotateX, rotateY, rotateZ );
-    // レンダリング
-    renderer.render(scene,camera);
-    // 次のアニメーション呼び出す
-    requestAnimationFrame(kurukuru2);
-  };
-
-  // ふわふわ
-  // groupではなくtriangleをふわらせる
-  function fuwafuwa1(){
-    degree = degree + 0.3; //頻度
-    var radian = degree * Math.PI / 180;
-    var positionY = Math.sin(radian) * 10; //幅
-
-    triangle1.position.y = positionY; // ふわふわ
-    // レンダリング
-    renderer.render(scene,camera);
-    // 次のアニメーション呼び出す
-    requestAnimationFrame(fuwafuwa1);
-  };
-  function fuwafuwa2(){
-    degree = degree + 0.3; //頻度
-    var radian = degree * Math.PI / 180;
-    var positionY = Math.sin(radian) * 5; //幅
-
-    triangle2.position.y = positionY; // ふわふわ
-    // レンダリング
-    renderer.render(scene,camera);
-    // 次のアニメーション呼び出す
-    requestAnimationFrame(fuwafuwa2);
+    requestAnimationFrame(animation);
   };
 
 
   // アニメーション発火
-  kurukuru1();
-  kurukuru2();
-  fuwafuwa1();
-  fuwafuwa2();
+  animation();
   console.log('canvas描画');
 };
