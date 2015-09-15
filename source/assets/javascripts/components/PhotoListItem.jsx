@@ -21,16 +21,49 @@ module.exports = React.createClass({
     // Native DOM取得してからjQueryオブジェクトに変換
     // ref属性で指定した名前でrefsからcomponentを参照できる(つらい)
     var overlay = $(React.findDOMNode(this.refs.overlay));
+    var date = $(React.findDOMNode(this.refs.date));
+    var tag = $(React.findDOMNode(this.refs.tag));
+    var note = $(React.findDOMNode(this.refs.note));
 
     // velocity
     overlay.velocity(
       {
         opacity: 1,
         top: 0
-      },
-      {
-        duration: 800,
+      },{
+        duration: 600,
+        delay: 0,
         easing: 'easeInOutQuart'
+      }
+    );
+    date.velocity(
+      {
+        opacity: 1,
+        top: 0
+      },{
+        duration: 400,
+        delay: 500,
+        easing: 'easeOutCubic'
+      }
+    );
+    tag.velocity(
+      {
+        opacity: 1,
+        top: 0
+      },{
+        duration: 400,
+        delay: 550,
+        easing: 'easeOutCubic'
+      }
+    );
+    note.velocity(
+      {
+        opacity: 1,
+        top: 0
+      },{
+        duration: 400,
+        delay: 600,
+        easing: 'easeOutCubic'
       }
     );
   },
@@ -40,9 +73,27 @@ module.exports = React.createClass({
     console.log('out');
 
     var overlay = $(React.findDOMNode(this.refs.overlay));
+    var date = $(React.findDOMNode(this.refs.date));
+    var tag = $(React.findDOMNode(this.refs.tag));
+    var note = $(React.findDOMNode(this.refs.note));
 
     // velocity
-    overlay.velocity('stop').velocity('reverse', 400);
+    note.velocity('stop').velocity('reverse', {
+      duration: 200,
+      delay: 0
+    });
+    tag.velocity('stop').velocity('reverse', {
+      duration: 200,
+      delay: 50
+    });
+    date.velocity('stop').velocity('reverse', {
+      duration: 200,
+      delay: 100
+    });
+    overlay.velocity('stop').velocity('reverse', {
+      duration: 400,
+      delay: 100
+    });
   },
 
   render: function(){
@@ -57,9 +108,9 @@ module.exports = React.createClass({
         <Link to={`/post/${this.props.id}/${this.props.slug}`} params={{id:this.props.id, slug:this.props.slug}}>
           <div className="photoList__itemOverlay" ref='overlay'>
             <div className="photoList__itemOverlayInner">
-              <h2 className='photoList__itemDate'>{moment(new Date(this.props.date)).format('YYYY.M.D')}</h2>
-              <ul className="photoList__itemTag">{tags}</ul>
-              <div className="photoList__itemNotes">{this.props.noteCount} NOTES</div>
+              <h2 className='photoList__itemDate' ref='date'>{moment(new Date(this.props.date)).format('YYYY.M.D')}</h2>
+              <ul className="photoList__itemTag" ref='tag'>{tags}</ul>
+              <div className="photoList__itemNotes" ref='note'>{this.props.noteCount} NOTES</div>
             </div>
           </div>
         </Link>
