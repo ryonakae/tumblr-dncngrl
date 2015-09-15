@@ -14,7 +14,7 @@ var canvas = require('../canvas');
 module.exports = React.createClass({
   componentDidMount: function(){
     console.log('DOMの初期化');
-    canvas;
+    canvas(); //canvas描画
   },
   componentDidUpdate: function(){
     console.log('Componentの更新');
@@ -26,7 +26,7 @@ module.exports = React.createClass({
         <RouteHandler />
         <Footer />
         <FixedContent />
-        <Rectangle page={this.state.page} />
+        <Rectangle />
       </div>
     );
   }
