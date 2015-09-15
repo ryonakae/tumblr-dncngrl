@@ -5,6 +5,8 @@ var React = require('react');
 // components
 var PhotoList = require('./PhotoList');
 var TextList = require('./TextList');
+require('jquery');
+require('velocity');
 
 module.exports = React.createClass({
   // DOM初期化された時

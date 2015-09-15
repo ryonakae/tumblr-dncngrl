@@ -4,8 +4,14 @@ var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
 var moment = require('moment');
+require('jquery');
+require('velocity');
 
 module.exports = React.createClass({
+  mouseOver: function(){
+    console.log('hover');
+  },
+
   render: function(){
     // tags
     var tags = [];
@@ -14,7 +20,7 @@ module.exports = React.createClass({
     }
 
     return (
-      <article className="photoList__item" style={{backgroundImage:`url(${this.props.photos[0].original_size.url})`}}>
+      <article className="photoList__item" onMouseOver={this.mouseOver} style={{backgroundImage:`url(${this.props.photos[0].original_size.url})`}}>
         <Link to={`/post/${this.props.id}/${this.props.slug}`} params={{id:this.props.id, slug:this.props.slug}}>
           <div className="photoList__itemOverlay">
             <div className="photoList__itemOverlayInner">
