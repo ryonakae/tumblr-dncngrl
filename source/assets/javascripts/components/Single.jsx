@@ -7,6 +7,8 @@ var State = Router.State;
 var moment = require('moment');
 var request = require('superagent');
 require('superagent-jsonp')(request);
+require('jquery');
+require('velocity');
 
 // tumblr api
 var tumblrUrl = config.tumblrUrl;
@@ -21,6 +23,22 @@ module.exports = React.createClass({
     return {
       data: []
     };
+  },
+
+  // component更新された時
+  componentDidUpdate: function(){
+    console.log('singleが読み込まれた');
+
+    $('.rectangle').velocity(
+      {
+        width: '100%',
+        height: '700px'
+      },
+      {
+        duration: 800,
+        easing: 'easeInOutQuart'
+      }
+    );
   },
 
   // Ajax
