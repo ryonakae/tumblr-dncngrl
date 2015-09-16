@@ -6,6 +6,7 @@ var Router = require('react-router');
 var State = Router.State;
 var moment = require('moment');
 var request = require('superagent');
+var canvas = require('../canvas');
 require('superagent-jsonp')(request);
 require('jquery');
 require('velocity');
@@ -29,6 +30,7 @@ module.exports = React.createClass({
   componentDidUpdate: function(){
     console.log('singleが読み込まれた');
 
+    // velocity
     $('.rectangle').velocity(
       {
         width: '100%',
@@ -39,6 +41,12 @@ module.exports = React.createClass({
         easing: 'easeInOutQuart'
       }
     );
+    $('#canvas').velocity({
+      opacity: 0
+    }, {
+      duration: 600,
+      easing: 'easeInOutCubic'
+    });
   },
 
   // Ajax

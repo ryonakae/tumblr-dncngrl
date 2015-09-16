@@ -28,7 +28,9 @@ module.exports = React.createClass({
   // DOM初期化された時
   componentDidMount: function(){
     console.log('DOMの初期化');
-    canvas(); //canvas描画
+
+    //canvas描画
+    canvas();
 
     this.fadeIn();
   },

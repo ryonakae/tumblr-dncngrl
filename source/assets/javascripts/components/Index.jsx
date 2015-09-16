@@ -13,6 +13,7 @@ module.exports = React.createClass({
   componentDidMount: function(){
     console.log('indexが読み込まれた');
 
+    // velocity
     $('.rectangle').velocity(
       {
         width: '50%',
@@ -23,6 +24,13 @@ module.exports = React.createClass({
         easing: 'easeInOutQuart'
       }
     );
+    $('#canvas').velocity({
+      opacity: 1
+    }, {
+      duration: 800,
+      delay: 300,
+      easing: 'easeInOutCubic'
+    });
   },
 
   componentWillUnmount: function(){
