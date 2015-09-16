@@ -84,9 +84,14 @@ module.exports = React.createClass({
     var article = this.state.data;
 
     // tags
+    // article.tags.lengthがundefinedになるので
+    // 空の配列オブジェクトを作り、article.tagsを合体する
+    // そして新しく作った配列のlengthを取る（つらい）
     var tags = [];
-    for (var i = 0; i < article.tags.length; i++) {
-      tags.push(<li>{article.tags[i]}</li>);
+    tags = tags.concat(article.tags);
+    var articleTags = [];
+    for (var i = 0; i < tags.length; i++) {
+      articleTags.push(<li>{tags[i]}</li>);
     }
 
     return (
@@ -96,7 +101,7 @@ module.exports = React.createClass({
             <h1 className="article__title">{article.title}</h1>
             <div className="article__info">
               <span className="article__date">{moment(new Date(article.date)).format('YYYY.M.D')}</span>
-              <ul className="article__tag">{tags}</ul>
+              <ul className="article__tag">{articleTags}</ul>
             </div>
             <div className="article__notes">{article.noteCount} NOTES</div>
           </header>
