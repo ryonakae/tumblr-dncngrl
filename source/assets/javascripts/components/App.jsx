@@ -20,8 +20,8 @@ module.exports = React.createClass({
       top: 0
     }, {
       duration: 800,
-      delay: 250,
-      easing: 'easeInOutCubic'
+      delay: 400,
+      easing: 'easeOutCubic'
     });
   },
 

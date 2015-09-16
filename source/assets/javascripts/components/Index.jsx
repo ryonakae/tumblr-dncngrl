@@ -28,7 +28,7 @@ module.exports = React.createClass({
       opacity: 1
     }, {
       duration: 800,
-      delay: 300,
+      delay: 600,
       easing: 'easeInOutCubic'
     });
   },

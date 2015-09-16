@@ -35,7 +35,7 @@ module.exports = React.createClass({
     $('.rectangle').velocity(
       {
         width: '100%',
-        height: '700px'
+        height: '650px'
       },
       {
         duration: 800,
@@ -45,7 +45,7 @@ module.exports = React.createClass({
     $('#canvas').velocity({
       opacity: 0
     }, {
-      duration: 600,
+      duration: 400,
       easing: 'easeInOutCubic'
     });
   },
@@ -103,14 +103,15 @@ module.exports = React.createClass({
               <span className="article__date">{moment(new Date(article.date)).format('YYYY.M.D')}</span>
               <ul className="article__tag">{articleTags}</ul>
             </div>
-            <div className="article__notes">{article.noteCount} NOTES</div>
+            <div className="article__notes">{article.note_count} NOTES</div>
           </header>
-          <div className="article__body" dangerouslySetInnerHTML={{__html: article.body}} />
-        </article>
 
-        <div className="content__back">
-          <Link className='button' to={'/'}>BACK</Link>
-        </div>
+          <div className="article__body" dangerouslySetInnerHTML={{__html: article.body}} />
+
+          <div className="article__back">
+            <Link className='button' to={'/'}>BACK</Link>
+          </div>
+        </article>
       </main>
     );
   }
