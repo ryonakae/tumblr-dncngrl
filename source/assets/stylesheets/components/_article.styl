@@ -24,6 +24,11 @@
 .article__date
   display inline
 
+  &:before
+    content '·'
+    margin-left 0.5em
+    margin-right 0.5em
+
 
 .article__tag
   display inline
@@ -38,12 +43,6 @@
       content ','
       margin-right 5px
 
-    &:first-child
-      &:before
-        content '·'
-        margin-left 0.5em
-        margin-right 0.5em
-
     &:last-child
       &:after
         content ''
@@ -55,13 +54,13 @@
   padding 5px 8px
   border 1px solid $color_border_default
   position absolute
-  top 50%
+  top 47%
   right 0
   transform translateY(-50%)
 
 
 .article__body
-  margin-top 35px
+  margin-top 40px
 
   h1, h2, h3, h4, h5, h6
     margin 1.3em 0 1em
@@ -111,7 +110,21 @@
     border none
     margin 3.5em auto
 
+  blockquote
+    margin 2em 0 2.15em
+    border-left 5px solid $color_lightGray2
+    color $color_text_sub
+    padding-left 15px
+    font-style italic
+
 
 .article__back
   margin-top 80px
   text-align center
+
+
+.article__photo
+  img
+    line-height 0
+    width 100%
+    height auto

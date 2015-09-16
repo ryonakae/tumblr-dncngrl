@@ -27,7 +27,7 @@ module.exports = React.createClass({
 
         <div className="fixedContent__backTop">
           <div>
-            <span onClick={this.backTop}>BACK TO TOP</span>
+            <span onClick={this.backTop}>SCROLL TO TOP</span>
           </div>
         </div>
       </div>
