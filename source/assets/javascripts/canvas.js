@@ -156,8 +156,11 @@ module.exports = function(){
 
     // カメラ位置
     // マウス座標と逆に動かしてパララックス効果つける
-    camera.position.x = -(mouseX/30);
-    camera.position.y = -(mouseY/30);
+    camera.position.x = -(mouseX/60);
+    camera.position.y = -(mouseY/60);
+    // 回転もさせるぜ
+    camera.rotation.x = -Math.PI + (mouseX * 0.00001);
+    camera.rotation.y =  mouseY * 0.00001;
     camera.updateProjectionMatrix();
   });
 };
