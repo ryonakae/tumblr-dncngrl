@@ -4,6 +4,7 @@ var React = require('react');
 var config = require('../config');
 var Router = require('react-router');
 var State = Router.State;
+var Link = Router.Link;
 var moment = require('moment');
 var request = require('superagent');
 var canvas = require('../canvas');
@@ -82,14 +83,30 @@ module.exports = React.createClass({
   render: function(){
     var article = this.state.data;
 
+    // tags
+    var tags = [];
+    for (var i = 0; i < article.tags.length; i++) {
+      tags.push(<li>{article.tags[i]}</li>);
+    }
+
     return (
-      <div className="article article--single">
-        <h1 className="article__title">{article.title}</h1>
-        <div className="article__date">
-          <small>{moment(new Date(article.date)).format('LL')}</small>
+      <main className="content content--single">
+        <article className='article'>
+          <header className="article__header">
+            <h1 className="article__title">{article.title}</h1>
+            <div className="article__info">
+              <span className="article__date">{moment(new Date(article.date)).format('YYYY.M.D')}</span>
+              <ul className="article__tag">{tags}</ul>
+            </div>
+            <div className="article__notes">{article.noteCount} NOTES</div>
+          </header>
+          <div className="article__body" dangerouslySetInnerHTML={{__html: article.body}} />
+        </article>
+
+        <div className="content__back">
+          <Link className='button' to={'/'}>BACK</Link>
         </div>
-        <div className="article__body" dangerouslySetInnerHTML={{__html: article.body}} />
-      </div>
+      </main>
     );
   }
 });
