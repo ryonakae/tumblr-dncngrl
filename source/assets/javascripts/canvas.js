@@ -1,7 +1,7 @@
 'use strict';
 
-var THREE = require('threejs');
 require('jquery');
+var THREE = require('three');
 
 module.exports = function(){
   // 設定
@@ -74,7 +74,7 @@ module.exports = function(){
   var group1 = new THREE.Object3D();
   group1.add(triangle1);
   group1.position.x = -450;
-  group1.position.y = height*0.2;
+  group1.position.y = height*0.3;
   group1.position.z = 0;
   group1.scale.set(1.9,1.9,1.9);
 
@@ -82,7 +82,7 @@ module.exports = function(){
   var group2 = new THREE.Object3D();
   group2.add(triangle2);
   group2.position.x = 550;
-  group2.position.y = height*-0.4;
+  group2.position.y = height*-0.45;
   group2.position.z = 0;
   group2.scale.set(2,2,2);
 
@@ -125,6 +125,7 @@ module.exports = function(){
       triangle2.position.y = -positionY;
     })();
 
+    renderer.clear();
     renderer.render(scene,camera);
     requestAnimationFrame(animation);
   };
@@ -133,4 +134,30 @@ module.exports = function(){
   // アニメーション発火
   animation();
   console.log('canvas描画');
+
+
+  // リサイズ
+  $(window).on('resize', function(){
+    width = $(window).width();
+    height = $(window).height();
+    camera.aspect = width/height
+    cameraZ = -(height / 2) / Math.tan( (camera.fov * Math.PI/180) / 2 )
+    camera.position.z = cameraZ;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height);
+  });
+
+
+  // マウスオーバー
+  $(window).on('mousemove', function(e){
+    // window中心からの座標
+    var mouseX = e.clientX - width/2;
+    var mouseY = e.clientY - height/2;
+
+    // カメラ位置
+    // マウス座標と逆に動かしてパララックス効果つける
+    camera.position.x = -(mouseX/30);
+    camera.position.y = -(mouseY/30);
+    camera.updateProjectionMatrix();
+  });
 };

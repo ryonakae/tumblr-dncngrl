@@ -44,24 +44,24 @@
     "jade": "^1.11.0",
     "kouto-swiss": "^0.11.13",
     "main-bower-files": "^2.9.0",
-    "moment": "^2.10.6",
     "path": "^0.11.14",
-    "react-router": "^0.13.3",
     "require-dir": "^0.3.0",
     "rimraf": "^2.4.3",
     "run-sequence": "^1.1.2",
     "spritesmith": "^1.3.2",
     "streamqueue": "^1.1.1",
     "stylus": "^0.52.0",
-    "superagent": "^1.3.0",
-    "superagent-jsonp": "0.0.5",
     "utils-merge": "^1.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.4.0"
   },
   "dependencies": {
-    "react": "^0.13.3"
+    "moment": "^2.10.6",
+    "react": "^0.13.3",
+    "react-router": "^0.13.3",
+    "superagent": "^1.3.0",
+    "superagent-jsonp": "0.0.5"
   },
   "browserify": {
     "transform": [
@@ -71,9 +71,13 @@
   "browser": {
     "jquery": "./build/assets/javascripts/libs/jquery.min.js",
     "velocity": "./build/assets/javascripts/libs/velocity.min.js",
-    "threejs": "./build/assets/javascripts/libs/three.min.js"
+    "three": "./build/assets/javascripts/libs/three.min.js",
+    "flyControls": "./build/assets/javascripts/libs/FlyControls.js"
   },
   "browserify-shim": {
-    "jquery": "$"
+    "jquery": "$",
+    "three": {
+      "exports": "THREE"
+    }
   }
 }
