@@ -4,6 +4,7 @@ var React = require('react');
 var config = require('../config');
 var Router = require('react-router');
 var State = Router.State;
+var Link = Router.Link;
 var moment = require('moment');
 var request = require('superagent');
 var canvas = require('../canvas');
@@ -34,7 +35,7 @@ module.exports = React.createClass({
     $('.rectangle').velocity(
       {
         width: '100%',
-        height: '700px'
+        height: '650px'
       },
       {
         duration: 800,
@@ -44,7 +45,7 @@ module.exports = React.createClass({
     $('#canvas').velocity({
       opacity: 0
     }, {
-      duration: 600,
+      duration: 400,
       easing: 'easeInOutCubic'
     });
   },
@@ -82,14 +83,85 @@ module.exports = React.createClass({
   render: function(){
     var article = this.state.data;
 
-    return (
-      <div className="article article--single">
-        <h1 className="article__title">{article.title}</h1>
-        <div className="article__date">
-          <small>{moment(new Date(article.date)).format('LL')}</small>
-        </div>
-        <div className="article__body" dangerouslySetInnerHTML={{__html: article.body}} />
-      </div>
-    );
+    // tags
+    // article.tags.lengthがundefinedになるので
+    // 空の配列オブジェクトを作り、article.tagsを合体する
+    // そして新しく作った配列のlengthを取る（つらい）
+    var tags = [];
+    tags = tags.concat(article.tags);
+    var articleTags = [];
+    for (var i = 0; i < tags.length; i++) {
+      articleTags.push(<li>{tags[i]}</li>);
+    }
+
+
+    // textのとき
+    if ( article.type === 'text' ) {
+      return (
+        <main className="content content--single">
+          <article className='article'>
+            <header className="article__header">
+              <h1 className="article__title">{article.title}</h1>
+              <div className="article__info">
+                <span className="article__date">{moment(new Date(article.date)).format('YYYY.M.D')}</span>
+                <ul className="article__tag">{articleTags}</ul>
+              </div>
+              <div className="article__notes">{article.note_count} NOTES</div>
+            </header>
+
+            <div className="article__body" dangerouslySetInnerHTML={{__html: article.body}} />
+
+            <div className="article__back">
+              <Link className='button' to={'/'}>BACK</Link>
+            </div>
+          </article>
+        </main>
+      );
+    }
+
+
+    // photoのとき
+    else if ( article.type === 'photo' ) {
+      return (
+        <main className="content content--single">
+          <article className='article'>
+            <header className="article__header">
+              <h1 className="article__title">{moment(new Date(article.date)).format('YYYY.M.D')}</h1>
+              <div className="article__info">
+                <ul className="article__tag">{articleTags}</ul>
+              </div>
+              <div className="article__notes">{article.note_count} NOTES</div>
+            </header>
+
+            <div className="article__body">
+              <div className="article__photo">
+                <img src={article.photos[0].original_size.url} alt="" />
+              </div>
+              <div className="article__caption" dangerouslySetInnerHTML={{__html: article.caption}} />
+            </div>
+
+            <div className="article__back">
+              <Link className='button' to={'/'}>BACK</Link>
+            </div>
+          </article>
+        </main>
+      );
+    }
+
+
+    // それ以外のとき
+    else { //elseがないとエラー出る
+      return (
+        <main className="content content--single">
+          <article className='article'>
+            <div className="article__back">
+              <Link className='button' to={'/'}>BACK</Link>
+            </div>
+          </article>
+        </main>
+      );
+    }
+
+
   }
 });
