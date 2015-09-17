@@ -2,7 +2,13 @@ doctype html
 html(lang='ja')
   head
     meta(charset='UTF-8')
-    title Dancing Girl.
+    title {Title}
+    {block:Description}
+    meta(name="description", content="{MetaDescription}")
+    {/block:Description}
+    meta(name="viewport", content="width=device-width,initial-scale=1.0")
+    link(rel="shortcut icon", href="{Favicon}")
+    link(rel="apple-touch-icon", href="{PortraitURL-128}")
     link(rel='stylesheet', href='assets/stylesheets/style.css', inline)
   body
     @@include('assets/images/svg/symbols.svg')
