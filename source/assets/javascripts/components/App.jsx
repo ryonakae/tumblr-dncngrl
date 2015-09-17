@@ -15,17 +15,34 @@ var Rectangle = require('./Rectangle');
 var canvas = require('../canvas');
 
 module.exports = React.createClass({
+  footerFadeIn: function(){
+    $('.footer').css({'opacity': 0});
+    $('.footer').velocity({
+      opacity: 1
+    },{
+        duration: 800,
+        delay: 400,
+        easing: 'easeInOutQuart'
+    });
+  },
+
   // DOM初期化された時
   componentDidMount: function(){
     console.log('DOMの初期化');
 
     //canvas描画
     canvas();
+
+    //フッターフェードイン
+    this.footerFadeIn();
   },
 
   // component更新された時
   componentDidUpdate: function(){
     console.log('Componentの更新');
+
+    //フッターフェードイン
+    this.footerFadeIn();
   },
 
   render: function(){
