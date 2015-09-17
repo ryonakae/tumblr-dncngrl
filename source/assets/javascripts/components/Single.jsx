@@ -5,6 +5,7 @@ var config = require('../config');
 var Router = require('react-router');
 var State = Router.State;
 var Link = Router.Link;
+var DocumentTitle = require('react-document-title');
 var moment = require('moment');
 var request = require('superagent');
 var canvas = require('../canvas');
@@ -98,24 +99,26 @@ module.exports = React.createClass({
     // textのとき
     if ( article.type === 'text' ) {
       return (
-        <main className="content content--single">
-          <article className='article'>
-            <header className="article__header">
-              <h1 className="article__title">{article.title}</h1>
-              <div className="article__info">
-                <span className="article__date">{moment(new Date(article.date)).format('YYYY.M.D')}</span>
-                <ul className="article__tag">{articleTags}</ul>
+        <DocumentTitle title={`${article.title} | Dancing Girl.`}>
+          <main className="content content--single">
+            <article className='article'>
+              <header className="article__header">
+                <h1 className="article__title">{article.title}</h1>
+                <div className="article__info">
+                  <span className="article__date">{moment(new Date(article.date)).format('YYYY.M.D')}</span>
+                  <ul className="article__tag">{articleTags}</ul>
+                </div>
+                <div className="article__notes">{article.note_count} NOTES</div>
+              </header>
+
+              <div className="article__body" dangerouslySetInnerHTML={{__html: article.body}} />
+
+              <div className="article__back">
+                <Link className='button' to={'/'}>BACK</Link>
               </div>
-              <div className="article__notes">{article.note_count} NOTES</div>
-            </header>
-
-            <div className="article__body" dangerouslySetInnerHTML={{__html: article.body}} />
-
-            <div className="article__back">
-              <Link className='button' to={'/'}>BACK</Link>
-            </div>
-          </article>
-        </main>
+            </article>
+          </main>
+        </DocumentTitle>
       );
     }
 
@@ -123,28 +126,30 @@ module.exports = React.createClass({
     // photoのとき
     else if ( article.type === 'photo' ) {
       return (
-        <main className="content content--single">
-          <article className='article'>
-            <header className="article__header">
-              <h1 className="article__title">{moment(new Date(article.date)).format('YYYY.M.D')}</h1>
-              <div className="article__info">
-                <ul className="article__tag">{articleTags}</ul>
-              </div>
-              <div className="article__notes">{article.note_count} NOTES</div>
-            </header>
+        <DocumentTitle title={`${moment(new Date(article.date)).format('YYYY.M.D')} | Dancing Girl.`}>
+          <main className="content content--single">
+            <article className='article'>
+              <header className="article__header">
+                <h1 className="article__title">{moment(new Date(article.date)).format('YYYY.M.D')}</h1>
+                <div className="article__info">
+                  <ul className="article__tag">{articleTags}</ul>
+                </div>
+                <div className="article__notes">{article.note_count} NOTES</div>
+              </header>
 
-            <div className="article__body">
-              <div className="article__photo">
-                <img src={article.photos[0].original_size.url} alt="" />
+              <div className="article__body">
+                <div className="article__photo">
+                  <img src={article.photos[0].original_size.url} alt="" />
+                </div>
+                <div className="article__caption" dangerouslySetInnerHTML={{__html: article.caption}} />
               </div>
-              <div className="article__caption" dangerouslySetInnerHTML={{__html: article.caption}} />
-            </div>
 
-            <div className="article__back">
-              <Link className='button' to={'/'}>BACK</Link>
-            </div>
-          </article>
-        </main>
+              <div className="article__back">
+                <Link className='button' to={'/'}>BACK</Link>
+              </div>
+            </article>
+          </main>
+        </DocumentTitle>
       );
     }
 
