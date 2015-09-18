@@ -1,0 +1,69 @@
+<div id="tumblr" style="display:none; visibility:hidden;">
+
+  <!-- header -->
+  <header>
+    <h1><a href="/">{Title}</a></h1>
+  </header>
+
+  <!-- main -->
+  <main>
+    <!-- article -->
+    {block:Posts}
+      <article>
+        <!-- article:photo -->
+        {block:Photo}
+          <header>
+            {block:Date}
+              <h1><a href="{Permalink}">{Year}.{MonthNumberWithZero}.{DayOfMonthWithZero}</a></h1>
+            {/block:Date}
+          </header>
+          <div>
+            {LinkOpenTag}
+              <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}">
+            {LinkCloseTag}
+            {block:Caption}
+              <div>{Caption}</div>
+            {/block:Caption}
+          </div>
+        {/block:Photo}
+
+        <!-- article:photoset -->
+        {block:Photoset}
+          <header>
+            {block:Date}
+              <h1><a href="{Permalink}">{Year}.{MonthNumberWithZero}.{DayOfMonthWithZero}</a></h1>
+            {/block:Date}
+          </header>
+          <div>
+            {Photoset-700}
+            {block:Caption}
+              <div>{Caption}</div>
+            {/block:Caption}
+          </div>
+        {/block:Photoset}
+
+        <!-- article:text -->
+        {block:Text}
+          <header>
+            {block:Title}
+              <h1><a href="{Permalink}">{Title}</a></h1>
+              {block:Date}
+                <small>{Year}.{MonthNumberWithZero}.{DayOfMonthWithZero}</small>
+              {/block:Date}
+            {/block:Title}
+          </header>
+          <div>
+            {Body}
+          </div>
+        {/block:Text}
+      </article>
+    {/block:Posts}
+  </main>
+
+  <!-- footer -->
+  <footer>
+    <h1><a href="/">{Title}</a></h1>
+    <small>&copy; DANCING GIRL.<br>DESIGN AND ILLUSTRATION BY <a href='http://brdr.jp' target='_blank'>RYO NAKAE</a></small>
+  </footer>
+
+</div>

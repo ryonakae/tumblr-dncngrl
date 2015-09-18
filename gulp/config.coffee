@@ -11,6 +11,7 @@ module.exports =
     images: 'source/assets/images/'
     sprite: 'source/assets/images/sprite/'
     fonts: 'source/assets/fonts/'
+    templateTag: 'source/templateTag/'
 
   # build
   build:
@@ -20,3 +21,4 @@ module.exports =
     jslibs: 'build/assets/javascripts/libs/'
     images: 'build/assets/images/'
     fonts: 'build/assets/fonts/'
+    templateTag: 'build/templateTag/'
