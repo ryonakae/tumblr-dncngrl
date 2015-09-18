@@ -12,7 +12,8 @@ var Header = require('./Header');
 var Footer = require('./Footer');
 var FixedContent = require('./FixedContent');
 var Rectangle = require('./Rectangle');
-var canvas = require('../canvas');
+// var canvas = require('../canvas');
+var canvas2 = require('../canvas2');
 
 module.exports = React.createClass({
   footerFadeIn: function(){
@@ -31,7 +32,8 @@ module.exports = React.createClass({
     console.log('DOMの初期化');
 
     //canvas描画
-    canvas();
+    // canvas();
+    canvas2(React.findDOMNode(this.refs.canvas));
 
     //フッターフェードイン
     this.footerFadeIn();
@@ -54,6 +56,7 @@ module.exports = React.createClass({
           <Footer />
           <FixedContent />
           <Rectangle />
+          <div ref="canvas" />
         </div>
       </DocumentTitle>
     );
