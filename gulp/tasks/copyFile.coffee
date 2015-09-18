@@ -9,6 +9,7 @@ gulp.task 'copyFile', ->
     [
       config.source.fonts + '**/*'
       config.source.images + '*.svg'
+      config.source.templateTag + '**/*.html'
     ]
     base: config.source.root
   )
