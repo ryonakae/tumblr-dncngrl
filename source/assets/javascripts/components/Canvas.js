@@ -5,7 +5,6 @@ var THREE = require('three');
 
 module.exports = function(canvasElement){
   // Canvas作る
-  // Canvasコンストラクタ関数を作る
   function Canvas(e){
     // 使い回す値はコンストラクタに入れておく
     this.element = e;
@@ -38,10 +37,13 @@ module.exports = function(canvasElement){
     this.triangle2 = new THREE.Shape();
     this.group1 = new THREE.Object3D();
     this.group2 = new THREE.Object3D();
+
+    // アニメーション用の角度
+    this.rotateDeg = 0;
+    this.fuwaDeg = 0;
   }
 
   // Canvasを初期化
-  // Canvasのprototypeに初期化関数を追加
   Canvas.prototype.init = function(){
     // カメラ
     // ピクセル等倍にする(canvasのサイズでオブジェクトの大きさを変えない)
@@ -49,7 +51,6 @@ module.exports = function(canvasElement){
     var cameraZ = -(this.height / 2) / Math.tan( (this.camera.fov * Math.PI/180) / 2 );
     this.camera.position.set(0,0,cameraZ); //手前に
     this.camera.lookAt(this.scene.position);
-    console.log(cameraZ);
 
     // レンダラ
     // レンダラの色やサイズをセット
@@ -93,11 +94,7 @@ module.exports = function(canvasElement){
     this.group2.position.y = this.height*-0.45;
     this.group2.position.z = 0;
     this.group2.scale.set(2,2,2);
-  }
 
-  // Canvasを描画
-  // Canvasのprototypeに描画関数を追加
-  Canvas.prototype.render = function(){
     // シーンにライトを追加
     this.scene.add(this.light0);
     this.scene.add(this.light1);
@@ -114,72 +111,105 @@ module.exports = function(canvasElement){
     this.renderer.render(this.scene, this.camera);
   }
 
-  // Canvasをアニメーション
-  // Canvasのprototypeにアニメーション関数を追加
+  // Canvasを描画・アニメーション
   Canvas.prototype.animation = function(){
-    var rotateDeg = 0;
-    var fuwaDeg = 0;
+    this.rotateDeg += 0.005;
+    var rotateRadian = this.rotateDeg * Math.PI / 180;
+    this.fuwaDeg += 0.3;
+    var fuwaRadian = this.fuwaDeg * Math.PI / 180;
 
-    // Animateコンストラクタ関数を作る
-    function Animate(group, triangle, renderer, scene, camera){
-      this.rotateDeg = 0;
-      this.fuwaDeg = 0;
+    // グループと三角形を変数に入れる
+    // 即時関数の中からthis.group1などを参照できるように
+    var group1 = this.group1;
+    var triangle1 = this.triangle1;
+    var group2 = this.group2;
+    var triangle2 = this.triangle2;
 
-      this.group = group;
-      this.triangle = triangle;
-
-      this.renderer = renderer;
-      this.scene = scene;
-      this.camera = camera;
-    }
-
-    // Animateのprototypeにkurufuwa関数を追加
-    Animate.prototype.kurufuwa = function(){
-      // くるくるの度合い
-      this.rotateDeg = this.rotateDeg + 0.005;
-      var rotateRadian = this.rotateDeg * Math.PI / 180;
-      var rotateY = Math.sin(rotateRadian) * 1;
+    // group1
+    (function(){
+      var rotateY = Math.sin(rotateRadian) * 1; //くるくるの振れ幅
       var rotateZ = Math.sin(rotateRadian) * 0.2;
+      var positionY = Math.sin(fuwaRadian) * 10; //ふわふわの振れ幅
+      group1.rotation.set( 0, rotateY, rotateZ );
+      triangle1.position.y = positionY;
+    })();
 
-      // ふわふわの度合い
-      this.fuwaDeg = this.fuwaDeg + 0.3;
-      var fuwaRadian = this.fuwaDeg * Math.PI / 180;
-      var positionY = Math.sin(fuwaRadian) * 10;
+    // group2
+    (function(){
+      var rotateY = Math.sin(rotateRadian) * 1.5; //くるくるの振れ幅
+      var rotateZ = Math.sin(rotateRadian) * 0.15;
+      var positionY = Math.sin(fuwaRadian) * 5; //ふわふわの振れ幅
+      group2.rotation.set( 0, -rotateY, -rotateZ );
+      triangle2.position.y = -positionY;
+    })();
 
-      // 動かす
-      this.group.rotation.set( 0, rotateY, rotateZ );
-      this.triangle.position.y = positionY;
-      console.log('くるくる きゃわわ');
+    // レンダラの中身を一回クリアしてから再レンダリング
+    this.renderer.clear();
+    this.renderer.render(this.scene, this.camera);
 
-      // フレームごとに再描画
-      this.renderer.clear();
-      this.renderer.render(this.scene, this.camera);
-      requestAnimationFrame(this.constructor);
-    }
+    // フレームごとに再描画
+    // animation()の中で使うthisをbindで固定する
+    requestAnimationFrame(this.animation.bind(this));
+  }
 
-    // Animateのインスタンスをそれぞれ作成
-    var animate1 = new Animate(this.group1, this.triangle1, this.renderer, this.scene, this.camera);
-    var animate2 = new Animate(this.group2, this.triangle2, this.renderer, this.scene, this.camera);
+  // Canvasのリサイズ
+  Canvas.prototype.resize = function(){
+    // bindでthisを束縛
+    // Canvas.prototype内の値を
+    // $(window).on('resize',function(){})内からthis.hogeで参照できる
+    $(window).on('resize', function(){
+      // Canvas.prototype.widthとCanvas.prototype.heightを
+      // リサイズごとに上書きする
+      this.width = $(window).width();
+      this.height = $(window).height();
 
-    animate1.kurufuwa();
-    animate2.kurufuwa();
+      // カメラ位置
+      this.camera.aspect = this.width/this.height;
+      var cameraZ = -(this.height / 2) / Math.tan( (this.camera.fov * Math.PI/180) / 2 );
+      this.camera.position.z = cameraZ;
+      this.camera.updateProjectionMatrix();
+
+      // groupの位置
+      this.group1.position.y = this.height*0.3;
+      this.group2.position.y = this.height*-0.45;
+
+      // レンダラのサイズ
+      this.renderer.setSize(this.width, this.height);
+    }.bind(this));
+  }
+
+  // Canvasのマウスオーバー
+  Canvas.prototype.mousemove = function(){
+    $(window).on('mousemove', function(e){
+      // window中心からの座標
+      var mouseX = e.clientX - this.width/2;
+      var mouseY = e.clientY - this.height/2;
+
+      // カメラ位置
+      // マウス座標と逆に動かしてパララックス効果つける
+      this.camera.position.x = -(mouseX/60);
+      this.camera.position.y = -(mouseY/60);
+      // 回転もさせるぜ
+      this.camera.rotation.x = -Math.PI + (mouseX * 0.00001);
+      this.camera.rotation.y =  mouseY * 0.00001;
+      this.camera.updateProjectionMatrix();
+    }.bind(this));
   }
 
 
-  // triangleっていう名前のCanvas関数のインスタンスを作成
+  // triangleという名前のCanvas関数のインスタンスを作成
   // 引数に設定したcanvasElementが、Canvas関数のthis.elementに入る
   var triangle = new Canvas(canvasElement);
 
   // triangleの初期化
-  // 継承元のCanvas関数で設定したinitメソッドが使える
   triangle.init();
 
-  // triangleの描画
-  // 継承元のCanvas関数で設定したrenderメソッドが使える
-  triangle.render();
-
-  // triangleの描画
-  // 継承元のCanvas関数で設定したrenderメソッドが使える
-  // 引数rotateDegとfuwaDegの初期値は0にする
+  // 描画・アニメーション
   triangle.animation();
+
+  // リサイズ
+  triangle.resize();
+
+  // マウスムーブ
+  triangle.mousemove();
 };
