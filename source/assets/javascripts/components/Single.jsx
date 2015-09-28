@@ -8,6 +8,7 @@ var Link = Router.Link;
 var DocumentTitle = require('react-document-title');
 var moment = require('moment');
 var request = require('superagent');
+var ReactScriptLoaderMixin = require('react-script-loader').ReactScriptLoaderMixin;
 require('superagent-jsonp')(request);
 require('jquery');
 require('velocity');
@@ -21,13 +22,35 @@ var Button = require('./Button');
 
 module.exports = React.createClass({
   // mixin
-  mixins: [ State ],
+  mixins: [
+    State,
+    ReactScriptLoaderMixin
+  ],
 
   // 初期化
   getInitialState: function(){
     return {
-      data: []
+      data: [],
+      scriptLoading: true,
+      scriptLoadError: false
     };
+  },
+
+  // 外部スクリプトを読み込む
+  // Twitterの埋め込みツイート用JS
+  getScriptURL: function(){
+    return 'http://platform.twitter.com/widgets.js'
+  },
+  onScriptLoaded: function(){
+    this.setState({
+      scriptLoading: true
+    });
+  },
+  onScriptError: function(){
+    this.setState({
+      scriptLoading: false,
+      scriptLoadError: true
+    });
   },
 
   // component更新された時
@@ -45,6 +68,15 @@ module.exports = React.createClass({
         easing: 'easeInOutQuart'
       }
     );
+
+    var body = React.findDOMNode(this.refs.body);
+    if( $(body).find('.twitter-tweet')[0] ){
+      twttr.widgets.load(body);
+      console.log('埋め込みツイートがある');
+    }
+    else {
+      console.log('埋め込みツイート、なし！w');
+    }
   },
 
   // Ajax
@@ -107,7 +139,7 @@ module.exports = React.createClass({
                 <div className="article__notes">{article.note_count} NOTES</div>
               </header>
 
-              <div className="article__body" dangerouslySetInnerHTML={{__html: article.body}} />
+              <div className="article__body" dangerouslySetInnerHTML={{__html: article.body}} ref='body' />
 
               <div className="article__back">
                 <Button type='link' href='/'>BACK</Button>
@@ -123,7 +155,7 @@ module.exports = React.createClass({
     else if ( article.type === 'photo' ) {
       return (
         <DocumentTitle title={`${moment(new Date(article.date)).format('YYYY.M.D')} | Dancing Girl.`}>
-          <main className="content content--single">
+          <main className="content content--single" ref='content'>
             <article className='article'>
               <header className="article__header">
                 <h1 className="article__title">{moment(new Date(article.date)).format('YYYY.M.D')}</h1>
@@ -153,7 +185,7 @@ module.exports = React.createClass({
     // それ以外のとき
     else { //elseがないとエラー出る
       return (
-        <main className="content content--single">
+        <main className="content content--single" ref='content'>
           <article className='article'>
             <div className="article__back">
               <Button type='link' href='/'>BACK</Button>
