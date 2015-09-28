@@ -20,7 +20,7 @@ module.exports = React.createClass({
         height: '600px'
       },
       {
-        duration: 400,
+        duration: 600,
         easing: 'easeInOutQuart'
       }
     );
