@@ -12,7 +12,8 @@ var Header = require('./Header');
 var Footer = require('./Footer');
 var FixedContent = require('./FixedContent');
 var Rectangle = require('./Rectangle');
-var canvas = require('../canvas');
+// var canvas = require('../canvas');
+var Canvas = require('./Canvas');
 
 module.exports = React.createClass({
   footerFadeIn: function(){
@@ -30,10 +31,12 @@ module.exports = React.createClass({
   componentDidMount: function(){
     console.log('DOMの初期化');
 
-    //canvas描画
-    canvas();
+    // canvas描画
+    // 引数にReactのcanvas要素を入れる(DOMに変換してから)
+    var canvasElement = React.findDOMNode(this.refs.canvas);
+    Canvas(canvasElement);
 
-    //フッターフェードイン
+    // フッターフェードイン
     this.footerFadeIn();
   },
 
@@ -41,7 +44,7 @@ module.exports = React.createClass({
   componentDidUpdate: function(){
     console.log('Componentの更新');
 
-    //フッターフェードイン
+    // フッターフェードイン
     this.footerFadeIn();
   },
 
@@ -54,6 +57,7 @@ module.exports = React.createClass({
           <Footer />
           <FixedContent />
           <Rectangle />
+          <div id="canvas" ref="canvas" />
         </div>
       </DocumentTitle>
     );
