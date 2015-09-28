@@ -13,6 +13,7 @@ var limit = 3;
 
 // components
 var TextListItem = require('./TextListItem');
+var Button = require('./Button');
 
 module.exports = React.createClass({
   // 初期化
@@ -108,7 +109,7 @@ module.exports = React.createClass({
         </div>
 
         <div className="textList__more">
-          <div className='button' onClick={this.nextPage}>MORE</div>
+          <Button type='more' onClick={this.nextPage}>MORE</Button>
         </div>
       </div>
     );

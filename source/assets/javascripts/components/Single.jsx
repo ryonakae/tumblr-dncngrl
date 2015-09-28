@@ -16,6 +16,9 @@ require('velocity');
 var tumblrUrl = config.tumblrUrl;
 var apiKey = config.apiKey;
 
+// components
+var Button = require('./Button');
+
 module.exports = React.createClass({
   // mixin
   mixins: [ State ],
@@ -107,7 +110,7 @@ module.exports = React.createClass({
               <div className="article__body" dangerouslySetInnerHTML={{__html: article.body}} />
 
               <div className="article__back">
-                <Link className='button' to={'/'}>BACK</Link>
+                <Button type='link' href='/'>BACK</Button>
               </div>
             </article>
           </main>
@@ -138,7 +141,7 @@ module.exports = React.createClass({
               </div>
 
               <div className="article__back">
-                <Link className='button' to={'/'}>BACK</Link>
+                <Button type='link' href='/'>BACK</Button>
               </div>
             </article>
           </main>
@@ -153,7 +156,7 @@ module.exports = React.createClass({
         <main className="content content--single">
           <article className='article'>
             <div className="article__back">
-              <Link className='button' to={'/'}>BACK</Link>
+              <Button type='link' href='/'>BACK</Button>
             </div>
           </article>
         </main>
