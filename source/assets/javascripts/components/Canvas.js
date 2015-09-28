@@ -2,6 +2,7 @@
 
 require('jquery');
 var THREE = require('three');
+// var TWEEN = require('tween');
 
 module.exports = function(canvasElement){
   // Canvas作る
@@ -106,8 +107,11 @@ module.exports = function(canvasElement){
 
     // this.element以下にcanvasを描画
     this.element.appendChild(this.renderer.domElement);
+  }
 
+  Canvas.prototype.render = function(){
     // レンダリング
+    this.renderer.clear();
     this.renderer.render(this.scene, this.camera);
   }
 
@@ -129,7 +133,7 @@ module.exports = function(canvasElement){
     (function(){
       var rotateY = Math.sin(rotateRadian) * 1; //くるくるの振れ幅
       var rotateZ = Math.sin(rotateRadian) * 0.2;
-      var positionY = Math.sin(fuwaRadian) * 10; //ふわふわの振れ幅
+      var positionY = Math.sin(fuwaRadian) * 15; //ふわふわの振れ幅
       group1.rotation.set( 0, rotateY, rotateZ );
       triangle1.position.y = positionY;
     })();
@@ -138,14 +142,13 @@ module.exports = function(canvasElement){
     (function(){
       var rotateY = Math.sin(rotateRadian) * 1.5; //くるくるの振れ幅
       var rotateZ = Math.sin(rotateRadian) * 0.15;
-      var positionY = Math.sin(fuwaRadian) * 5; //ふわふわの振れ幅
+      var positionY = Math.sin(fuwaRadian) * 10; //ふわふわの振れ幅
       group2.rotation.set( 0, -rotateY, -rotateZ );
       triangle2.position.y = -positionY;
     })();
 
-    // レンダラの中身を一回クリアしてから再レンダリング
-    this.renderer.clear();
-    this.renderer.render(this.scene, this.camera);
+    // 再レンダリング
+    this.render();
 
     // フレームごとに再描画
     // animation()の中で使うthisをbindで固定する
@@ -204,7 +207,10 @@ module.exports = function(canvasElement){
   // triangleの初期化
   triangle.init();
 
-  // 描画・アニメーション
+  // 描画
+  triangle.render();
+
+  // アニメーション
   triangle.animation();
 
   // リサイズ

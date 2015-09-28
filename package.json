@@ -75,12 +75,11 @@
     "jquery": "./build/assets/javascripts/libs/jquery.min.js",
     "velocity": "./build/assets/javascripts/libs/velocity.min.js",
     "three": "./build/assets/javascripts/libs/three.min.js",
-    "flyControls": "./build/assets/javascripts/libs/FlyControls.js"
+    "tween": "./build/assets/javascripts/libs/tween.min.js"
   },
   "browserify-shim": {
     "jquery": "$",
-    "three": {
-      "exports": "THREE"
-    }
+    "three": "THREE",
+    "tween": "TWEEN"
   }
 }

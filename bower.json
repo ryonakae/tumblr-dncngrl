@@ -16,8 +16,8 @@
   "dependencies": {
     "jquery": "~2.1.4",
     "react": "~0.13.3",
-    "velocity": "~1.2.2",
-    "threejs": "*"
+    "threejs": "*",
+    "velocity": "~1.2.2"
   },
   "overrides": {
     "react": {
@@ -27,13 +27,13 @@
       "main": "dist/jquery.min.js"
     },
     "velocity": {
-      "main": [
-        "./velocity.min.js",
-        "./velocity.ui.min.js"
-      ]
+      "main": "./velocity.min.js"
     },
     "threejs": {
-      "main": "build/three.min.js"
+      "main": [
+        "build/three.min.js",
+        "examples/js/libs/tween.min.js"
+      ]
     }
   }
 }
