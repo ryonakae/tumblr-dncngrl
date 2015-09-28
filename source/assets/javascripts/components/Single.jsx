@@ -8,7 +8,6 @@ var Link = Router.Link;
 var DocumentTitle = require('react-document-title');
 var moment = require('moment');
 var request = require('superagent');
-var canvas = require('../canvas');
 require('superagent-jsonp')(request);
 require('jquery');
 require('velocity');
@@ -39,16 +38,10 @@ module.exports = React.createClass({
         height: '650px'
       },
       {
-        duration: 800,
+        duration: 600,
         easing: 'easeInOutQuart'
       }
     );
-    $('#canvas').velocity({
-      opacity: 0
-    }, {
-      duration: 400,
-      easing: 'easeInOutCubic'
-    });
   },
 
   // Ajax

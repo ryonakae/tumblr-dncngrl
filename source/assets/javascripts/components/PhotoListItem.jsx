@@ -31,7 +31,7 @@ module.exports = React.createClass({
         opacity: 1,
         top: 0
       },{
-        duration: 600,
+        duration: 500,
         delay: 0,
         easing: 'easeInOutQuart'
       }
@@ -42,7 +42,7 @@ module.exports = React.createClass({
         top: 0
       },{
         duration: 400,
-        delay: 500,
+        delay: 450,
         easing: 'easeOutCubic'
       }
     );
@@ -52,7 +52,7 @@ module.exports = React.createClass({
         top: 0
       },{
         duration: 400,
-        delay: 550,
+        delay: 500,
         easing: 'easeOutCubic'
       }
     );
@@ -62,7 +62,7 @@ module.exports = React.createClass({
         top: 0
       },{
         duration: 400,
-        delay: 600,
+        delay: 550,
         easing: 'easeOutCubic'
       }
     );

@@ -11,7 +11,7 @@ module.exports = React.createClass({
   backTop: function(){
     $('html').velocity('scroll', {
       duration: 1000,
-      easing: 'easeOutExpo'
+      easing: 'easeOutQuint'
     });
   },
 
