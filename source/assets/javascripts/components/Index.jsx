@@ -20,17 +20,10 @@ module.exports = React.createClass({
         height: '600px'
       },
       {
-        duration: 800,
+        duration: 400,
         easing: 'easeInOutQuart'
       }
     );
-    $('#canvas').velocity({
-      opacity: 1
-    }, {
-      duration: 800,
-      delay: 600,
-      easing: 'easeInOutCubic'
-    });
   },
 
   componentWillUnmount: function(){

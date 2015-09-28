@@ -12,7 +12,6 @@ var Header = require('./Header');
 var Footer = require('./Footer');
 var FixedContent = require('./FixedContent');
 var Rectangle = require('./Rectangle');
-// var canvas = require('../canvas');
 var Canvas = require('./Canvas');
 
 module.exports = React.createClass({
@@ -35,6 +34,14 @@ module.exports = React.createClass({
     // 引数にReactのcanvas要素を入れる(DOMに変換してから)
     var canvasElement = React.findDOMNode(this.refs.canvas);
     Canvas(canvasElement);
+
+    $('#canvas').velocity({
+      opacity: 1
+    }, {
+      duration: 800,
+      delay: 600,
+      easing: 'easeInOutCubic'
+    });
 
     // フッターフェードイン
     this.footerFadeIn();

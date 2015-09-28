@@ -30,8 +30,8 @@ var routes = (
 );
 
 // render
-Router.run(routes, Router.HistoryLocation, function(Handler){
-// Router.run(routes, function(Handler){
+// Router.run(routes, Router.HistoryLocation, function(Handler){
+Router.run(routes, function(Handler){
   React.render(
     <Handler />, document.getElementById('dncngrl')
   );
