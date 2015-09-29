@@ -16,8 +16,6 @@ module.exports = React.createClass({
 
   // マウスオーバー
   mouseOver: function(){
-    console.log('over');
-
     // Native DOM取得してからjQueryオブジェクトに変換
     // ref属性で指定した名前でrefsからcomponentを参照できる(つらい)
     var overlay = $(React.findDOMNode(this.refs.overlay));
@@ -26,52 +24,42 @@ module.exports = React.createClass({
     var note = $(React.findDOMNode(this.refs.note));
 
     // velocity
-    overlay.velocity(
-      {
-        opacity: 1,
-        top: 0
-      },{
-        duration: 500,
-        delay: 0,
-        easing: 'easeInOutQuart'
-      }
-    );
-    date.velocity(
-      {
-        opacity: 1,
-        top: 0
-      },{
-        duration: 400,
-        delay: 450,
-        easing: 'easeOutCubic'
-      }
-    );
-    tag.velocity(
-      {
-        opacity: 1,
-        top: 0
-      },{
-        duration: 400,
-        delay: 500,
-        easing: 'easeOutCubic'
-      }
-    );
-    note.velocity(
-      {
-        opacity: 1,
-        top: 0
-      },{
-        duration: 400,
-        delay: 550,
-        easing: 'easeOutCubic'
-      }
-    );
+    overlay.velocity({
+      opacity: 1,
+      top: 0
+    }, {
+      duration: 500,
+      delay: 0,
+      easing: 'easeInOutQuart'
+    });
+    date.velocity({
+      opacity: 1,
+      top: 0
+    }, {
+      duration: 400,
+      delay: 450,
+      easing: 'easeOutCubic'
+    });
+    tag.velocity({
+      opacity: 1,
+      top: 0
+    },{
+      duration: 400,
+      delay: 500,
+      easing: 'easeOutCubic'
+    });
+    note.velocity({
+      opacity: 1,
+      top: 0
+    }, {
+      duration: 400,
+      delay: 550,
+      easing: 'easeOutCubic'
+    });
   },
 
   // マウスアウト
   mouseOut: function(){
-    console.log('out');
-
     var overlay = $(React.findDOMNode(this.refs.overlay));
     var date = $(React.findDOMNode(this.refs.date));
     var tag = $(React.findDOMNode(this.refs.tag));

@@ -28,8 +28,6 @@ module.exports = React.createClass({
 
   // DOM初期化された時
   componentDidMount: function(){
-    console.log('DOMの初期化');
-
     // canvas描画
     // 引数にReactのcanvas要素を入れる(DOMに変換してから)
     var canvasElement = React.findDOMNode(this.refs.canvas);
@@ -49,8 +47,6 @@ module.exports = React.createClass({
 
   // component更新された時
   componentDidUpdate: function(){
-    console.log('Componentの更新');
-
     // フッターフェードイン
     this.footerFadeIn();
   },

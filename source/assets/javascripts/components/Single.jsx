@@ -55,8 +55,6 @@ module.exports = React.createClass({
 
   // component更新された時
   componentDidUpdate: function(){
-    console.log('singleが読み込まれた');
-
     // velocity
     $('.rectangle').velocity(
       {
@@ -72,10 +70,6 @@ module.exports = React.createClass({
     var body = React.findDOMNode(this.refs.body);
     if( $(body).find('.twitter-tweet')[0] ){
       twttr.widgets.load(body);
-      console.log('埋め込みツイートがある');
-    }
-    else {
-      console.log('埋め込みツイート、なし！w');
     }
   },
 
@@ -100,7 +94,6 @@ module.exports = React.createClass({
         this.setState({
           data: data.body.response.posts[0]
         });
-        console.log(this.state.data);
       }.bind(this));
   },
 

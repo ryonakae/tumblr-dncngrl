@@ -20,7 +20,10 @@ module.exports = React.createClass({
   getInitialState: function(){
     return {
       data: [],
-      page: 1
+      page: 1,
+      articleCount: limit,
+      articleTotal: 0,
+      buttonLabel: 'MORE'
     };
   },
 
@@ -51,18 +54,29 @@ module.exports = React.createClass({
 
         // dataに取得したデータを入れる
         this.setState({
-          data: newData
+          data: newData,
+          buttonLabel: 'MORE'
         });
 
-        console.log(data.body.response);
+        // 最後まで表示したらMOREボタン隠す
+        this.chackLastPage();
       }.bind(this));
+  },
+
+  // ページ番号確認用関数
+  chackLastPage: function(){
+    if ( this.state.articleCount >= this.state.articleTotal ) {
+      var more = React.findDOMNode(this.refs.more);
+      $(more).css({ 'display':'none' });
+    }
   },
 
   // 次ページ読み込み用関数
   nextPage: function(e){
     // ページ番号をアップデート
     this.setState({
-      page: this.state.page + 1
+      page: this.state.page + 1,
+      buttonLabel: 'LOADING'
     });
 
     // 次ページのデータを取得
@@ -108,8 +122,8 @@ module.exports = React.createClass({
           {articleNodes}
         </div>
 
-        <div className="textList__more">
-          <Button type='more' onClick={this.nextPage}>MORE</Button>
+        <div className="textList__more" ref='more'>
+          <Button type='more' onClick={this.nextPage}>{this.state.buttonLabel}</Button>
         </div>
       </div>
     );

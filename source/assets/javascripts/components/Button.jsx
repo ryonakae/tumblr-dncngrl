@@ -54,7 +54,7 @@ module.exports = React.createClass({
   render: function(){
     if( this.props.type === 'more' ){
       return (
-        <div className='button' onMouseEnter={this.mouseOver} onMouseLeave={this.mouseOut} ref='button'>{this.props.children}</div>
+        <div className='button' onMouseEnter={this.mouseOver} onMouseLeave={this.mouseOut} ref='button' onClick={this.props.onClick}>{this.props.children}</div>
       );
     }
     else {

@@ -11,8 +11,6 @@ require('velocity');
 module.exports = React.createClass({
   // DOM初期化された時
   componentDidMount: function(){
-    console.log('indexが読み込まれた');
-
     // velocity
     $('.rectangle').velocity(
       {
@@ -24,10 +22,6 @@ module.exports = React.createClass({
         easing: 'easeInOutQuart'
       }
     );
-  },
-
-  componentWillUnmount: function(){
-    console.log('indexがunmountされた');
   },
 
   render: function(){
