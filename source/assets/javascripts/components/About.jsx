@@ -16,8 +16,9 @@ module.exports = React.createClass({
       width: '100%',
       height: '650px'
     }, {
-      duration: 600,
-      easing: 'easeInOutQuart'
+      duration: 800,
+      delay: 150,
+      easing: 'easeInOutCirc'
     });
   },
 
