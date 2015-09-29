@@ -12,7 +12,7 @@ var Header = require('./Header');
 var Footer = require('./Footer');
 var FixedContent = require('./FixedContent');
 var Rectangle = require('./Rectangle');
-var Canvas = require('./Canvas');
+var Canvas = require('./Canvas2');
 
 module.exports = React.createClass({
   footerFadeIn: function(){

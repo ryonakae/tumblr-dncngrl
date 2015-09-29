@@ -35,9 +35,7 @@ module.exports = function(canvasElement){
 
     // シェイプとグループ
     this.triangle1 = new THREE.Shape();
-    this.triangle2 = new THREE.Shape();
     this.group1 = new THREE.Object3D();
-    this.group2 = new THREE.Object3D();
 
     // アニメーション用の角度
     this.rotateDeg = 0;
@@ -70,31 +68,19 @@ module.exports = function(canvasElement){
 
     // シェイプとグループ
     // triangle1
-    this.triangle1.moveTo(-50,100);
-    this.triangle1.lineTo(-100,-150);
-    this.triangle1.lineTo(30,20);
-    this.triangle1.lineTo(-50,100); //始点に戻る
+    this.triangle1.moveTo(-20,90);
+    this.triangle1.lineTo(-60,-150);
+    this.triangle1.lineTo(40,30);
+    this.triangle1.lineTo(-20,90); //始点に戻る
     this.triangle1 = new THREE.ShapeGeometry(this.triangle1);
     this.triangle1 =  new THREE.Mesh(this.triangle1, material);
-    // triangle2
-    this.triangle2.moveTo(-20,150);
-    this.triangle2.lineTo(10,-50);
-    this.triangle2.lineTo(60,20);
-    this.triangle2.lineTo(-20,150); //始点に戻る
-    this.triangle2 = new THREE.ShapeGeometry(this.triangle2);
-    this.triangle2 =  new THREE.Mesh(this.triangle2, material);
+
     // group1: 右中央ちょい下くらいに置く
     this.group1.add(this.triangle1);
-    this.group1.position.x = -450;
-    this.group1.position.y = this.height*0.3;
+    this.group1.position.x = -500;
+    this.group1.position.y = this.height*-0.05;
     this.group1.position.z = 0;
-    this.group1.scale.set(1.9,1.9,1.9);
-    // group2: 左下くらいに置く
-    this.group2.add(this.triangle2);
-    this.group2.position.x = 550;
-    this.group2.position.y = this.height*-0.45;
-    this.group2.position.z = 0;
-    this.group2.scale.set(2,2,2);
+    this.group1.scale.set(1.8,1.8,1.8);
 
     // シーンにライトを追加
     this.scene.add(this.light0);
@@ -103,48 +89,37 @@ module.exports = function(canvasElement){
 
     // シーンにグループを追加
     this.scene.add(this.group1);
-    this.scene.add(this.group2);
 
     // this.element以下にcanvasを描画
     this.element.appendChild(this.renderer.domElement);
   }
 
+  // Canvasをレンダリング
   Canvas.prototype.render = function(){
-    // レンダリング
     this.renderer.clear();
     this.renderer.render(this.scene, this.camera);
   }
 
-  // Canvasを描画・アニメーション
+  // Canvasをアニメーション
   Canvas.prototype.animation = function(){
-    this.rotateDeg += 0.005;
+    this.rotateDeg += 0.1; //くるくるの速度
     var rotateRadian = this.rotateDeg * Math.PI / 180;
-    this.fuwaDeg += 0.3;
+    this.fuwaDeg += 0.3; //ふわふわの速度
     var fuwaRadian = this.fuwaDeg * Math.PI / 180;
 
     // グループと三角形を変数に入れる
     // 即時関数の中からthis.group1などを参照できるように
     var group1 = this.group1;
     var triangle1 = this.triangle1;
-    var group2 = this.group2;
-    var triangle2 = this.triangle2;
 
     // group1
     (function(){
-      var rotateY = Math.sin(rotateRadian) * 1; //くるくるの振れ幅
-      var rotateZ = Math.sin(rotateRadian) * 0.2;
-      var positionY = Math.sin(fuwaRadian) * 15; //ふわふわの振れ幅
-      group1.rotation.set( 0, rotateY, rotateZ );
-      triangle1.position.y = positionY;
-    })();
-
-    // group2
-    (function(){
-      var rotateY = Math.sin(rotateRadian) * 1.5; //くるくるの振れ幅
-      var rotateZ = Math.sin(rotateRadian) * 0.15;
-      var positionY = Math.sin(fuwaRadian) * 10; //ふわふわの振れ幅
-      group2.rotation.set( 0, -rotateY, -rotateZ );
-      triangle2.position.y = -positionY;
+      var rotateY = Math.sin(rotateRadian) * 10; //くるくるの振れ幅
+      var rotateZ = Math.sin(rotateRadian) * 0.1; //くるくるの振れ幅
+      var positionY = Math.sin(fuwaRadian) * 20; //ふわふわの振れ幅
+      triangle1.rotation.y = rotateY;
+      triangle1.rotation.z = rotateZ;
+      group1.position.y = positionY;
     })();
 
     // 再レンダリング
@@ -173,8 +148,7 @@ module.exports = function(canvasElement){
       this.camera.updateProjectionMatrix();
 
       // groupの位置
-      this.group1.position.y = this.height*0.3;
-      this.group2.position.y = this.height*-0.45;
+      this.group1.position.y = this.height*-0.05;
 
       // レンダラのサイズ
       this.renderer.setSize(this.width, this.height);
