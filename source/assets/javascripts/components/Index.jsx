@@ -12,16 +12,13 @@ module.exports = React.createClass({
   // DOM初期化された時
   componentDidMount: function(){
     // velocity
-    $('.rectangle').velocity(
-      {
-        width: '50%',
-        height: '600px'
-      },
-      {
-        duration: 600,
-        easing: 'easeInOutQuart'
-      }
-    );
+    $('.rectangle').velocity({
+      width: '50%',
+      height: '600px'
+    }, {
+      duration: 600,
+      easing: 'easeInOutQuart'
+    });
   },
 
   render: function(){

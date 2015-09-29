@@ -56,16 +56,13 @@ module.exports = React.createClass({
   // component更新された時
   componentDidUpdate: function(){
     // velocity
-    $('.rectangle').velocity(
-      {
-        width: '100%',
-        height: '650px'
-      },
-      {
-        duration: 600,
-        easing: 'easeInOutQuart'
-      }
-    );
+    $('.rectangle').velocity({
+      width: '100%',
+      height: '650px'
+    }, {
+      duration: 600,
+      easing: 'easeInOutQuart'
+    });
 
     var body = React.findDOMNode(this.refs.body);
     if( $(body).find('.twitter-tweet')[0] ){
