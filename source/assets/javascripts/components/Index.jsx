@@ -5,21 +5,11 @@ var React = require('react');
 // components
 var PhotoList = require('./PhotoList');
 var TextList = require('./TextList');
-require('jquery');
-require('velocity');
 
 module.exports = React.createClass({
   // DOM初期化された時
   componentDidMount: function(){
-    // velocity
-    $('.rectangle').velocity({
-      width: '50%',
-      height: '600px'
-    }, {
-      duration: 800,
-      delay: 150,
-      easing: 'easeInOutCirc'
-    });
+    this.props.onLoadIndex();
   },
 
   render: function(){

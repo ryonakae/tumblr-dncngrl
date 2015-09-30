@@ -10,16 +10,12 @@ var Button = require('./Button');
 
 module.exports = React.createClass({
   // component更新された時
+  componentDidUpdate: function(){
+  },
+
+  // コンポーネントの準備完了
   componentDidMount: function(){
-    // velocity
-    $('.rectangle').velocity({
-      width: '100%',
-      height: '650px'
-    }, {
-      duration: 800,
-      delay: 150,
-      easing: 'easeInOutCirc'
-    });
+    this.props.onLoadSingle();
   },
 
   render: function(){

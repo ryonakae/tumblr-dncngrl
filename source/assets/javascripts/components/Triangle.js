@@ -5,10 +5,11 @@ var THREE = require('three');
 var TWEEN = require('tween');
 
 module.exports = function(canvasElement){
-  // Canvas作る
-  function Canvas(e){
+  // Triangle作る
+  function Triangle(element){
     // 使い回す値はコンストラクタに入れておく
-    this.element = e;
+    // 引数
+    this.element = element;
 
     // サイズや背景色
     this.width = $(window).width();
@@ -42,8 +43,8 @@ module.exports = function(canvasElement){
     this.rotateFlag = false;
   }
 
-  // Canvasを初期化
-  Canvas.prototype.init = function(){
+  // 初期化
+  Triangle.prototype.init = function(){
     // カメラ
     // ピクセル等倍にする(canvasのサイズでオブジェクトの大きさを変えない)
     // http://ikeryou.jp/log/?p=242
@@ -70,7 +71,7 @@ module.exports = function(canvasElement){
   }
 
   // オブジェクトの初期化
-  Canvas.prototype.initObject = function(){
+  Triangle.prototype.initObject = function(){
     // マテリアル・テクスチャ
     var material =  new THREE.MeshLambertMaterial({
       color: 0x76faff
@@ -98,7 +99,7 @@ module.exports = function(canvasElement){
   }
 
   // ライトの初期化
-  Canvas.prototype.initLight = function(){
+  Triangle.prototype.initLight = function(){
     this.light0.color.multiplyScalar(0.9);
 
     this.light1.position.set(50,300,-50);
@@ -110,15 +111,15 @@ module.exports = function(canvasElement){
     this.scene.add(this.light2);
   }
 
-  // Canvasをレンダリング
+  // レンダリング
   // this.animation()から呼ぶ
-  Canvas.prototype.render = function(){
+  Triangle.prototype.render = function(){
     this.renderer.clear();
     this.renderer.render(this.scene, this.camera);
   }
 
-  // Canvasをアニメーション
-  Canvas.prototype.animation = function(){
+  // アニメーション
+  Triangle.prototype.animation = function(){
     if (this.rotateFlag === true) {
       this.rotateDeg += 0.002; //くるくるの速度
       var rotateRadian = this.rotateDeg * Math.PI / 180;
@@ -138,7 +139,7 @@ module.exports = function(canvasElement){
   }
 
   // Tween(初回アニメーション)
-  Canvas.prototype.tween = function(){
+  Triangle.prototype.tween = function(){
     var self = this;
 
     TWEEN.removeAll();
@@ -163,13 +164,13 @@ module.exports = function(canvasElement){
       .start();
   }
 
-  // Canvasのリサイズ
-  Canvas.prototype.resize = function(){
+  // リサイズ
+  Triangle.prototype.resize = function(){
     // bindでthisを束縛
-    // Canvas.prototype内の値を
+    // Trignale.prototype内の値を
     // $(window).on('resize',function(){})内からthis.hogeで参照できる
     $(window).on('resize', function(){
-      // Canvas.prototype.widthとCanvas.prototype.heightを
+      // Trignale.prototype.widthとTrignale.prototype.heightを
       // リサイズごとに上書きする
       this.width = $(window).width();
       this.height = $(window).height();
@@ -189,9 +190,10 @@ module.exports = function(canvasElement){
   }
 
 
-  // triangleという名前のCanvas関数のインスタンスを作成
-  // 引数に設定したcanvasElementが、Canvas関数のthis.elementに入る
-  var triangle = new Canvas(canvasElement);
+  // triangleという名前のTriangle関数のインスタンスを作成
+  // 引数に設定したcanvasElementが、Triangle関数のthis.elementに入る
+  // canvasElementは、require元のCanvas.jsxで指定したDOMが入る
+  var triangle = new Triangle(canvasElement);
 
   // triangleの初期化
   triangle.init();

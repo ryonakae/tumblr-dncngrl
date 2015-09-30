@@ -10,8 +10,6 @@ var moment = require('moment');
 var request = require('superagent');
 var ReactScriptLoaderMixin = require('react-script-loader').ReactScriptLoaderMixin;
 require('superagent-jsonp')(request);
-require('jquery');
-require('velocity');
 
 // tumblr api
 var tumblrUrl = config.tumblrUrl;
@@ -31,6 +29,7 @@ module.exports = React.createClass({
   getInitialState: function(){
     return {
       data: [],
+      dataLoaded: false,
       scriptLoading: true,
       scriptLoadError: false
     };
@@ -53,18 +52,22 @@ module.exports = React.createClass({
     });
   },
 
+  componentWillMount: function(){
+    this.loadAjax();
+  },
+
+  // コンポーネントの準備完了
+  componentDidMount: function(){
+    this.props.onBeforeLoad();
+  },
+
   // component更新された時
   componentDidUpdate: function(){
-    // velocity
-    $('.rectangle').velocity({
-      width: '100%',
-      height: '650px'
-    }, {
-      duration: 800,
-      delay: 150,
-      easing: 'easeInOutCirc'
-    });
+    if (this.state.dataLoaded === true) {
+      this.props.onLoadSingle();
+    }
 
+    // Twitterの埋め込みツイートがあったら関数実行
     var body = React.findDOMNode(this.refs.body);
     if( $(body).find('.twitter-tweet')[0] ){
       twttr.widgets.load(body);
@@ -90,14 +93,10 @@ module.exports = React.createClass({
           console.error(err.toString());
         }
         this.setState({
-          data: data.body.response.posts[0]
+          data: data.body.response.posts[0],
+          dataLoaded: true
         });
       }.bind(this));
-  },
-
-  // コンポーネントの準備完了
-  componentDidMount: function(){
-    this.loadAjax();
   },
 
   render: function(){

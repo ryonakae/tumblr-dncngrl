@@ -10,29 +10,34 @@ require('velocity');
 module.exports = React.createClass({
   getInitialState: function(){
     return{
-      hover: false
+      hover: false,
+      overlay: null,
+      date: null,
+      tag: null,
+      note: null
     };
+  },
+
+  componentDidMount: function(){
+    this.setState({
+      overlay: React.findDOMNode(this.refs.overlay),
+      date: React.findDOMNode(this.refs.date),
+      tag: React.findDOMNode(this.refs.tag),
+      note: React.findDOMNode(this.refs.note)
+    });
   },
 
   // マウスオーバー
   mouseOver: function(){
-    // Native DOM取得してからjQueryオブジェクトに変換
-    // ref属性で指定した名前でrefsからcomponentを参照できる(つらい)
-    var overlay = $(React.findDOMNode(this.refs.overlay));
-    var date = $(React.findDOMNode(this.refs.date));
-    var tag = $(React.findDOMNode(this.refs.tag));
-    var note = $(React.findDOMNode(this.refs.note));
-
     // velocity
-    overlay.velocity({
-      opacity: 1,
-      top: 0
+    $(this.state.overlay).velocity({
+      opacity: 1
     }, {
       duration: 500,
       delay: 0,
-      easing: 'easeInOutQuart'
+      easing: 'ease'
     });
-    date.velocity({
+    $(this.state.date).velocity({
       opacity: 1,
       top: 0
     }, {
@@ -40,7 +45,7 @@ module.exports = React.createClass({
       delay: 450,
       easing: 'easeOutCubic'
     });
-    tag.velocity({
+    $(this.state.tag).velocity({
       opacity: 1,
       top: 0
     },{
@@ -48,7 +53,7 @@ module.exports = React.createClass({
       delay: 500,
       easing: 'easeOutCubic'
     });
-    note.velocity({
+    $(this.state.note).velocity({
       opacity: 1,
       top: 0
     }, {
@@ -60,25 +65,20 @@ module.exports = React.createClass({
 
   // マウスアウト
   mouseOut: function(){
-    var overlay = $(React.findDOMNode(this.refs.overlay));
-    var date = $(React.findDOMNode(this.refs.date));
-    var tag = $(React.findDOMNode(this.refs.tag));
-    var note = $(React.findDOMNode(this.refs.note));
-
     // velocity
-    note.velocity('stop').velocity('reverse', {
+    $(this.state.note).velocity('stop').velocity('reverse', {
       duration: 200,
       delay: 0
     });
-    tag.velocity('stop').velocity('reverse', {
+    $(this.state.tag).velocity('stop').velocity('reverse', {
       duration: 200,
       delay: 50
     });
-    date.velocity('stop').velocity('reverse', {
+    $(this.state.date).velocity('stop').velocity('reverse', {
       duration: 200,
       delay: 100
     });
-    overlay.velocity('stop').velocity('reverse', {
+    $(this.state.overlay).velocity('stop').velocity('reverse', {
       duration: 400,
       delay: 100
     });
