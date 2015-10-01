@@ -12,6 +12,10 @@
     background-color $color_text_default
     transform translateX(-50%)
 
+  +media-query($mq_tablet)
+    &:after
+      display none
+
 
 .header__title
   float left
@@ -20,6 +24,9 @@
   width 170px
   height 39px
   overflow hidden
+
+  +media-query($mq_tablet)
+    margin 60px 0 0 6.7%
 
 .header__titleLink,
 .header__titleLoader
@@ -63,7 +70,7 @@
     height 100%
     background-image linear-gradient( 70deg, #a7e0fd, #ff95d7, #93ff8c, #ffb2b4, #a7e0fd, #ff95d7, #93ff8c, #ffb2b4, #a7e0fd, #ff95d7 )
     animation-name rainbow
-    animation-duration 10s
+    animation-duration 7s
     animation-timing-function cubic-bezier(0.25, 0.25, 0.75, 0.75)
     animation-iteration-count infinite
     animation-direction alternate
@@ -80,14 +87,17 @@
   float right
   position relative
   clearfix()
-  margin-right $margin_page
+  margin 80px $margin_page 0 0
+
+  +media-query($mq_tablet)
+    margin 60px 6.7% 0 0
 
 
 .header__link
   float left
   list-style-type none
   padding 0
-  margin 90px 0 0 0
+  margin 10px 0 0 0
   clearfix()
 
 .header__linkItem
@@ -95,17 +105,22 @@
   margin-left 40px
   font-weight bold
 
+  +media-query($mq_tablet)
+    margin-left 25px
+
   a:hover
-    color transparent
-    text-shadow: 0 0 3px $color_text_link
+    color $color_text_link
 
 
 .header_sns
   float left
   list-style-type none
   padding 0
-  margin 85px 0 0 40px
+  margin 5px 0 0 40px
   clearfix()
+
+  +media-query($mq_tablet)
+    margin-left 25px
 
 .header__snsItem
   float left

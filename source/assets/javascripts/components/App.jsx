@@ -59,6 +59,10 @@ module.exports = React.createClass({
     });
   },
 
+  beforeLoad: function(){
+    this.footerHide();
+  },
+
   transformRectangleIndex: function(){
     var self = this;
 
@@ -122,7 +126,7 @@ module.exports = React.createClass({
             onLoadEnd={this.loaderHide}
             onLoadIndex={this.transformRectangleIndex}
             onLoadSingle={this.transformRectangleSingle}
-            onBeforeLoad={this.footerHide}
+            onBeforeLoad={this.beforeLoad}
           />
           <Footer />
           <FixedContent />

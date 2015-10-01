@@ -92,16 +92,18 @@ module.exports = React.createClass({
     }
 
     return (
-      <article className="photoList__item" onMouseEnter={this.mouseOver} onMouseLeave={this.mouseOut} style={{backgroundImage:`url(${this.props.photos[0].original_size.url})`}}>
-        <Link to={`/post/${this.props.id}/${this.props.slug}`} params={{id:this.props.id, slug:this.props.slug}}>
-          <div className="photoList__itemOverlay" ref='overlay'>
-            <div className="photoList__itemOverlayInner">
-              <h2 className='photoList__itemDate' ref='date'>{moment.unix(new Date(this.props.timestamp)).format('YYYY.M.D')}</h2>
-              <ul className="photoList__itemTag" ref='tag'>{tags}</ul>
-              <div className="photoList__itemNotes" ref='note'>{this.props.noteCount} NOTES</div>
+      <article className="photoList__item" onMouseEnter={this.mouseOver} onMouseLeave={this.mouseOut}>
+        <div className="photoList__itemInner" style={{backgroundImage:`url(${this.props.photos[0].original_size.url})`}}>
+          <Link to={`/post/${this.props.id}/${this.props.slug}`} params={{id:this.props.id, slug:this.props.slug}}>
+            <div className="photoList__itemOverlay" ref='overlay'>
+              <div className="photoList__itemOverlayInner">
+                <h2 className='photoList__itemDate' ref='date'>{moment.unix(new Date(this.props.timestamp)).format('YYYY.M.D')}</h2>
+                <ul className="photoList__itemTag" ref='tag'>{tags}</ul>
+                <div className="photoList__itemNotes" ref='note'>{this.props.noteCount} NOTES</div>
+              </div>
             </div>
-          </div>
-        </Link>
+          </Link>
+        </div>
       </article>
     );
   }
