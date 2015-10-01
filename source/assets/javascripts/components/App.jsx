@@ -18,13 +18,12 @@ module.exports = React.createClass({
   contentHide: function(){
     $('.content').css({'opacity':0});
   },
-
   contentFadeIn: function(){
     $('.content').velocity({
       opacity: 1
     },{
       duration: 450,
-      delay: 200,
+      delay: 400,
       easing: 'ease'
     });
   },
@@ -32,13 +31,30 @@ module.exports = React.createClass({
   footerHide: function(){
     $('.footer').css({'opacity': 0});
   },
-
   footerFadeIn: function(){
     $('.footer').velocity({
       opacity: 1
     },{
       duration: 450,
-      delay: 200,
+      delay: 400,
+      easing: 'ease'
+    });
+  },
+
+  loaderShow: function(){
+    $('.header__titleLoader').velocity({
+      opacity: 1
+    }, {
+      duration: 250,
+      easing: 'ease'
+    });
+  },
+  loaderHide: function(){
+    $('.header__titleLoader').velocity({
+      opacity: 0
+    }, {
+      duration: 450,
+      delay: 600,
       easing: 'ease'
     });
   },
@@ -51,7 +67,7 @@ module.exports = React.createClass({
       width: '50%',
       height: '600px'
     }, {
-      duration: 700,
+      duration: 600,
       easing: 'easeInOutCirc',
       begin: function(){
         self.contentHide();
@@ -72,7 +88,7 @@ module.exports = React.createClass({
       width: '100%',
       height: '650px'
     }, {
-      duration: 700,
+      duration: 600,
       easing: 'easeInOutCirc',
       begin: function(){
         self.contentHide();
@@ -83,6 +99,9 @@ module.exports = React.createClass({
         self.footerFadeIn();
       }
     });
+  },
+
+  componentWillMount: function(){
   },
 
   // DOM初期化された時
@@ -98,7 +117,13 @@ module.exports = React.createClass({
       <DocumentTitle title='Dancing Girl.'>
         <div className='app'>
           <Header />
-          <RouteHandler onLoadIndex={this.transformRectangleIndex} onLoadSingle={this.transformRectangleSingle} onBeforeLoad={this.footerHide} />
+          <RouteHandler
+            onLoadStart={this.loaderShow}
+            onLoadEnd={this.loaderHide}
+            onLoadIndex={this.transformRectangleIndex}
+            onLoadSingle={this.transformRectangleSingle}
+            onBeforeLoad={this.footerHide}
+          />
           <Footer />
           <FixedContent />
           <Rectangle />

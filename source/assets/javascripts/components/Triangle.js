@@ -89,10 +89,11 @@ module.exports = function(canvasElement){
 
     // group1: 右中央ちょい下くらいに置く
     this.group1.add(this.triangle1);
-    this.group1.position.x = -500;
+    // this.group1.position.x = -500;
+    this.group1.position.x = this.width*-0.35;
     this.group1.position.y = this.height*0.5;
     this.group1.position.z = 0;
-    this.group1.scale.set(2.7,2.7,2.7);
+    this.group1.scale.set(2.8,2.8,2.8);
 
     // シーンにグループを追加
     this.scene.add(this.group1);
@@ -121,7 +122,7 @@ module.exports = function(canvasElement){
   // アニメーション
   Triangle.prototype.animation = function(){
     if (this.rotateFlag === true) {
-      this.rotateDeg += 0.002; //くるくるの速度
+      this.rotateDeg += 0.008; //くるくるの速度
       var rotateRadian = this.rotateDeg * Math.PI / 180;
 
       this.triangle1.rotation.y = Math.sin(rotateRadian) * 10;
@@ -148,10 +149,12 @@ module.exports = function(canvasElement){
     new TWEEN.Tween(self.triangle1.rotation)
       .to({
         y: 0
-      }, 2500)
+      }, 2300)
       .easing(TWEEN.Easing.Quartic.InOut)
       .onComplete(function(){
-        self.rotateFlag = true; //無限回転アニメーションを開始する
+        setTimeout(function(){
+          self.rotateFlag = true; //無限回転アニメーションを開始する
+        }, 500);
       })
       .start();
 
@@ -159,7 +162,7 @@ module.exports = function(canvasElement){
     new TWEEN.Tween(self.group1.position)
       .to({
         y: self.height*-0.035
-      }, 2500)
+      }, 2300)
       .easing(TWEEN.Easing.Cubic.Out)
       .start();
   }
@@ -182,6 +185,7 @@ module.exports = function(canvasElement){
       this.camera.updateProjectionMatrix();
 
       // groupの位置
+      this.group1.position.x = this.width*-0.35;
       this.group1.position.y = this.height*-0.035;
 
       // レンダラのサイズ

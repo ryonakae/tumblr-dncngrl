@@ -8,6 +8,7 @@ module.exports = React.createClass({
   render: function(){
     // svg
     var svg_logo = '<title>Dancing Girl.</title><use xlink:href="#logo" />';
+    var svg_logoInverse = '<use xlink:href="#logo_inverse" />';
     var svg_iconTwitter = '<title>Twitter</title><use xlink:href="#icon_twitter" />';
     var svg_iconPixiv = '<title>Pixiv</title><use xlink:href="#icon_pixiv" />';
 
@@ -16,9 +17,13 @@ module.exports = React.createClass({
         <div className="header__bg"></div>
 
         <h1 className="header__title">
-          <Link to={'/'}>
+          <Link className='header__titleLink' to={'/'}>
             <svg dangerouslySetInnerHTML={{__html:svg_logo}}></svg>
           </Link>
+          <div className="header__titleLoader">
+            <svg dangerouslySetInnerHTML={{__html:svg_logoInverse}}></svg>
+            <div className="header__titleLoaderBg"></div>
+          </div>
         </h1>
 
         <div className="header__navi">

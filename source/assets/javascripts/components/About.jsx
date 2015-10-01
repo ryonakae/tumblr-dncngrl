@@ -9,6 +9,10 @@ require('velocity');
 var Button = require('./Button');
 
 module.exports = React.createClass({
+  componentWillMount: function(){
+    this.props.onLoadStart();
+  },
+
   // component更新された時
   componentDidUpdate: function(){
   },
@@ -16,6 +20,7 @@ module.exports = React.createClass({
   // コンポーネントの準備完了
   componentDidMount: function(){
     this.props.onLoadSingle();
+    this.props.onLoadEnd();
   },
 
   render: function(){

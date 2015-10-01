@@ -42,7 +42,7 @@ module.exports = React.createClass({
       top: 0
     }, {
       duration: 400,
-      delay: 450,
+      delay: 350,
       easing: 'easeOutCubic'
     });
     $(this.state.tag).velocity({
@@ -50,7 +50,7 @@ module.exports = React.createClass({
       top: 0
     },{
       duration: 400,
-      delay: 500,
+      delay: 400,
       easing: 'easeOutCubic'
     });
     $(this.state.note).velocity({
@@ -58,7 +58,7 @@ module.exports = React.createClass({
       top: 0
     }, {
       duration: 400,
-      delay: 550,
+      delay: 450,
       easing: 'easeOutCubic'
     });
   },
@@ -96,7 +96,7 @@ module.exports = React.createClass({
         <Link to={`/post/${this.props.id}/${this.props.slug}`} params={{id:this.props.id, slug:this.props.slug}}>
           <div className="photoList__itemOverlay" ref='overlay'>
             <div className="photoList__itemOverlayInner">
-              <h2 className='photoList__itemDate' ref='date'>{moment(new Date(this.props.date)).format('YYYY.M.D')}</h2>
+              <h2 className='photoList__itemDate' ref='date'>{moment.unix(new Date(this.props.timestamp)).format('YYYY.M.D')}</h2>
               <ul className="photoList__itemTag" ref='tag'>{tags}</ul>
               <div className="photoList__itemNotes" ref='note'>{this.props.noteCount} NOTES</div>
             </div>

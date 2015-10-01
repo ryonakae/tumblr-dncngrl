@@ -98,13 +98,12 @@ module.exports = React.createClass({
 
   // レンダリング
   render: function(){
-    // ArticleListItemコンポーネントを配列分作成し、
-    // データを子コンポーネント(ArticleListItem)に渡す
+    // TextListItemコンポーネントを配列分作成し、データを渡す
     var articleNodes = this.state.data.map(function(article){
       return (
         <TextListItem
           title={article.title}
-          date={article.date}
+          timestamp={article.timestamp}
           slug={article.slug}
           tags={article.tags}
           body={article.body}

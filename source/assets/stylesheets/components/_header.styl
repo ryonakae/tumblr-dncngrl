@@ -16,18 +16,64 @@
 .header__title
   float left
   margin 80px 0 0 $margin_page
+  position relative
+  width 170px
+  height 39px
+  overflow hidden
 
-  a
-    display block
-    width 170px
-    height 39px
-    position relative
+.header__titleLink,
+.header__titleLoader
+  display block
+  position absolute
+  top 0
+  left 0
+  width 100%
+  height 100%
 
   svg
     width 100%
     height 100%
-    fill $color_text_default
     position relative
+
+.header__titleLink
+  svg
+    fill $color_text_default
+
+.header__titleLoader
+  opacity 0
+  pointer-events none
+
+  svg
+    fill $color_bg_link
+    z-index 1
+
+.header__titleLoaderBg
+  width 100%
+  height 100%
+  position absolute
+  top 0
+  left 0
+
+  &:after
+    content ''
+    position absolute
+    top 0
+    left 0
+    width 1000%
+    height 100%
+    background-image linear-gradient( 70deg, #a7e0fd, #ff95d7, #93ff8c, #ffb2b4, #a7e0fd, #ff95d7, #93ff8c, #ffb2b4, #a7e0fd, #ff95d7 )
+    animation-name rainbow
+    animation-duration 10s
+    animation-timing-function cubic-bezier(0.25, 0.25, 0.75, 0.75)
+    animation-iteration-count infinite
+    animation-direction alternate
+    animation-fill-mode both
+
+@keyframes rainbow
+  0%
+    left 0
+  100%
+    left -900%
 
 
 .header__navi
