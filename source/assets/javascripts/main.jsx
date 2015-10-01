@@ -33,6 +33,7 @@ var routes = (
 // Router.run(routes, Router.HistoryLocation, function(Handler){
 Router.run(routes, function(Handler){
   React.render(
-    <Handler />, document.getElementById('dncngrl')
+    React.createElement(Handler, {}),
+    document.getElementById('dncngrl')
   );
 });

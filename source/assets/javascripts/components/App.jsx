@@ -15,44 +15,101 @@ var Rectangle = require('./Rectangle');
 var Canvas = require('./Canvas');
 
 module.exports = React.createClass({
-  footerFadeIn: function(){
+  contentHide: function(){
+    $('.content').css({'opacity':0});
+  },
+  contentFadeIn: function(){
+    $('.content').velocity({
+      opacity: 1
+    },{
+      duration: 450,
+      delay: 400,
+      easing: 'ease'
+    });
+  },
+
+  footerHide: function(){
     $('.footer').css({'opacity': 0});
+  },
+  footerFadeIn: function(){
     $('.footer').velocity({
       opacity: 1
     },{
-        duration: 800,
-        delay: 400,
-        easing: 'easeInOutQuart'
+      duration: 450,
+      delay: 400,
+      easing: 'ease'
     });
+  },
+
+  loaderShow: function(){
+    $('.header__titleLoader').velocity({
+      opacity: 1
+    }, {
+      duration: 250,
+      easing: 'ease'
+    });
+  },
+  loaderHide: function(){
+    $('.header__titleLoader').velocity({
+      opacity: 0
+    }, {
+      duration: 450,
+      delay: 600,
+      easing: 'ease'
+    });
+  },
+
+  transformRectangleIndex: function(){
+    var self = this;
+
+    // velocity
+    $('.rectangle').velocity({
+      width: '50%',
+      height: '600px'
+    }, {
+      duration: 600,
+      easing: 'easeInOutCirc',
+      begin: function(){
+        self.contentHide();
+        self.footerHide();
+      },
+      complete: function(){
+        self.contentFadeIn();
+        self.footerFadeIn();
+      }
+    });
+  },
+
+  transformRectangleSingle: function(){
+    var self = this;
+
+    // velocity
+    $('.rectangle').velocity({
+      width: '100%',
+      height: '650px'
+    }, {
+      duration: 600,
+      easing: 'easeInOutCirc',
+      begin: function(){
+        self.contentHide();
+        self.footerHide();
+      },
+      complete: function(){
+        self.contentFadeIn();
+        self.footerFadeIn();
+      }
+    });
+  },
+
+  componentWillMount: function(){
   },
 
   // DOM初期化された時
   componentDidMount: function(){
-    console.log('DOMの初期化');
-
-    // canvas描画
-    // 引数にReactのcanvas要素を入れる(DOMに変換してから)
-    var canvasElement = React.findDOMNode(this.refs.canvas);
-    Canvas(canvasElement);
-
-    $('#canvas').velocity({
-      opacity: 1
-    }, {
-      duration: 800,
-      delay: 600,
-      easing: 'easeInOutCubic'
-    });
-
-    // フッターフェードイン
-    this.footerFadeIn();
   },
 
   // component更新された時
   componentDidUpdate: function(){
-    console.log('Componentの更新');
-
-    // フッターフェードイン
-    this.footerFadeIn();
   },
 
   render: function(){
@@ -60,11 +117,17 @@ module.exports = React.createClass({
       <DocumentTitle title='Dancing Girl.'>
         <div className='app'>
           <Header />
-          <RouteHandler />
+          <RouteHandler
+            onLoadStart={this.loaderShow}
+            onLoadEnd={this.loaderHide}
+            onLoadIndex={this.transformRectangleIndex}
+            onLoadSingle={this.transformRectangleSingle}
+            onBeforeLoad={this.footerHide}
+          />
           <Footer />
           <FixedContent />
           <Rectangle />
-          <div id="canvas" ref="canvas" />
+          <Canvas />
         </div>
       </DocumentTitle>
     );

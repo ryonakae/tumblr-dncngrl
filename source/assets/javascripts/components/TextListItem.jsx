@@ -20,7 +20,7 @@ module.exports = React.createClass({
         </h2>
 
         <div className="textList__itemInfo">
-          <span className='textList__itemDate'>{moment(new Date(this.props.date)).format('YYYY.M.D')}</span>
+          <span className='textList__itemDate'>{moment.unix(new Date(this.props.timestamp)).format('YYYY.M.D')}</span>
           <ul className="textList__itemTag">{tags}</ul>
         </div>
       </article>

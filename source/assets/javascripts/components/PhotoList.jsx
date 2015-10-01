@@ -13,13 +13,17 @@ var limit = 6;
 
 // components
 var PhotoListItem = require('./PhotoListItem');
+var Button = require('./Button');
 
 module.exports = React.createClass({
   // 初期化
   getInitialState: function(){
     return {
       data: [],
-      page: 1
+      page: 1,
+      articleCount: limit,
+      articleTotal: 0,
+      buttonLabel: 'MORE'
     };
   },
 
@@ -50,18 +54,31 @@ module.exports = React.createClass({
 
         // dataに取得したデータを入れる
         this.setState({
-          data: newData
+          data: newData,
+          articleTotal: data.body.response.total_posts,
+          buttonLabel: 'MORE'
         });
 
-        console.log(data.body.response);
+        // 最後まで表示したらMOREボタン隠す
+        this.chackLastPage();
       }.bind(this));
+  },
+
+  // ページ番号確認用関数
+  chackLastPage: function(){
+    if ( this.state.articleCount >= this.state.articleTotal ) {
+      var more = React.findDOMNode(this.refs.more);
+      $(more).css({ 'display':'none' });
+    }
   },
 
   // 次ページ読み込み用関数
   nextPage: function(e){
     // ページ番号をアップデート
     this.setState({
-      page: this.state.page + 1
+      page: this.state.page + 1,
+      articleCount: this.state.articleCount + limit,
+      buttonLabel: 'LOADING'
     });
 
     // 次ページのデータを取得
@@ -83,13 +100,12 @@ module.exports = React.createClass({
 
   // レンダリング
   render: function(){
-    // ArticleListItemコンポーネントを配列分作成し、
-    // データを子コンポーネント(ArticleListItem)に渡す
+    // PhotoListItemコンポーネントを配列分作成し、データを渡す
     var articleNodes = this.state.data.map(function(article){
       return (
         <PhotoListItem
           title={article.title}
-          date={article.date}
+          timestamp={article.timestamp}
           slug={article.slug}
           tags={article.tags}
           body={article.body}
@@ -108,8 +124,8 @@ module.exports = React.createClass({
           {articleNodes}
         </div>
 
-        <div className="photoList__more">
-          <div className='button' onClick={this.nextPage}>MORE</div>
+        <div className="photoList__more" ref='more'>
+          <Button type='more' onClick={this.nextPage}>{this.state.buttonLabel}</Button>
         </div>
       </div>
     );

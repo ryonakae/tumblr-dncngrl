@@ -34,8 +34,10 @@
     transform rotate(90deg)
 
     span
+      transition: all 300ms ease
       cursor pointer
       pointer-events auto
 
       &:hover
-        color $color_text_link
+        color transparent
+        text-shadow: 0 0 3px $color_text_link

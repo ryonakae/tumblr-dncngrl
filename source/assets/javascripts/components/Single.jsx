@@ -8,6 +8,7 @@ var Link = Router.Link;
 var DocumentTitle = require('react-document-title');
 var moment = require('moment');
 var request = require('superagent');
+var ReactScriptLoaderMixin = require('react-script-loader').ReactScriptLoaderMixin;
 require('superagent-jsonp')(request);
 require('jquery');
 require('velocity');
@@ -16,32 +17,89 @@ require('velocity');
 var tumblrUrl = config.tumblrUrl;
 var apiKey = config.apiKey;
 
+// components
+var Button = require('./Button');
+
 module.exports = React.createClass({
   // mixin
-  mixins: [ State ],
+  mixins: [
+    State,
+    ReactScriptLoaderMixin
+  ],
 
   // 初期化
   getInitialState: function(){
     return {
-      data: []
+      data: [],
+      dataLoaded: false,
+      scriptLoading: true,
+      scriptLoadError: false
     };
+  },
+
+  // 外部スクリプトを読み込む
+  // Twitterの埋め込みツイート用JS
+  getScriptURL: function(){
+    return 'http://platform.twitter.com/widgets.js'
+  },
+  onScriptLoaded: function(){
+    this.setState({
+      scriptLoading: true
+    });
+  },
+  onScriptError: function(){
+    this.setState({
+      scriptLoading: false,
+      scriptLoadError: true
+    });
+  },
+
+  // Backボタンが見えちゃうのでロード時は隠す
+  backHide: function(){
+    $('.article__back').css({
+      'opacity': 0
+    });
+  },
+  backShow: function(){
+    $('.article__back').velocity({
+      opacity: 1
+    }, {
+      duration: 450,
+      delay: 400,
+      easing: 'ease'
+    });
+  },
+
+  componentWillMount: function(){
+    this.loadAjax();
+    this.props.onLoadStart();
+    this.backHide();
+  },
+
+  // コンポーネントの準備完了
+  componentDidMount: function(){
+    this.props.onBeforeLoad();
   },
 
   // component更新された時
   componentDidUpdate: function(){
-    console.log('singleが読み込まれた');
+    if (this.state.dataLoaded === true) {
+      this.props.onLoadSingle();
+      this.props.onLoadEnd();
+      this.backShow();
+    }
 
-    // velocity
-    $('.rectangle').velocity(
-      {
-        width: '100%',
-        height: '650px'
-      },
-      {
-        duration: 600,
-        easing: 'easeInOutQuart'
-      }
-    );
+    // Twitterの埋め込みツイートがあったら関数実行
+    var body = React.findDOMNode(this.refs.body);
+    if( $(body).find('.twitter-tweet')[0] ){
+      twttr.widgets.load(body);
+    }
+  },
+
+  componentWillUnmount: function(){
+    this.setState({
+      dataLoaded: false
+    });
   },
 
   // Ajax
@@ -63,15 +121,10 @@ module.exports = React.createClass({
           console.error(err.toString());
         }
         this.setState({
-          data: data.body.response.posts[0]
+          data: data.body.response.posts[0],
+          dataLoaded: true
         });
-        console.log(this.state.data);
       }.bind(this));
-  },
-
-  // コンポーネントの準備完了
-  componentDidMount: function(){
-    this.loadAjax();
   },
 
   render: function(){
@@ -98,16 +151,19 @@ module.exports = React.createClass({
               <header className="article__header">
                 <h1 className="article__title">{article.title}</h1>
                 <div className="article__info">
-                  <span className="article__date">{moment(new Date(article.date)).format('YYYY.M.D')}</span>
+                  <span className="article__date">{moment.unix(new Date(article.timestamp)).format('YYYY.M.D')}</span>
                   <ul className="article__tag">{articleTags}</ul>
                 </div>
                 <div className="article__notes">{article.note_count} NOTES</div>
               </header>
 
-              <div className="article__body" dangerouslySetInnerHTML={{__html: article.body}} />
+              <div className="article__body" dangerouslySetInnerHTML={{__html: article.body}} ref='body' />
+              <div className="article__reblog">
+                <a href={`https://www.tumblr.com/reblog/${article.id}/${article.reblog_key}`} target="_blank">REBLOG THIS ARTICLE</a>
+              </div>
 
               <div className="article__back">
-                <Link className='button' to={'/'}>BACK</Link>
+                <Button type='link' href='/'>BACK</Button>
               </div>
             </article>
           </main>
@@ -119,11 +175,11 @@ module.exports = React.createClass({
     // photoのとき
     else if ( article.type === 'photo' ) {
       return (
-        <DocumentTitle title={`${moment(new Date(article.date)).format('YYYY.M.D')} | Dancing Girl.`}>
-          <main className="content content--single">
+        <DocumentTitle title={`${moment.unix(new Date(article.timestamp)).format('YYYY.M.D')} | Dancing Girl.`}>
+          <main className="content content--single" ref='content'>
             <article className='article'>
               <header className="article__header">
-                <h1 className="article__title">{moment(new Date(article.date)).format('YYYY.M.D')}</h1>
+                <h1 className="article__title">{moment.unix(new Date(article.timestamp)).format('YYYY.M.D')}</h1>
                 <div className="article__info">
                   <ul className="article__tag">{articleTags}</ul>
                 </div>
@@ -136,9 +192,12 @@ module.exports = React.createClass({
                 </div>
                 <div className="article__caption" dangerouslySetInnerHTML={{__html: article.caption}} />
               </div>
+              <div className="article__reblog">
+                <a href={`https://www.tumblr.com/reblog/${article.id}/${article.reblog_key}`} target="_blank">REBLOG THIS ARTICLE</a>
+              </div>
 
               <div className="article__back">
-                <Link className='button' to={'/'}>BACK</Link>
+                <Button type='link' href='/'>BACK</Button>
               </div>
             </article>
           </main>
@@ -150,16 +209,14 @@ module.exports = React.createClass({
     // それ以外のとき
     else { //elseがないとエラー出る
       return (
-        <main className="content content--single">
+        <main className="content content--single" ref='content'>
           <article className='article'>
             <div className="article__back">
-              <Link className='button' to={'/'}>BACK</Link>
+              <Button type='link' href='/'>BACK</Button>
             </div>
           </article>
         </main>
       );
     }
-
-
   }
 });
