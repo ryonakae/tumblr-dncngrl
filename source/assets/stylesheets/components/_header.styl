@@ -1,3 +1,228 @@
+.header
+  clearfix()
+  overflow hidden
+
+  &:after
+    content ''
+    position absolute
+    top 98px
+    left 50%
+    width 40px
+    height 3px
+    background-color $color_text_default
+    transform translateX(-50%)
+
+  +media-query($mq_tablet)
+    &:after
+      display none
+
+
 .header__title
+  float left
+  margin 80px 0 0 $margin_page
+  position relative
+  width 170px
+  height 39px
+  overflow hidden
+  z-index 10
+
+  +media-query($mq_tablet)
+    margin 60px 0 0 6.7%
+
+  +media-query($mq_smartphone)
+    width 130px
+    height 30px
+    margin 40px 0 0 4%
+
+.header__titleLink,
+.header__titleLoader
+  display block
+  position absolute
+  top 0
+  left 0
+  width 100%
+  height 100%
+
+  svg
+    width 100%
+    height 100%
+    position relative
+
+.header__titleLink
+  svg
+    fill $color_text_default
+
+.header__titleLoader
+  opacity 0
+  pointer-events none
+
+  svg
+    fill $color_bg_link
+    z-index 1
+
+.header__titleLoaderBg
+  width 100%
+  height 100%
+  position absolute
+  top 0
+  left 0
+
+  &:after
+    content ''
+    position absolute
+    top 0
+    left 0
+    width 1000%
+    height 100%
+    background-image linear-gradient( 70deg, #a7e0fd, #ff95d7, #93ff8c, #ffb2b4, #a7e0fd, #ff95d7, #93ff8c, #ffb2b4, #a7e0fd, #ff95d7 )
+    animation-name rainbow
+    animation-duration 7s
+    animation-timing-function cubic-bezier(0.25, 0.25, 0.75, 0.75)
+    animation-iteration-count infinite
+    animation-direction alternate
+    animation-fill-mode both
+
+@keyframes rainbow
+  0%
+    left 0
+  100%
+    left -900%
+
+
+.header__navi
+  float right
+  position relative
+  margin 80px $margin_page 0 0
+
+  +media-query($mq_tablet)
+    margin 60px 6.7% 0 0
+
+  +media-query($mq_smartphone)
+    display none
+    opacity 0
+    visibility hidden
+    float none
+    margin 0
+    position fixed
+    top 0
+    left 0
+    width 100%
+    height 100%
+    background-color rgba($color_bg_link, 0.9)
+    z-index 1
+
+
+.header__naviInner
+  clearfix()
+
+  +media-query($mq_smartphone)
+    position relative
+    top 50%
+    transform translateY(-50%)
+    text-align center
+
+
+.header__link
+  float left
+  list-style-type none
+  padding 0
+  margin 10px 0 0 0
+  clearfix()
+
+  +media-query($mq_smartphone)
+    float none
+    margin 0
+
+.header__linkItem
+  float left
+  margin-left 40px
+  font-weight bold
+
+  +media-query($mq_tablet)
+    margin-left 25px
+
+  +media-query($mq_smartphone)
+    margin 0
+    float none
+    // display inline-block
+    margin 15px 0
+
+    &:first-child
+      margin-top 0
+
+  a:hover
+    color $color_text_link
+
+
+.header_sns
+  float left
+  list-style-type none
+  padding 0
+  margin 5px 0 0 40px
+  clearfix()
+
+  +media-query($mq_tablet)
+    margin-left 25px
+
+  +media-query($mq_smartphone)
+    float none
+    margin 30px 0 0
+
+.header__snsItem
+  float left
+
+  +media-query($mq_smartphone)
+    float none
+    display inline-block
+    margin 0 10px
+    text-align left
+
   a
-    text-decoration none
+    display block
+    width 30px
+    height 30px
+    border 1px solid $color_border_default
+    position relative
+    line-height 0
+
+  svg
+    position relative
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
+
+  &--twitter
+    svg
+      width 13px
+      height 10px
+      fill $color_text_default
+
+  &--pixiv
+    margin-left -1px
+
+    svg
+      width 11px
+      height 10px
+      fill $color_text_default
+
+
+.header__toggle
+  display none
+  font-size $fontSize_small
+  font-weight bold
+  position fixed
+  right 4%
+  top 48px
+  z-index 10
+
+  +media-query($mq_smartphone)
+    display block
+
+
+
+.header__link,
+.header_sns
+  +media-query($mq_smartphone)
+    position relative
+    top 25px
+    opacity 0

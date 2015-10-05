@@ -7,10 +7,11 @@ browserSync = require 'browser-sync'
 gulp.task 'copyFile', ->
   gulp.src(
     [
-      # config.source.root + 'index.html'
-      # config.source.fonts + '**/*'
+      config.source.fonts + '**/*'
+      config.source.images + '*.svg'
+      config.source.templateTag + '**/*.html'
     ]
     base: config.source.root
   )
   .pipe gulp.dest config.build.root
-  .pipe browserSync.stream()
+  # .pipe browserSync.stream()
