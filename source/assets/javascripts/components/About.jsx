@@ -50,7 +50,7 @@ module.exports = React.createClass({
             </header>
 
             <div className="article__body">
-              <img src="https://41.media.tumblr.com/5164f1ca2d255f7477f855c2e607e0ab/tumblr_inline_nvqxj0S3La1qa5y5a_500.png"/>
+              <img src="http://static.tumblr.com/xm1j4jr/4t1nvqxtc/about_visual.png"/>
 
               <p>
                 Dancing Girl.は<a href="http://brdr.jp" target="_blank">Ryo Nakae</a>主宰の同人サークルです。<br />
