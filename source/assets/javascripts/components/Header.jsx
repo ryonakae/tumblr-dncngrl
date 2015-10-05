@@ -28,7 +28,7 @@ module.exports = React.createClass({
       <header className='header'>
         <div className="header__bg"></div>
 
-        <h1 className="header__title" onTouchStart={this.menuClose}>
+        <h1 className="header__title" onClick={this.menuClose}>
           <Link className='header__titleLink' to={'/'}>
             <svg dangerouslySetInnerHTML={{__html:svg_logo}}></svg>
           </Link>
@@ -40,7 +40,7 @@ module.exports = React.createClass({
 
         <div className="header__navi">
           <div className="header__naviInner">
-            <ul ref='link' className="header__link" onTouchStart={this.menuClose}>
+            <ul ref='link' className="header__link" onClick={this.menuClose}>
               <li className="header__linkItem">
                 <Link to={'/'}>TOP</Link>
               </li>
@@ -52,7 +52,7 @@ module.exports = React.createClass({
               </li>
             </ul>
 
-            <ul className="header_sns" onTouchStart={this.menuClose}>
+            <ul className="header_sns" onClick={this.menuClose}>
               <li className="header__snsItem header__snsItem--twitter">
                 <a href='https://twitter.com/ryo_dg' target='_blank'>
                   <svg dangerouslySetInnerHTML={{__html:svg_iconTwitter}}></svg>
@@ -67,7 +67,7 @@ module.exports = React.createClass({
           </div>
         </div>
 
-        <div className="header__toggle" onTouchStart={this.props.onMenuToggle}>{this.props.menuLabel}</div>
+        <div className="header__toggle" onClick={this.props.onMenuToggle}>{this.props.menuLabel}</div>
       </header>
     );
   }
