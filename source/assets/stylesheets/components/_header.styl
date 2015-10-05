@@ -144,8 +144,11 @@
   +media-query($mq_smartphone)
     margin 0
     float none
-    display inline-block
-    margin 0 20px
+    // display inline-block
+    margin 15px 0
+
+    &:first-child
+      margin-top 0
 
   a:hover
     color $color_text_link
@@ -163,7 +166,7 @@
 
   +media-query($mq_smartphone)
     float none
-    margin 40px 0 0
+    margin 30px 0 0
 
 .header__snsItem
   float left
@@ -219,6 +222,7 @@
 
 .header__link,
 .header_sns
-  position relative
-  top 30px
-  opacity 0
+  +media-query($mq_smartphone)
+    position relative
+    top 25px
+    opacity 0

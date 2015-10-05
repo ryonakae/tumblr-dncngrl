@@ -9,8 +9,24 @@ require('velocity');
 var Button = require('./Button');
 
 module.exports = React.createClass({
+  backHide: function(){
+    $('.article__back').css({
+      'opacity': 0
+    });
+  },
+  backShow: function(){
+    $('.article__back').velocity({
+      opacity: 1
+    }, {
+      duration: 450,
+      delay: 400,
+      easing: 'ease'
+    });
+  },
+
   componentWillMount: function(){
     this.props.onLoadStart();
+    this.backHide();
   },
 
   // component更新された時
@@ -21,6 +37,7 @@ module.exports = React.createClass({
   componentDidMount: function(){
     this.props.onLoadSingle();
     this.props.onLoadEnd();
+    this.backShow();
   },
 
   render: function(){
@@ -33,7 +50,24 @@ module.exports = React.createClass({
             </header>
 
             <div className="article__body">
-              About
+              <p>
+                Dancing Girl.は<a href="http://brdr.jp" target="_blank">Ryo Nakae</a>主宰の同人サークルです。<br />
+                アニメ・マンガ作品の二次創作を中心に活動予定。
+              </p>
+
+              <h2>Member</h2>
+              <h3>Ryo Nakae</h3>
+              <p>Webデザイナー。1989年生まれ。サークル「Dancing Girl.」主宰。</p>
+              <ul>
+                <li><a href="https://www.facebook.com/ryo.nakae" target="_blank">Facebook</a></li>
+                <li><a href="https://twitter.com/ryo_dg" target="_blank">Twitter</a></li>
+                <li><a href="https://dribbble.com/ryo_dg" target="_blank">Dribbble</a></li>
+                <li><a href="https://www.behance.net/ryo_dg" target="_blank">Behance</a></li>
+                <li><a href="https://jypg.net/ryo_dg" target="_blank">JAYPEG</a></li>
+                <li><a href="https://github.com/ryonakae" target="_blank">GitHub</a></li>
+                <li><a href="http://pixiv.me/ryo_dg" target="_blank">Pixiv</a></li>
+                <li><a href="mailto:me@ryonakae.com">E-Mail</a></li>
+              </ul>
             </div>
 
             <div className="article__back">
