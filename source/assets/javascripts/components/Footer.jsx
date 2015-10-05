@@ -38,16 +38,16 @@ module.exports = React.createClass({
 
           <ul className="footer_sns">
             <li className="footer__snsItem footer__snsItem--twitter">
-              <Link to={'/'} target='_blank'>
+              <a href='https://twitter.com/ryo_dg' target='_blank'>
                 <span>TWITTER</span>
                 <svg dangerouslySetInnerHTML={{__html:svg_iconTwitter}}></svg>
-              </Link>
+              </a>
             </li>
             <li className="footer__snsItem footer__snsItem--pixiv">
-              <Link to={'/'} target='_blank'>
+              <a href='http://pixiv.me/ryo_dg' target='_blank'>
                 <span>PIXIV</span>
                 <svg dangerouslySetInnerHTML={{__html:svg_iconPixiv}}></svg>
-              </Link>
+              </a>
             </li>
           </ul>
 

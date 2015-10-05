@@ -140,14 +140,14 @@ module.exports = React.createClass({
 
             <ul ref='sns' className="header_sns">
               <li className="header__snsItem header__snsItem--twitter">
-                <Link to={'/'} target='_blank'>
+                <a href='https://twitter.com/ryo_dg' target='_blank'>
                   <svg dangerouslySetInnerHTML={{__html:svg_iconTwitter}}></svg>
-                </Link>
+                </a>
               </li>
               <li className="header__snsItem header__snsItem--pixiv">
-                <Link to={'/'} target='_blank'>
+                <a href='http://pixiv.me/ryo_dg' target='_blank'>
                   <svg dangerouslySetInnerHTML={{__html:svg_iconPixiv}}></svg>
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
