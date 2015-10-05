@@ -4,8 +4,13 @@ var React = require('react');
 var Router = require('react-router');
 var RouteHandler = Router.RouteHandler;
 var DocumentTitle = require('react-document-title');
+var uaParser = require('ua-parser-js');
 require('jquery');
 require('velocity');
+
+// ua parser
+var parser = new uaParser();
+var ua = parser.getResult();
 
 // components
 var Header = require('./Header');
@@ -65,10 +70,19 @@ module.exports = React.createClass({
 
   transformRectangleIndex: function(){
     var self = this;
+    var rectWidth;
+
+    if ( $(window).width() <= 500 ) {
+      rectWidth = '100%';
+    }
+    else {
+      rectWidth = '50%';
+    }
+    console.log(rectWidth);
 
     // velocity
     $('.rectangle').velocity({
-      width: '50%',
+      width: rectWidth,
       height: '600px'
     }, {
       duration: 600,
@@ -110,6 +124,7 @@ module.exports = React.createClass({
 
   // DOM初期化された時
   componentDidMount: function(){
+    console.log(ua);
   },
 
   // component更新された時
@@ -117,6 +132,12 @@ module.exports = React.createClass({
   },
 
   render: function(){
+    // uaのdevice typeがモバイルの時はCanvasを描画しない
+    var canvasDom;
+    if (ua.device.type !== 'mobile') {
+      canvasDom = <Canvas />;
+    }
+
     return (
       <DocumentTitle title='Dancing Girl.'>
         <div className='app'>
@@ -131,7 +152,7 @@ module.exports = React.createClass({
           <Footer />
           <FixedContent />
           <Rectangle />
-          <Canvas />
+          {canvasDom}
         </div>
       </DocumentTitle>
     );
