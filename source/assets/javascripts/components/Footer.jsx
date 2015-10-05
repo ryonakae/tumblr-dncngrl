@@ -3,8 +3,18 @@
 var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
+require('jquery');
+require('velocity');
 
 module.exports = React.createClass({
+  // scrolltop function
+  backTop: function(){
+    $('html').velocity('scroll', {
+      duration: 1000,
+      easing: 'easeOutQuint'
+    });
+  },
+
   render: function(){
     // svg
     var svg_logoFooterSymbol = '<use xlink:href="#logo_footer_symbol" />';
@@ -56,6 +66,13 @@ module.exports = React.createClass({
             <svg dangerouslySetInnerHTML={{__html:svg_logoBrdr}}></svg>
             <div className="footer__brdrLogoBg"></div>
           </Link>
+
+          <div className="footer__copyright">
+            &copy; DANCING GIRL.<br />
+            DESIGN AND ILLUSTRATION BY <a href='http://brdr.jp' target='_blank'>RYO NAKAE</a>
+          </div>
+
+          <div className="footer__backTop" onClick={this.backTop}>SCROLL TO TOP</div>
         </div>
       </footer>
     );

@@ -4,8 +4,10 @@
   opacity 0
 
   +media-query($mq_tablet)
-    // padding 65px 6.7% 20px
     padding 65px 6.7%
+
+  +media-query($mq_smartphone)
+    padding 50px 4%
 
 
 .footer__top
@@ -20,6 +22,9 @@
   height 40px
   border 1px solid $color_border_default
   clearfix()
+
+  +media-query($mq_smartphone)
+    display none
 
 .footer__logoSymbol
   float left
@@ -60,6 +65,11 @@
   padding 0
   list-style-type none
   clearfix()
+
+  +media-query($mq_smartphone)
+    float none
+    text-align center
+    line-height 0
 
 .footer__snsItem
   float left
@@ -102,6 +112,20 @@
       height 10px
       fill $color_text_link
 
+  +media-query($mq_smartphone)
+    float none
+    display inline-block
+
+    a
+      width 40px
+
+    span
+      display none
+
+    svg
+      left 50%
+      transform translate(-50%, -50%)
+
 
 .footer__border
   position absolute
@@ -111,9 +135,6 @@
   height 6px
   transform translateX(-50%)
   line-height 0
-
-  +media-query($mq_tablet)
-    display none
 
   svg
     width 100%
@@ -126,8 +147,8 @@
   clearfix()
   overflow hidden
 
-  +media-query($mq_tablet)
-    display none
+  +media-query($mq_smartphone)
+    margin-top 30px
 
 
 .footer__poetry
@@ -135,6 +156,9 @@
   border-left 3px solid $color_border_link
   padding-left 10px
   width 770px
+
+  +media-query($mq_tablet)
+    display none
 
 .footer__poetryTitle
   margin 0
@@ -188,3 +212,34 @@
     left 0
   100%
     left -900%
+
+
+.footer__border,
+.footer__poetry,
+.footer__brdrLogo
+  +media-query($mq_tablet)
+    display none
+
+.footer__copyright,
+.footer__backTop
+  display none
+
+  +media-query($mq_tablet)
+    display block
+
+.footer__copyright
+  float left
+  font-size $fontSize_small
+
+  +media-query($mq_smartphone)
+    float none
+    text-align center
+
+.footer__backTop
+  float right
+  font-size $fontSize_small
+
+  +media-query($mq_smartphone)
+    float none
+    text-align center
+    margin-top 15px

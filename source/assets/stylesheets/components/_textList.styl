@@ -6,6 +6,10 @@
   padding 80px 0 100px
   position relative
 
+  +media-query($mq_smartphone)
+    margin-top 60px
+    padding 60px 0
+
   &:before
     content ''
     position absolute
@@ -24,6 +28,9 @@
 .textList__items
   margin 0 auto
   max-width $width_textList
+
+  +media-query($mq_smartphone)
+    max-width 92%
 
 
 .textList__item

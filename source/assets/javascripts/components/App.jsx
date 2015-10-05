@@ -71,19 +71,21 @@ module.exports = React.createClass({
   transformRectangleIndex: function(){
     var self = this;
     var rectWidth;
+    var rectHeight;
 
     if ( $(window).width() <= 500 ) {
       rectWidth = '100%';
+      rectHeight = '550px';
     }
     else {
       rectWidth = '50%';
+      rectHeight = '600px';
     }
-    console.log(rectWidth);
 
     // velocity
     $('.rectangle').velocity({
       width: rectWidth,
-      height: '600px'
+      height: rectHeight
     }, {
       duration: 600,
       easing: 'easeInOutCirc',
@@ -124,7 +126,6 @@ module.exports = React.createClass({
 
   // DOM初期化された時
   componentDidMount: function(){
-    console.log(ua);
   },
 
   // component更新された時
