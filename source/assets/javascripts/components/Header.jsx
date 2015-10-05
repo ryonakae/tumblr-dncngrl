@@ -4,9 +4,6 @@ var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
 
-// タッチイベントを有効化
-React.initializeTouchEvents(true);
-
 module.exports = React.createClass({
   componentDidMount: function(){
   },
