@@ -19,6 +19,9 @@ var FixedContent = require('./FixedContent');
 var Rectangle = require('./Rectangle');
 var Canvas = require('./Canvas');
 
+// タッチイベントを有効化
+React.initializeTouchEvents(true);
+
 module.exports = React.createClass({
   getInitialState: function(){
     return {
