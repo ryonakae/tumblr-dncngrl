@@ -6,6 +6,10 @@
   padding 80px 0 100px
   position relative
 
+  +media-query($mq_smartphone)
+    margin-top 60px
+    padding 60px 0
+
   &:before
     content ''
     position absolute
@@ -22,8 +26,11 @@
 
 
 .textList__items
-  width $width_textList
   margin 0 auto
+  max-width $width_textList
+
+  +media-query($mq_smartphone)
+    max-width 92%
 
 
 .textList__item
@@ -31,6 +38,9 @@
 
   &:first-child
     margin-top 0
+
+  +media-query($mq_smartphone)
+    margin-top 40px
 
 .textList__itemTitle
   font-size $fontSize_large
@@ -40,6 +50,9 @@
   margin-top 15px
   font-size $fontSize_small
   color $color_text_sub
+
+  +media-query($mq_smartphone)
+    margin-top 10px
 
 .textList__itemDate
   display inline
@@ -72,3 +85,6 @@
 .textList__more
   margin-top 70px
   text-align center
+
+  +media-query($mq_smartphone)
+    margin-top 40px

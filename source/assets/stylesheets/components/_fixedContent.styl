@@ -2,6 +2,8 @@
 
 
 .fixedContent
+  clearfix()
+  opacity 0
   position fixed
   top 53%
   width 100%
@@ -9,6 +11,9 @@
   font-size $fontSize_small
   line-height 1.3
   pointer-events none
+
+  +media-query($mq_tablet)
+    display none
 
 
 .fixedContent__copyright
@@ -39,5 +44,4 @@
       pointer-events auto
 
       &:hover
-        color transparent
-        text-shadow: 0 0 3px $color_text_link
+        color $color_text_link

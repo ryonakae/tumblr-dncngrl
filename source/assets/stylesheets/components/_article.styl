@@ -5,6 +5,10 @@
   max-width 640px
   margin 0 auto 130px auto
 
+  +media-query($mq_smartphone)
+    max-width 92%
+    margin-bottom 80px
+
 
 .article__header
   position relative
@@ -15,6 +19,9 @@
   font-size $fontSize_xlarge
   padding-right 120px
 
+  +media-query($mq_smartphone)
+    font-size $fontSize_xlarge * 0.9
+
 
 .article__info
   margin-top 15px
@@ -24,7 +31,7 @@
 .article__date
   display inline
 
-  &:before
+  &:after
     content '·'
     margin-left 0.5em
     margin-right 0.5em
@@ -122,6 +129,9 @@
   margin-top 80px
   text-align center
   opacity 0
+
+  +media-query($mq_smartphone)
+    margin-top 50px
 
 
 .article__photo

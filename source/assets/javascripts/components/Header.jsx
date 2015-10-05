@@ -5,6 +5,15 @@ var Router = require('react-router');
 var Link = Router.Link;
 
 module.exports = React.createClass({
+  componentDidMount: function(){
+  },
+
+  menuClose: function(){
+    if (this.props.menuOpen === true) {
+      this.props.onMenuClose();
+    }
+  },
+
   render: function(){
     // svg
     var svg_logo = '<title>Dancing Girl.</title><use xlink:href="#logo" />';
@@ -16,7 +25,7 @@ module.exports = React.createClass({
       <header className='header'>
         <div className="header__bg"></div>
 
-        <h1 className="header__title">
+        <h1 className="header__title" onClick={this.menuClose}>
           <Link className='header__titleLink' to={'/'}>
             <svg dangerouslySetInnerHTML={{__html:svg_logo}}></svg>
           </Link>
@@ -27,31 +36,35 @@ module.exports = React.createClass({
         </h1>
 
         <div className="header__navi">
-          <ul className="header__link">
-            <li className="header__linkItem">
-              <Link to={'/'}>TOP</Link>
-            </li>
-            <li className="header__linkItem">
-              <Link to={'/about'}>ABOUT</Link>
-            </li>
-            <li className="header__linkItem">
-              <a href="/archive">ARCHIVE</a>
-            </li>
-          </ul>
+          <div className="header__naviInner">
+            <ul ref='link' className="header__link" onClick={this.menuClose}>
+              <li className="header__linkItem">
+                <Link to={'/'}>TOP</Link>
+              </li>
+              <li className="header__linkItem">
+                <Link to={'/about'}>ABOUT</Link>
+              </li>
+              <li className="header__linkItem">
+                <a href="/archive">ARCHIVE</a>
+              </li>
+            </ul>
 
-          <ul className="header_sns">
-            <li className="header__snsItem header__snsItem--twitter">
-              <Link to={'/'} target='_blank'>
-                <svg dangerouslySetInnerHTML={{__html:svg_iconTwitter}}></svg>
-              </Link>
-            </li>
-            <li className="header__snsItem header__snsItem--pixiv">
-              <Link to={'/'} target='_blank'>
-                <svg dangerouslySetInnerHTML={{__html:svg_iconPixiv}}></svg>
-              </Link>
-            </li>
-          </ul>
+            <ul className="header_sns" onClick={this.menuClose}>
+              <li className="header__snsItem header__snsItem--twitter">
+                <a href='https://twitter.com/ryo_dg' target='_blank'>
+                  <svg dangerouslySetInnerHTML={{__html:svg_iconTwitter}}></svg>
+                </a>
+              </li>
+              <li className="header__snsItem header__snsItem--pixiv">
+                <a href='http://pixiv.me/ryo_dg' target='_blank'>
+                  <svg dangerouslySetInnerHTML={{__html:svg_iconPixiv}}></svg>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
+
+        <div className="header__toggle" onClick={this.props.onMenuToggle}>{this.props.menuLabel}</div>
       </header>
     );
   }

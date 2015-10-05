@@ -2,27 +2,41 @@
 
 
 .photoList
-  max-width $width_default + 30px
   margin 0 auto
+
+  +media-query($mq_pcLarge)
+    max-width $width_default + 30px
+
+  +media-query($mq_pc)
+    max-width 80%
+
+  +media-query($mq_tablet)
+    max-width 90%
+
+  +media-query($mq_smartphone)
+    max-width 96%
 
 
 .photoList__items
-  gs('fluid', 3, 30px)
-  // overflow hidden
   clearfix()
+  gs('fluid', 3, 30px)
 
 
 .photoList__item
-  col(1)
-  ratio-box(1/1.414)
   vertical-align top
-  position relative
-  margin-bottom 30px
-  background-color $color_bg_link
-  background-repeat no-repeat
-  background-size cover
-  background-position 50% 50%
   cursor pointer
+
+  +media-query($mq_pcLarge)
+    col(1)
+
+  +media-query($mq_pc)
+    col(1)
+
+  +media-query($mq_tablet)
+    col(1.5)
+
+  +media-query($mq_smartphone)
+    col(3)
 
   a
     display block
@@ -31,6 +45,16 @@
     &:hover
       opacity inherit
       color inherit
+
+
+.photoList__itemInner
+  ratio-box(1/1.414)
+  position relative
+  margin-bottom 30px
+  background-color $color_bg_link
+  background-repeat no-repeat
+  background-size cover
+  background-position 50% 50%
 
 
 .photoList__itemOverlay
@@ -86,6 +110,9 @@
 .photoList__more
   margin-top 50px
   text-align center
+
+  +media-query($mq_smartphone)
+    margin-top 30px
 
 
 .photoList__itemDate,
