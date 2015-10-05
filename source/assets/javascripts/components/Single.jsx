@@ -107,7 +107,6 @@ module.exports = React.createClass({
     // react-routerのmixin
     // アクティブなparamsの情報を取得
     var params = self.getParams();
-    console.log(params);
 
     $.ajax({
       type: 'GET',
