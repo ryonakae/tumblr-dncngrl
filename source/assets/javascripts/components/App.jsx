@@ -75,7 +75,7 @@ module.exports = React.createClass({
 
     if ( $(window).width() <= 500 ) {
       rectWidth = '100%';
-      rectHeight = '550px';
+      rectHeight = '300px';
     }
     else {
       rectWidth = '50%';
@@ -102,11 +102,19 @@ module.exports = React.createClass({
 
   transformRectangleSingle: function(){
     var self = this;
+    var rectHeight;
+
+    if ( $(window).width() <= 500 ) {
+      rectHeight = '450px';
+    }
+    else {
+      rectHeight = '650px';
+    }
 
     // velocity
     $('.rectangle').velocity({
       width: '100%',
-      height: '650px'
+      height: rectHeight
     }, {
       duration: 600,
       easing: 'easeInOutCirc',
