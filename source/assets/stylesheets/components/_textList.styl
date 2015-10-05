@@ -39,6 +39,9 @@
   &:first-child
     margin-top 0
 
+  +media-query($mq_smartphone)
+    margin-top 40px
+
 .textList__itemTitle
   font-size $fontSize_large
   margin 0
@@ -47,6 +50,9 @@
   margin-top 15px
   font-size $fontSize_small
   color $color_text_sub
+
+  +media-query($mq_smartphone)
+    margin-top 10px
 
 .textList__itemDate
   display inline
@@ -79,3 +85,6 @@
 .textList__more
   margin-top 70px
   text-align center
+
+  +media-query($mq_smartphone)
+    margin-top 40px

@@ -55,6 +55,7 @@ module.exports = React.createClass({
         // dataに取得したデータを入れる
         this.setState({
           data: newData,
+          articleTotal: data.body.response.total_posts,
           buttonLabel: 'MORE'
         });
 
@@ -76,6 +77,7 @@ module.exports = React.createClass({
     // ページ番号をアップデート
     this.setState({
       page: this.state.page + 1,
+      articleCount: this.state.articleCount + limit,
       buttonLabel: 'LOADING'
     });
 
