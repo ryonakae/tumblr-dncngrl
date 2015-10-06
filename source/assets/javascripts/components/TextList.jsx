@@ -2,8 +2,6 @@
 
 var React = require('react');
 var config = require('../config');
-var request = require('superagent');
-require('superagent-jsonp')(request);
 require('jquery');
 
 // tumblr api
@@ -29,9 +27,12 @@ module.exports = React.createClass({
 
   // Ajax
   loadAjax: function(){
-    request
-      .get(tumblrUrl)
-      .query({
+    var self = this;
+
+    $.ajax({
+      type: 'GET',
+      url: tumblrUrl,
+      data: {
         api_key: apiKey,
         limit: limit,
         offset: this.state.page * limit - limit,
@@ -39,29 +40,30 @@ module.exports = React.createClass({
         notes_info: false,
         format: 'html',
         type: 'text'
-      })
-      .jsonp()
-      .end(function(err, data){
-        // エラー処理
-        if (err) {
-          console.error(err.toString());
-        }
-
+      },
+      cache: false,
+      dataType: 'jsonp',
+      timeout: 10000,
+      success: function(data){
         // データに新しく取得したデータを連結する
         // 初回はoldDataは空
-        var oldData = this.state.data;
-        var newData = oldData.concat(data.body.response.posts);
+        var oldData = self.state.data;
+        var newData = oldData.concat(data.response.posts);
 
         // dataに取得したデータを入れる
-        this.setState({
+        self.setState({
           data: newData,
-          articleTotal: data.body.response.total_posts,
+          articleTotal: data.response.total_posts,
           buttonLabel: 'MORE'
         });
 
         // 最後まで表示したらMOREボタン隠す
-        this.chackLastPage();
-      }.bind(this));
+        self.chackLastPage();
+      },
+      error: function(){
+        alert('Load Error');
+      }
+    });
   },
 
   // ページ番号確認用関数

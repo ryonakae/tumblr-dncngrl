@@ -7,9 +7,7 @@ var State = Router.State;
 var Link = Router.Link;
 var DocumentTitle = require('react-document-title');
 var moment = require('moment');
-var request = require('superagent');
 var ReactScriptLoaderMixin = require('react-script-loader').ReactScriptLoaderMixin;
-require('superagent-jsonp')(request);
 require('jquery');
 require('velocity');
 
@@ -104,27 +102,35 @@ module.exports = React.createClass({
 
   // Ajax
   loadAjax: function(){
-    var params = this.getParams();
+    var self = this;
 
-    request
-      .get(tumblrUrl)
-      .query({
+    // react-routerのmixin
+    // アクティブなparamsの情報を取得
+    var params = self.getParams();
+
+    $.ajax({
+      type: 'GET',
+      url: tumblrUrl,
+      data: {
         api_key: apiKey,
         id: params.id,
         reblog_info: true,
         notes_info: true,
         format: 'html'
-      })
-      .jsonp()
-      .end(function(err, data){
-        if (err) {
-          console.error(err.toString());
-        }
-        this.setState({
-          data: data.body.response.posts[0],
+      },
+      cache: false,
+      dataType: 'jsonp',
+      timeout: 10000,
+      success: function(data){
+        self.setState({
+          data: data.response.posts[0],
           dataLoaded: true
         });
-      }.bind(this));
+      },
+      error: function(){
+        alert('Load Error');
+      }
+    });
   },
 
   render: function(){
