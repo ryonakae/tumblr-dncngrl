@@ -6,7 +6,6 @@ browserSync = require 'browser-sync'
 inline = require 'gulp-inline-source'
 
 
-# jade
 gulp.task 'jade', ->
   gulp
     .src [
@@ -17,4 +16,4 @@ gulp.task 'jade', ->
     .pipe jade
       pretty: true
     .pipe gulp.dest config.build.root
-    .pipe browserSync.stream()
+    # .pipe browserSync.stream()

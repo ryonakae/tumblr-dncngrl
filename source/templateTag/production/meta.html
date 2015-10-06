@@ -1,0 +1,49 @@
+<meta charset="UTF-8">
+<title>{block:PostSummary}{PostSummary} | {/block:PostSummary}{Title}</title>
+<meta name="description" content="{MetaDescription}">
+<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+{block:TagPage}
+  <meta name="robots" content="noindex,follow">
+{/block:TagPage}
+{block:DayPage}
+  <meta name="robots" content="noindex,follow">
+{/block:DayPage}
+
+<meta property="og:locale" content="ja_JP">
+<meta property="og:description" content="{MetaDescription}">
+<meta property="og:site_name" content="{Title}">
+{block:IndexPage}
+  <meta property="og:title" content="{Title}">
+  <meta property="og:image" content="{PortraitURL-128}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{BlogURL}">
+  <meta meta name="twitter:card" value="summary">
+{/block:IndexPage}
+{block:PermalinkPage}
+  {block:Posts}
+    {block:Text}
+      <meta property="og:title" content="{block:PostSummary}{PostSummary} | {/block:PostSummary}{Title}">
+    {/block:Text}
+    {block:Photo}
+      {block:Date}
+        <meta property="og:title" content="{Year}.{MonthNumberWithZero}.{DayOfMonthWithZero} | {Title}">
+      {/block:Date}
+      <meta property="og:image" content="{PhotoURL-HighRes}">
+    {/block:Photo}
+    {block:Photoset}
+      {block:Date}
+        <meta property="og:title" content="{Year}.{MonthNumberWithZero}.{DayOfMonthWithZero} | {Title}">
+      {/block:Date}
+      {block:Photos}
+        <meta property="og:image" content="{PhotoURL-HighRes}">
+      {/block:Photos}
+    {/block:Photoset}
+  {/block:Posts}
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{Permalink}">
+  <meta meta name="twitter:card" value="summary_large_image">
+{/block:PermalinkPage}
+
+<link rel="shortcut icon" href="{Favicon}">
+<link rel="alternate" type="application/rss+xml" href="{RSS}">
+<link rel="apple-touch-icon" href="{PortraitURL-128}">

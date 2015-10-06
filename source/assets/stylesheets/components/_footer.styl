@@ -1,0 +1,246 @@
+.footer
+  background-color $color_bg_inverse
+  padding 85px $margin_page
+  opacity 0
+
+  +media-query($mq_tablet)
+    padding 65px 6.7%
+
+  +media-query($mq_smartphone)
+    padding 50px 4%
+
+
+.footer__top
+  clearfix()
+  overflow hidden
+  position relative
+
+
+.footer__logo
+  display block
+  float left
+  height 40px
+  border 1px solid $color_border_default
+  clearfix()
+
+  +media-query($mq_smartphone)
+    display none
+
+.footer__logoSymbol
+  float left
+  width 40px
+  height 100%
+  border-right 1px solid $color_border_default
+  position relative
+
+  svg
+    width 18px
+    height 22px
+    position absolute
+    left 50%
+    top 50%
+    transform translate(-50%, -50%)
+    fill $color_text_default
+
+.footer__logoText
+  float left
+  width 130px
+  height 100%
+  position relative
+  margin 0
+
+  svg
+    width 97px
+    height 15px
+    position absolute
+    left 50%
+    top 52%
+    transform translate(-50%, -50%)
+    fill $color_text_default
+
+
+.footer_sns
+  float right
+  margin 0
+  padding 0
+  list-style-type none
+  clearfix()
+
+  +media-query($mq_smartphone)
+    float none
+    text-align center
+    line-height 0
+
+.footer__snsItem
+  float left
+  margin-left 10px
+
+  &:first-child
+    margin-left 0
+
+  a
+    display block
+    width 150px
+    height 40px
+    line-height 0
+    border 1px solid $color_border_link
+    color $color_text_link
+    font-size $fontSize_small
+    position relative
+
+  span
+    position absolute
+    top 50%
+    left 20px
+    transform translateY(-50%)
+
+  svg
+    position absolute
+    top 50%
+    right 20px
+    transform translateY(-50%)
+
+  &--twitter
+    svg
+      width 13px
+      height 10px
+      fill $color_text_link
+
+  &--pixiv
+    svg
+      width 11px
+      height 10px
+      fill $color_text_link
+
+  +media-query($mq_smartphone)
+    float none
+    display inline-block
+
+    a
+      width 40px
+
+    span
+      display none
+
+    svg
+      left 50%
+      transform translate(-50%, -50%)
+
+
+.footer__border
+  position absolute
+  top 17px
+  left 50%
+  width 40px
+  height 6px
+  transform translateX(-50%)
+  line-height 0
+
+  svg
+    width 100%
+    height 100%
+    fill #e6e6e6
+
+
+.footer__bottom
+  margin-top 40px
+  clearfix()
+  overflow hidden
+
+  +media-query($mq_smartphone)
+    margin-top 30px
+
+
+.footer__poetry
+  float left
+  border-left 3px solid $color_border_link
+  padding-left 10px
+  width 770px
+
+  +media-query($mq_tablet)
+    display none
+
+.footer__poetryTitle
+  margin 0
+
+.footer__poetryText
+  font-size $fontSize_small
+  margin 10px 0 0
+  line-height 1.3
+
+
+.footer__brdrLogo
+  float right
+  margin-top 26px
+  display block
+  width 24px
+  height 38px
+  overflow hidden
+  position relative
+
+  svg
+    width 100%
+    height 100%
+    fill $color_bg_inverse
+    position relative
+    z-index 1
+
+.footer__brdrLogoBg
+  width 100%
+  height 100%
+  position absolute
+  top 0
+  left 0
+
+  &:after
+    content ''
+    position absolute
+    top 0
+    left 0
+    width 1000%
+    height 100%
+    background-image linear-gradient( 70deg, #a7e0fd, #ff95d7, #93ff8c, #ffb2b4, #a7e0fd, #ff95d7, #93ff8c, #ffb2b4, #a7e0fd, #ff95d7 )
+    animation-name rainbow
+    animation-duration 10s
+    animation-timing-function cubic-bezier(0.25, 0.25, 0.75, 0.75)
+    animation-iteration-count infinite
+    animation-direction alternate
+    animation-fill-mode both
+
+@keyframes rainbow
+  0%
+    left 0
+  100%
+    left -900%
+
+
+.footer__border,
+.footer__poetry,
+.footer__brdrLogo
+  +media-query($mq_tablet)
+    display none
+
+.footer__copyright,
+.footer__backTop
+  display none
+
+  +media-query($mq_tablet)
+    display block
+
+.footer__copyright
+  float left
+  font-size $fontSize_small
+
+  +media-query($mq_smartphone)
+    float none
+    text-align center
+
+.footer__backTop
+  float right
+  font-size $fontSize_small
+  cursor pointer
+
+  +media-query($mq_smartphone)
+    float none
+    text-align center
+    margin-top 15px

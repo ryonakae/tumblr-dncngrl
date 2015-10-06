@@ -12,5 +12,28 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "react": "~0.13.3",
+    "threejs": "*",
+    "velocity": "~1.2.2"
+  },
+  "overrides": {
+    "react": {
+      "main": "react-with-addons.min.js"
+    },
+    "jquery": {
+      "main": "dist/jquery.min.js"
+    },
+    "velocity": {
+      "main": "./velocity.min.js"
+    },
+    "threejs": {
+      "main": [
+        "build/three.min.js",
+        "examples/js/libs/tween.min.js"
+      ]
+    }
+  }
 }

@@ -3,11 +3,15 @@ config = require '../config'
 runSequence  = require 'run-sequence'
 
 
-# Default Task
 gulp.task 'watch', ->
-  runSequence 'cleanBuild', ['jade', 'webpack'], 'browserSync'
+  runSequence 'cleanBuild', ['copyFile', 'svgSprite'], ['jade', 'stylus:development', 'watchify'], 'include:development', 'browserSync'
 
-  gulp.watch config.source.root + '**/*.jade', ['jade']
-  gulp.watch config.source.stylesheets + '**/*.styl', ['webpack']
-  gulp.watch config.source.javascripts + '**/*.jsx', ['webpack']
-  # gulp.watch config.source.iamges + '*', ['imageMin']
+  gulp.watch config.source.root + '**/*.jade', ->
+    runSequence 'jade', 'include:development'
+  gulp.watch config.source.stylesheets + '**/*.styl', ['stylus:development']
+  gulp.watch config.source.images + '*.svg', ['copyFile']
+  gulp.watch config.source.sprite + '*.svg', ->
+    runSequence 'svgSprite', 'jade', 'include:development'
+
+
+gulp.task 'default', ['watch']
