@@ -3,7 +3,6 @@ config = require '../config'
 stylus = require 'gulp-stylus'
 plumber = require 'gulp-plumber'
 sourcemaps = require 'gulp-sourcemaps'
-browserSync = require 'browser-sync'
 minifyCss = require 'gulp-minify-css'
 autoprefixer = require 'autoprefixer-stylus'
 koutoSwiss = require 'kouto-swiss'
@@ -31,7 +30,6 @@ gulp.task 'stylus:development', ->
         "include css": true
     .pipe sourcemaps.write './'
     .pipe gulp.dest config.build.stylesheets
-    # .pipe browserSync.stream()
 
 
 gulp.task 'stylus:production', ->
@@ -55,7 +53,6 @@ gulp.task 'stylus:production', ->
       debug: true
     .pipe combineMediaQueries()
     .pipe csscomb()
-    # .pipe minifyCss
-    #   keepSpecialComments: 0
+    .pipe minifyCss
+      keepSpecialComments: 0
     .pipe gulp.dest config.build.stylesheets
-    # .pipe browserSync.stream()

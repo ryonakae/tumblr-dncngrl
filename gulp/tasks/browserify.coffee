@@ -9,7 +9,6 @@ merge = require 'utils-merge'
 uglify = require 'gulp-uglify'
 sourcemaps = require 'gulp-sourcemaps'
 gutil = require 'gulp-util'
-browserSync = require 'browser-sync'
 
 
 # path
@@ -39,7 +38,6 @@ gulp.task 'watchify', ['bower'], ->
           loadMaps: true
         .pipe sourcemaps.write './'
         .pipe gulp.dest destPath
-        # .pipe browserSync.stream()
 
     bundle()
 

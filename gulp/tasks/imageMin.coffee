@@ -3,7 +3,6 @@ config = require '../config'
 imagemin = require 'gulp-imagemin'
 pngcrush = require 'imagemin-pngcrush'
 cache = require 'gulp-cache'
-browserSync = require 'browser-sync'
 
 
 # ImageMin
@@ -20,4 +19,3 @@ gulp.task 'imageMin', ->
       svgoPlugins: [{removeViewBox: false}]
       use: [pngcrush()]
     .pipe gulp.dest config.build.images
-    # .pipe browserSync.stream()

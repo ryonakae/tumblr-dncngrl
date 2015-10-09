@@ -2,7 +2,6 @@ gulp = require 'gulp'
 config = require '../config'
 jade = require 'gulp-jade'
 plumber = require 'gulp-plumber'
-browserSync = require 'browser-sync'
 inline = require 'gulp-inline-source'
 
 
@@ -16,4 +15,3 @@ gulp.task 'jade', ->
     .pipe jade
       pretty: true
     .pipe gulp.dest config.build.root
-    # .pipe browserSync.stream()
