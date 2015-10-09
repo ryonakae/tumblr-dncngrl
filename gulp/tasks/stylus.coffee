@@ -3,11 +3,12 @@ config = require '../config'
 stylus = require 'gulp-stylus'
 plumber = require 'gulp-plumber'
 sourcemaps = require 'gulp-sourcemaps'
-browserSync = require 'browser-sync'
 minifyCss = require 'gulp-minify-css'
 autoprefixer = require 'autoprefixer-stylus'
 koutoSwiss = require 'kouto-swiss'
 base64 = require 'gulp-base64'
+combineMediaQueries = require 'gulp-combine-media-queries'
+csscomb = require 'gulp-csscomb'
 
 
 gulp.task 'stylus:development', ->
@@ -23,13 +24,12 @@ gulp.task 'stylus:development', ->
       use: [
         koutoSwiss()
         autoprefixer
-          browsers: ['last 3 versions', 'ie 8', 'ie 9']
+          browsers: ['last 2 versions']
       ]
       set:
         "include css": true
     .pipe sourcemaps.write './'
     .pipe gulp.dest config.build.stylesheets
-    # .pipe browserSync.stream()
 
 
 gulp.task 'stylus:production', ->
@@ -43,7 +43,7 @@ gulp.task 'stylus:production', ->
       use: [
         koutoSwiss()
         autoprefixer
-          browsers: ['last 3 versions', 'ie 8', 'ie 9']
+          browsers: ['last 2 versions']
       ]
       set:
         "include css": true
@@ -51,7 +51,8 @@ gulp.task 'stylus:production', ->
       extensions: ['jpg', 'png', 'woff', 'ttf', 'svg']
       maxImageSize: 2000*1024 # 20MB
       debug: true
+    .pipe combineMediaQueries()
+    .pipe csscomb()
     .pipe minifyCss
       keepSpecialComments: 0
     .pipe gulp.dest config.build.stylesheets
-    # .pipe browserSync.stream()
