@@ -62,10 +62,10 @@ module.exports = React.createClass({
             <p className="footer__poetryText">The story is the account of the star-crossed romance between a German dancing girl, Elise, and the protagonist, Toyotarō Ōta a Japanese exchange student who must choose between his career and his feelings for the dancer. The Japanese student eventually chooses his career, sending the dancing girl into a nervous breakdown. He leaves the girl alone and pregnant with his child, ending the story.</p>
           </div>
 
-          <Link className="footer__brdrLogo" to={'/'} target='_blank'>
+          <a className="footer__brdrLogo" href='http://brdr.jp' target='_blank'>
             <svg dangerouslySetInnerHTML={{__html:svg_logoBrdr}}></svg>
             <div className="footer__brdrLogoBg"></div>
-          </Link>
+          </a>
 
           <div className="footer__copyright">
             &copy; DANCING GIRL.<br />
