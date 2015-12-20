@@ -10,6 +10,7 @@ font-face('Gotham', '../fonts/Gotham-Book', normal, normal, formats:woff)
 font-face('Gotham', '../fonts/Gotham-Medium', bold, normal, formats:woff)
 
 body
+  padding 0 !important
   font-family $fontFamily
   font-size $fontSize_default
   background-color $color_bg_default
@@ -22,6 +23,9 @@ body
 
   +retina-query( only screen, 2 )
     -webkit-font-smoothing antialiased
+
+  .iframe-controls--phone-mobile
+    display none !important
 
 
 a
