@@ -34,8 +34,8 @@ var routes = (
 GA.initialize('UA-46325777-9');
 
 // render
-// Router.run(routes, Router.HistoryLocation, function(Handler, state){
-Router.run(routes, function(Handler, state){
+Router.run(routes, Router.HistoryLocation, function(Handler, state){
+// Router.run(routes, function(Handler, state){
   GA.pageview(state.pathname);
   React.render(
     React.createElement(Handler, {}),
