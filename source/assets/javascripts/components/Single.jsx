@@ -153,7 +153,7 @@ module.exports = React.createClass({
       return (
         <DocumentTitle title={`${article.title} | Dancing Girl.`}>
           <main className="content content--single">
-            <article className='article'>
+            <article className='article article--text'>
               <header className="article__header">
                 <h1 className="article__title">{article.title}</h1>
                 <div className="article__info">
