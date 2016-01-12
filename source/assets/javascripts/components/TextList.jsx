@@ -50,6 +50,11 @@ module.exports = React.createClass({
         var oldData = self.state.data;
         var newData = oldData.concat(data.response.posts);
 
+        // データを日付順にソート
+        newData.sort(function(a, b){
+          return( a.date < b.date ? 1 : -1 );
+        });
+
         // dataに取得したデータを入れる
         self.setState({
           data: newData,
