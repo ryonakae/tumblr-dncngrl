@@ -3,7 +3,7 @@
 
 * Gulp
 * React
-* Webpack
+* Browserify
 * Jade
 * Stylus
 
