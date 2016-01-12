@@ -17,6 +17,7 @@ var apiKey = config.apiKey;
 
 // components
 var Button = require('./Button');
+var SinglePhoto = require('./SinglePhoto');
 
 module.exports = React.createClass({
   // mixin
@@ -31,7 +32,8 @@ module.exports = React.createClass({
       data: [],
       dataLoaded: false,
       scriptLoading: true,
-      scriptLoadError: false
+      scriptLoadError: false,
+      articlePhotos: []
     };
   },
 
@@ -124,6 +126,7 @@ module.exports = React.createClass({
       success: function(data){
         self.setState({
           data: data.response.posts[0],
+          articlePhotos: data.response.posts[0].photos,
           dataLoaded: true
         });
       },
@@ -153,7 +156,7 @@ module.exports = React.createClass({
       return (
         <DocumentTitle title={`${article.title} | Dancing Girl.`}>
           <main className="content content--single">
-            <article className='article'>
+            <article className='article article--text'>
               <header className="article__header">
                 <h1 className="article__title">{article.title}</h1>
                 <div className="article__info">
@@ -180,6 +183,14 @@ module.exports = React.createClass({
 
     // photoのとき
     else if ( article.type === 'photo' ) {
+      // photos
+      // SinglePhotoコンポーネントを配列分作成し、子コンポーネントにデータを渡す
+      var articlePhotos = this.state.articlePhotos.map(function(photo){
+        return (
+          <SinglePhoto src={photo.original_size.url} />
+        );
+      });
+
       return (
         <DocumentTitle title={`${moment.unix(new Date(article.timestamp)).format('YYYY.M.D')} | Dancing Girl.`}>
           <main className="content content--single" ref='content'>
@@ -193,9 +204,7 @@ module.exports = React.createClass({
               </header>
 
               <div className="article__body">
-                <div className="article__photo">
-                  <img src={article.photos[0].original_size.url} alt="" />
-                </div>
+                <div className="article__photo">{articlePhotos}</div>
                 <div className="article__caption" dangerouslySetInnerHTML={{__html: article.caption}} />
               </div>
               <div className="article__reblog">

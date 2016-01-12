@@ -44,7 +44,7 @@ module.exports = React.createClass({
     return (
       <DocumentTitle title='About | Dancing Girl.'>
         <main className="content content--single content--page">
-          <article className='article'>
+          <article className='article article--text'>
             <header className="article__header">
               <h1 className="article__title">ABOUT</h1>
             </header>

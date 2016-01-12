@@ -8,6 +8,7 @@ var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var RouteHandler = Router.RouteHandler;
 var Redirect = Router.Redirect;
+var GA = require('react-ga');
 
 // components
 var App = require('./components/App');
@@ -29,9 +30,13 @@ var routes = (
   </Route>
 );
 
+// ga
+GA.initialize('UA-46325777-9');
+
 // render
-Router.run(routes, Router.HistoryLocation, function(Handler){
-// Router.run(routes, function(Handler){
+Router.run(routes, Router.HistoryLocation, function(Handler, state){
+// Router.run(routes, function(Handler, state){
+  GA.pageview(state.pathname);
   React.render(
     React.createElement(Handler, {}),
     document.getElementById('dncngrl')

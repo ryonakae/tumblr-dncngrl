@@ -50,12 +50,18 @@ module.exports = React.createClass({
         var oldData = self.state.data;
         var newData = oldData.concat(data.response.posts);
 
+        // データを日付順にソート
+        newData.sort(function(a, b){
+          return( a.date < b.date ? 1 : -1 );
+        });
+
         // dataに取得したデータを入れる
         self.setState({
           data: newData,
           articleTotal: data.response.total_posts,
           buttonLabel: 'MORE'
         });
+        console.log(self.state.data);
 
         // 最後まで表示したらMOREボタン隠す
         self.chackLastPage();
