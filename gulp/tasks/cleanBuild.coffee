@@ -1,8 +1,8 @@
 gulp = require 'gulp'
-config = require '../config'
+path = require '../path'
 rimraf = require 'rimraf'
 
 
 # clean build directory
 gulp.task 'cleanBuild', (cb) ->
-  rimraf config.build.root, cb
+  rimraf path.build.root, cb

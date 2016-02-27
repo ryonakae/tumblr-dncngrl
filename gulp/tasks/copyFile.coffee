@@ -1,15 +1,14 @@
 gulp = require 'gulp'
-config = require '../config'
+path = require '../path'
 
 
 # copy files
 gulp.task 'copyFile', ->
   gulp.src(
     [
-      config.source.fonts + '**/*'
-      config.source.images + '*.svg'
-      config.source.templateTag + '**/*.html'
+      path.source.fonts + '**/*'
+      path.source.templateTag + '**/*.html'
     ]
-    base: config.source.root
+    base: path.source.root
   )
-  .pipe gulp.dest config.build.root
+  .pipe gulp.dest path.build.root
