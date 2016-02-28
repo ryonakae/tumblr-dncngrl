@@ -12,5 +12,5 @@ html(lang='ja', prefix="og: http://ogp.me/ns#")
     #app
       @@if (env === 'production') { @@include('templateTag/production/template.html') }
 
-    @@if (env === 'development') { <script src="assets/javascripts/bundle.js"></script> }
+    @@if (env === 'development') { <script src="javascripts/bundle.js"></script> }
     @@if (env === 'production') { <script src="http://file.brdr.jp/dncngrl/javascripts/bundle.js"></script> }

@@ -6,7 +6,7 @@ runSequence  = require 'run-sequence'
 
 gulp.task 'watch', ->
   watch path.source.root + '**/*.jade', (event) ->
-    gulp.start 'jade'
+    runSequence 'jade', 'include:development'
 
   watch path.source.stylesheets + '**/*.styl', (event) ->
     gulp.start 'stylus'
