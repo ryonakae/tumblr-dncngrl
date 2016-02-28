@@ -1,11 +1,11 @@
 gulp   = require 'gulp'
-config = require '../config'
+path = require '../path'
 include = require 'gulp-file-include'
 
 # development
 gulp.task 'include:development', ->
   gulp
-    .src config.build.root + 'index.html'
+    .src path.build.root + 'index.html'
     .pipe include
       prefix: '@@'
       basePath: '@file'
@@ -16,7 +16,7 @@ gulp.task 'include:development', ->
 # production
 gulp.task 'include:production', ->
   gulp
-    .src config.build.root + 'index.html'
+    .src path.build.root + 'index.html'
     .pipe include
       prefix: '@@'
       basePath: '@file'

@@ -1,17 +1,18 @@
 gulp = require 'gulp'
-config = require '../config'
+path = require '../path'
+env = require '../env'
 jade = require 'gulp-jade'
 plumber = require 'gulp-plumber'
-inline = require 'gulp-inline-source'
+gulpif = require 'gulp-if'
 
 
 gulp.task 'jade', ->
   gulp
     .src [
-      config.source.root + 'index.jade'
-      '!' + config.source.root + '**/_*.jade'
+      path.source.root + '*.jade'
+      '!' + path.source.root + '**/_*.jade'
     ]
     .pipe plumber()
     .pipe jade
       pretty: true
-    .pipe gulp.dest config.build.root
+    .pipe gulp.dest path.build.root

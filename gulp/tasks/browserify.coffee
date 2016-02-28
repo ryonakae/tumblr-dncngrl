@@ -1,65 +1,110 @@
 gulp = require 'gulp'
-config = require '../config'
+path = require '../path'
+env = require '../env'
 browserify = require 'browserify'
+vueify = require 'vueify'
 babelify = require 'babelify'
 watchify = require 'watchify'
 source = require 'vinyl-source-stream'
 buffer = require 'vinyl-buffer'
-merge = require 'utils-merge'
 uglify = require 'gulp-uglify'
 sourcemaps = require 'gulp-sourcemaps'
 gutil = require 'gulp-util'
+gulpif = require 'gulp-if'
+prettyHrtime = require 'pretty-hrtime'
+eslint = require 'gulp-eslint'
+plumber = require 'gulp-plumber'
 
 
 # path
-# パスの先頭に ./ をつけないと何故かエラー出る
-srcPath = './' + config.source.javascripts + 'main.jsx'
-destPath = './' + config.build.javascripts
+# パスの先頭に ./ をつけないとエラー出る
+srcPath = './' + path.source.javascripts + 'main.js'
+destPath = './' + path.build.javascripts
 
 
-# watchify
-gulp.task 'watchify', ['bower'], ->
-  compile = ->
-    option = merge watchify.args,
-      entries: [srcPath]
-      transform: [babelify]
-      debug: true
-      extensions: ['.coffee', '.js', '.jsx']
-    bundler = watchify browserify(option)
-
-    bundle = ->
-      bundler
-        .bundle()
-        .on 'error', (err)->
-          console.log gutil.log 'Browserify Error: \n' + err.message
-        .pipe source 'bundle.js'
-        .pipe buffer()
-        .pipe sourcemaps.init
-          loadMaps: true
-        .pipe sourcemaps.write './'
-        .pipe gulp.dest destPath
-
-    bundle()
-
-    bundler.on 'update', ->
-      bundle()
-    bundler.on 'log', (msg)->
-      gutil.log 'Finished', '\'' + gutil.colors.cyan('watchify') + '\'', msg
-
-  compile()
+# browserify task
+gulp.task 'browserify', ->
+  compile env.isProduction
 
 
-# browserify
-gulp.task 'browserify', ['bower'], ->
-  bundler = browserify
-    entries: [srcPath]
-    transform: [babelify]
-    extensions: ['.coffee', '.js', '.jsx']
-  .bundle()
-  .on 'error', (err)->
-    console.log gutil.log 'Browserify Error: \n' + err.message
-  .pipe source 'bundle.js'
-  .pipe buffer()
-  .pipe uglify
-    preserveComments: 'some'
-  .pipe gulp.dest destPath
+# compile function
+compile = (isProduction) ->
+  option =
+    transform: [vueify, [babelify, {'presets': 'es2015'}]]
+    debug: true
+    extensions: ['.js']
+  bundler = null
+  bundleJs = 'bundle.js'
+  bundleLogger = new BundleLogger srcPath, bundleJs
+
+  # production(browserify)
+  if(isProduction == true)
+    bundler = browserify srcPath, option
+
+  # development(watchify)
+  else
+    option.cache = {}
+    option.packageCache = {}
+    option.fullPaths = true
+    bundler = watchify browserify srcPath, option
+    bundleLogger.watch()
+
+  bundle = ->
+    # ESLint
+    bundleLogger.beginLint()
+    gulp
+      .src './' + path.source.javascripts + '**/*.js'
+      .pipe plumber()
+      .pipe eslint
+        useEslintrc: true
+      .pipe eslint.format()
+      .pipe eslint.failOnError()
+      .pipe eslint.result (result) ->
+        bundleLogger.endLint()
+
+    # Browserify
+    bundleLogger.begin()
+    bundler
+      .bundle()
+      .on 'error', (err)->
+        gutil.log 'Browserify Error: \n' + gutil.colors.red(err.message)
+      .pipe source bundleJs
+      .pipe buffer()
+      .pipe gulpif isProduction == false, sourcemaps.init
+        loadMaps: true
+      .pipe gulpif isProduction == false, sourcemaps.write './'
+      .pipe gulpif isProduction == true, uglify
+        preserveComments: 'some'
+      .on 'end', bundleLogger.end
+      .pipe gulp.dest destPath
+
+  bundler.on 'update', bundle
+
+  bundle()
+
+
+# logger function
+class BundleLogger
+  constructor: (src, bundle) ->
+    @beginTime = null
+
+    @beginLint = =>
+      @beginTime = process.hrtime()
+      gutil.log 'Starting', gutil.colors.magenta('ESLint')
+
+    @begin = =>
+      @beginTime = process.hrtime()
+      gutil.log 'Bundling', gutil.colors.green(src) + '...'
+
+    @watch = ->
+      gutil.log 'Watching files required by', gutil.colors.yellow(src)
+
+    @end = =>
+      taskTime = process.hrtime @beginTime
+      prettyTime = prettyHrtime taskTime
+      gutil.log 'Bundled', gutil.colors.green(bundle), 'in', gutil.colors.magenta(prettyTime)
+
+    @endLint = =>
+      taskTime = process.hrtime @beginTime
+      prettyTime = prettyHrtime taskTime
+      gutil.log 'Finished', gutil.colors.magenta('ESLint'), 'in', gutil.colors.magenta(prettyTime)
