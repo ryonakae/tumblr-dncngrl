@@ -6,8 +6,8 @@ Vue.use(VueRouter);
 
 // vue-router initialize
 const router = new VueRouter({
-  history: true,
-  saveScrollPosition: true,
+  // history: true,
+  // saveScrollPosition: true,
   // abstract: true
 });
 export const vueRouter = router;
@@ -15,11 +15,13 @@ export const vueRouter = router;
 // import pages
 import Index from './pages/Index.vue';
 import About from './pages/About.vue';
+import Work from './pages/Work.vue';
 
 // vue-router mapping
 router.map({
   '/': { component: Index },
-  '/about': { component: About }
+  '/about': { component: About },
+  '/work': { component: Work }
 });
 router.afterEach((transition) => {
   console.log('Successfully navigated to: ' + transition.to.path);

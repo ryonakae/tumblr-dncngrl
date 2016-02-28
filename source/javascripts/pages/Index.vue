@@ -1,20 +1,29 @@
 <template lang='jade'>
 div
-  h1 Index
-  p Clicked {{count}} times
-  button(v-on:click='increment') ふえる
-  button(v-on:click='decrement') へる
+  h1 Dancing Girl.
+  //- p Clicked {{count}} times
+  //- button(v-on:click='increment') ふえる
+  //- button(v-on:click='decrement') へる
+  div(v-on:click='transitionToWork') Work
 </template>
 
 <script>
 import store from '../stores/';
 
 export default {
-  computed: {
-    count() {
-      return store.state.count;
-    }
+  // computed: {
+  //   count() {
+  //     return store.state.count;
+  //   }
+  // },
+  // methods: store.actions
+
+  ready() {
+    console.log('index ready');
   },
-  methods: store.actions
+
+  methods: {
+    transitionToWork: store.actions.transitionToWork
+  }
 };
 </script>

@@ -1,7 +1,7 @@
 <template lang='jade'>
 header.header
   h1.header__logo
-    a(v-link='{path:"/"}') Dancing Girl.
+    span(v-on:click='transitionToTop') Dancing Girl.
 
   ul.header__navi
     li.header__naviList
