@@ -14,13 +14,6 @@ window.jQuery = window.$ = require('jquery');
 export default {
   ready() {
     console.log('index ready');
-
-    $(window).scrollTop(0);
-    $(window).on('scroll', () => {
-      if ( $(window).scrollTop() >= 100 ) {
-        vueRouter.go({ path: '/work' });
-      }
-    });
   },
 
   methods: {

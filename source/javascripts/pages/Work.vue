@@ -29,13 +29,6 @@ export default {
   ready() {
     console.log('work ready');
 
-    $(window).scrollTop(100);
-    $(window).on('scroll', () => {
-      if ( $(window).scrollTop() <= 0 ) {
-        vueRouter.go({ path: '/' });
-      }
-    });
-
     store.actions.loadEntry('photo', 10)
       .then(() => {
         $('.postList').imagesLoaded(() => {
