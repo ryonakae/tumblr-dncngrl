@@ -35,10 +35,10 @@ Then, edit `source/assets/javascripts/config.js`.
 
 
 ## Development
-### Watch
+### Develop & Watch
 
-    $ gulp
+    $ npm start
 
 ### Build
 
-    $ gulp env=production
+    $ npm build

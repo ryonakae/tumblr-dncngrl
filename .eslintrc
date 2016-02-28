@@ -1,5 +1,8 @@
-
 {
+  "plugins": [
+    "html"
+  ],
+
   "parser": "babel-eslint",
 
   "env": {
