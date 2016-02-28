@@ -83,7 +83,7 @@ const actions = {
 
           // stateにデータ入れる
           state.posts_photo = newData;
-          console.log(state.posts_photo);
+          // console.log(state.posts_photo);
           resolve();
         }
       });
@@ -95,6 +95,7 @@ const actions = {
   },
 
   beforeInIndex: () => {
+    $(window).scrollTop(0);
     $('.eyecatch__image').removeClass('eyecatch__image--blur');
   },
   beforeLeaveIndex: () => {

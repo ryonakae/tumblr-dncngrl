@@ -10,7 +10,7 @@ header.header
     li.header__naviList
       span(v-on:click='transitionToAbout') About
     li.header__naviList
-      span(v-on:click='transitionToWork') Work
+      a(v-link='{path:"/work"}') Work
     li.header__naviList
       a(href='/archive') Archive
 </template>

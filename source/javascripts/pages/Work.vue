@@ -5,8 +5,10 @@ div.archive
   div.archive__content
     ul.postList.postList--photo
       li.postList__item(v-for='post in posts')
-        img.postList__itemImage(v-bind:src='post.photos[0].original_size.url')
-        h3.postList__itemTitle {{ post.timestamp | moment }}
+        a.postList__itemLink(v-link='{ name: "post", params: { id: post.id, slug: post.slug }}')
+          img.postList__itemImage(v-bind:src='post.photos[0].original_size.url')
+          div.postList__itemClone(v-bind:style='{ backgroundImage: "url("+post.photos[0].original_size.url+")" }')
+          h3.postList__itemTitle {{ post.timestamp | moment }}
 </template>
 
 <script>
@@ -39,7 +41,11 @@ export default {
       });
   },
 
-  methods: {},
+  methods: {
+    photoFitWindow: function() {
+      console.log($(this.$els.post));
+    }
+  },
 
   filters: {
     moment: (timestamp) => {

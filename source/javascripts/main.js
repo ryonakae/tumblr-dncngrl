@@ -18,25 +18,44 @@ export const vueRouter = router;
 import Index from './pages/Index.vue';
 import About from './pages/About.vue';
 import Work from './pages/Work.vue';
+import Single from './pages/Single.vue';
 
 // vue-router mapping
 router.map({
   '/': { component: Index },
   '/about': { component: About },
-  '/work': { component: Work }
+  '/work': { component: Work },
+  '/post/:id/:slug': {
+    name: 'post',
+    component: Single
+  }
 });
 
 // before routing
 let isFirst = true;
 router.beforeEach((transition) => {
+  console.log(transition);
   console.log('Go: ' + transition.to.path);
 
-  if (transition.to.path === '/') {
+  // work -> index
+  if (transition.from.path === '/work' && transition.to.path === '/') {
+    console.log('workからindexに遷移するぞ');
     store.actions.beroreLeaveArchive();
     store.actions.beforeInIndex();
-  } else if (transition.to.path === '/work') {
+  }
+  // index -> work
+  else if (transition.from.path === '/' && transition.to.path === '/work') {
+    console.log('indexからworkに遷移するぞ');
     store.actions.beforeLeaveIndex();
     store.actions.beroreInArchive();
+  }
+  // work -> single
+  else if (transition.from.path === '/work' && transition.to.name === 'post') {
+    console.log('workからsingleに遷移するぞ');
+  }
+  // single -> work
+  else if (transition.from.name === 'post' && transition.to.path === '/work') {
+    console.log('singleからworkに遷移するぞ');
   }
 
   if (isFirst) {
