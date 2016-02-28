@@ -92,6 +92,31 @@ const actions = {
 
   formatDate: ({ dispatch }, timestamp) => {
     return moment.unix(new Date(timestamp)).format('YYYY.M.D');
+  },
+
+  beforeInIndex: () => {
+    $('.eyecatch__image').removeClass('eyecatch__image--blur');
+  },
+  beforeLeaveIndex: () => {
+    $('.top__title').removeClass('top__title--active');
+  },
+  afterInIndex: () => {
+    setTimeout(() => {
+      $('.top__title').addClass('top__title--active');
+    }, 100);
+  },
+
+  beroreInArchive: () => {
+    $('.eyecatch__image').addClass('eyecatch__image--blur');
+  },
+  beroreLeaveArchive: () => {
+    $('.archive__title').removeClass('archive__title--active');
+    $('.postList').removeClass('postList--visible');
+  },
+  afterInArchive: () => {
+    setTimeout(() => {
+      $('.archive__title').addClass('archive__title--active');
+    }, 100);
   }
 };
 

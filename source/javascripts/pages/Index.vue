@@ -1,25 +1,26 @@
 <template lang='jade'>
-div
-  h1 Dancing Girl.
-  //- p Clicked {{count}} times
-  //- button(v-on:click='increment') ふえる
-  //- button(v-on:click='decrement') へる
-  div(v-on:click='transitionToWork') Work
+div.top
+  h1.top__title
+    span Dancing Girl.
+  //- div.top__button(v-on:click='transitionToWork') Work
+  a.top__button(v-link='{path:"/work"}') Work
 </template>
 
 <script>
 import store from '../stores/';
+import { vueRouter } from '../main.js';
+window.jQuery = window.$ = require('jquery');
 
 export default {
-  // computed: {
-  //   count() {
-  //     return store.state.count;
-  //   }
-  // },
-  // methods: store.actions
-
   ready() {
     console.log('index ready');
+
+    $(window).scrollTop(0);
+    $(window).on('scroll', () => {
+      if ( $(window).scrollTop() >= 100 ) {
+        vueRouter.go({ path: '/work' });
+      }
+    });
   },
 
   methods: {

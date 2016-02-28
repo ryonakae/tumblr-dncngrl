@@ -1,15 +1,18 @@
 <template lang='jade'>
-div
-  h2 Work
-  ul.postList.postList--photo
-    li.postList__item(v-for='post in posts')
-      img.postList__itemImage(v-bind:src='post.photos[0].original_size.url')
-      h3.postList__title {{ post.timestamp | moment }}
-      //- h3.postList__title {{ post.timestamp }}
+div.archive
+  h2.archive__title
+    span Work
+  div.archive__content
+    ul.postList.postList--photo
+      li.postList__item(v-for='post in posts')
+        img.postList__itemImage(v-bind:src='post.photos[0].original_size.url')
+        h3.postList__itemTitle {{ post.timestamp | moment }}
 </template>
 
 <script>
 import store from '../stores/';
+import { vueRouter } from '../main.js';
+
 window.jQuery = window.$ = require('jquery');
 const velocity = require('velocity-animate');
 const imagesLoaded = require('imagesloaded');
@@ -26,31 +29,28 @@ export default {
   ready() {
     console.log('work ready');
 
-    $('.eyecatch__image').addClass('eyecatch__image--blur');
+    $(window).scrollTop(100);
+    $(window).on('scroll', () => {
+      if ( $(window).scrollTop() <= 0 ) {
+        vueRouter.go({ path: '/' });
+      }
+    });
 
     store.actions.loadEntry('photo', 10)
       .then(() => {
         $('.postList').imagesLoaded(() => {
           console.log(this.posts);
 
-          $('.postList').velocity({ opacity: 1 }, {
-            duration: 400
-          });
+          $('.postList').addClass('postList--visible');
         });
       });
-
-    console.log( store.actions.formatDate(1450686975) );
   },
 
-  methods: {
-    formatDate: (timestamp) => {
-      store.actions.formatDate(timestamp);
-    }
-  },
+  methods: {},
 
   filters: {
     moment: (timestamp) => {
-      return moment.unix(new Date(timestamp)).format('YYYY.M.D');
+      return store.actions.formatDate(timestamp);
     }
   }
 };
