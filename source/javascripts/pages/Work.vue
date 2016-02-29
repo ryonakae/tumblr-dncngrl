@@ -26,8 +26,16 @@ export default {
       // inアニメーション
       $(this.eyecatch).find('.eyecatch__image').addClass('eyecatch__image--blur');
 
-      // このページに遷移
-      transition.next();
+      // single -> workに遷移するとき
+      if (transition.from.name === 'post') {
+        $('.cloneImage').removeClass('cloneImage--zoomIn');
+        setTimeout(() => {
+          transition.next();
+        }, 1000);
+      } else {
+        // このページに遷移
+        transition.next();
+      }
     },
     deactivate: function(transition) {
       console.log('work deactivate');
@@ -36,6 +44,9 @@ export default {
       // work -> singleへ遷移するとき
       if (transition.to.name === 'post') {
         transition.abort();
+        setTimeout(() => {
+          $('.cloneImage').addClass('cloneImage--zoomIn');
+        }, 1000);
       }
 
       // work -> indexへ遷移するとき

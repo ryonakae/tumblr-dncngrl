@@ -1,7 +1,18 @@
 .cloneImage
-  position absolute
-  // visibility hidden
+  position fixed
+  visibility hidden
+  // opacity 0
   pointer-events none
   background-size cover
-  margin-left 100px
+  background-position 50% 0
+  left 50%
+  transform translateX(-50%)
   z-index 2
+  transition: all 1000ms easing('in-out-quart')
+
+  &--zoomIn
+    // opacity 1 !important
+    visibility visible !important
+    top 0 !important
+    width 100% !important
+    height 100% !important
