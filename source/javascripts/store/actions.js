@@ -60,5 +60,9 @@ export default {
 
   setEyecatch: ({ dispatch }, vm) => {
     dispatch('SET_EYECATCH', vm);
+  },
+
+  setEntryImage: ({ dispatch }, url, width, height, offset) => {
+    dispatch('SET_ENTRY_IMAGE', url, width, height, offset);
   }
 };

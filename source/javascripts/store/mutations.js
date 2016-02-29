@@ -19,7 +19,18 @@ export default {
     state.count--;
   },
 
+  // アイキャッチのVMを取得
+  // していろんなとこで使い回す
   SET_EYECATCH(state, vm) {
     state.eyecatch = vm.$els.eyecatch;
+  },
+
+  // 記事の画像を取得してurlを取得
+  SET_ENTRY_IMAGE(state, url, width, height, offset) {
+    state.entryImage.url = url;
+    state.entryImage.width = width;
+    state.entryImage.height = height;
+    state.entryImage.offset = offset;
+    console.log(state.entryImage);
   }
 };

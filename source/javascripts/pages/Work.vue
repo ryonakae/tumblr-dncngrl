@@ -22,16 +22,29 @@ export default {
   route: {
     activate: function(transition) {
       console.log('work activate');
+
+      // inアニメーション
+      $(this.eyecatch).find('.eyecatch__image').addClass('eyecatch__image--blur');
+
+      // このページに遷移
       transition.next();
     },
     deactivate: function(transition) {
       console.log('work deactivate');
+      console.log(transition);
+
+      // work -> singleへ遷移するとき
+      if (transition.to.name === 'post') {
+        transition.abort();
+      }
 
       // work -> indexへ遷移するとき
       if (transition.to.path === '/') {
+        // outアニメーション
         $(this.$els.title).removeClass('archive__title--active');
         $(this.$els.entryList).removeClass('entryList--visible');
         $(this.eyecatch).find('.eyecatch__image').removeClass('eyecatch__image--blur');
+        // アニメーション終了後に遷移
         setTimeout(() => {
           transition.next();
         }, 600);

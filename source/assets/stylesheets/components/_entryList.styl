@@ -30,6 +30,8 @@
       width 100%
       height auto
       transition: all 600ms easing('in-out-quart')
+      position relative
+      z-index 1
 
     &Title
       position absolute
@@ -40,6 +42,7 @@
       line-height 1
       font-size 70px
       color $textColor_default
+      z-index 3
 
     &:hover
       .entryList__item

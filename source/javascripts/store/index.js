@@ -10,7 +10,16 @@ const state = {
   count: 0,
   posts: [],
   page: 0,
-  eyecatch: {}
+  eyecatch: {},
+  entryImage: {
+    url: '',
+    width: 0,
+    height: 0,
+    offset: {
+      top: 0,
+      left: 0
+    }
+  }
 };
 
 // vuex initialize
