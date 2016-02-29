@@ -43,6 +43,9 @@ router.beforeEach((transition) => {
     console.log('workからindexに遷移するぞ');
     store.actions.beroreLeaveArchive();
     store.actions.beforeInIndex();
+  } else if (transition.to.path === '/work') {
+    console.log('workに遷移するぞ');
+    store.actions.beroreInArchive();
   } else if (transition.from.path === '/' && transition.to.path === '/work') {
     console.log('indexからworkに遷移するぞ');
     store.actions.beforeLeaveIndex();

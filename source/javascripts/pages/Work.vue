@@ -4,24 +4,24 @@ div.archive
     span Work
   div.archive__content
     ul.entryList.entryList--photo
-      li.entryList__item(v-for='post in posts')
-        a.entryList__itemLink(v-link='{ name: "post", params: { id: post.id, slug: post.slug }}')
-          img.entryList__itemImage(v-bind:src='post.photos[0].original_size.url')
-          div.entryList__itemClone(v-bind:style='{ backgroundImage: "url("+post.photos[0].original_size.url+")" }')
-          h3.entryList__itemTitle {{ post.timestamp | moment }}
+      component-entry(v-for='post in posts', track-by='id', :post='post')
 </template>
 
 <script>
 import store from '../store/';
 import { vueRouter } from '../main.js';
+import Entry from '../components/Entry.vue';
 
 window.jQuery = window.$ = require('jquery');
 const velocity = require('velocity-animate');
 const imagesLoaded = require('imagesloaded');
 imagesLoaded.makeJQueryPlugin($);
-const moment = require('moment');
 
 export default {
+  components: {
+    'component-entry': Entry
+  },
+
   computed: {
     posts() {
       return store.state.posts;
