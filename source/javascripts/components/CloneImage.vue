@@ -1,5 +1,5 @@
 <template lang='jade'>
-  div.cloneImage(v-bind:style='{ backgroundImage:"url("+imageUrl+")" , width:imageWidth+"px", height:imageHeight+"px", top:imageOffsetTop+"px" }')
+  .cloneImage(v-bind:style='{ backgroundImage:"url("+imageUrl+")" , width:imageWidth+"px", height:imageHeight+"px", top:imageOffsetTop+"px" }')
 </template>
 
 <script>

@@ -1,0 +1,38 @@
+.entryItem
+  margin-top 100px
+  position relative
+  overflow hidden
+  background-color #000
+
+  &:first-child
+    margin-top 0
+
+  &:hover
+    .image
+      // transform scale(1.05)
+      transform-origin 50% 50%
+      opacity 0.3
+
+  .link
+    display block
+    width 100%
+    height 100%
+    line-height 0
+
+  .image
+    width 100%
+    height auto
+    transition: all 600ms easing('in-out-quart')
+    position relative
+    z-index 1
+
+  .title
+    position absolute
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
+    margin 0
+    line-height 1
+    font-size 70px
+    color $textColor_default
+    z-index 3

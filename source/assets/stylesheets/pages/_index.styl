@@ -1,28 +1,23 @@
-.index
-  &__title
-    margin 0
-    position absolute
-    top 50%
-    left 0
-    width 100%
-    transform translateY(-50%)
-    line-height 0
-    font-size 110px
-    text-align center
+.index__title
+  hide-text()
+  margin 0
+  position absolute
+  top 50%
+  left 50%
+  background url('/assets/images/index_logo.png') no-repeat
+  background-size (1140/2)px (276/2)px
+  width (1140/2)px
+  height (276/2)px
+  opacity 0
+  transform translate(-50%, -50%)
+  transition: opacity 600ms easing('in-out-quart')
+  transform-origin 50% 50%
 
-    span
-      display block
-      opacity 0
-      transform scale(1.1)
-      transition: all 600ms easing('in-out-quart')
+  &.is--visible
+    opacity 1
 
-    &--active
-      span
-        opacity 1
-        transform scale(1)
-
-  &__button
-    position absolute
-    bottom 50px
-    left 50%
-    transform translateX(-50%)
+.index__button
+  position absolute
+  bottom 50px
+  left 50%
+  transform translateX(-50%)

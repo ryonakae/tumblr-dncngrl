@@ -1,15 +1,16 @@
 <template lang='jade'>
-div.archive
-  h2.archive__title(v-el:title)
-    span Work
-  div.archive__content
+.archive
+  h2.archive__title(v-el:title) WORK
+
+  .archive__content
     ul.entryList.entryList--photo(v-el:entry-list)
-      component-entry(v-for='post in posts', track-by='id', :post='post')
+      li.entryList__item(v-for='post in posts', track-by='id')
+        component-entryitem(:post='post')
 </template>
 
 <script>
 import store from '../store/';
-import Entry from '../components/Entry.vue';
+import EntryItem from '../components/EntryItem.vue';
 
 window.jQuery = window.$ = require('jquery');
 const velocity = require('velocity-animate');
@@ -23,12 +24,13 @@ export default {
       console.log('work activate');
 
       // inアニメーション
-      $(this.eyecatch).find('.eyecatch__image').addClass('eyecatch__image--blur');
-      $(this.eyecatch).find('.eyecatch__image').removeClass('eyecatch__image--hidden');
+      $(this.eyecatch).find('.image')
+        .addClass('is--blur')
+        .removeClass('is--hidden');
 
       // single -> workに遷移するとき
       if (transition.from.name === 'post') {
-        $('.cloneImage').removeClass('cloneImage--zoomIn');
+        $('.cloneImage').removeClass('is--zoomIn');
         setTimeout(() => {
           transition.next();
         }, 1000);
@@ -42,11 +44,11 @@ export default {
 
       // work -> singleへ遷移するとき
       if (transition.to.name === 'post') {
-        $('body').addClass('disableScroll');
-        $(this.eyecatch).find('.eyecatch__image').addClass('eyecatch__image--hidden');
+        $('body').addClass('is--disableScroll');
+        $(this.eyecatch).find('.image').addClass('is--hidden');
 
         setTimeout(() => {
-          $('.cloneImage').addClass('cloneImage--zoomIn');
+          $('.cloneImage').addClass('is--zoomIn');
         }, 1000);
         setTimeout(() => {
           transition.next();
@@ -56,9 +58,9 @@ export default {
       // work -> indexへ遷移するとき
       if (transition.to.path === '/') {
         // outアニメーション
-        $(this.$els.title).removeClass('archive__title--active');
-        $(this.$els.entryList).removeClass('entryList--visible');
-        $(this.eyecatch).find('.eyecatch__image').removeClass('eyecatch__image--blur');
+        $(this.$els.title).removeClass('is--active');
+        $(this.$els.entryList).removeClass('is--visible');
+        $(this.eyecatch).find('.image').removeClass('is--blur');
         // アニメーション終了後に遷移
         setTimeout(() => {
           transition.next();
@@ -68,7 +70,7 @@ export default {
   },
 
   components: {
-    'component-entry': Entry
+    'component-entryitem': EntryItem
   },
 
   computed: {
@@ -88,15 +90,15 @@ export default {
 
     // ページタイトルをフェードイン
     setTimeout(() => {
-      $(this.$els.title).addClass('archive__title--active');
-    }, 10);
+      $(this.$els.title).addClass('is--active');
+    }, 100);
 
     store.actions.loadEntry('photo', 10)
       .then(() => {
         $('.entryList').imagesLoaded(() => {
           console.log(this.posts);
 
-          $(this.$els.entryList).addClass('entryList--visible');
+          $(this.$els.entryList).addClass('is--visible');
         });
       });
   },

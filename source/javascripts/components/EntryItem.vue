@@ -1,9 +1,8 @@
 <template lang='jade'>
-li.entryList__item(v-el:entry-item)
-  a.entryList__itemLink(v-link='{ name: "post", params: { id: post.id, slug: post.slug }}', v-on:click='setEntryImage')
-    img.entryList__itemImage(v-bind:src='post.photos[0].original_size.url')
-    div.entryList__itemClone(v-bind:style='{ backgroundImage: "url("+post.photos[0].original_size.url+")" }')
-    h3.entryList__itemTitle {{ post.timestamp | moment }}
+.entryItem.entryItem--photo(v-el:entry-item)
+  a.link(v-link='{ name: "post", params: { id: post.id, slug: post.slug }}', v-on:click='setEntryImage')
+    img.image(v-bind:src='post.photos[0].original_size.url')
+    h3.title {{ post.timestamp | moment }}
 </template>
 
 <script>

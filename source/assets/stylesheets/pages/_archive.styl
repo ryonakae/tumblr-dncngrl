@@ -1,31 +1,25 @@
-.archive
-  &__title
-    line-height 1
-    margin 0
-    position absolute
-    top 50%
-    left 0
-    width 100%
-    text-align center
-    font-size 110px
-    transform translateY(-50%)
+.archive__title
+  line-height 0
+  margin 0
+  position absolute
+  top 50%
+  left 0
+  width 100%
+  text-align center
+  font-size 110px
+  opacity 0
+  transform scale(1.1) translateY(-50%)
+  transition: all 600ms easing('in-out-quart')
+  letter-spacing 0.2em
 
-    span
-      display block
-      opacity 0
-      transform scale(1.1)
-      transition: all 600ms easing('in-out-quart')
-      letter-spacing 0.2em
+  &.is--active
+    opacity 1
+    transform scale(1) translateY(-50%)
+    letter-spacing 0.06em
 
-    &--active
-      span
-        opacity 1
-        transform scale(1)
-        letter-spacing 0.06em
-
-  &__content
-    position absolute
-    top 50%
-    left 0
-    width 100%
-    margin-top 150+(110/2)px
+.archive__content
+  position absolute
+  top 50%
+  left 0
+  width 100%
+  margin-top 150+(110/2)px
