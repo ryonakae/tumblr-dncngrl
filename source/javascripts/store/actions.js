@@ -64,5 +64,9 @@ export default {
 
   setEntryImage: ({ dispatch }, url, width, height, offset) => {
     dispatch('SET_ENTRY_IMAGE', url, width, height, offset);
+  },
+
+  clearEntryImage: ({ dispatch }) => {
+    dispatch('CLEAR_ENTRY_IMAGE');
   }
 };

@@ -12,7 +12,18 @@ export default {
   route: {
     activate: function(transition) {
       console.log('index activate');
-      transition.next();
+
+      // single -> indexに遷移するとき
+      if (transition.from.name === 'post') {
+        $('.cloneImage').removeClass('cloneImage--zoomIn');
+        $(this.eyecatch).find('.eyecatch__image').removeClass('eyecatch__image--blur').removeClass('eyecatch__image--hidden');
+        setTimeout(() => {
+          transition.next();
+        }, 1000);
+      } else {
+        // このページに遷移
+        transition.next();
+      }
     },
     deactivate: function(transition) {
       console.log('index deactivate');

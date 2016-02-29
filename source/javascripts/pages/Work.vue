@@ -9,7 +9,6 @@ div.archive
 
 <script>
 import store from '../store/';
-import { vueRouter } from '../main.js';
 import Entry from '../components/Entry.vue';
 
 window.jQuery = window.$ = require('jquery');
@@ -25,6 +24,7 @@ export default {
 
       // inアニメーション
       $(this.eyecatch).find('.eyecatch__image').addClass('eyecatch__image--blur');
+      $(this.eyecatch).find('.eyecatch__image').removeClass('eyecatch__image--hidden');
 
       // single -> workに遷移するとき
       if (transition.from.name === 'post') {
@@ -39,14 +39,18 @@ export default {
     },
     deactivate: function(transition) {
       console.log('work deactivate');
-      console.log(transition);
 
       // work -> singleへ遷移するとき
       if (transition.to.name === 'post') {
-        transition.abort();
+        $('body').addClass('disableScroll');
+        $(this.eyecatch).find('.eyecatch__image').addClass('eyecatch__image--hidden');
+
         setTimeout(() => {
           $('.cloneImage').addClass('cloneImage--zoomIn');
         }, 1000);
+        setTimeout(() => {
+          transition.next();
+        }, 2000);
       }
 
       // work -> indexへ遷移するとき
@@ -59,8 +63,6 @@ export default {
         setTimeout(() => {
           transition.next();
         }, 600);
-      } else {
-        transition.next();
       }
     }
   },
