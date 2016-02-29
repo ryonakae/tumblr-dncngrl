@@ -3,12 +3,12 @@ div.archive
   h2.archive__title
     span Work
   div.archive__content
-    ul.postList.postList--photo
-      li.postList__item(v-for='post in posts')
-        a.postList__itemLink(v-link='{ name: "post", params: { id: post.id, slug: post.slug }}')
-          img.postList__itemImage(v-bind:src='post.photos[0].original_size.url')
-          div.postList__itemClone(v-bind:style='{ backgroundImage: "url("+post.photos[0].original_size.url+")" }')
-          h3.postList__itemTitle {{ post.timestamp | moment }}
+    ul.entryList.entryList--photo
+      li.entryList__item(v-for='post in posts')
+        a.entryList__itemLink(v-link='{ name: "post", params: { id: post.id, slug: post.slug }}')
+          img.entryList__itemImage(v-bind:src='post.photos[0].original_size.url')
+          div.entryList__itemClone(v-bind:style='{ backgroundImage: "url("+post.photos[0].original_size.url+")" }')
+          h3.entryList__itemTitle {{ post.timestamp | moment }}
 </template>
 
 <script>
@@ -33,10 +33,10 @@ export default {
 
     store.actions.loadEntry('photo', 10)
       .then(() => {
-        $('.postList').imagesLoaded(() => {
+        $('.entryList').imagesLoaded(() => {
           console.log(this.posts);
 
-          $('.postList').addClass('postList--visible');
+          $('.entryList').addClass('entryList--visible');
         });
       });
   },

@@ -1,0 +1,47 @@
+.entryList
+  opacity 0
+  max-width 600px
+  list-style-type none
+  margin 0 auto
+  padding 0
+  transition: all 600ms easing('out-quint')
+  transform translateY(100px)
+
+  &--visible
+    opacity 1
+    transform translateY(0)
+
+  &__item
+    margin-top 100px
+    position relative
+    overflow hidden
+    background-color #000
+
+    &:first-child
+      margin-top 0
+
+    &Link
+      display block
+      width 100%
+      height 100%
+
+    &Image
+      width 100%
+      height auto
+      transition: all 600ms easing('in-out-quart')
+
+    &Title
+      position absolute
+      top 50%
+      left 50%
+      transform translate(-50%, -50%)
+      margin 0
+      line-height 1
+      font-size 70px
+
+    &:hover
+      .entryList__item
+        &Image
+          transform scale(1.05)
+          transform-origin 50% 50%
+          opacity 0.3

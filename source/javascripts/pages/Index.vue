@@ -1,9 +1,8 @@
 <template lang='jade'>
-div.top
-  h1.top__title
+div.index
+  h1.index__title
     span Dancing Girl.
-  //- div.top__button(v-on:click='transitionToWork') Work
-  a.top__button(v-link='{path:"/work"}') Work
+  a.index__button(v-link='{path:"/work"}') Work
 </template>
 
 <script>
