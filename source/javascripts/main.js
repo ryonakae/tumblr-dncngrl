@@ -1,6 +1,8 @@
 import Vue from 'vue';
 window.jQuery = window.$ = require('jquery');
-import store from './stores/';
+
+// import stores
+import store from './store/';
 
 // import vue-router
 import VueRouter from 'vue-router';
@@ -37,24 +39,17 @@ router.beforeEach((transition) => {
   console.log(transition);
   console.log('Go: ' + transition.to.path);
 
-  // work -> index
   if (transition.from.path === '/work' && transition.to.path === '/') {
     console.log('workからindexに遷移するぞ');
     store.actions.beroreLeaveArchive();
     store.actions.beforeInIndex();
-  }
-  // index -> work
-  else if (transition.from.path === '/' && transition.to.path === '/work') {
+  } else if (transition.from.path === '/' && transition.to.path === '/work') {
     console.log('indexからworkに遷移するぞ');
     store.actions.beforeLeaveIndex();
     store.actions.beroreInArchive();
-  }
-  // work -> single
-  else if (transition.from.path === '/work' && transition.to.name === 'post') {
+  } else if (transition.from.path === '/work' && transition.to.name === 'post') {
     console.log('workからsingleに遷移するぞ');
-  }
-  // single -> work
-  else if (transition.from.name === 'post' && transition.to.path === '/work') {
+  } else if (transition.from.name === 'post' && transition.to.path === '/work') {
     console.log('singleからworkに遷移するぞ');
   }
 

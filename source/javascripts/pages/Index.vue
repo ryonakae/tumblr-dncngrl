@@ -6,7 +6,7 @@ div.index
 </template>
 
 <script>
-import store from '../stores/';
+import store from '../store/';
 import { vueRouter } from '../main.js';
 window.jQuery = window.$ = require('jquery');
 

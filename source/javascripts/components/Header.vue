@@ -16,7 +16,7 @@ header.header
 </template>
 
 <script>
-import store from '../stores/';
+import store from '../store/';
 
 export default {
   methods: {

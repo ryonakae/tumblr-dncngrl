@@ -12,7 +12,7 @@ div.archive
 </template>
 
 <script>
-import store from '../stores/';
+import store from '../store/';
 import { vueRouter } from '../main.js';
 
 window.jQuery = window.$ = require('jquery');
@@ -24,7 +24,10 @@ const moment = require('moment');
 export default {
   computed: {
     posts() {
-      return store.state.posts_photo;
+      return store.state.posts;
+    },
+    pageNum() {
+      return store.state.page;
     }
   },
 

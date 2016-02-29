@@ -26,7 +26,7 @@
     "indent": [1, 2],
 
     "comma-style": [2, "last"],
-    "brace-style": [2, "1tbs", { "allowSingleLine": false }],
+    "brace-style": [2, "1tbs", { "allowSingleLine": true }],
     "consistent-this": [2, "DO NOT USE"],
 
     "object-curly-spacing": [2, "always"],

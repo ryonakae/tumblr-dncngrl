@@ -1,12 +1,7 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-Vue.use(Vuex);
-
 import { vueRouter } from '../main.js';
 
 window.jQuery = window.$ = require('jquery');
 const velocity = require('velocity-animate');
-
 const moment = require('moment');
 
 // tumblr api
@@ -16,19 +11,9 @@ const tumblr = {
   apiKey: config.apiKey
 };
 
-// state
-const state = {
-  count: 0,
-  posts_photo: [],
-  page_photo: 1,
-  posts_text: [],
-  page_text: 1
-};
-
-// actions
-const actions = {
-  increment: 'INCREMENT',
-  decrement: 'DECREMENT',
+export default {
+  incrementPage: 'INCREMENT_PAGE',
+  decrementPage: 'DECREMENT_PAGE',
 
   transitionToTop: () => {
     $('.eyecatch__image').removeClass('eyecatch__image--blur');
@@ -73,7 +58,7 @@ const actions = {
         timeout: 10000,
         success: (res) => {
           // 関数実行のたびに配列を空にする
-          state.posts_photo = [];
+          dispatch('CLEAR_POSTDATA');
           let newData = res.response.posts;
 
           // データを日付順にソート
@@ -82,8 +67,11 @@ const actions = {
           });
 
           // stateにデータ入れる
-          state.posts_photo = newData;
-          // console.log(state.posts_photo);
+          dispatch('GET_POSTDATA', newData);
+
+          // ページ数増やす
+          dispatch('INCREMENT_PAGE');
+
           resolve();
         }
       });
@@ -99,11 +87,11 @@ const actions = {
     $('.eyecatch__image').removeClass('eyecatch__image--blur');
   },
   beforeLeaveIndex: () => {
-    $('.top__title').removeClass('top__title--active');
+    $('.index__title').removeClass('index__title--active');
   },
   afterInIndex: () => {
     setTimeout(() => {
-      $('.top__title').addClass('top__title--active');
+      $('.index__title').addClass('index__title--active');
     }, 100);
   },
 
@@ -112,7 +100,7 @@ const actions = {
   },
   beroreLeaveArchive: () => {
     $('.archive__title').removeClass('archive__title--active');
-    $('.postList').removeClass('postList--visible');
+    $('.entryList').removeClass('entryList--visible');
   },
   afterInArchive: () => {
     setTimeout(() => {
@@ -120,20 +108,3 @@ const actions = {
     }, 100);
   }
 };
-
-// mutations
-const mutations = {
-  INCREMENT(state) {
-    state.count++;
-  },
-  DECREMENT(state) {
-    state.count--;
-  }
-};
-
-// vuex initialize
-export default new Vuex.Store({
-  state,
-  actions,
-  mutations
-});
