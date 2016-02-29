@@ -1,7 +1,7 @@
 <template lang='jade'>
-.single
-  .single__photo
-    img(v-for='photo in posts[0].photos', v-bind.src='photo.original_size.url')
+.single(v-el:single)
+  .single__photo {{{post.caption}}}
+    //- img(v-for='photo in post.photos', v-bind.src='photo.original_size.url')
 </template>
 
 <script>
@@ -37,14 +37,14 @@ export default {
   ready() {
     store.actions.loadEntry(null, null, this.id, true, true)
       .then(() => {
-        $('.single').imagesLoaded(() => {
+        $(this.$els.single).imagesLoaded(() => {
           console.log(this.posts);
-          this.$set('post', this.posts[0]);
+          this.post = this.posts[0];
           console.log(this.post);
 
           this.clearEntryImage();
           $('.cloneImage').removeClass('is--zoomIn');
-          $('body').removeClass('disableScroll');
+          $('body').removeClass('is--disableScroll');
         });
       });
   },
