@@ -45,6 +45,6 @@ export default {
     state.entryImage.width = 0;
     state.entryImage.height = 0;
     state.entryImage.offset = {};
-    console.log(state.entryImage);
+    console.log('cleared state.entryImage');
   }
 };

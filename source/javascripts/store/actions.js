@@ -15,7 +15,7 @@ export default {
   incrementPage: 'INCREMENT_PAGE',
   decrementPage: 'DECREMENT_PAGE',
 
-  loadEntry: ({ dispatch }, postType, limit) => {
+  loadEntry: ({ dispatch }, postType, limit, id, reblogInfo, notesInfo) => {
     return new Promise((resolve, reject) => {
       $.ajax({
         type: 'GET',
@@ -24,12 +24,12 @@ export default {
           api_key: tumblr.apiKey,
           limit: limit,
           // offset: self.state.page * limit - limit,
-          reblog_info: false,
-          notes_info: false,
+          id: id,
+          reblog_info: reblogInfo,
+          notes_info: notesInfo,
           format: 'html',
           type: postType
         },
-        type: 'photo',
         dataType: 'jsonp',
         timeout: 10000,
         success: (res) => {

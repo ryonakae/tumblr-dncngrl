@@ -93,7 +93,7 @@ export default {
       $(this.$els.title).addClass('is--active');
     }, 100);
 
-    store.actions.loadEntry('photo', 10)
+    store.actions.loadEntry('photo', 10, null, false, false)
       .then(() => {
         $('.entryList').imagesLoaded(() => {
           console.log(this.posts);
