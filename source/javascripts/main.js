@@ -33,51 +33,6 @@ router.map({
   }
 });
 
-// before routing
-let isFirst = true;
-router.beforeEach((transition) => {
-  console.log(transition);
-  console.log('Go: ' + transition.to.path);
-
-  if (transition.from.path === '/work' && transition.to.path === '/') {
-    console.log('workからindexに遷移するぞ');
-    store.actions.beroreLeaveArchive();
-    store.actions.beforeInIndex();
-  } else if (transition.to.path === '/work') {
-    console.log('workに遷移するぞ');
-    store.actions.beroreInArchive();
-  } else if (transition.from.path === '/' && transition.to.path === '/work') {
-    console.log('indexからworkに遷移するぞ');
-    store.actions.beforeLeaveIndex();
-    store.actions.beroreInArchive();
-  } else if (transition.from.path === '/work' && transition.to.name === 'post') {
-    console.log('workからsingleに遷移するぞ');
-  } else if (transition.from.name === 'post' && transition.to.path === '/work') {
-    console.log('singleからworkに遷移するぞ');
-  }
-
-  if (isFirst) {
-    console.log('initial transition');
-    transition.next();
-    isFirst = false;
-  } else {
-    setTimeout(() => {
-      transition.next();
-    }, 1000);
-  }
-});
-
-// after routing
-router.afterEach((transition) => {
-  console.log('Successfully navigated to: ' + transition.to.path);
-
-  if (transition.to.path === '/') {
-    store.actions.afterInIndex();
-  } else if (transition.to.path === '/work') {
-    store.actions.afterInArchive();
-  }
-});
-
 // import app
 import Dncngrl from './Dncngrl.vue';
 const App = Vue.extend(Dncngrl);

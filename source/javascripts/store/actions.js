@@ -15,32 +15,8 @@ export default {
   incrementPage: 'INCREMENT_PAGE',
   decrementPage: 'DECREMENT_PAGE',
 
-  transitionToTop: () => {
-    $('.eyecatch__image').removeClass('eyecatch__image--blur');
-
-    setTimeout(() => {
-      vueRouter.go({ path: '/' });
-    }, 1000);
-  },
-
-  transitionToAbout: () => {
-    setTimeout(() => {
-      vueRouter.go({ path: '/about' });
-    }, 1000);
-  },
-
-  transitionToWork: () => {
-    $('.eyecatch__image').addClass('eyecatch__image--blur');
-
-    setTimeout(() => {
-      vueRouter.go({ path: '/work' });
-    }, 1000);
-  },
-
   loadEntry: ({ dispatch }, postType, limit) => {
     return new Promise((resolve, reject) => {
-      console.log('loadEntry', postType, limit);
-
       $.ajax({
         type: 'GET',
         url: tumblr.url,
@@ -82,29 +58,7 @@ export default {
     return moment.unix(new Date(timestamp)).format('YYYY.M.D');
   },
 
-  beforeInIndex: () => {
-    $(window).scrollTop(0);
-    $('.eyecatch__image').removeClass('eyecatch__image--blur');
-  },
-  beforeLeaveIndex: () => {
-    $('.index__title').removeClass('index__title--active');
-  },
-  afterInIndex: () => {
-    setTimeout(() => {
-      $('.index__title').addClass('index__title--active');
-    }, 100);
-  },
-
-  beroreInArchive: () => {
-    $('.eyecatch__image').addClass('eyecatch__image--blur');
-  },
-  beroreLeaveArchive: () => {
-    $('.archive__title').removeClass('archive__title--active');
-    $('.entryList').removeClass('entryList--visible');
-  },
-  afterInArchive: () => {
-    setTimeout(() => {
-      $('.archive__title').addClass('archive__title--active');
-    }, 100);
+  setEyecatch: ({ dispatch }, vm) => {
+    dispatch('SET_EYECATCH', vm);
   }
 };

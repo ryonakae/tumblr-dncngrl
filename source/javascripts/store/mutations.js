@@ -17,5 +17,9 @@ export default {
   // ページ数を1つ減らす
   DECREMENT_PAGE(state) {
     state.count--;
+  },
+
+  SET_EYECATCH(state, vm) {
+    state.eyecatch = vm.$els.eyecatch;
   }
 };

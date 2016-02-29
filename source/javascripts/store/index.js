@@ -9,7 +9,8 @@ Vue.use(Vuex);
 const state = {
   count: 0,
   posts: [],
-  page: 0
+  page: 0,
+  eyecatch: {}
 };
 
 // vuex initialize

@@ -1,9 +1,9 @@
 <template lang='jade'>
 div.archive
-  h2.archive__title
+  h2.archive__title(v-el:title)
     span Work
   div.archive__content
-    ul.entryList.entryList--photo
+    ul.entryList.entryList--photo(v-el:entry-list)
       component-entry(v-for='post in posts', track-by='id', :post='post')
 </template>
 
@@ -18,6 +18,29 @@ const imagesLoaded = require('imagesloaded');
 imagesLoaded.makeJQueryPlugin($);
 
 export default {
+  // arrow function使うとthisが取れない
+  route: {
+    activate: function(transition) {
+      console.log('work activate');
+      transition.next();
+    },
+    deactivate: function(transition) {
+      console.log('work deactivate');
+
+      // work -> indexへ遷移するとき
+      if (transition.to.path === '/') {
+        $(this.$els.title).removeClass('archive__title--active');
+        $(this.$els.entryList).removeClass('entryList--visible');
+        $(this.eyecatch).find('.eyecatch__image').removeClass('eyecatch__image--blur');
+        setTimeout(() => {
+          transition.next();
+        }, 600);
+      } else {
+        transition.next();
+      }
+    }
+  },
+
   components: {
     'component-entry': Entry
   },
@@ -28,26 +51,28 @@ export default {
     },
     pageNum() {
       return store.state.page;
+    },
+    eyecatch() {
+      return store.state.eyecatch;
     }
   },
 
   ready() {
     console.log('work ready');
 
+    // ページタイトルをフェードイン
+    setTimeout(() => {
+      $(this.$els.title).addClass('archive__title--active');
+    }, 10);
+
     store.actions.loadEntry('photo', 10)
       .then(() => {
         $('.entryList').imagesLoaded(() => {
           console.log(this.posts);
 
-          $('.entryList').addClass('entryList--visible');
+          $(this.$els.entryList).addClass('entryList--visible');
         });
       });
-  },
-
-  methods: {
-    photoFitWindow: function() {
-      console.log($(this.$els.post));
-    }
   },
 
   filters: {
