@@ -1,5 +1,5 @@
 <template lang='jade'>
-section.index
+section.page.js-page.index
   h1.index__title(v-el:title) Dancing Girl.
 
   a.index__button.button(v-el:button, v-link='{path:"/work"}')
@@ -20,8 +20,6 @@ export default {
 
       // ヘッダータイトル隠す
       $('.js-headerTitle').removeClass('is--visible');
-      // ナビ出す
-      $('.js-naviToggle').addClass('is--visible');
 
       // single -> indexに遷移するとき
       if (transition.from.name === 'post') {
@@ -67,6 +65,7 @@ export default {
     setTimeout(() => {
       $(this.$els.title).addClass('is--visible');
       $(this.$els.button).addClass('is--visible');
+      $('.js-naviToggle').addClass('is--visible');
     }, 10);
   },
 

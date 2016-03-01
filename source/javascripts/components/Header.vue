@@ -4,7 +4,7 @@ header.header
     a(v-link='{path:"/"}') Dancing Girl.
 
   div.header__navi.navi
-    .navi__toggle.js-naviToggle
+    .navi__toggle.js-naviToggle(v-on:click='naviToggle')
     ul.navi__list
       li.navi__listItem
         a(v-link='{path:"/"}') Top
@@ -18,12 +18,15 @@ header.header
 
 <script>
 import store from '../store/';
+window.jQuery = window.$ = require('jquery');
 
 export default {
   methods: {
-    transitionToTop: store.actions.transitionToTop,
-    transitionToAbout: store.actions.transitionToAbout,
-    transitionToWork: store.actions.transitionToWork
+    naviToggle: () => {
+      $('.js-page').toggleClass('is--blur');
+      $('.js-eyecatchImage').toggleClass('is--blur');
+      $('body').toggleClass('is--naviActive');
+    }
   }
 };
 </script>

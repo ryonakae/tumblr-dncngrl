@@ -1,5 +1,5 @@
 <template lang='jade'>
-section.archive
+section.page.js-page.archive
   h1.archive__title(v-el:title) WORK
 
   .archive__content

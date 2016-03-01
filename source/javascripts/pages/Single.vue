@@ -1,5 +1,5 @@
 <template lang='jade'>
-section.single
+section.page.js-page.single
   article.entry.entry--photo(v-el:entry)
     .entry__photo
       img(v-for='photo in post.photos', v-bind:src='photo.original_size.url')
