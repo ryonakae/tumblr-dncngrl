@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja" prefix="og: http://ogp.me/ns#">
+<head>
+  @@if (env === 'development') { @@include('templateTag/development/meta.html') }
+  @@if (env === 'production') { @@include('templateTag/production/meta.html') }
+
+  @@if (env === 'development') { <link rel="stylesheet" href="assets/stylesheets/style.css"> }
+  @@if (env === 'production') { <link rel="stylesheet" href="http://file.brdr.jp/dncngrl/stylesheets/style.css"> }
+
+  @@if (env === 'production') { <meta name="google-site-verification", content="dOK4gS5k1bnPJhqErl07IiZ13uhj3XPmnm02ruORFZg"> }
+</head>
+@@if (env === 'development') { <body data-eyecatch="/assets/images/eyecatch.jpg"> }
+@@if (env === 'production') { <body data-eyecatch="{HeaderImage}"> }
+  <div id="app">
+    @@if (env === 'production') { @@include('templateTag/production/template.html') }
+  </div>
+
+  @@if (env === 'development') { <script src="javascripts/bundle.js"></script> }
+  @@if (env === 'production') { <script src="http://file.brdr.jp/dncngrl/javascripts/bundle.js"></script> }
+</body>
+</html>
