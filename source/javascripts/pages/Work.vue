@@ -107,12 +107,6 @@ export default {
           $(this.$els.entryList).addClass('is--visible');
         });
       });
-  },
-
-  filters: {
-    moment: (timestamp) => {
-      return store.actions.formatDate(timestamp);
-    }
   }
 };
 </script>

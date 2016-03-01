@@ -1,8 +1,8 @@
 import Vue from 'vue';
 window.jQuery = window.$ = require('jquery');
 
-// import stores
-import store from './store/';
+// debug mode
+Vue.config.debug = true;
 
 // import vue-router
 import VueRouter from 'vue-router';
