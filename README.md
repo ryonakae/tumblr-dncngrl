@@ -24,9 +24,9 @@
 
 ### Create config.js
 
-    $ touch source/assets/javascripts/config.js
+    $ touch source/javascripts/config.js
 
-Then, edit `source/assets/javascripts/config.js`.
+Then, edit `source/javascripts/config.js`.
 
     module.exports = {
       tumblrUrl: 'http://api.tumblr.com/v2/blog/your-blog-domain/posts',
