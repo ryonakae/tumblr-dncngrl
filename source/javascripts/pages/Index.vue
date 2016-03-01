@@ -1,6 +1,7 @@
 <template lang='jade'>
-.index
+section.index
   h1.index__title(v-el:title) Dancing Girl.
+
   a.index__button.button(v-el:button, v-link='{path:"/work"}')
     span WORK
     .button__borderTop
@@ -19,8 +20,8 @@ export default {
 
       // ヘッダータイトル隠す
       $('.js-headerTitle').removeClass('is--visible');
-      // ナビ隠す
-      $('.js-naviToggle').removeClass('is--visible');
+      // ナビ出す
+      $('.js-naviToggle').addClass('is--visible');
 
       // single -> indexに遷移するとき
       if (transition.from.name === 'post') {

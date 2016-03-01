@@ -1,6 +1,6 @@
 <template lang='jade'>
-.archive
-  h2.archive__title(v-el:title) WORK
+section.archive
+  h1.archive__title(v-el:title) WORK
 
   .archive__content
     ul.entryList.entryList--photo(v-el:entry-list)

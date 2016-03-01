@@ -1,8 +1,8 @@
 <template lang='jade'>
-.entryItem.entryItem--photo(v-el:entry-item)
+article.entryItem.entryItem--photo(v-el:entry-item)
   a.link(v-link='{ name: "post", params: { id: post.id, slug: post.slug }}', v-on:click='setEntryImage')
     img.image(v-bind:src='post.photos[0].original_size.url')
-    h3.title {{ post.timestamp | moment }}
+    h1.title {{ post.timestamp | moment }}
 </template>
 
 <script>

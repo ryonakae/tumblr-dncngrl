@@ -1,14 +1,21 @@
 .cloneImage
+  background-color $bgColor_default
   position fixed
   visibility hidden
   // opacity 0
   pointer-events none
-  background-size cover
-  background-position 50% 0
   left 50%
   transform translateX(-50%)
   z-index 2
   transition: all 1000ms easing('in-out-quart')
+
+  .image
+    width 100%
+    height 100%
+    background-size cover
+    background-position 50% 0
+    background-repeat no-repeat
+    opacity 0.5
 
   &.is--zoomIn
     // opacity 1 !important

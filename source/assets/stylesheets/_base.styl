@@ -2,13 +2,18 @@
 @import '_config'
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700')
+font-face( 'ProximaNova', '../fonts/ProximaNova-Regular', normal, normal, formats: woff )
+font-face( 'ProximaNova', '../fonts/ProximaNova-Regular-Italic', normal, italic, formats: woff )
+font-face( 'ProximaNova', '../fonts/ProximaNova-Semibold', bold, normal, formats: woff )
+font-face( 'ProximaNova', '../fonts/ProximaNova-Semibold-Italic', bold, italic, formats: woff )
+font-face( 'NotoSansJapanese', '../fonts/NotoSansJP-Regular', normal, normal, formats: woff )
 
 normalize()
 box-sizing-reset()
 
 body
   padding 0 !important
-  font-family Montserrat, 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, Arial, NotoSansJapanese, 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, sans-serif
+  font-family $fontFamily_default
   font-size $fontSize_default
   line-height $lineHeight_default
   letter-spacing $letterSpacing_default
@@ -18,6 +23,14 @@ body
   text-align justify
   word-wrap break-word
   overflow-wrap break-word
+
+  & ::-moz-selection
+      background $bgColor_selection
+      color $textColor_default
+
+  & ::selection
+      background $bgColor_selection
+      color $textColor_default
 
   +retina-query(only screen, 2)
     -webkit-font-smoothing antialiased
@@ -40,6 +53,7 @@ a
 
 h1, h2, h3, h4, h5, h6
   line-height $lineHeight_title
+  font-family $fontFamily_title
 
   a
     color inherit

@@ -1,0 +1,131 @@
+.entry
+  position relative
+  z-index 3
+  opacity 0
+  visibility hidden
+  transition: all 600ms easing('in-out-quart')
+
+  &.is--visible
+    opacity 1
+    visibility visible
+
+.entry__photo
+  width 100%
+  line-height 0
+
+  img
+    line-height 0
+    width 100%
+    height auto
+
+.entry__textarea
+  background $bgColor_single
+  color $textColor_inverse
+  padding 60px 0 70px
+
+  a
+    color $textColor_inverse
+    text-decoration underline
+
+    &:hover
+      opacity 0.5
+
+.entry__textareaInner
+  max-width 640px
+  margin 0 auto
+
+.entry__title
+  margin 0
+  font-size $fontSize_entryTitle
+
+.entry__info
+  margin-top 10px
+  font-size $fontSize_info
+
+  .tags
+    margin-left 10px
+
+    &__item
+      &:before
+        content ','
+        margin-right 5px
+
+      &:first-child
+        &:before
+          content ''
+          margin-right 0
+          display none
+
+
+.entry__body
+  margin-top 50px
+
+  h1, h2, h3, h4, h5, h6
+    margin 1.3em 0 1em
+
+  h1
+    font-size $fontSize_entryBodyTitle
+
+  h2
+    font-size $fontSize_entryBodyTitle * 0.9
+
+  h3
+    font-size $fontSize_entryBodyTitle * 0.8
+
+  h4
+    font-size $fontSize_entryBodyTitle * 0.7
+
+  h5
+    font-size $fontSize_default
+
+  h6
+    font-size $fontSize_default
+    font-weight normal
+
+  p,ul,ol
+    margin 0 0 1.2em
+
+  ul
+    padding-left 1.5em
+
+  img
+    line-height 0
+    margin 0 0 1.2em
+    max-width 100%
+    height auto
+
+  hr
+    width 17%
+    height 2px
+    background-color $borderColor_entry
+    border none
+    margin 3.5em auto
+
+  blockquote
+    margin 2em 0 2.15em
+    border-left 5px solid $borderColor_entry
+    color $textColor_sub
+    padding-left 15px
+    font-style italic
+
+
+.entry__reblog
+  margin-top 50px
+
+
+.entry__back
+  background $bgColor_default
+
+  a
+    display block
+    width 100%
+    height 100%
+    text-decoration none
+    font-size $fontSize_entryTitle
+    font-family $fontFamily_title
+    text-align center
+    line-height 1
+    padding 40px 0
+
+    &:hover
+      letter-spacing 0.15em
