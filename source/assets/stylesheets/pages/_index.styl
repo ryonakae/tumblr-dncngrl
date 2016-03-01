@@ -20,4 +20,10 @@
   position absolute
   bottom 50px
   left 50%
-  transform translateX(-50%)
+  opacity 0
+  transform translate(-50%, 50px)
+  transition: all 600ms easing('in-out-quart')
+
+  &.is--visible
+    opacity 1
+    transform translate(-50%, 0)

@@ -1,6 +1,6 @@
 <template lang='jade'>
 .eyecatch(v-el:eyecatch)
-  .image
+  .image.js-eyecatchImage
 </template>
 
 <script>

@@ -93,6 +93,12 @@ export default {
       $(this.$els.title).addClass('is--active');
     }, 100);
 
+    // ヘッダータイトルとナビをフェードイン
+    setTimeout(() => {
+      $('.js-headerTitle').addClass('is--visible');
+      $('.js-naviToggle').addClass('is--visible');
+    }, 600);
+
     store.actions.loadEntry('photo', 10, null, false, false)
       .then(() => {
         $('.entryList').imagesLoaded(() => {

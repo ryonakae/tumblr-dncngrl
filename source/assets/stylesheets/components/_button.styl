@@ -1,0 +1,69 @@
+.button
+  font-size $fontSize_default
+  color $textColor_default
+  min-width 180px
+  padding 9px 50px
+  letter-spacing 0.3em
+  position relative
+  border 1px solid $borderColor_default
+  text-align center
+  background-color transparent
+
+  // hover
+  &:hover
+    text-decoration none
+
+
+// border
+.button__borderTop,
+.button__borderRight,
+.button__borderBottom,
+.button__borderLeft
+  position absolute
+  background-color $textColor_default
+  transition: all 300ms easing('in-out-quart')
+  opacity 0
+
+.button__borderTop
+  width 0
+  height 1px
+  top 0
+  left 0
+
+.button__borderRight
+  width 1px
+  height 0
+  bottom 0
+  right 0
+
+.button__borderBottom
+  width 0
+  height 1px
+  bottom 0
+  right 0
+
+.button__borderLeft
+  width 1px
+  height 0
+  top 0
+  left 0
+
+// hover
+.button:hover
+  .button__borderTop,
+  .button__borderRight,
+  .button__borderBottom,
+  .button__borderLeft
+    opacity 1
+
+  .button__borderTop
+    width 100%
+
+  .button__borderRight
+    height 100%
+
+  .button__borderBottom
+    width 100%
+
+  .button__borderLeft
+    height 100%

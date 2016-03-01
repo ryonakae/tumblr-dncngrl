@@ -1,7 +1,12 @@
 <template lang='jade'>
 .index
   h1.index__title(v-el:title) Dancing Girl.
-  a.index__button(v-link='{path:"/work"}') Work
+  a.index__button.button(v-el:button, v-link='{path:"/work"}')
+    span WORK
+    .button__borderTop
+    .button__borderRight
+    .button__borderBottom
+    .button__borderLeft
 </template>
 
 <script>
@@ -12,12 +17,15 @@ export default {
     activate: function(transition) {
       console.log('index activate');
 
+      // ヘッダータイトル隠す
+      $('.js-headerTitle').removeClass('is--visible');
+      // ナビ隠す
+      $('.js-naviToggle').removeClass('is--visible');
+
       // single -> indexに遷移するとき
       if (transition.from.name === 'post') {
         $('.cloneImage').removeClass('is--zoomIn');
-        $(this.eyecatch).find('.image')
-          .removeClass('is--blur')
-          .removeClass('is--hidden');
+        $(this.eyecatch).find('.image').removeClass('is--blur').removeClass('is--hidden');
         setTimeout(() => {
           transition.next();
         }, 1000);
@@ -28,6 +36,9 @@ export default {
     },
     deactivate: function(transition) {
       console.log('index deactivate');
+
+      // ボタン隠す
+      $(this.$els.button).removeClass('is--visible');
 
       // index -> workへ遷移するとき
       if (transition.to.path === '/work') {
@@ -54,6 +65,7 @@ export default {
     // サイトタイトルをフェードイン
     setTimeout(() => {
       $(this.$els.title).addClass('is--visible');
+      $(this.$els.button).addClass('is--visible');
     }, 10);
   },
 

@@ -1,5 +1,27 @@
-.header
+.header__title
+  margin 0
   position fixed
-  top 0
-  left 0
   z-index 10
+  top 40px
+  left 40px
+  opacity 0
+  transform translateX(-50px)
+  transition: all 600ms easing('in-out-quart')
+
+  &.is--visible
+    opacity 1
+    transform translateX(0)
+
+  a
+    display block
+    hide-text()
+    background url('/assets/images/header_logo.png') no-repeat
+    width (380/2)px
+    height (92/2)px
+    background-size (380/2)px (92/2)px
+
+.header__navi
+  position fixed
+  z-index 10
+  right 40px
+  top 54px

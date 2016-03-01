@@ -1,0 +1,34 @@
+.navi__toggle
+  width 36px
+  height 20px
+  position relative
+  cursor pointer
+
+  &:before,
+  &:after
+    content ''
+    position absolute
+    width 100%
+    height 3px
+    background-color $textColor_default
+    left 0
+    opacity 0
+    transition: all 600ms easing('in-out-quart')
+
+  &:before
+    top 0
+    transform translateX(20px)
+
+  &:after
+    bottom 0
+    transform translateX(10px)
+
+  &.is--visible
+    &:before,
+    &:after
+      opacity 1
+      transform translateX(0)
+
+
+.navi__list
+  display none

@@ -1,18 +1,19 @@
 <template lang='jade'>
 header.header
-  h1.header__logo
-    //- span(v-on:click='transitionToTop') Dancing Girl.
+  h1.header__title.js-headerTitle
     a(v-link='{path:"/"}') Dancing Girl.
 
-  ul.header__navi
-    li.header__naviList
-      span(v-on:click='transitionToTop') Top
-    li.header__naviList
-      span(v-on:click='transitionToAbout') About
-    li.header__naviList
-      a(v-link='{path:"/work"}') Work
-    li.header__naviList
-      a(href='/archive') Archive
+  div.header__navi.navi
+    .navi__toggle.js-naviToggle
+    ul.navi__list
+      li.navi__listItem
+        a(v-link='{path:"/"}') Top
+      li.navi__listItem
+        a(v-link='{path:"/about"}') About
+      li.navi__listItem
+        a(v-link='{path:"/work"}') Work
+      li.navi__listItem
+        a(href='/archive') Archive
 </template>
 
 <script>
