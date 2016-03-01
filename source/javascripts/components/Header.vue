@@ -5,7 +5,7 @@ header.header
 
   div.header__navi.navi
     .navi__toggle.js-naviToggle(v-on:click='naviToggle')
-    ul.navi__list
+    ul.navi__list.js-navi(v-el:navi)
       li.navi__listItem
         a(v-link='{path:"/"}') Top
       li.navi__listItem
@@ -23,9 +23,8 @@ window.jQuery = window.$ = require('jquery');
 export default {
   methods: {
     naviToggle: () => {
-      $('.js-page').toggleClass('is--blur');
-      $('.js-eyecatchImage').toggleClass('is--blur');
       $('body').toggleClass('is--naviActive');
+      $('.js-navi').toggleClass('is--visible');
     }
   }
 };

@@ -21,7 +21,7 @@
 .entry__textarea
   background $bgColor_single
   color $textColor_inverse
-  padding 60px 0 70px
+  padding 60px 0 65px
 
   a
     color $textColor_inverse
@@ -114,18 +114,14 @@
 
 
 .entry__back
-  background $bgColor_default
+  position fixed
+  top 58px
+  left 50%
+  transform translateX(-50%)
+  line-height 1
+
+  &:hover
+    letter-spacing 0.15em
 
   a
-    display block
-    width 100%
-    height 100%
     text-decoration none
-    font-size $fontSize_entryTitle
-    font-family $fontFamily_title
-    text-align center
-    line-height 1
-    padding 40px 0
-
-    &:hover
-      letter-spacing 0.15em
