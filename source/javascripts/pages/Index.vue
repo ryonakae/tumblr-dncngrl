@@ -61,12 +61,14 @@ export default {
   ready() {
     console.log('index ready');
 
-    // サイトタイトルをフェードイン
     setTimeout(() => {
       $(this.$els.title).addClass('is--visible');
+    }, 100);
+
+    setTimeout(() => {
       $(this.$els.button).addClass('is--visible');
       $('.js-naviToggle').addClass('is--visible');
-    }, 10);
+    }, 600);
   },
 
   methods: {

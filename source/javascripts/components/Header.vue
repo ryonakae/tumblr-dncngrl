@@ -25,6 +25,7 @@ export default {
     naviToggle: () => {
       $('body').toggleClass('is--naviActive');
       $('.js-navi').toggleClass('is--visible');
+      $('.js-naviToggle').toggleClass('is--visible');
     }
   }
 };
