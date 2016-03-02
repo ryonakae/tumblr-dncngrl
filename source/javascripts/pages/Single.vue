@@ -34,15 +34,24 @@ export default {
       this.$set('id', transition.to.params.id);
       this.$set('slug', transition.to.params.slug);
 
-      $('.js-eyecatchImage').addClass('is--blur').removeClass('is--hidden');
+      $('.js-eyecatchImage').addClass('is--blur').addClass('is--hidden');
 
       transition.next();
     },
     deactivate: function(transition) {
       $(this.$els.entry).removeClass('is--visible');
-      setTimeout(() => {
-        transition.next();
-      }, 600);
+
+      // single -> aboutへ遷移するとき
+      if (transition.to.path === '/about') {
+        $('.js-eyecatchImage').removeClass('is--blur').removeClass('is--hidden');
+        setTimeout(() => {
+          transition.next();
+        }, 1000);
+      } else {
+        setTimeout(() => {
+          transition.next();
+        }, 600);
+      }
     }
   },
 

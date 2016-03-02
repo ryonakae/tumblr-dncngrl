@@ -21,21 +21,25 @@ export default {
       console.log('about deactivate');
 
       // outアニメーション
-      $('.js-eyecatchImage').removeClass('is--shiftLeft');
-      $(this.$els.page).removeClass('is--visible');
+      setTimeout(() => {
+        $(this.$els.page).removeClass('is--visible');
+      }, 100);
+      setTimeout(() => {
+        $('.js-eyecatchImage').removeClass('is--shiftLeft');
+      }, 300);
 
       // about -> workへ遷移するとき
       if (transition.to.path === '/work') {
         setTimeout(() => {
           $('.js-eyecatchImage').addClass('is--blur');
-        }, 1000);
+        }, 1300);
         setTimeout(() => {
           transition.next();
-        }, 2000);
+        }, 2300);
       } else {
         setTimeout(() => {
           transition.next();
-        }, 1000);
+        }, 1300);
       }
     }
   },
