@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       articleData: {}
-    }
+    };
   },
 
   ready() {
@@ -27,7 +27,7 @@ export default {
     // ヘッダータイトルとナビをフェードイン
     setTimeout(() => {
       $('.js-headerTitle').addClass('is--visible');
-      $('.js-naviToggle').addClass('is--visible');
+      $('.js-naviOpen').addClass('is--visible');
     }, 600);
 
     // ajax

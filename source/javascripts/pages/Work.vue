@@ -102,7 +102,7 @@ export default {
     // ヘッダータイトルとナビをフェードイン
     setTimeout(() => {
       $('.js-headerTitle').addClass('is--visible');
-      $('.js-naviToggle').addClass('is--visible');
+      $('.js-naviOpen').addClass('is--visible');
     }, 600);
 
     store.actions.loadEntry('photo', 10, null, false, false)

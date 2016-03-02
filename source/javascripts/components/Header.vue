@@ -4,16 +4,21 @@ header.header
     a(v-link='{path:"/"}') Dancing Girl.
 
   div.header__navi.navi
-    .navi__toggle.js-naviToggle(v-on:click='naviToggle')
-    ul.navi__list.js-navi(v-el:navi)
-      li.navi__listItem
-        a(v-link='{path:"/"}') Top
-      li.navi__listItem
-        a(v-link='{path:"/about"}') About
-      li.navi__listItem
-        a(v-link='{path:"/work"}') Work
-      li.navi__listItem
-        a(href='/archive') Archive
+    .navi__toggle
+      .open.js-naviOpen(v-on:click='naviToggle')
+      .close.js-naviClose(v-on:click='naviToggle')
+        .inner
+
+    .navi__list.js-navi(v-el:navi)
+      ul
+        li
+          a(v-link='{path:"/"}') Top
+        li
+          a(v-link='{path:"/about"}') About
+        li
+          a(v-link='{path:"/work"}') Work
+        li
+          a(href='/archive') Archive
 </template>
 
 <script>
@@ -25,7 +30,8 @@ export default {
     naviToggle: () => {
       $('body').toggleClass('is--naviActive');
       $('.js-navi').toggleClass('is--visible');
-      $('.js-naviToggle').toggleClass('is--visible');
+      $('.js-naviOpen').toggleClass('is--visible');
+      $('.js-naviClose').toggleClass('is--visible');
     }
   }
 };

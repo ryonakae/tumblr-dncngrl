@@ -73,7 +73,7 @@ export default {
 
     setTimeout(() => {
       $(this.$els.button).addClass('is--visible');
-      $('.js-naviToggle').addClass('is--visible');
+      $('.js-naviOpen').addClass('is--visible');
     }, 600);
   },
 

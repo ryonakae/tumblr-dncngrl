@@ -58,7 +58,7 @@ export default {
         draw(ctx);
 
         if (this.grainStatus === 'start') {
-          console.log('grain started');
+          // console.log('grain started');
           requestAnimationFrame(loop);
         }
 
