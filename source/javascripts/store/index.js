@@ -21,7 +21,8 @@ const state = {
       top: 0,
       left: 0
     }
-  }
+  },
+  grainStatus: 'stop'
 };
 
 // vuex initialize

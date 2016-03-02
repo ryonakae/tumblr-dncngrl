@@ -61,6 +61,9 @@ export default {
   ready() {
     console.log('index ready');
 
+    // ノイズ開始
+    store.actions.changeGrainStatus('start');
+
     // ページタイトルを変更
     store.actions.changePageTitle('Top');
 

@@ -46,5 +46,11 @@ export default {
   // ページのタイトルを変更
   CHANGE_PAGE_TITLE(state, title) {
     state.pageTitle = title;
+  },
+
+  // ノイズのstatusを変更
+  CHANGE_GRAIN_STATUS(state, status) {
+    state.grainStatus = status;
+    console.log(state.grainStatus);
   }
 };

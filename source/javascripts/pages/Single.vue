@@ -59,13 +59,16 @@ export default {
       return store.state.posts;
     },
     reblogUrl() {
-      let id = this.post.id;
-      let reblogKey = this.post.reblog_key;
+      const id = this.post.id;
+      const reblogKey = this.post.reblog_key;
       return 'https://www.tumblr.com/reblog/' + id + '/' + reblogKey;
     }
   },
 
   ready() {
+    // ノイズ停止
+    store.actions.changeGrainStatus('stop');
+
     // ヘッダータイトルとナビをフェードイン
     setTimeout(() => {
       $('.js-headerTitle').addClass('is--visible');
@@ -79,8 +82,8 @@ export default {
 
         // ページタイトルを変更
         if (this.post.type === 'photo') {
-          let timestamp = this.post.timestamp;
-          let date = store.actions.formatDate(timestamp);
+          const timestamp = this.post.timestamp;
+          const date = store.actions.formatDate(timestamp);
           store.actions.changePageTitle(date);
         } else {
           store.actions.changePageTitle(this.post.type === 'text');
@@ -95,16 +98,12 @@ export default {
 
           // 記事フェードイン後
           setTimeout(() => {
-            this.clearEntryImage();
+            store.actions.clearEntryImage();
             $('.cloneImage').removeClass('is--zoomIn');
             $('body').removeClass('is--disableScroll');
           }, 700);
         });
       });
-  },
-
-  methods: {
-    clearEntryImage: store.actions.clearEntryImage
   },
 
   filters: {

@@ -88,6 +88,9 @@ export default {
   ready() {
     console.log('work ready');
 
+    // ノイズ停止
+    store.actions.changeGrainStatus('stop');
+
     // ページタイトルを変更
     store.actions.changePageTitle('Work');
 

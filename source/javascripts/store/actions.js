@@ -72,5 +72,9 @@ export default {
 
   changePageTitle: ({ dispatch }, title) => {
     dispatch('CHANGE_PAGE_TITLE', title);
+  },
+
+  changeGrainStatus: ({ dispatch }, status) => {
+    dispatch('CHANGE_GRAIN_STATUS', status);
   }
 };
