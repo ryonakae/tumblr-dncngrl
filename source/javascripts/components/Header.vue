@@ -12,11 +12,11 @@ header.header
     .navi__list.js-navi(v-el:navi)
       ul
         li
-          a(v-link='{path:"/"}') Top
+          a(v-link='{path:"/"}', v-on:click='naviClose') Top
         li
-          a(v-link='{path:"/about"}') About
+          a(v-link='{path:"/about"}', v-on:click='naviClose') About
         li
-          a(v-link='{path:"/work"}') Work
+          a(v-link='{path:"/work"}', v-on:click='naviClose') Work
         li
           a(href='/archive') Archive
 </template>
@@ -32,6 +32,12 @@ export default {
       $('.js-navi').toggleClass('is--visible');
       $('.js-naviOpen').toggleClass('is--visible');
       $('.js-naviClose').toggleClass('is--visible');
+    },
+
+    naviClose: () => {
+      $('body').removeClass('is--naviActive');
+      $('.js-navi').removeClass('is--visible');
+      $('.js-naviClose').removeClass('is--visible');
     }
   }
 };
