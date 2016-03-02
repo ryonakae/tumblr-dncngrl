@@ -23,7 +23,9 @@
   opacity 0
   transform translate(-50%, 50px)
   transition: all 600ms easing('in-out-quart')
+  filter blur(20px)
 
   &.is--visible
     opacity 1
     transform translate(-50%, 0)
+    filter blur(0px)

@@ -58,7 +58,7 @@ export default {
       // work -> indexへ遷移するとき
       if (transition.to.path === '/') {
         // outアニメーション
-        $(this.$els.title).removeClass('is--active');
+        $(this.$els.title).removeClass('is--visible');
         $(this.$els.entryList).removeClass('is--visible');
         $(this.eyecatch).find('.image').removeClass('is--blur');
         // アニメーション終了後に遷移
@@ -96,7 +96,7 @@ export default {
 
     // ページタイトルをフェードイン
     setTimeout(() => {
-      $(this.$els.title).addClass('is--active');
+      $(this.$els.title).addClass('is--visible');
     }, 100);
 
     // ヘッダータイトルとナビをフェードイン
