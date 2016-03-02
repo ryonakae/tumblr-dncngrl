@@ -61,6 +61,9 @@ export default {
   ready() {
     console.log('index ready');
 
+    // ページタイトルを変更
+    store.actions.changePageTitle('Top');
+
     setTimeout(() => {
       $(this.$els.title).addClass('is--visible');
     }, 100);

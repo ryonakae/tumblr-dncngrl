@@ -27,16 +27,11 @@ export default {
 
   // 記事の画像を取得してurlを取得
   SET_ENTRY_IMAGE(state, url, width, height, offset) {
-    return new Promise((resolve, reject) => {
-      state.entryImage.url = url;
-      state.entryImage.width = width;
-      state.entryImage.height = height;
-      state.entryImage.offset = offset;
-      console.log(state.entryImage);
-      setTimeout(() => {
-        resolve();
-      }, 2000);
-    });
+    state.entryImage.url = url;
+    state.entryImage.width = width;
+    state.entryImage.height = height;
+    state.entryImage.offset = offset;
+    console.log(state.entryImage);
   },
 
   // 記事の画像をクリア
@@ -46,5 +41,10 @@ export default {
     state.entryImage.height = 0;
     state.entryImage.offset = {};
     console.log('cleared state.entryImage');
+  },
+
+  // ページのタイトルを変更
+  CHANGE_PAGE_TITLE(state, title) {
+    state.pageTitle = title;
   }
 };

@@ -88,6 +88,9 @@ export default {
   ready() {
     console.log('work ready');
 
+    // ページタイトルを変更
+    store.actions.changePageTitle('Work');
+
     // ページタイトルをフェードイン
     setTimeout(() => {
       $(this.$els.title).addClass('is--active');

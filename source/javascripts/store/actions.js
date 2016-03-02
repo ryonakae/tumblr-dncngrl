@@ -1,7 +1,4 @@
-import { vueRouter } from '../main.js';
-
 window.jQuery = window.$ = require('jquery');
-const velocity = require('velocity-animate');
 const moment = require('moment');
 
 // tumblr api
@@ -63,10 +60,17 @@ export default {
   },
 
   setEntryImage: ({ dispatch }, url, width, height, offset) => {
-    dispatch('SET_ENTRY_IMAGE', url, width, height, offset);
+    return new Promise((resolve, reject) => {
+      dispatch('SET_ENTRY_IMAGE', url, width, height, offset);
+      resolve();
+    });
   },
 
   clearEntryImage: ({ dispatch }) => {
     dispatch('CLEAR_ENTRY_IMAGE');
+  },
+
+  changePageTitle: ({ dispatch }, title) => {
+    dispatch('CHANGE_PAGE_TITLE', title);
   }
 };

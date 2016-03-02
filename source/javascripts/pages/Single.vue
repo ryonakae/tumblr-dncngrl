@@ -77,6 +77,15 @@ export default {
         // storeから取得したpostsの最初のオブジェクトをdataのpostに入れる
         this.post = this.posts[0];
 
+        // ページタイトルを変更
+        if (this.post.type === 'photo') {
+          let timestamp = this.post.timestamp;
+          let date = store.actions.formatDate(timestamp);
+          store.actions.changePageTitle(date);
+        } else {
+          store.actions.changePageTitle(this.post.type === 'text');
+        }
+
         // 画像読み込み後
         $(this.$els.entry).imagesLoaded(() => {
           // 記事をフェードイン

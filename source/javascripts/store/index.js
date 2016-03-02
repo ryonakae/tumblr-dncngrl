@@ -7,6 +7,8 @@ Vue.use(Vuex);
 
 // state
 const state = {
+  pageTitle: '',
+  siteTitle: 'Dancing Girl.',
   count: 0,
   posts: [],
   page: 0,
