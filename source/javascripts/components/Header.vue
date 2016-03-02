@@ -18,6 +18,8 @@ header.header
         li
           a(v-link='{path:"/work"}', v-on:click='naviClose') Work
         li
+          a(v-link='{path:"/news"}', v-on:click='naviClose') News
+        li
           a(href='/archive') Archive
 </template>
 

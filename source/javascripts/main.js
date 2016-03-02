@@ -20,6 +20,7 @@ export const vueRouter = router;
 import Index from './pages/Index.vue';
 import About from './pages/About.vue';
 import Work from './pages/Work.vue';
+import News from './pages/News.vue';
 import Single from './pages/Single.vue';
 
 // vue-router mapping
@@ -27,6 +28,7 @@ router.map({
   '/': { component: Index },
   '/about': { component: About },
   '/work': { component: Work },
+  '/news': { component: News },
   '/post/:id/:slug': {
     name: 'post',
     component: Single

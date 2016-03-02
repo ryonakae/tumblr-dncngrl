@@ -1,8 +1,14 @@
 <template lang='jade'>
-article.entryItem.entryItem--photo(v-el:entry-item)
+//- photo
+article.entryItem.entryItem--photo(v-el:entry-item, v-if='post.type === "photo"')
   a.link(v-link='{ name: "post", params: { id: post.id, slug: post.slug }}', v-on:click='setEntryImage')
     img.image(v-bind:src='post.photos[0].original_size.url')
     h1.title {{ post.timestamp | moment }}
+
+//- news
+article.entryItem.entryItem--news(v-el:entry-item, v-if='post.type === "text"')
+  h1.title {{post.title}}
+  small.date {{ post.timestamp | moment }}
 </template>
 
 <script>
@@ -12,13 +18,18 @@ window.jQuery = window.$ = require('jquery');
 export default {
   props: ['post'],
 
-  data() {
-    return {
-      imageUrl: this.post.photos[0].original_size.url
-    };
-  },
+  // data() {
+  //   return {
+  //     imageUrl: this.post.photos[0].original_size.url
+  //   };
+  // },
 
   computed: {
+    imageUrl() {
+      if (this.post.type === 'photo') {
+        return this.post.photos[0].original_size.url;
+      }
+    },
     imageWidth() {
       return $(this.$els.entryItem).width();
     },

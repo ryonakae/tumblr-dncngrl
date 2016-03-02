@@ -13,7 +13,6 @@ import store from '../store/';
 import EntryItem from '../components/EntryItem.vue';
 
 window.jQuery = window.$ = require('jquery');
-const velocity = require('velocity-animate');
 const imagesLoaded = require('imagesloaded');
 imagesLoaded.makeJQueryPlugin($);
 
