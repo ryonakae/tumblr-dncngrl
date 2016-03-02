@@ -23,7 +23,7 @@ export default {
       // outアニメーション
       setTimeout(() => {
         $(this.$els.page).removeClass('is--visible');
-      }, 100);
+      }, 150);
       setTimeout(() => {
         $('.js-eyecatchImage').removeClass('is--shiftLeft');
       }, 300);
@@ -56,7 +56,7 @@ export default {
     // アイキャッチとコンテンツを移動
     setTimeout(() => {
       $(this.$els.page).addClass('is--visible');
-    }, 100);
+    }, 150);
     setTimeout(() => {
       $('.js-eyecatchImage').addClass('is--shiftLeft');
     }, 300);
