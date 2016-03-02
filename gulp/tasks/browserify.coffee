@@ -53,7 +53,13 @@ compile = (isProduction) ->
     # ESLint
     bundleLogger.beginLint()
     gulp
-      .src './' + path.source.javascripts + '**/*.{js,jsx,vue}'
+      .src(
+        [
+          './' + path.source.javascripts + '**/*.{js,jsx,vue}'
+          '!' + path.source.javascripts + 'lib/**/*'
+        ]
+        base: path.source.root
+      )
       .pipe plumber()
       .pipe eslint
         useEslintrc: true
