@@ -44,7 +44,7 @@ export default {
       // work -> singleへ遷移するとき
       if (transition.to.name === 'post') {
         $('body').addClass('is--disableScroll');
-        $(this.eyecatch).find('.image').addClass('is--hidden');
+        $('.js-eyecatchImage').addClass('is--hidden');
 
         setTimeout(() => {
           $('.cloneImage').addClass('is--zoomIn');
@@ -55,11 +55,12 @@ export default {
       }
 
       // work -> indexへ遷移するとき
-      if (transition.to.path === '/') {
+      // work -> aboutへ遷移するとき
+      if (transition.to.path === '/' || transition.to.path === '/about') {
         // outアニメーション
         $(this.$els.title).removeClass('is--visible');
         $(this.$els.entryList).removeClass('is--visible');
-        $(this.eyecatch).find('.image').removeClass('is--blur');
+        $('.js-eyecatchImage').removeClass('is--blur');
         // アニメーション終了後に遷移
         setTimeout(() => {
           transition.next();

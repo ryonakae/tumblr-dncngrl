@@ -15,22 +15,28 @@ export default {
     activate: function(transition) {
       console.log('about activate');
 
-      // inアニメーション
-      $('.js-eyecatchImage').addClass('is--shiftLeft');
-
-      setTimeout(() => {
-        transition.next();
-      }, 1000);
+      transition.next();
     },
     deactivate: function(transition) {
       console.log('about deactivate');
 
       // outアニメーション
       $('.js-eyecatchImage').removeClass('is--shiftLeft');
+      $(this.$els.page).removeClass('is--visible');
 
-      setTimeout(() => {
-        transition.next();
-      }, 1000);
+      // about -> workへ遷移するとき
+      if (transition.to.path === '/work') {
+        setTimeout(() => {
+          $('.js-eyecatchImage').addClass('is--blur');
+        }, 1000);
+        setTimeout(() => {
+          transition.next();
+        }, 2000);
+      } else {
+        setTimeout(() => {
+          transition.next();
+        }, 1000);
+      }
     }
   },
 
@@ -43,6 +49,14 @@ export default {
   ready() {
     console.log('about ready');
 
+    // アイキャッチとコンテンツを移動
+    setTimeout(() => {
+      $(this.$els.page).addClass('is--visible');
+    }, 100);
+    setTimeout(() => {
+      $('.js-eyecatchImage').addClass('is--shiftLeft');
+    }, 300);
+
     // ノイズ停止・隠す
     store.actions.changeGrainStatus('stop');
     $('.js-grain').addClass('is--hidden');
@@ -51,20 +65,17 @@ export default {
     store.actions.changePageTitle('About');
 
     // ヘッダータイトルとナビをフェードイン
-    // コンテンツも
     setTimeout(() => {
       $('.js-headerTitle').addClass('is--visible');
       $('.js-naviOpen').addClass('is--visible');
-      $(this.$els.page).addClass('is--visible');
     }, 600);
 
     // ページ内容取得してフェードイン
     this.getAboutContent()
       .then(() => {
-        $(this.$els.page).addClass('is--visible');
         setTimeout(() => {
           $(this.$els.entry).addClass('is--visible');
-        }, 1000);
+        }, 1200);
       });
   },
 

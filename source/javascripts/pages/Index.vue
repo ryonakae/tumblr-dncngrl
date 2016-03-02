@@ -24,7 +24,7 @@ export default {
       // single -> indexに遷移するとき
       if (transition.from.name === 'post') {
         $('.cloneImage').removeClass('is--zoomIn');
-        $(this.eyecatch).find('.image').removeClass('is--blur').removeClass('is--hidden');
+        $('.js-eyecatchImage').removeClass('is--blur').removeClass('is--hidden');
         setTimeout(() => {
           transition.next();
         }, 1000);
@@ -39,16 +39,16 @@ export default {
       // ボタン隠す
       $(this.$els.button).removeClass('is--visible');
 
+      $(this.$els.title).removeClass('is--visible');
+
       // index -> workへ遷移するとき
       if (transition.to.path === '/work') {
-        $(this.$els.title).removeClass('is--visible');
-        $(this.eyecatch).find('.image').addClass('is--blur');
-        setTimeout(() => {
-          transition.next();
-        }, 600);
-      } else {
-        transition.next();
+        $('.js-eyecatchImage').addClass('is--blur');
       }
+
+      setTimeout(() => {
+        transition.next();
+      }, 600);
     }
   },
 
