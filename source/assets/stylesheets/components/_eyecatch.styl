@@ -35,8 +35,17 @@
     &.is--hidden
       opacity 0
 
+    &.is--shiftLeft
+      transform translateX(-25%)
+      // filter blur(20px)
+
   .grain
     // background #fff
     position absolute
     opacity 0.2
     transition: all 1000ms easing('in-out-quart')
+
+    &.is--hidden
+      opacity 0
+      // display none
+      // visibility hidden

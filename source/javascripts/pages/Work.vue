@@ -87,8 +87,9 @@ export default {
   ready() {
     console.log('work ready');
 
-    // ノイズ停止
+    // ノイズ停止・隠す
     store.actions.changeGrainStatus('stop');
+    $('.js-grain').addClass('is--hidden');
 
     // ページタイトルを変更
     store.actions.changePageTitle('Work');

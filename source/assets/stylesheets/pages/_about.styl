@@ -1,0 +1,20 @@
+.about
+  position absolute
+  width 50%
+  min-height 100%
+  right 0
+  background-color $bgColor_single
+  padding 50px 60px
+  color $textColor_inverse
+  transition: all 1000ms easing('in-out-quart')
+  transform translateX(100%)
+
+  a
+    color $textColor_inverse
+    text-decoration underline
+
+    &:hover
+      opacity 0.5
+
+  &.is--visible
+    transform translateX(0)

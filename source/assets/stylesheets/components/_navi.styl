@@ -120,12 +120,19 @@
     text-align center
 
   li
-    margin 20px 0
+    margin-top 30px
     font-family $fontFamily_title
     font-size $fontSize_naviItem
+    font-weight bold
+    letter-spacing 0.2em
+    text-indent 0.2em
+
+    &:first-child
+      margin-top 0
 
     a
       text-decoration none
 
       &:hover
-        letter-spacing 0.25em
+        letter-spacing 0.5em
+        text-indent 0.5em

@@ -66,8 +66,9 @@ export default {
   },
 
   ready() {
-    // ノイズ停止
+    // ノイズ停止・隠す
     store.actions.changeGrainStatus('stop');
+    $('.js-grain').addClass('is--hidden');
 
     // ヘッダータイトルとナビをフェードイン
     setTimeout(() => {

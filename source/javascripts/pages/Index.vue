@@ -61,8 +61,9 @@ export default {
   ready() {
     console.log('index ready');
 
-    // ノイズ開始
+    // ノイズ開始・表示する
     store.actions.changeGrainStatus('start');
+    $('.js-grain').removeClass('is--hidden');
 
     // ページタイトルを変更
     store.actions.changePageTitle('Top');

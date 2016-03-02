@@ -12,15 +12,15 @@ header.header
     .navi__list.js-navi(v-el:navi)
       ul
         li
-          a(v-link='{path:"/"}', v-on:click='naviClose') Top
+          a(v-link='{path:"/"}', v-on:click='naviClose') TOP
         li
-          a(v-link='{path:"/about"}', v-on:click='naviClose') About
+          a(v-link='{path:"/about"}', v-on:click='naviClose') ABOUT
         li
-          a(v-link='{path:"/work"}', v-on:click='naviClose') Work
+          a(v-link='{path:"/work"}', v-on:click='naviClose') WORK
         li
-          a(v-link='{path:"/news"}', v-on:click='naviClose') News
+          a(v-link='{path:"/news"}', v-on:click='naviClose') NEWS
         li
-          a(href='/archive') Archive
+          a(href='/archive') ARCHIVE
 </template>
 
 <script>
@@ -34,6 +34,9 @@ export default {
       $('.js-navi').toggleClass('is--visible');
       $('.js-naviOpen').toggleClass('is--visible');
       $('.js-naviClose').toggleClass('is--visible');
+      if ($('.js-page').hasClass('index')) {
+        $('.js-grain').toggleClass('is--hidden');
+      }
     },
 
     naviClose: () => {
