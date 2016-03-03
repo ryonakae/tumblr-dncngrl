@@ -1,8 +1,8 @@
 <template lang='jade'>
 section.page.js-page.about(v-el:page)
-  div.entry(v-el:entry)
+  article.entry(v-el:entry)
     h1.entry__title About
-    div.entry__body {{{articleData}}}
+    .entry__body {{{articleData}}}
 </template>
 
 <script>

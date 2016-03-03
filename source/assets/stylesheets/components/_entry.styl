@@ -9,20 +9,6 @@
     opacity 1
     visibility visible
 
-.entry__photo
-  width 100%
-  line-height 0
-
-  img
-    line-height 0
-    width 100%
-    height auto
-
-.entry__textarea
-  background $bgColor_single
-  color $textColor_inverse
-  padding 60px 0 65px
-
   a
     color $textColor_inverse
     text-decoration underline
@@ -30,10 +16,35 @@
     &:hover
       opacity 0.5
 
-.entry__textareaInner
-  max-width 640px
-  margin 0 auto
+  &--photo
+    .entry__photo
+      width 100%
+      line-height 0
 
+      img
+        line-height 0
+        width 100%
+        height auto
+
+    .entry__textarea
+      background $bgColor_single
+      color $textColor_inverse
+      padding 60px 0 65px
+
+    .entry__textareaInner
+      max-width 640px
+      margin 0 auto
+
+  &--news
+    .entry__content
+      background $bgColor_single
+      color $textColor_inverse
+      max-width 640px
+      margin 130px auto
+      padding 50px 60px
+
+
+// photo, news, aboutで共通
 .entry__title
   margin 0
   font-size $fontSize_entryTitle
@@ -124,4 +135,5 @@
     letter-spacing 0.15em
 
   a
+    color $textColor_default
     text-decoration none

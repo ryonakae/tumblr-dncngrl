@@ -22,7 +22,15 @@ section.page.js-page.single
       a(v-link='{path:"/work"}') BACK TO WORK
 
   //- news
-  article.entry.entry--photo(v-el:entry, v-if='post.type === "text"') {{{post.body}}}
+  article.entry.entry--news(v-el:entry, v-if='post.type === "text"')
+    .entry__content
+      h1.entry__title {{post.title}}
+      .entry__body {{{post.body}}}
+      .entry__reblog
+        a(v-bind:href='reblogUrl', target='_blank') Reblog this article
+
+    .entry__back
+      a(v-link='{path:"/news"}') BACK TO NEWS
 </template>
 
 <script>
@@ -100,10 +108,10 @@ export default {
           const date = store.actions.formatDate(timestamp);
           store.actions.changePageTitle(date);
         } else {
-          store.actions.changePageTitle(this.post.type === 'text');
+          store.actions.changePageTitle(this.post.title);
         }
 
-        // 画像読み込み後
+        // 画像読み込み後にフェードイン
         $(this.$els.entry).imagesLoaded(() => {
           // 記事をフェードイン
           setTimeout(() => {
