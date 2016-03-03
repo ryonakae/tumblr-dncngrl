@@ -1,37 +1,79 @@
 .entryItem
-  position relative
-  overflow hidden
-  background-color #000
+  &--news
+    .link
+      border-top 1px solid $borderColor_default
+      display table
+      width 100%
+      height 100%
+      padding 60px
+      transition: all 600ms easing('out-quint')
 
-  &:first-child
-    margin-top 0
+    &:hover
+      .link
+        text-decoration none
+        background-color $bgColor_inverse
+        border-color $borderColor_newsHover
+        color $textColor_inverse
 
-  &:hover
-    .image
-      // transform scale(1.05)
-      transform-origin 50% 50%
-      opacity 0.5
+    .info,
+    .title
+      display table-cell
+      vertical-align top
 
-  .link
-    display block
-    width 100%
-    height 100%
-    line-height 0
+    .info
+      width 200px
+      font-family $fontFamily_title
+      padding-top 3px
 
-  .image
-    width 100%
-    height auto
-    transition: all 600ms easing('in-out-quart')
+      .date,
+      .notes
+        display block
+        $fontSize_info
+
+    .title
+      font-family $fontFamily_default
+      margin 0
+      font-size $fontSize_entryBodyTitle
+
+
+
+  &--photo
+    margin 0 auto 100px
+    max-width 600px
     position relative
-    z-index 1
+    overflow hidden
+    background-color #000
 
-  .title
-    position absolute
-    top 50%
-    left 50%
-    transform translate(-50%, -50%)
-    margin 0
-    line-height 1
-    font-size $fontSize_entryItemTitle
-    color $textColor_default
-    z-index 3
+    &:hover
+      .image
+        // transform scale(1.05)
+        transform-origin 50% 50%
+        opacity 0.5
+
+      .title
+        transform translate(-50%, -40%)
+
+    .link
+      display block
+      width 100%
+      height 100%
+      line-height 0
+
+    .image
+      width 100%
+      height auto
+      transition: all 600ms ease
+      position relative
+      z-index 1
+
+    .title
+      position absolute
+      top 50%
+      left 50%
+      transform translate(-50%, -50%)
+      margin 0
+      line-height 1
+      font-size $fontSize_entryItemTitle
+      color $textColor_default
+      z-index 3
+      transition: all 600ms easing('out-quint')

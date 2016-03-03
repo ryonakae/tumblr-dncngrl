@@ -11,7 +11,8 @@ const state = {
   siteTitle: 'Dancing Girl.',
   count: 0,
   posts: [],
-  page: 0,
+  pageNum: 0,
+  totalPosts: 0,
   eyecatch: {},
   entryImage: {
     url: '',

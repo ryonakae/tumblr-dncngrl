@@ -15,6 +15,67 @@ import EntryItem from '../components/EntryItem.vue';
 window.jQuery = window.$ = require('jquery');
 
 export default {
+  route: {
+    activate: function(transition) {
+      console.log('news activate');
+
+      // inアニメーション
+      $('.js-eyecatchImage').addClass('is--blur').removeClass('is--hidden');
+
+      // single -> newsに遷移するとき
+      if (transition.from.name === 'post') {
+        $('.cloneImage').removeClass('is--zoomIn');
+        setTimeout(() => {
+          transition.next();
+        }, 1000);
+      } else {
+        // このページに遷移
+        transition.next();
+      }
+    },
+    deactivate: function(transition) {
+      console.log('news deactivate');
+
+      // infiniteScrollを無効
+      $(window).off('.infiniteScroll');
+
+      // news -> single(news)へ遷移するとき
+      if (transition.to.name === 'post') {
+        $(this.$els.title).removeClass('is--visible');
+        $(this.$els.entryList).removeClass('is--visible');
+        $('.js-eyecatchImage').addClass('is--hidden');
+
+        setTimeout(() => {
+          transition.next();
+        }, 600);
+      }
+
+      // news -> indexへ遷移するとき
+      // news -> aboutへ遷移するとき
+      if (transition.to.path === '/' || transition.to.path === '/about') {
+        // outアニメーション
+        $(this.$els.title).removeClass('is--visible');
+        $(this.$els.entryList).removeClass('is--visible');
+        $('.js-eyecatchImage').removeClass('is--blur');
+        // アニメーション終了後に遷移
+        setTimeout(() => {
+          transition.next();
+        }, 600);
+      }
+
+      // news -> workへ遷移するとき
+      if (transition.to.path === '/work') {
+        // outアニメーション
+        $(this.$els.title).removeClass('is--visible');
+        $(this.$els.entryList).removeClass('is--visible');
+        // アニメーション終了後に遷移
+        setTimeout(() => {
+          transition.next();
+        }, 600);
+      }
+    }
+  },
+
   components: {
     'component-entryitem': EntryItem
   },
@@ -24,7 +85,7 @@ export default {
       return store.state.posts;
     },
     pageNum() {
-      return store.state.page;
+      return store.state.pageNum;
     },
     eyecatch() {
       return store.state.eyecatch;
@@ -52,11 +113,23 @@ export default {
       $('.js-naviOpen').addClass('is--visible');
     }, 600);
 
-    store.actions.loadEntry('text', 10, null, false, false)
+    // totalPostsとpageNumをリセット
+    this.resetPageNum();
+    this.resetTotalPosts();
+
+    store.actions.loadEntry('text', 5, null, false, true)
       .then(() => {
         console.log(this.posts);
         $(this.$els.entryList).addClass('is--visible');
+
+        // 無限スクロール
+        setTimeout(store.actions.infiniteScroll('text', 5, false, true), 600);
       });
+  },
+
+  methods: {
+    resetPageNum: store.actions.resetPageNum,
+    resetTotalPosts: store.actions.resetTotalPosts
   }
 };
 </script>

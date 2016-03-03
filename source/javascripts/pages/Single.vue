@@ -1,6 +1,7 @@
 <template lang='jade'>
 section.page.js-page.single
-  article.entry.entry--photo(v-el:entry)
+  //- photo
+  article.entry.entry--photo(v-el:entry, v-if='post.type === "photo"')
     .entry__photo
       img(v-for='photo in post.photos', v-bind:src='photo.original_size.url')
 
@@ -19,6 +20,9 @@ section.page.js-page.single
 
     .entry__back
       a(v-link='{path:"/work"}') BACK TO WORK
+
+  //- news
+  article.entry.entry--photo(v-el:entry, v-if='post.type === "text"') {{{post.body}}}
 </template>
 
 <script>

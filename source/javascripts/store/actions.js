@@ -1,3 +1,5 @@
+import store from '../store/';
+
 window.jQuery = window.$ = require('jquery');
 const moment = require('moment');
 
@@ -9,47 +11,14 @@ const tumblr = {
 };
 
 export default {
-  incrementPage: 'INCREMENT_PAGE',
-  decrementPage: 'DECREMENT_PAGE',
+  incrementPageNum: 'INCREMENT_PAGE_NUM',
+  decrementPageNum: 'DECREMENT_PAGE_NUM',
+  resetPageNum: 'RESET_PAGE_NUM',
 
-  loadEntry: ({ dispatch }, postType, limit, id, reblogInfo, notesInfo) => {
-    return new Promise((resolve, reject) => {
-      $.ajax({
-        type: 'GET',
-        url: tumblr.url,
-        data: {
-          api_key: tumblr.apiKey,
-          limit: limit,
-          // offset: self.state.page * limit - limit,
-          id: id,
-          reblog_info: reblogInfo,
-          notes_info: notesInfo,
-          format: 'html',
-          type: postType
-        },
-        dataType: 'jsonp',
-        timeout: 10000,
-        success: (res) => {
-          // 関数実行のたびに配列を空にする
-          dispatch('CLEAR_POSTDATA');
-          let newData = res.response.posts;
-
-          // データを日付順にソート
-          newData.sort(function(a, b) {
-            return ( a.date < b.date ? 1 : -1 );
-          });
-
-          // stateにデータ入れる
-          dispatch('GET_POSTDATA', newData);
-
-          // ページ数増やす
-          dispatch('INCREMENT_PAGE');
-
-          resolve();
-        }
-      });
-    });
+  setTotalPosts: ({ dispatch }, totalPosts) => {
+    dispatch('SET_TOTAL_POSTS', totalPosts);
   },
+  resetTotalPosts: 'RESET_TOTAL_POSTS',
 
   formatDate: ({ dispatch }, timestamp) => {
     return moment.unix(new Date(timestamp)).format('YYYY.M.D');
@@ -76,5 +45,82 @@ export default {
 
   changeGrainStatus: ({ dispatch }, status) => {
     dispatch('CHANGE_GRAIN_STATUS', status);
+  },
+
+  loadEntry: ({ dispatch }, postType, limit, id, reblogInfo, notesInfo) => {
+    return new Promise((resolve, reject) => {
+      // ページ数増やす
+      dispatch('INCREMENT_PAGE_NUM');
+
+      $.ajax({
+        type: 'GET',
+        url: tumblr.url,
+        data: {
+          api_key: tumblr.apiKey,
+          limit: limit * store.state.pageNum,
+          // offset: self.state.page * limit - limit,
+          id: id,
+          reblog_info: reblogInfo,
+          notes_info: notesInfo,
+          format: 'html',
+          type: postType
+        },
+        dataType: 'jsonp',
+        timeout: 10000,
+        success: (res) => {
+          // 関数実行のたびに配列を空にする
+          dispatch('CLEAR_POSTDATA');
+
+          let newData = res.response.posts;
+
+          // データを日付順にソート
+          newData.sort(function(a, b) {
+            return ( a.date < b.date ? 1 : -1 );
+          });
+
+          // stateにデータ入れる
+          dispatch('GET_POSTDATA', newData);
+
+          // totalPostsをセット
+          store.actions.setTotalPosts(res.response.total_posts);
+
+          resolve();
+        }
+      });
+    });
+  },
+
+  infiniteScroll: ({ dispatch }, postType, limit, reblogInfo, notesInfo) => {
+    let loadLock = false;
+
+    $(window).on('resize.infiniteScroll scroll.infiniteScroll mousewheel.infiniteScroll', () => {
+      let scrollTop = $(window).scrollTop();
+      let windowHeight = $(window).height();
+      let documentHeight = $(document).height();
+
+      // console.log('scroll bottom line:', scrollTop + windowHeight);
+      // console.log('document height:', documentHeight);
+
+      // 記事数がtotal_post未満で、
+      // スクロールが8割位になったら次のポストロード
+      if (store.state.posts.length < store.state.totalPosts && scrollTop + windowHeight > documentHeight * 0.8) {
+        // lockがtrueなら以下スキップ
+        if (loadLock) return;
+
+        // lockする
+        loadLock = true;
+
+        // 記事取得
+        store.actions.loadEntry(postType, limit, null, reblogInfo, notesInfo)
+          .then(() => {
+            console.log(store.state.posts);
+
+            // lock解除
+            setTimeout(() => {
+              loadLock = false;
+            }, 100);
+          });
+      }
+    });
   }
 };

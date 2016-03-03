@@ -10,13 +10,33 @@ export default {
   },
 
   // ページ数を1つ増やす
-  INCREMENT_PAGE(state) {
-    state.count++;
+  INCREMENT_PAGE_NUM(state) {
+    state.pageNum++;
+    console.log('pagenum', state.pageNum);
   },
 
   // ページ数を1つ減らす
-  DECREMENT_PAGE(state) {
-    state.count--;
+  DECREMENT_PAGE_NUM(state) {
+    state.pageNum--;
+    console.log('pagenum', state.pageNum);
+  },
+
+  // ページ数を0にリセット
+  RESET_PAGE_NUM(state) {
+    state.pageNum = 0;
+    console.log('pagenum', state.pageNum);
+  },
+
+  // 記事数をtotalPostsにセット
+  SET_TOTAL_POSTS(state, totalPosts) {
+    state.totalPosts = totalPosts;
+    console.log('total_posts', state.totalPosts);
+  },
+
+  // 記事数を0にリセット
+  RESET_TOTAL_POSTS(state) {
+    state.totalPosts = 0;
+    console.log('total_posts', state.totalPosts);
   },
 
   // アイキャッチのVMを取得

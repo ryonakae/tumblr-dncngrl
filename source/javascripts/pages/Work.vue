@@ -23,9 +23,7 @@ export default {
       console.log('work activate');
 
       // inアニメーション
-      $(this.eyecatch).find('.image')
-        .addClass('is--blur')
-        .removeClass('is--hidden');
+      $('.js-eyecatchImage').addClass('is--blur').removeClass('is--hidden');
 
       // single -> workに遷移するとき
       if (transition.from.name === 'post') {
@@ -41,7 +39,10 @@ export default {
     deactivate: function(transition) {
       console.log('work deactivate');
 
-      // work -> singleへ遷移するとき
+      // infiniteScrollを無効
+      $(window).off('.infiniteScroll');
+
+      // work -> single(photo)へ遷移するとき
       if (transition.to.name === 'post') {
         $('body').addClass('is--disableScroll');
         $('.js-eyecatchImage').addClass('is--hidden');
@@ -66,6 +67,17 @@ export default {
           transition.next();
         }, 600);
       }
+
+      // work -> newsへ遷移するとき
+      if (transition.to.path === '/news') {
+        // outアニメーション
+        $(this.$els.title).removeClass('is--visible');
+        $(this.$els.entryList).removeClass('is--visible');
+        // アニメーション終了後に遷移
+        setTimeout(() => {
+          transition.next();
+        }, 600);
+      }
     }
   },
 
@@ -78,10 +90,10 @@ export default {
       return store.state.posts;
     },
     pageNum() {
-      return store.state.page;
+      return store.state.pageNum;
     },
-    eyecatch() {
-      return store.state.eyecatch;
+    totalPosts() {
+      return store.state.totalPosts;
     }
   },
 
@@ -106,14 +118,27 @@ export default {
       $('.js-naviOpen').addClass('is--visible');
     }, 600);
 
-    store.actions.loadEntry('photo', 10, null, false, false)
+    // totalPostsとpageNumをリセット
+    this.resetPageNum();
+    this.resetTotalPosts();
+
+    // 記事取得・表示
+    store.actions.loadEntry('photo', 2, null, false, false)
       .then(() => {
         $('.entryList').imagesLoaded(() => {
           console.log(this.posts);
 
           $(this.$els.entryList).addClass('is--visible');
+
+          // 無限スクロール
+          setTimeout(store.actions.infiniteScroll('photo', 1, false, false), 600);
         });
       });
+  },
+
+  methods: {
+    resetPageNum: store.actions.resetPageNum,
+    resetTotalPosts: store.actions.resetTotalPosts
   }
 };
 </script>

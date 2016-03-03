@@ -7,8 +7,11 @@ article.entryItem.entryItem--photo(v-el:entry-item, v-if='post.type === "photo"'
 
 //- news
 article.entryItem.entryItem--news(v-el:entry-item, v-if='post.type === "text"')
-  h1.title {{post.title}}
-  small.date {{ post.timestamp | moment }}
+  a.link(v-link='{ name: "post", params: { id: post.id, slug: post.slug }}')
+    .info
+      small.date {{ post.timestamp | moment }}
+      small.notes {{ post.note_count }} Notes
+    h1.title {{post.title}}
 </template>
 
 <script>
