@@ -4,6 +4,7 @@ article.entryItem.entryItem--photo(v-el:entry-item, v-if='post.type === "photo"'
   a.link(v-link='{ name: "post", params: { id: post.id, slug: post.slug }}', v-on:click='setEntryImage')
     img.image(v-bind:src='post.photos[0].original_size.url')
     h1.title {{ post.timestamp | moment }}
+    div.notes {{ post.note_count }} Notes
 
 //- news
 article.entryItem.entryItem--news(v-el:entry-item, v-if='post.type === "text"')
