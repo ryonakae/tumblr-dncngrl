@@ -25,6 +25,12 @@ section.page.js-page.single
   article.entry.entry--news(v-el:entry, v-if='post.type === "text"')
     .entry__content
       h1.entry__title {{post.title}}
+
+      .entry__info
+        small.notes {{post.note_count}} Notes
+        small.tags
+          span.tags__item(v-for='tag in post.tags') {{tag}}
+
       .entry__body {{{post.body}}}
       .entry__reblog
         a(v-bind:href='reblogUrl', target='_blank') Reblog this article
@@ -38,6 +44,7 @@ import store from '../store/';
 window.jQuery = window.$ = require('jquery');
 const imagesLoaded = require('imagesloaded');
 imagesLoaded.makeJQueryPlugin($);
+require('../lib/twitter_widgets.js');
 
 export default {
   route: {
@@ -46,7 +53,7 @@ export default {
       this.$set('id', transition.to.params.id);
       this.$set('slug', transition.to.params.slug);
 
-      $('.js-eyecatchImage').addClass('is--blur').addClass('is--hidden');
+      $('.js-eyecatchImage').addClass('is--blur');
 
       transition.next();
     },
@@ -101,6 +108,8 @@ export default {
       .then(() => {
         // storeから取得したpostsの最初のオブジェクトをdataのpostに入れる
         this.post = this.posts[0];
+        console.log(this.posts);
+        console.log(this.post);
 
         // ページタイトルを変更
         if (this.post.type === 'photo') {
@@ -113,9 +122,15 @@ export default {
 
         // 画像読み込み後にフェードイン
         $(this.$els.entry).imagesLoaded(() => {
+          // Twitterの埋め込みツイートがあったら関数実行
+          if ($('body').find('.twitter-tweet')[0]) {
+            twttr.widgets.load(document.body);
+          }
+
           // 記事をフェードイン
           setTimeout(() => {
             $(this.$els.entry).addClass('is--visible');
+            console.log(this.post.title);
           }, 100);
 
           // 記事フェードイン後

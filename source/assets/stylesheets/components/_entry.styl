@@ -2,12 +2,12 @@
   position relative
   z-index 3
   opacity 0
-  visibility hidden
+  // visibility hidden
   transition: all 600ms easing('in-out-quart')
 
   &.is--visible
     opacity 1
-    visibility visible
+    // visibility visible
 
   a
     color $textColor_inverse
@@ -36,6 +36,10 @@
       margin 0 auto
 
   &--news
+    .entry__title
+      font-size $fontSize_entryNewsTitle
+      font-family $fontFamily_default
+
     .entry__content
       background $bgColor_single
       color $textColor_inverse
