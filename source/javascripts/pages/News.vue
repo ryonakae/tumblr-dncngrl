@@ -98,6 +98,12 @@ export default {
   ready() {
     // console.log('news ready');
 
+    // eyecatch
+    $('.js-eyecatchImage').addClass('is--noanimation');
+    setTimeout(() => {
+      $('.js-eyecatchImage').removeClass('is--noanimation');
+    }, 1000);
+
     // ノイズ停止・隠す
     store.actions.changeGrainStatus('stop');
     $('.js-grain').addClass('is--hidden');

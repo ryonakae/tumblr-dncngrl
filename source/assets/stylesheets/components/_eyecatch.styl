@@ -27,6 +27,9 @@
     background-size cover
     transition: all 1000ms easing('in-out-quart')
 
+    &.is--noanimation
+      transition-duration 0ms
+
     &.is--blur
       transform scale(0.8)
       transform-origin 50% 50%
