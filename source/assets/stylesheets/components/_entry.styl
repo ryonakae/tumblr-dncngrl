@@ -1,4 +1,5 @@
 .entry
+  color $textColor_inverse
   position relative
   z-index 3
   opacity 0
@@ -16,6 +17,9 @@
     &:hover
       opacity 0.5
 
+      +media-query($mq_tablet)
+        opacity 1
+
   &--photo
     .entry__photo
       width 100%
@@ -30,6 +34,9 @@
       background $bgColor_single
       color $textColor_inverse
       padding 60px 0 65px
+
+      +media-query($mq_tablet)
+        padding 40px 0 45px
 
     .entry__textareaInner
       max-width 640px
@@ -46,12 +53,20 @@
       max-width 640px
       margin 130px auto
       padding 55px 60px 60px
+      border-radius 6px
+
+      +media-query($mq_tablet)
+        margin 110px auto
+        padding 40px
 
 
 // photo, news, aboutで共通
 .entry__title
   margin 0
   font-size $fontSize_entryTitle
+
+  +media-query($mq_tablet)
+    font-size $fontSize_entryTitle * 0.9
 
 .entry__info
   margin-top 10px
@@ -123,9 +138,26 @@
     padding-left 15px
     font-style italic
 
+  +media-query($mq_tablet)
+    margin-top 35px
+
+    h1
+      font-size $fontSize_entryBodyTitle * 0.9
+
+    h2
+      font-size $fontSize_entryBodyTitle * 0.9 * 0.9
+
+    h3
+      font-size $fontSize_entryBodyTitle * 0.8 * 0.9
+
+    h4
+      font-size $fontSize_entryBodyTitle * 0.7 * 0.9
 
 .entry__reblog
   margin-top 50px
+
+  +media-query($mq_tablet)
+    margin-top 30px
 
 
 .entry__back
@@ -137,7 +169,15 @@
 
   &:hover
     letter-spacing 0.15em
+    text-indent 0.15em
 
   a
     color $textColor_default
     text-decoration none
+
+  +media-query($mq_tablet)
+    top 47px
+
+    &:hover
+      letter-spacing normal
+      text-indent 0

@@ -16,9 +16,14 @@
   &.is--visible
     opacity 1
 
+  +media-query($mq_tablet)
+    width 412px
+    height 100px
+    background-size 412px 100px
+
 .index__button
   position absolute
-  bottom 100px
+  bottom 80px
   left 50%
   opacity 0
   transform translate(-50%, 50px)
@@ -29,3 +34,6 @@
     opacity 1
     transform translate(-50%, 0)
     filter blur(0px)
+
+  +media-query($mq_tablet)
+    bottom 60px

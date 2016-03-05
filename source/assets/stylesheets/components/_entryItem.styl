@@ -15,6 +15,11 @@
         border-color $borderColor_newsHover
         color $textColor_inverse
 
+        +media-query($mq_tablet)
+          background-color transparent
+          border-color $borderColor_default
+          color $textColor_default
+
     .info,
     .title
       display table-cell
@@ -35,13 +40,26 @@
       margin 0
       font-size $fontSize_entryBodyTitle
 
+    +media-query($mq_tablet)
+      .link
+        padding 40px
+
+      .info
+        width 150px
+
+      .title
+        font-size $fontSize_entryBodyTitle * 0.9
+
 
   &--photo
-    margin 0 auto 100px
     max-width 600px
+    margin 0 auto
     position relative
     overflow hidden
     background-color #000
+
+    &:first-child
+      margin-top 0
 
     &:hover
       .image
@@ -70,28 +88,30 @@
       position relative
       z-index 1
 
-    .title
-      position absolute
-      top 50%
-      left 50%
-      transform translate(-50%, -50%)
-      margin 0
-      line-height 1
-      font-size $fontSize_entryItemTitle
-      color $textColor_default
-      z-index 3
-      transition: all 600ms easing('out-quint')
-
+    .title,
     .notes
       position absolute
       top 50%
       left 50%
       transform translate(-50%, -50%)
+      z-index 3
+      color $textColor_default
+      transition: all 600ms easing('out-quint')
+
+    .title
+      margin 0
+      line-height 1
+      font-size $fontSize_entryItemTitle
+
+    .notes
       font-size $fontSize_info
       font-family $fontFamily_title
-      color $textColor_default
-      z-index 3
-      transition: all 600ms easing('out-quint')
       transition-delay 100ms
       margin-top 60px
       opacity 0
+
+    +media-query($mq_tablet)
+      max-width 500px
+
+      .title
+        font-size $fontSize_entryItemTitle * 0.9

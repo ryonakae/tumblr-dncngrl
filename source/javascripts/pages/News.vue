@@ -1,6 +1,7 @@
 <template lang='jade'>
 section.page.js-page.archive
-  h1.archive__title(v-el:title) NEWS
+  h1.archive__title(v-el:title)
+    span NEWS
 
   .archive__content
     ul.entryList.entryList--news(v-el:entry-list)
@@ -105,26 +106,26 @@ export default {
     // ページタイトルをフェードイン
     setTimeout(() => {
       $(this.$els.title).addClass('is--visible');
-    }, 100);
+    }, 150);
 
-    // ヘッダータイトルとナビをフェードイン
     setTimeout(() => {
+      // ヘッダータイトルとナビをフェードイン
       $('.js-headerTitle').addClass('is--visible');
       $('.js-naviOpen').addClass('is--visible');
-    }, 600);
 
-    // totalPostsとpageNumをリセット
-    this.resetPageNum();
-    this.resetTotalPosts();
+      // totalPostsとpageNumをリセット
+      this.resetPageNum();
+      this.resetTotalPosts();
 
-    store.actions.loadEntry('text', 5, null, false, true)
-      .then(() => {
-        console.log(this.posts);
-        $(this.$els.entryList).addClass('is--visible');
+      store.actions.loadEntry('text', 5, null, false, true)
+        .then(() => {
+          console.log(this.posts);
+          $(this.$els.entryList).addClass('is--visible');
 
-        // 無限スクロール
-        setTimeout(store.actions.infiniteScroll('text', 5, false, true), 600);
-      });
+          // 無限スクロール
+          setTimeout(store.actions.infiniteScroll('text', 5, false, true), 600);
+        });
+    }, 150+600);
   },
 
   methods: {

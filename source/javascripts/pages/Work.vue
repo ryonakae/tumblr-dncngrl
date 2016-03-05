@@ -1,10 +1,11 @@
 <template lang='jade'>
 section.page.js-page.archive
-  h1.archive__title(v-el:title) WORK
+  h1.archive__title(v-el:title)
+    span WORK
 
   .archive__content
     ul.entryList.entryList--photo(v-el:entry-list)
-      li.entryList__item(v-for='post in posts', track-by='id')
+      li.entryList__item.entryList__item--photo(v-for='post in posts', track-by='id')
         component-entryitem(:post='post')
 </template>
 
@@ -110,30 +111,30 @@ export default {
     // ページタイトルをフェードイン
     setTimeout(() => {
       $(this.$els.title).addClass('is--visible');
-    }, 100);
+    }, 150);
 
-    // ヘッダータイトルとナビをフェードイン
     setTimeout(() => {
+      // ヘッダータイトルとナビをフェードイン
       $('.js-headerTitle').addClass('is--visible');
       $('.js-naviOpen').addClass('is--visible');
-    }, 600);
 
-    // totalPostsとpageNumをリセット
-    this.resetPageNum();
-    this.resetTotalPosts();
+      // totalPostsとpageNumをリセット
+      this.resetPageNum();
+      this.resetTotalPosts();
 
-    // 記事取得・表示
-    store.actions.loadEntry('photo', 2, null, false, false)
-      .then(() => {
-        $('.entryList').imagesLoaded(() => {
-          console.log(this.posts);
+      // 記事取得・表示
+      store.actions.loadEntry('photo', 2, null, false, false)
+        .then(() => {
+          $('.entryList').imagesLoaded(() => {
+            console.log(this.posts);
 
-          $(this.$els.entryList).addClass('is--visible');
+            $(this.$els.entryList).addClass('is--visible');
 
-          // 無限スクロール
-          setTimeout(store.actions.infiniteScroll('photo', 1, false, false), 600);
+            // 無限スクロール
+            setTimeout(store.actions.infiniteScroll('photo', 1, false, false), 600);
+          });
         });
-      });
+    }, 150+600);
   },
 
   methods: {

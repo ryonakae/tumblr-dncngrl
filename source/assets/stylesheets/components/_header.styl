@@ -26,8 +26,19 @@
     &:hover
       opacity 0.7
 
+      +media-query($mq_tablet)
+        opacity 1
+
+  +media-query($mq_tablet)
+    top 30px
+    left 30px
+
 .header__navi
   position fixed
   z-index 10
   right 40px
   top 54px
+
+  +media-query($mq_tablet)
+    right 30px
+    top 42px

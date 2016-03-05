@@ -1,8 +1,9 @@
 <template lang='jade'>
-section.page.js-page.about(v-el:page)
-  article.entry(v-el:entry)
-    h1.entry__title About
-    .entry__body {{{articleData}}}
+section.page.js-page.about
+  .about__content.js-aboutContent(v-el:content)
+    article.entry(v-el:entry)
+      h1.entry__title About
+      .entry__body {{{articleData}}}
 </template>
 
 <script>
@@ -22,7 +23,7 @@ export default {
 
       // outアニメーション
       setTimeout(() => {
-        $(this.$els.page).removeClass('is--visible');
+        $(this.$els.content).removeClass('is--visible');
       }, 150);
       setTimeout(() => {
         $('.js-eyecatchImage').removeClass('is--shiftLeft');
@@ -55,7 +56,7 @@ export default {
 
     // アイキャッチとコンテンツを移動
     setTimeout(() => {
-      $(this.$els.page).addClass('is--visible');
+      $(this.$els.content).addClass('is--visible');
     }, 150);
     setTimeout(() => {
       $('.js-eyecatchImage').addClass('is--shiftLeft');

@@ -1,29 +1,43 @@
 .archive__title
-  line-height 0
   margin 0
   position absolute
-  top 50%
-  left 0
   width 100%
-  text-align center
-  font-size 110px
-  opacity 0
-  transform scale(1.1) translateY(-50%)
-  transition: all 600ms easing('in-out-quart')
-  letter-spacing 0.2em
-  text-indent 0.2em
-  filter blur(20px)
+  height 100%
+  top 0
+  left 0
+  overflow hidden
+
+  span
+    display block
+    line-height 0
+    position absolute
+    top 50%
+    left 0
+    width 100%
+    text-align center
+    font-size $fontSize_archiveTitle
+    opacity 0
+    transform scale(1.15) translateY(-50%)
+    // transform translateY(-50%)
+    transition: all 600ms easing('in-out-quart')
+    letter-spacing 0.2em
+    text-indent 0.2em
+    filter blur(20px)
+
 
   &.is--visible
-    opacity 1
-    transform scale(1) translateY(-50%)
-    letter-spacing 0.06em
-    text-indent 0.06em
-    filter blur(0px)
+    span
+      opacity 1
+      transform scale(1) translateY(-50%)
+      // transform translateY(-50%)
+      letter-spacing 0.06em
+      text-indent 0.06em
+      filter blur(0px)
 
 .archive__content
-  position absolute
-  top 50%
+  position relative
+  top 50vh
   left 0
   width 100%
-  margin-top 150+(110/2)px
+  transform translateY(150+(110/2)px)
+  // margin-top 150+(110/2)px
