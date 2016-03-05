@@ -50,6 +50,17 @@
       .title
         font-size $fontSize_entryBodyTitle * 0.9
 
+    +media-query($mq_spLarge)
+      .link
+        padding 30px
+
+      .info
+        width 100px
+        padding-top 0
+
+      .title
+        font-size $fontSize_entryBodyTitle * 0.7
+
 
   &--photo
     max-width 600px
@@ -115,3 +126,9 @@
 
       .title
         font-size $fontSize_entryItemTitle * 0.9
+
+    +media-query($mq_spLarge)
+      max-width 320px
+
+      .title
+        font-size $fontSize_entryItemTitle * 0.7

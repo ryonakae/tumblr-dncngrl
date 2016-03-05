@@ -18,21 +18,22 @@
     font-size $fontSize_archiveTitle
     opacity 0
     transform scale(1.15) translateY(-50%)
-    // transform translateY(-50%)
     transition: all 600ms easing('in-out-quart')
     letter-spacing 0.2em
     text-indent 0.2em
     filter blur(20px)
 
-
   &.is--visible
     span
       opacity 1
       transform scale(1) translateY(-50%)
-      // transform translateY(-50%)
       letter-spacing 0.06em
       text-indent 0.06em
       filter blur(0px)
+
+  +media-query($mq_spLarge)
+    span
+      font-size $fontSize_archiveTitle * 0.7
 
 .archive__content
   position relative
@@ -40,4 +41,6 @@
   left 0
   width 100%
   transform translateY(150+(110/2)px)
-  // margin-top 150+(110/2)px
+
+  +media-query($mq_spLarge)
+    transform translateY(150+(110*0.7/2)px)

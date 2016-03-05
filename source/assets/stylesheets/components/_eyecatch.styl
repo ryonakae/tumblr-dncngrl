@@ -50,3 +50,13 @@
       opacity 0
       // display none
       // visibility hidden
+
+  +media-query($mq_tablet)
+    .image
+      &.is--shiftLeft
+        transform translateX(-30%)
+
+  +media-query($mq_spLarge)
+    .image
+      &.is--shiftLeft
+        transform translateX(-40%)

@@ -13,6 +13,12 @@
   &--photo
     padding-bottom 100px
 
+    +media-query($mq_tablet)
+      padding-bottom 85px
+
+    +media-query($mq_spLarge)
+      padding-bottom 60px
+
 
 .entryList__item
   &--photo
@@ -20,3 +26,9 @@
 
     &:last-child
       margin-bottom 0
+
+    +media-query($mq_tablet)
+      margin 0 auto 85px
+
+    +media-query($mq_spLarge)
+      margin 0 auto 60px
