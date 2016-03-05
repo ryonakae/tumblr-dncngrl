@@ -29,7 +29,7 @@ export default {
   },
 
   ready() {
-    console.log('dncngrl ready');
+    // console.log('dncngrl ready');
 
     this.$watch('pageTitle', () => {
       if (this.pageTitle === 'Top' || this.pageTitle === 'Index') {

@@ -58,12 +58,12 @@ export default {
         draw(ctx);
 
         if (this.grainStatus === 'start') {
-          // console.log('grain started');
+          // // console.log('grain started');
           requestAnimationFrame(loop);
         }
 
         if (this.grainStatus === 'stop') {
-          console.log('grain stopped');
+          // console.log('grain stopped');
           cancelAnimationFrame(loop);
         }
       };

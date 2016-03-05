@@ -49,7 +49,7 @@ require('../lib/twitter_widgets.js');
 export default {
   route: {
     activate: function(transition) {
-      console.log('single activate');
+      // console.log('single activate');
       this.$set('id', transition.to.params.id);
       this.$set('slug', transition.to.params.slug);
 
@@ -111,8 +111,8 @@ export default {
       .then(() => {
         // storeから取得したpostsの最初のオブジェクトをdataのpostに入れる
         this.post = this.posts[0];
-        console.log(this.posts);
-        console.log(this.post);
+        // console.log(this.posts);
+        // console.log(this.post);
 
         // ページタイトルを変更
         if (this.post.type === 'photo') {
@@ -133,7 +133,7 @@ export default {
           // 記事をフェードイン
           setTimeout(() => {
             $(this.$els.entry).addClass('is--visible');
-            console.log(this.post.title);
+            // console.log(this.post.title);
           }, 100);
 
           // 記事フェードイン後

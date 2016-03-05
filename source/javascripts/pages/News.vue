@@ -18,7 +18,7 @@ window.jQuery = window.$ = require('jquery');
 export default {
   route: {
     activate: function(transition) {
-      console.log('news activate');
+      // console.log('news activate');
 
       $(window).scrollTop(0);
 
@@ -37,7 +37,7 @@ export default {
       }
     },
     deactivate: function(transition) {
-      console.log('news deactivate');
+      // console.log('news deactivate');
 
       // infiniteScrollを無効
       $(window).off('.infiniteScroll');
@@ -96,7 +96,7 @@ export default {
   },
 
   ready() {
-    console.log('news ready');
+    // console.log('news ready');
 
     // ノイズ停止・隠す
     store.actions.changeGrainStatus('stop');
@@ -121,7 +121,7 @@ export default {
 
       store.actions.loadEntry('text', 4, null, false, true)
         .then(() => {
-          console.log(this.posts);
+          // console.log(this.posts);
           $(this.$els.entryList).addClass('is--visible');
 
           // 無限スクロール

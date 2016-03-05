@@ -16,7 +16,7 @@ import store from '../store/';
 export default {
   route: {
     activate: function(transition) {
-      console.log('index activate');
+      // console.log('index activate');
 
       // ヘッダータイトル隠す
       $('.js-headerTitle').removeClass('is--visible');
@@ -34,7 +34,7 @@ export default {
       }
     },
     deactivate: function(transition) {
-      console.log('index deactivate');
+      // console.log('index deactivate');
 
       // ボタン隠す
       $(this.$els.button).removeClass('is--visible');
@@ -59,7 +59,7 @@ export default {
   },
 
   ready() {
-    console.log('index ready');
+    // console.log('index ready');
 
     // ノイズ開始・表示する
     store.actions.changeGrainStatus('start');

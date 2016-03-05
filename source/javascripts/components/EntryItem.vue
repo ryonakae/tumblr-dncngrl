@@ -46,7 +46,7 @@ export default {
   },
 
   ready() {
-    // console.log(this.image);
+    // // console.log(this.image);
   },
 
   methods: {

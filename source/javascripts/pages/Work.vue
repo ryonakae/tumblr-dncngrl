@@ -21,7 +21,7 @@ export default {
   // arrow function使うとthisが取れない
   route: {
     activate: function(transition) {
-      console.log('work activate');
+      // console.log('work activate');
 
       $(window).scrollTop(0);
 
@@ -40,7 +40,7 @@ export default {
       }
     },
     deactivate: function(transition) {
-      console.log('work deactivate');
+      // console.log('work deactivate');
 
       // infiniteScrollを無効
       $(window).off('.infiniteScroll');
@@ -101,7 +101,7 @@ export default {
   },
 
   ready() {
-    console.log('work ready');
+    // console.log('work ready');
 
     // ノイズ停止・隠す
     store.actions.changeGrainStatus('stop');
@@ -128,7 +128,7 @@ export default {
       store.actions.loadEntry('photo', 4, null, false, false)
         .then(() => {
           $('.entryList').imagesLoaded(() => {
-            console.log(this.posts);
+            // console.log(this.posts);
 
             $(this.$els.entryList).addClass('is--visible');
 

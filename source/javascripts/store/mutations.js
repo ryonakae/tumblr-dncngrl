@@ -12,31 +12,31 @@ export default {
   // ページ数を1つ増やす
   INCREMENT_PAGE_NUM(state) {
     state.pageNum++;
-    console.log('pagenum', state.pageNum);
+    // console.log('pagenum', state.pageNum);
   },
 
   // ページ数を1つ減らす
   DECREMENT_PAGE_NUM(state) {
     state.pageNum--;
-    console.log('pagenum', state.pageNum);
+    // console.log('pagenum', state.pageNum);
   },
 
   // ページ数を0にリセット
   RESET_PAGE_NUM(state) {
     state.pageNum = 0;
-    console.log('pagenum', state.pageNum);
+    // console.log('pagenum', state.pageNum);
   },
 
   // 記事数をtotalPostsにセット
   SET_TOTAL_POSTS(state, totalPosts) {
     state.totalPosts = totalPosts;
-    console.log('total_posts', state.totalPosts);
+    // console.log('total_posts', state.totalPosts);
   },
 
   // 記事数を0にリセット
   RESET_TOTAL_POSTS(state) {
     state.totalPosts = 0;
-    console.log('total_posts', state.totalPosts);
+    // console.log('total_posts', state.totalPosts);
   },
 
   // アイキャッチのVMを取得
@@ -51,7 +51,7 @@ export default {
     state.entryImage.width = width;
     state.entryImage.height = height;
     state.entryImage.offset = offset;
-    console.log(state.entryImage);
+    // console.log(state.entryImage);
   },
 
   // 記事の画像をクリア
@@ -60,7 +60,7 @@ export default {
     state.entryImage.width = 0;
     state.entryImage.height = 0;
     state.entryImage.offset = {};
-    console.log('cleared state.entryImage');
+    // console.log('cleared state.entryImage');
   },
 
   // ページのタイトルを変更
@@ -71,6 +71,6 @@ export default {
   // ノイズのstatusを変更
   CHANGE_GRAIN_STATUS(state, status) {
     state.grainStatus = status;
-    console.log(state.grainStatus);
+    // console.log(state.grainStatus);
   }
 };
