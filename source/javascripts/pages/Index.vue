@@ -36,13 +36,13 @@ export default {
     deactivate: function(transition) {
       // console.log('index deactivate');
 
-      // ボタン隠す
+      // タイトルロゴとボタン隠す
       $(this.$els.button).removeClass('is--visible');
-
       $(this.$els.title).removeClass('is--visible');
 
       // index -> workへ遷移するとき
-      if (transition.to.path === '/work') {
+      // index -> newsへ遷移するとき
+      if (transition.to.path === '/work' || transition.to.path === '/news') {
         $('.js-eyecatchImage').addClass('is--blur');
       }
 

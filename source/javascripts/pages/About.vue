@@ -53,7 +53,8 @@ export default {
       }, 300);
 
       // about -> workへ遷移するとき
-      if (transition.to.path === '/work') {
+      // about -> newsへ遷移するとき
+      if (transition.to.path === '/work' || transition.to.path === '/news') {
         setTimeout(() => {
           $('.js-eyecatchImage').addClass('is--blur');
         }, 1300);
