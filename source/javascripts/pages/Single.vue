@@ -94,6 +94,9 @@ export default {
   },
 
   ready() {
+    // アイキャッチ隠す
+    $('.js-eyecatchImage').addClass('is--hidden');
+
     // ノイズ停止・隠す
     store.actions.changeGrainStatus('stop');
     $('.js-grain').addClass('is--hidden');

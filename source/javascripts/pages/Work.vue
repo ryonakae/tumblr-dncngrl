@@ -23,6 +23,8 @@ export default {
     activate: function(transition) {
       console.log('work activate');
 
+      $(window).scrollTop(0);
+
       // inアニメーション
       $('.js-eyecatchImage').addClass('is--blur').removeClass('is--hidden');
 
@@ -123,7 +125,7 @@ export default {
       this.resetTotalPosts();
 
       // 記事取得・表示
-      store.actions.loadEntry('photo', 2, null, false, false)
+      store.actions.loadEntry('photo', 4, null, false, false)
         .then(() => {
           $('.entryList').imagesLoaded(() => {
             console.log(this.posts);
@@ -131,7 +133,7 @@ export default {
             $(this.$els.entryList).addClass('is--visible');
 
             // 無限スクロール
-            setTimeout(store.actions.infiniteScroll('photo', 1, false, false), 600);
+            setTimeout(store.actions.infiniteScroll('photo', 4, false, false), 600);
           });
         });
     }, 150+600);

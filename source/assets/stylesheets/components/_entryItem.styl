@@ -36,7 +36,6 @@
         $fontSize_info
 
     .title
-      font-family $fontFamily_default
       margin 0
       font-size $fontSize_entryBodyTitle
 
@@ -60,6 +59,27 @@
 
       .title
         font-size $fontSize_entryBodyTitle * 0.7
+
+    +media-query($mq_sp)
+      .link
+        display block
+        padding 20px 30px 25px
+
+      .info,
+      .title
+        display block
+        width 100%
+
+      .info
+        .date,
+        .notes
+          display inline-block
+
+        .notes
+          margin-left 10px
+
+      .title
+        margin-top 10px
 
 
   &--photo
@@ -126,9 +146,34 @@
 
       .title
         font-size $fontSize_entryItemTitle * 0.9
+        margin-top -10px
+
+      .notes
+        opacity 1
+        margin-top 40px
 
     +media-query($mq_spLarge)
       max-width 320px
 
       .title
         font-size $fontSize_entryItemTitle * 0.7
+
+      .notes
+        margin-top 30px
+
+      &:hover
+        .notes
+          margin-top 30px
+
+    +media-query($mq_sp)
+      max-width 260px
+
+      .title
+        font-size $fontSize_entryItemTitle * 0.6
+
+      .notes
+        margin-top 25px
+
+      &:hover
+        .notes
+          margin-top 25px

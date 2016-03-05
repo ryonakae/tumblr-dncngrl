@@ -102,8 +102,8 @@ export default {
       // console.log('document height:', documentHeight);
 
       // 記事数がtotal_post未満で、
-      // スクロールが8割位になったら次のポストロード
-      if (store.state.posts.length < store.state.totalPosts && scrollTop + windowHeight > documentHeight * 0.8) {
+      // スクロールが7割位になったら次のポストロード
+      if (store.state.posts.length < store.state.totalPosts && scrollTop + windowHeight > documentHeight * 0.7) {
         // lockがtrueなら以下スキップ
         if (loadLock) return;
 

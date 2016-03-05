@@ -20,6 +20,8 @@ export default {
     activate: function(transition) {
       console.log('news activate');
 
+      $(window).scrollTop(0);
+
       // inアニメーション
       $('.js-eyecatchImage').addClass('is--blur').removeClass('is--hidden');
 
@@ -117,13 +119,13 @@ export default {
       this.resetPageNum();
       this.resetTotalPosts();
 
-      store.actions.loadEntry('text', 5, null, false, true)
+      store.actions.loadEntry('text', 4, null, false, true)
         .then(() => {
           console.log(this.posts);
           $(this.$els.entryList).addClass('is--visible');
 
           // 無限スクロール
-          setTimeout(store.actions.infiniteScroll('text', 5, false, true), 600);
+          setTimeout(store.actions.infiniteScroll('text', 4, false, true), 600);
         });
     }, 150+600);
   },

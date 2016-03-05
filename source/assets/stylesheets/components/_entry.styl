@@ -48,7 +48,12 @@
   &--news
     .entry__title
       font-size $fontSize_entryNewsTitle
-      font-family $fontFamily_default
+
+      +media-query($mq_tablet)
+        font-size $fontSize_entryNewsTitle * 0.9
+
+      +media-query($mq_spLarge)
+        font-size $fontSize_entryNewsTitle * 0.8
 
     .entry__content
       background $bgColor_single
@@ -65,7 +70,7 @@
       +media-query($mq_spLarge)
         width 100%
         padding 30px
-        margin 90px 0 0
+        margin 87px 0 0
         border-radius 0
 
 
@@ -79,6 +84,9 @@
 
   +media-query($mq_spLarge)
     font-size $fontSize_entryTitle * 0.8
+
+  +media-query($mq_sp)
+    font-size $fontSize_entryTitle * 0.7
 
 .entry__info
   margin-top 10px
@@ -135,6 +143,10 @@
     margin 0 0 1.2em
     max-width 100%
     height auto
+    vertical-align top
+
+  p img
+    margin-bottom 0.5em
 
   hr
     width 17%
@@ -214,3 +226,4 @@
 
   +media-query($mq_spLarge)
     top 37px
+    font-size $fontSize_default * 0.8

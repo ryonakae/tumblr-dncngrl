@@ -35,6 +35,10 @@
     span
       font-size $fontSize_archiveTitle * 0.7
 
+  +media-query($mq_sp)
+    span
+      font-size $fontSize_archiveTitle * 0.6
+
 .archive__content
   position relative
   top 50vh
@@ -44,3 +48,6 @@
 
   +media-query($mq_spLarge)
     transform translateY(150+(110*0.7/2)px)
+
+  +media-query($mq_sp)
+    transform translateY(150+(110*0.6/2)px)
