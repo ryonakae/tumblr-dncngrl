@@ -19,7 +19,7 @@ gulp.task 'include:development', ->
 # production
 gulp.task 'include:production', ->
   gulp
-    .src path.build.root + 'index.html'
+    .src path.source.root + 'index.html'
     .pipe include
       prefix: '@@'
       basePath: '@file'

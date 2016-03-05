@@ -11,6 +11,7 @@ csscomb = require 'gulp-csscomb'
 minifyCss = require 'gulp-minify-css'
 gulpif = require 'gulp-if'
 base64 = require 'gulp-base64'
+replace = require 'gulp-replace'
 
 
 gulp.task 'stylus', ->
@@ -30,6 +31,7 @@ gulp.task 'stylus', ->
       set:
         "include css": true
     .pipe gulpif env.isProduction == false, sourcemaps.write './'
+    .pipe gulpif env.isProduction == true, replace '../', 'http://file.brdr.jp/dncngrl/'
     .pipe gulpif env.isProduction == true, base64
       extensions: ['woff', 'ttf']
       maxImageSize: 2000*1024 # 20MB
