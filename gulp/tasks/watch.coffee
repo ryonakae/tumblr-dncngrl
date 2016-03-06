@@ -1,17 +1,18 @@
 gulp = require 'gulp'
-config = require '../config'
+path = require '../path'
+watch = require 'gulp-watch'
 runSequence  = require 'run-sequence'
 
 
 gulp.task 'watch', ->
-  runSequence 'cleanBuild', ['copyFile', 'svgSprite'], ['jade', 'stylus:development', 'watchify'], 'include:development', 'browserSync'
+  watch path.source.root + '**/*.html', (event) ->
+    gulp.start 'include:development'
 
-  gulp.watch config.source.root + '**/*.jade', ->
-    runSequence 'jade', 'include:development'
-  gulp.watch config.source.stylesheets + '**/*.styl', ['stylus:development']
-  gulp.watch config.source.images + '*.svg', ['copyFile']
-  gulp.watch config.source.sprite + '*.svg', ->
-    runSequence 'svgSprite', 'jade', 'include:development'
+  watch path.source.stylesheets + '**/*.styl', (event) ->
+    gulp.start 'stylus'
 
+  watch path.source.fonts + '*', (event) ->
+    gulp.start 'copyFile'
 
-gulp.task 'default', ['watch']
+  watch path.source.sprite + '*', (event) ->
+    runSequence 'imageSprite', 'stylus'

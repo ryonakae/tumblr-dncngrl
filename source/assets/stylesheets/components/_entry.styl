@@ -1,0 +1,229 @@
+.entry
+  color $textColor_inverse
+  position relative
+  z-index 3
+  opacity 0
+  // visibility hidden
+  transition: all 600ms easing('in-out-quart')
+
+  &.is--visible
+    opacity 1
+    // visibility visible
+
+  a
+    color $textColor_inverse
+    text-decoration underline
+
+    &:hover
+      opacity 0.5
+
+      +media-query($mq_tablet)
+        opacity 1
+
+  &--photo
+    .entry__photo
+      width 100%
+      line-height 0
+
+      img
+        line-height 0
+        width 100%
+        height auto
+
+    .entry__textarea
+      background $bgColor_single
+      color $textColor_inverse
+      padding 60px 0 65px
+
+      +media-query($mq_tablet)
+        padding 40px 0 45px
+
+      +media-query($mq_spLarge)
+        padding 30px 30px 35px
+
+    .entry__textareaInner
+      max-width 640px
+      margin 0 auto
+
+  &--news
+    .entry__title
+      font-size $fontSize_entryNewsTitle
+
+      +media-query($mq_tablet)
+        font-size $fontSize_entryNewsTitle * 0.9
+
+      +media-query($mq_spLarge)
+        font-size $fontSize_entryNewsTitle * 0.8
+
+    .entry__content
+      background $bgColor_single
+      color $textColor_inverse
+      max-width 640px
+      margin 130px auto
+      padding 55px 60px 60px
+      border-radius 6px
+
+      +media-query($mq_tablet)
+        margin 110px auto
+        padding 40px
+
+      +media-query($mq_spLarge)
+        width 100%
+        padding 30px
+        margin 87px 0 0
+        border-radius 0
+
+
+// photo, news, aboutで共通
+.entry__title
+  margin 0
+  font-size $fontSize_entryTitle
+
+  +media-query($mq_tablet)
+    font-size $fontSize_entryTitle * 0.9
+
+  +media-query($mq_spLarge)
+    font-size $fontSize_entryTitle * 0.8
+
+  +media-query($mq_sp)
+    font-size $fontSize_entryTitle * 0.7
+
+.entry__info
+  margin-top 10px
+  font-size $fontSize_info
+
+  .tags
+    margin-left 10px
+
+    &__item
+      &:before
+        content ','
+        margin-right 5px
+
+      &:first-child
+        &:before
+          content ''
+          margin-right 0
+          display none
+
+
+.entry__body
+  margin-top 50px
+
+  h1, h2, h3, h4, h5, h6
+    margin 1.3em 0 1em
+
+  h1
+    font-size $fontSize_entryBodyTitle
+
+  h2
+    font-size $fontSize_entryBodyTitle * 0.9
+
+  h3
+    font-size $fontSize_entryBodyTitle * 0.8
+
+  h4
+    font-size $fontSize_entryBodyTitle * 0.7
+
+  h5
+    font-size $fontSize_default
+
+  h6
+    font-size $fontSize_default
+    font-weight normal
+
+  p,ul,ol
+    margin 0 0 1.2em
+
+  ul
+    padding-left 1.5em
+
+  img
+    line-height 0
+    margin 0 0 1.2em
+    max-width 100%
+    height auto
+    vertical-align top
+
+  p img
+    margin-bottom 0.5em
+
+  hr
+    width 17%
+    height 2px
+    background-color $borderColor_entry
+    border none
+    margin 3.5em auto
+
+  blockquote
+    margin 2em 0 2.15em
+    border-left 5px solid $borderColor_entry
+    color $textColor_sub
+    padding-left 15px
+    font-style italic
+
+  +media-query($mq_tablet)
+    margin-top 35px
+
+    h1
+      font-size $fontSize_entryBodyTitle * 0.9
+
+    h2
+      font-size $fontSize_entryBodyTitle * 0.9 * 0.9
+
+    h3
+      font-size $fontSize_entryBodyTitle * 0.8 * 0.9
+
+    h4
+      font-size $fontSize_entryBodyTitle * 0.7 * 0.9
+
+    +media-query($mq_spLarge)
+      margin-top 25px
+
+      h1
+        font-size $fontSize_entryBodyTitle * 0.8
+
+      h2
+        font-size $fontSize_entryBodyTitle * 0.9 * 0.8
+
+      h3
+        font-size $fontSize_entryBodyTitle * 0.8 * 0.8
+
+      h4
+        font-size $fontSize_entryBodyTitle * 0.7 * 0.8
+
+.entry__reblog
+  margin-top 50px
+
+  +media-query($mq_tablet)
+    margin-top 30px
+
+  +media-query($mq_spLarge)
+    margin-top 25px
+
+
+.entry__back
+  position fixed
+  top 58px
+  left 50%
+  transform translateX(-50%)
+  line-height 1
+
+  &:hover
+    letter-spacing 0.15em
+    text-indent 0.15em
+
+  a
+    color $textColor_default
+    text-decoration none
+
+  +media-query($mq_tablet)
+    top 47px
+
+    &:hover
+      letter-spacing inherit
+      text-indent 0
+
+  +media-query($mq_spLarge)
+    top 37px
+    font-size $fontSize_default * 0.8

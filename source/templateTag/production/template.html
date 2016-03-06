@@ -17,7 +17,7 @@
               <h1><a href="{Permalink}">{Year}.{MonthNumberWithZero}.{DayOfMonthWithZero}</a></h1>
             {/block:Date}
           </header>
-          <div>
+          <div id="article">
             {LinkOpenTag}
               <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}">
             {LinkCloseTag}
@@ -34,7 +34,7 @@
               <h1><a href="{Permalink}">{Year}.{MonthNumberWithZero}.{DayOfMonthWithZero}</a></h1>
             {/block:Date}
           </header>
-          <div>
+          <div id="article">
             {Photoset-700}
             {block:Caption}
               <div>{Caption}</div>
@@ -52,7 +52,7 @@
               {/block:Date}
             {/block:Title}
           </header>
-          <div>
+          <div id="article">
             {Body}
           </div>
         {/block:Text}

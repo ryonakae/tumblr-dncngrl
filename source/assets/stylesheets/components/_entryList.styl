@@ -1,0 +1,40 @@
+.entryList
+  opacity 0
+  list-style-type none
+  margin 0 auto
+  padding 0
+  transition: all 600ms easing('out-quint')
+  transform translateY(100px)
+
+  &.is--visible
+    opacity 1
+    transform translateY(0)
+
+  &--photo
+    padding-bottom 100px
+
+    +media-query($mq_tablet)
+      padding-bottom 85px
+
+    +media-query($mq_spLarge)
+      padding-bottom 60px
+
+    +media-query($mq_sp)
+      padding-bottom 40px
+
+
+.entryList__item
+  &--photo
+    margin 0 auto 100px
+
+    &:last-child
+      margin-bottom 0
+
+    +media-query($mq_tablet)
+      margin 0 auto 85px
+
+    +media-query($mq_spLarge)
+      margin 0 auto 60px
+
+    +media-query($mq_sp)
+      margin 0 auto 40px

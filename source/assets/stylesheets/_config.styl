@@ -1,52 +1,72 @@
-// font family
-$fontFamily = Gotham, "Helvetica Neue", Helvetica, Arial, "小塚ゴシック Pr6N", "Kozuka Gothic Pr6N", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif
-
-
 // color
 $color_white = #fff
-$color_lightGray1 = #f8f8f8
-$color_lightGray2 = #e5e5e5
-$color_gray = #bfbfbf
-$color_black = #333
-$color_cyan = #76faff
+$color_black = #000
+$color_lightGray = #fafafa
+$color_darkGray = #999
+$color_gray = #e3e5ec
+$color_blue = #0041f3
 
-$color_text_default = $color_black
-$color_text_link = $color_cyan
-$color_text_sub = $color_gray
-$color_text_inverse = $color_white
-$color_bg_default = $color_lightGray1
-$color_bg_inverse = $color_white
-$color_bg_link = $color_cyan
-$color_border_default = $color_black
-$color_border_link = $color_cyan
+
+// bg color
+$bgColor_default = $color_black
+$bgColor_inverse = $color_white
+$bgColor_single = $color_lightGray
+$bgColor_selection = $color_blue
+
+// text color
+$textColor_default = $color_white
+$textColor_inverse = $color_black
+$textColor_link = $color_white
+$textColor_sub = $color_darkGray
+
+
+// border color
+$borderColor_default = rgba($color_white, 0.15)
+$borderColor_newsHover = $color_white
+$borderColor_entry = $color_gray
+
+
+// font family
+$fontFamily_default = ProximaNova, 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, Arial, NotoSansJapanese, 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, sans-serif
+$fontFamily_title = Montserrat, 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, Arial, NotoSansJapanese, 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, sans-serif
 
 
 // font size
 $fontSize_default = rem(13px)
-$fontSize_small = rem(10px)
-$fontSize_large = rem(16px)
-$fontSize_xlarge = rem(22px)
+$fontSize_info = rem(10px)
+$fontSize_entryTitle = rem(26px)
+$fontSize_entryItemTitle = rem(70px)
+$fontSize_entryBodyTitle = rem(23px)
+$fontSize_entryNewsTitle = rem(23px)
+$fontSize_archiveTitle = rem(110px)
+$fontSize_naviItem = rem(23px)
 
 
 // line height
 $lineHeight_default = 1.7
-$lineHeight_title = 1.4
+$lineHeight_title = 1.35
 
 
 // letter spacing
-$letterSpacing = 0.04em
+$letterSpacing_default = 0.04em
 
 
-// width & margin
-$margin_page = 80px
+// width
+$width_base = 940px
 
-$width_default = 960px
-$width_textList = 500px
-$width_single = 640px
+
+// padding
+$padding_base = 40px
+$padding_tablet = 6%
+$padding_smartphone = 4%
+$padding_section = 120px
+$padding_section_tablet = 60px
+$padding_section_smartphone = 40px
 
 
 // media query
-$mq_pcLarge = only screen, min-width 1180px
-$mq_pc = only screen, max-width 1180px
-$mq_tablet = only screen, max-width 960px
-$mq_smartphone = only screen, max-width 640px
+$mq_pcLarge = only screen, min-width 1200px
+$mq_pc = only screen, max-width 1199px
+$mq_tablet = only screen, max-width 899px
+$mq_spLarge = only screen, max-width 639px
+$mq_sp = only screen, max-width 399px

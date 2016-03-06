@@ -1,42 +1,70 @@
 @import 'kouto-swiss'
-
 @import '_config'
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700')
+font-face( 'ProximaNova', '../fonts/ProximaNova-Regular', normal, normal, formats: woff )
+font-face( 'ProximaNova', '../fonts/ProximaNova-Regular-Italic', normal, italic, formats: woff )
+font-face( 'ProximaNova', '../fonts/ProximaNova-Semibold', bold, normal, formats: woff )
+font-face( 'ProximaNova', '../fonts/ProximaNova-Semibold-Italic', bold, italic, formats: woff )
+font-face( 'NotoSansJapanese', '../fonts/NotoSansJP-Regular', normal, normal, formats: woff )
+font-face( 'NotoSansJapanese', '../fonts/NotoSansJP-Bold', bold, normal, formats: woff )
 
 normalize()
 box-sizing-reset()
 
-// font-face
-font-face('Gotham', '../fonts/Gotham-Book', normal, normal, formats:woff)
-font-face('Gotham', '../fonts/Gotham-Medium', bold, normal, formats:woff)
-
 body
   padding 0 !important
-  font-family $fontFamily
+  font-family $fontFamily_default
   font-size $fontSize_default
-  background-color $color_bg_default
-  color $color_text_default
   line-height $lineHeight_default
-  letter-spacing $letterSpacing
-  text-rendering optimizeLegibility
-  position relative
-  overflow-x hidden
+  letter-spacing $letterSpacing_default
+  background-color $bgColor_default
+  font-kerning normal
+  color $textColor_default
+  // text-align justify
+  word-wrap break-word
+  overflow-wrap break-word
 
-  +retina-query( only screen, 2 )
+  & ::-moz-selection
+      background $bgColor_selection
+      color $textColor_default
+
+  & ::selection
+      background $bgColor_selection
+      color $textColor_default
+
+  +retina-query(only screen, 2)
     -webkit-font-smoothing antialiased
 
-  .iframe-controls--phone-mobile
-    display none !important
+  // +media-query($mq_tablet)
+  //   overflow-x hidden
+
+  &.is--disableScroll
+    overflow hidden
+    pointer-events none
+
+  &.is--naviActive
+    overflow hidden
 
 
 a
+  color $textColor_link
   transition: all 300ms ease
-  color inherit
   text-decoration none
 
   &:hover
-    color $color_text_link
-    opacity 0.7
-
+    text-decoration underline
 
 h1, h2, h3, h4, h5, h6
   line-height $lineHeight_title
+  font-family $fontFamily_title
+
+  a
+    color inherit
+
+
+.tmblr-iframe
+  &.iframe-controls--phone-mobile
+    display none !important
+    visibility hidden !important
+    opacity 0 !important

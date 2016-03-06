@@ -1,25 +1,27 @@
 gulp = require 'gulp'
-config = require '../config'
+path = require '../path'
+env = require '../env'
 stylus = require 'gulp-stylus'
 plumber = require 'gulp-plumber'
 sourcemaps = require 'gulp-sourcemaps'
-minifyCss = require 'gulp-minify-css'
 autoprefixer = require 'autoprefixer-stylus'
 koutoSwiss = require 'kouto-swiss'
-base64 = require 'gulp-base64'
 combineMediaQueries = require 'gulp-combine-media-queries'
 csscomb = require 'gulp-csscomb'
+minifyCss = require 'gulp-minify-css'
+gulpif = require 'gulp-if'
+base64 = require 'gulp-base64'
+replace = require 'gulp-replace'
 
 
-gulp.task 'stylus:development', ->
+gulp.task 'stylus', ->
   gulp
     .src [
-      config.source.stylesheets + '**/*.styl'
-      '!' + config.source.stylesheets + '**/_*.styl'
+      path.source.stylesheets + '**/*.styl'
+      '!' + path.source.stylesheets + '**/_*.styl'
     ]
     .pipe plumber()
-    .pipe sourcemaps.init
-      loadMaps: true
+    .pipe gulpif env.isProduction == false, sourcemaps.init()
     .pipe stylus
       use: [
         koutoSwiss()
@@ -28,31 +30,13 @@ gulp.task 'stylus:development', ->
       ]
       set:
         "include css": true
-    .pipe sourcemaps.write './'
-    .pipe gulp.dest config.build.stylesheets
-
-
-gulp.task 'stylus:production', ->
-  gulp
-    .src [
-      config.source.stylesheets + '**/*.styl'
-      '!' + config.source.stylesheets + '**/_*.styl'
-    ]
-    .pipe plumber()
-    .pipe stylus
-      use: [
-        koutoSwiss()
-        autoprefixer
-          browsers: ['last 2 versions']
-      ]
-      set:
-        "include css": true
-    .pipe base64
-      extensions: ['jpg', 'png', 'woff', 'ttf', 'svg']
+    .pipe gulpif env.isProduction == false, sourcemaps.write './'
+    .pipe gulpif env.isProduction == true, replace '../', 'http://file.brdr.jp/dncngrl/'
+    .pipe gulpif env.isProduction == true, base64
+      extensions: ['woff', 'ttf']
       maxImageSize: 2000*1024 # 20MB
       debug: true
-    .pipe combineMediaQueries()
-    .pipe csscomb()
-    .pipe minifyCss
-      keepSpecialComments: 0
-    .pipe gulp.dest config.build.stylesheets
+    .pipe gulpif env.isProduction == true, combineMediaQueries()
+    .pipe gulpif env.isProduction == true, csscomb()
+    .pipe gulpif env.isProduction == true, minifyCss()
+    .pipe gulp.dest path.build.stylesheets

@@ -1,5 +1,5 @@
 gulp = require 'gulp'
-config = require '../config'
+path = require '../path'
 browserSync = require 'browser-sync'
 
 
@@ -8,5 +8,17 @@ gulp.task 'browserSync', ->
   browserSync.init
     open: false
     notify: true
+    reloadDelay: 800
     server:
-      baseDir: config.build.root
+      baseDir: path.build.root
+    # logLevel: 'debug'
+    # logConnections: true
+
+
+gulp.task 'bsReload', ->
+  browserSync.reload()
+
+
+gulp.task 'bsStream', ->
+  browserSync.reload
+    stream: true
