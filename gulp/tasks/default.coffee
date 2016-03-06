@@ -8,8 +8,8 @@ browserSync = require 'browser-sync'
 gulp.task 'default', ->
   # production
   if(env.isProduction == true)
-    runSequence 'clearCache', 'cleanBuild', ['copyFile', 'imageSprite'], ['jade', 'stylus', 'browserify', 'imageMin'], 'include:production'
+    runSequence 'clearCache', 'cleanBuild', ['copyFile', 'imageSprite'], ['stylus', 'browserify', 'imageMin'], 'include:production'
 
   # development
   else
-    runSequence 'cleanBuild', ['copyFile', 'imageSprite'], ['jade', 'stylus', 'browserify', 'imageMin'], 'include:development', 'browserSync', 'watch'
+    runSequence 'cleanBuild', ['copyFile', 'imageSprite'], ['stylus', 'browserify', 'imageMin'], 'include:development', 'browserSync', 'watch'

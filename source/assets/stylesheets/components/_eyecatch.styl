@@ -1,0 +1,65 @@
+.eyecatch
+  position fixed
+  top 0
+  left 0
+  width 100%
+  height 100%
+  z-index -1
+  overflow hidden
+
+  &:after
+    content ''
+    position absolute
+    top 0
+    left 0
+    width 100%
+    height 100%
+    background-color rgba($bgColor_default, 0.6);
+
+  .image
+    position absolute
+    width 100%
+    height 100%
+    top 0
+    left 0
+    background-repeat no-repeat
+    background-position 50% 50%
+    background-size cover
+    transition: all 1000ms easing('in-out-quart')
+
+    &.is--noanimation
+      transition-duration 0ms
+
+    &.is--blur
+      transform scale(0.8)
+      transform-origin 50% 50%
+      filter blur(20px)
+      opacity 0.5
+
+    &.is--hidden
+      opacity 0
+
+    &.is--shiftLeft
+      transform translateX(-25%)
+      // filter blur(20px)
+
+  .grain
+    // background #fff
+    position absolute
+    opacity 0.3
+    transition: all 1000ms easing('in-out-quart')
+
+    &.is--hidden
+      opacity 0
+      // display none
+      // visibility hidden
+
+  +media-query($mq_tablet)
+    .image
+      &.is--shiftLeft
+        transform translateX(-30%)
+
+  +media-query($mq_spLarge)
+    .image
+      &.is--shiftLeft
+        transform translateX(-40%)

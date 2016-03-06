@@ -1,0 +1,179 @@
+.entryItem
+  &--news
+    .link
+      border-top 1px solid $borderColor_default
+      display table
+      width 100%
+      height 100%
+      padding 60px
+      transition: all 600ms ease
+
+    &:hover
+      .link
+        text-decoration none
+        background-color $bgColor_inverse
+        border-color $borderColor_newsHover
+        color $textColor_inverse
+
+        +media-query($mq_tablet)
+          background-color transparent
+          border-color $borderColor_default
+          color $textColor_default
+
+    .info,
+    .title
+      display table-cell
+      vertical-align top
+
+    .info
+      width 200px
+      font-family $fontFamily_title
+      padding-top 3px
+
+      .date,
+      .notes
+        display block
+        $fontSize_info
+
+    .title
+      margin 0
+      font-size $fontSize_entryBodyTitle
+
+    +media-query($mq_tablet)
+      .link
+        padding 40px
+
+      .info
+        width 150px
+
+      .title
+        font-size $fontSize_entryBodyTitle * 0.9
+
+    +media-query($mq_spLarge)
+      .link
+        padding 30px
+
+      .info
+        width 100px
+        padding-top 0
+
+      .title
+        font-size $fontSize_entryBodyTitle * 0.7
+
+    +media-query($mq_sp)
+      .link
+        display block
+        padding 20px 30px 25px
+
+      .info,
+      .title
+        display block
+        width 100%
+
+      .info
+        .date,
+        .notes
+          display inline-block
+
+        .notes
+          margin-left 10px
+
+      .title
+        margin-top 10px
+
+
+  &--photo
+    max-width 600px
+    margin 0 auto
+    position relative
+    overflow hidden
+    background-color #000
+
+    &:first-child
+      margin-top 0
+
+    &:hover
+      .image
+        // transform scale(1.05)
+        transform-origin 50% 50%
+        opacity 0.5
+
+      .title
+        margin-top -10px
+        opacity 1
+
+      .notes
+        margin-top 40px
+        opacity 1
+
+    .link
+      display block
+      width 100%
+      height 100%
+      line-height 0
+
+    .image
+      width 100%
+      height auto
+      transition: all 600ms ease
+      position relative
+      z-index 1
+
+    .title,
+    .notes
+      position absolute
+      top 50%
+      left 50%
+      transform translate(-50%, -50%)
+      z-index 3
+      color $textColor_default
+      transition: all 600ms easing('out-quint')
+
+    .title
+      margin 0
+      line-height 1
+      font-size $fontSize_entryItemTitle
+
+    .notes
+      font-size $fontSize_info
+      font-family $fontFamily_title
+      transition-delay 100ms
+      margin-top 60px
+      opacity 0
+
+    +media-query($mq_tablet)
+      max-width 500px
+
+      .title
+        font-size $fontSize_entryItemTitle * 0.9
+        margin-top -10px
+
+      .notes
+        opacity 1
+        margin-top 40px
+
+    +media-query($mq_spLarge)
+      max-width 320px
+
+      .title
+        font-size $fontSize_entryItemTitle * 0.7
+
+      .notes
+        margin-top 30px
+
+      &:hover
+        .notes
+          margin-top 30px
+
+    +media-query($mq_sp)
+      max-width 260px
+
+      .title
+        font-size $fontSize_entryItemTitle * 0.6
+
+      .notes
+        margin-top 25px
+
+      &:hover
+        .notes
+          margin-top 25px

@@ -1,0 +1,32 @@
+.about
+  position fixed
+  width 100vw
+  height 100vh
+  overflow-x hidden
+  overflow-y auto
+  -webkit-overflow-scrolling touch
+
+.about__content
+  position absolute
+  width 50%
+  min-height 100%
+  right 0
+  background-color $bgColor_single
+  padding 50px 60px
+  transition: all 1000ms easing('in-out-quart')
+  transform translateX(100%)
+
+  &.is--visible
+    transform translateX(0)
+
+  +media-query($mq_tablet)
+    width 60%
+    padding 37px 40px 40px
+
+  +media-query($mq_spLarge)
+    width 80%
+    padding 30px
+
+  +media-query($mq_sp)
+    width 77%
+    padding 30px 20px

@@ -8,6 +8,7 @@ gulp.task 'copyFile', ->
     [
       path.source.fonts + '**/*'
       path.source.templateTag + '**/*.html'
+      path.source.javascripts + 'lib/**/*'
     ]
     base: path.source.root
   )

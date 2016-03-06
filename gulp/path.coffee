@@ -6,7 +6,7 @@ module.exports =
   source:
     root: 'source/'
     stylesheets: 'source/assets/stylesheets/'
-    javascripts: 'source/assets/javascripts/'
+    javascripts: 'source/javascripts/'
     images: 'source/assets/images/'
     sprite: 'source/assets/images/sprite/'
     fonts: 'source/assets/fonts/'
@@ -16,7 +16,7 @@ module.exports =
   build:
     root: 'build/'
     stylesheets: 'build/assets/stylesheets/'
-    javascripts: 'build/assets/javascripts/'
+    javascripts: 'build/javascripts/'
     images: 'build/assets/images/'
     fonts: 'build/assets/fonts/'
     templateTag: 'build/templateTag/'
