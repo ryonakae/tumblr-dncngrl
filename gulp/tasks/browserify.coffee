@@ -51,22 +51,22 @@ compile = (isProduction) ->
 
   bundle = ->
     # ESLint
-    # bundleLogger.beginLint()
-    # gulp
-    #   .src(
-    #     [
-    #       './' + path.source.javascripts + '**/*.{js,jsx,vue}'
-    #       '!' + path.source.javascripts + 'lib/**/*'
-    #     ]
-    #     base: path.source.root
-    #   )
-    #   .pipe plumber()
-    #   .pipe eslint
-    #     useEslintrc: true
-    #   .pipe eslint.format()
-    #   .pipe eslint.failOnError()
-    #   .pipe eslint.result (result) ->
-    #     bundleLogger.endLint()
+    bundleLogger.beginLint()
+    gulp
+      .src(
+        [
+          './' + path.source.javascripts + '**/*.{js,jsx,vue}'
+          '!' + path.source.javascripts + 'lib/**/*'
+        ]
+        base: path.source.root
+      )
+      .pipe plumber()
+      .pipe eslint
+        useEslintrc: true
+      .pipe eslint.format()
+      .pipe eslint.failOnError()
+      .pipe eslint.result (result) ->
+        bundleLogger.endLint()
 
     # Browserify
     bundleLogger.begin()

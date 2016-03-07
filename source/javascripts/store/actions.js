@@ -72,6 +72,7 @@ export default {
           dispatch('CLEAR_POSTDATA');
 
           let newData = res.response.posts;
+          // console.log(newData);
 
           // データを日付順にソート
           newData.sort(function(a, b) {
