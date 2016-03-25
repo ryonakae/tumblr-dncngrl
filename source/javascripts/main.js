@@ -16,6 +16,11 @@ const router = new VueRouter({
 });
 export const vueRouter = router;
 
+// uaManager
+import UaManager from './modules/UaManager';
+const uaManager = new UaManager();
+export const myUaManager = uaManager;
+
 // import pages
 import Index from './pages/Index.vue';
 import About from './pages/About.vue';

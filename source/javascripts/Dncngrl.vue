@@ -15,8 +15,7 @@ import Eyecatch from './components/Eyecatch.vue';
 import Header from './components/Header.vue';
 import CloneImage from './components/CloneImage.vue';
 
-import UaManager from './modules/UaManager';
-const uaManager = new UaManager;
+import { myUaManager } from './main.js';
 
 export default {
   components: {
@@ -35,7 +34,7 @@ export default {
     // console.log('dncngrl ready');
 
     // UA見てbodyにclass付与
-    uaManager.init();
+    myUaManager.init();
 
     this.$watch('pageTitle', () => {
       if (this.pageTitle === 'Top' || this.pageTitle === 'Index') {

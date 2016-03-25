@@ -1,8 +1,7 @@
 import store from '../store/';
 
 import { vueRouter } from '../main.js';
-import UaManager from '../modules/UaManager';
-const uaManager = new UaManager();
+import { myUaManager } from '../main.js';
 
 window.jQuery = window.$ = require('jquery');
 const moment = require('moment');
@@ -130,7 +129,7 @@ export default {
   },
 
   onScrollTransition: ({ dispatch }, path, moreOrLess, quantity) => {
-    const ua = uaManager.device();
+    const ua = myUaManager.device();
     let moveAmount;
 
     if (ua === 'pc') {
