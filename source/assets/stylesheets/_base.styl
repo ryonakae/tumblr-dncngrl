@@ -53,8 +53,9 @@ a
   transition: all 300ms ease
   text-decoration none
 
-  &:hover
-    text-decoration underline
+  .is-pc &
+    &:hover
+      text-decoration none
 
 h1, h2, h3, h4, h5, h6
   line-height $lineHeight_title
