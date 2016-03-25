@@ -1,0 +1,181 @@
+/*
+Stylus variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon_home_width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon_home = x y offset_x offset_y width height total_width total_height image_path;
+
+At the bottom of this section, we provide information about the spritesheet itself
+$spritesheet = width height image $spritesheet_sprites;
+*/
+$header_logo_name = 'header_logo';
+$header_logo_x = 0px;
+$header_logo_y = 0px;
+$header_logo_offset_x = 0px;
+$header_logo_offset_y = 0px;
+$header_logo_width = 190px;
+$header_logo_height = 46px;
+$header_logo_total_width = 190px;
+$header_logo_total_height = 68px;
+$header_logo_image = '../images/sprite.png';
+$header_logo = 0px 0px 0px 0px 190px 46px 190px 68px '../images/sprite.png' 'header_logo';
+$icon_arrow_name = 'icon_arrow';
+$icon_arrow_x = 0px;
+$icon_arrow_y = 56px;
+$icon_arrow_offset_x = 0px;
+$icon_arrow_offset_y = -56px;
+$icon_arrow_width = 22px;
+$icon_arrow_height = 12px;
+$icon_arrow_total_width = 190px;
+$icon_arrow_total_height = 68px;
+$icon_arrow_image = '../images/sprite.png';
+$icon_arrow = 0px 56px 0px -56px 22px 12px 190px 68px '../images/sprite.png' 'icon_arrow';
+$header_logo_2x_name = 'header_logo-2x';
+$header_logo_2x_x = 0px;
+$header_logo_2x_y = 0px;
+$header_logo_2x_offset_x = 0px;
+$header_logo_2x_offset_y = 0px;
+$header_logo_2x_width = 380px;
+$header_logo_2x_height = 92px;
+$header_logo_2x_total_width = 380px;
+$header_logo_2x_total_height = 136px;
+$header_logo_2x_image = '../images/sprite-2x.png';
+$header_logo_2x = 0px 0px 0px 0px 380px 92px 380px 136px '../images/sprite-2x.png' 'header_logo-2x';
+$icon_arrow_2x_name = 'icon_arrow-2x';
+$icon_arrow_2x_x = 0px;
+$icon_arrow_2x_y = 112px;
+$icon_arrow_2x_offset_x = 0px;
+$icon_arrow_2x_offset_y = -112px;
+$icon_arrow_2x_width = 44px;
+$icon_arrow_2x_height = 24px;
+$icon_arrow_2x_total_width = 380px;
+$icon_arrow_2x_total_height = 136px;
+$icon_arrow_2x_image = '../images/sprite-2x.png';
+$icon_arrow_2x = 0px 112px 0px -112px 44px 24px 380px 136px '../images/sprite-2x.png' 'icon_arrow-2x';
+$spritesheet_width = 190px;
+$spritesheet_height = 68px;
+$spritesheet_image = '../images/sprite.png';
+$spritesheet_sprites = $header_logo $icon_arrow;
+$spritesheet = 190px 68px '../images/sprite.png' $spritesheet_sprites;
+$retina_spritesheet_width = 380px;
+$retina_spritesheet_height = 136px;
+$retina_spritesheet_image = '../images/sprite-2x.png';
+$retina_spritesheet_sprites = $header_logo_2x $icon_arrow_2x;
+$retina_spritesheet = 380px 136px '../images/sprite-2x.png' $retina_spritesheet_sprites;
+
+/*
+These "retina group" variables are mappings for the naming and pairing of normal and retina sprites.
+
+The list formatted variables are intended for mixins like `retinaSprite` and `retinaSprites`.
+*/
+$header_logo_group_name = 'header_logo';
+$header_logo_group = 'header_logo' $header_logo $header_logo_2x;
+$icon_arrow_group_name = 'icon_arrow';
+$icon_arrow_group = 'icon_arrow' $icon_arrow $icon_arrow_2x;
+$retina_groups = $header_logo_group $icon_arrow_group;
+
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  spriteWidth($icon_home)
+}
+
+.icon-email {
+  sprite($icon_email)
+}
+
+Here are example usages in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+`display: inline-block` sprite:
+<img class="icon-home" />
+*/
+spriteWidth($sprite) {
+  width: $sprite[4];
+}
+
+spriteHeight($sprite) {
+  height: $sprite[5];
+}
+
+spritePosition($sprite) {
+  background-position: $sprite[2] $sprite[3];
+}
+
+spriteImage($sprite) {
+  background-image: url($sprite[8]);
+}
+
+sprite($sprite) {
+  spriteImage($sprite)
+  spritePosition($sprite)
+  spriteWidth($sprite)
+  spriteHeight($sprite)
+}
+
+/*
+The `retinaSprite` mixin sets up rules and a media query for a sprite/retina sprite.
+  It should be used with a "retina group" variable.
+
+The media query is from CSS Tricks: https://css-tricks.com/snippets/css/retina-display-media-query/
+
+$icon_home_group = 'icon-home' $icon_home $icon_home_2x;
+
+.icon-home {
+  retinaSprite($icon_home_group)
+}
+*/
+spriteBackgroundSize($sprite) {
+  background-size: $sprite[6] $sprite[7];
+}
+
+retinaSprite($retina_group) {
+  $normal_sprite = $retina_group[1];
+  $retina_sprite = $retina_group[2];
+  sprite($normal_sprite)
+
+  @media (-webkit-min-device-pixel-ratio: 2),
+         (min-resolution: 192dpi) {
+    spriteImage($retina_sprite)
+    spriteBackgroundSize($normal_sprite)
+  }
+}
+
+/*
+The `sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of Stylus
+
+This must be run when you have at least 2 sprites.
+  If run with a single sprite, then there will be reference errors.
+
+sprites($spritesheet_sprites);
+*/
+sprites($sprites) {
+  for $sprite in $sprites {
+    $sprite_name = $sprite[9];
+    .{$sprite_name} {
+      sprite($sprite);
+    }
+  }
+}
+
+/*
+The `retinaSprites` mixin generates a CSS rule and media query for retina groups
+  This yields the same output as CSS retina template but can be overridden in Stylus
+
+retinaSprites($retina_groups);
+*/
+retinaSprites($retina_groups) {
+  for $retina_group in $retina_groups {
+    $sprite_name = $retina_group[0];
+    .{$sprite_name} {
+      retinaSprite($retina_group);
+    }
+  }
+}
