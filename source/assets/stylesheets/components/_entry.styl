@@ -14,11 +14,9 @@
     color $textColor_inverse
     text-decoration underline
 
-    &:hover
-      opacity 0.5
-
-      +media-query($mq_tablet)
-        opacity 1
+    .is-pc &
+      &:hover
+        opacity 0.5
 
   &--photo
     .entry__photo
@@ -209,9 +207,10 @@
   transform translateX(-50%)
   line-height 1
 
-  &:hover
-    letter-spacing 0.15em
-    text-indent 0.15em
+  .is-pc &
+    &:hover
+      letter-spacing 0.15em
+      text-indent 0.15em
 
   a
     color $textColor_default
@@ -219,10 +218,6 @@
 
   +media-query($mq_tablet)
     top 47px
-
-    &:hover
-      letter-spacing inherit
-      text-indent 0
 
   +media-query($mq_spLarge)
     top 37px

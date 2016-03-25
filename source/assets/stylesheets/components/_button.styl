@@ -12,14 +12,11 @@
   transition: all 100ms ease
 
   // hover
-  &:hover
-    text-decoration none
-    letter-spacing 0.6em
-    text-indent 0.6em
-
-    +media-query($mq_tablet)
-      letter-spacing inherit
-      text-indent 0
+  .is-pc &
+    &:hover
+      text-decoration none
+      letter-spacing 0.6em
+      text-indent 0.6em
 
 
 // border
@@ -61,24 +58,23 @@
   left 0
 
 // hover
-.button:hover
-  .button__borderTop,
-  .button__borderRight,
-  .button__borderBottom,
-  .button__borderLeft
-    opacity 1
+.button
+  .is-pc &
+    &:hover
+      .button__borderTop,
+      .button__borderRight,
+      .button__borderBottom,
+      .button__borderLeft
+        opacity 1
 
-    +media-query($mq_tablet)
-      display none
+      .button__borderTop
+        width 100%
 
-  .button__borderTop
-    width 100%
+      .button__borderRight
+        height 100%
 
-  .button__borderRight
-    height 100%
+      .button__borderBottom
+        width 100%
 
-  .button__borderBottom
-    width 100%
-
-  .button__borderLeft
-    height 100%
+      .button__borderLeft
+        height 100%

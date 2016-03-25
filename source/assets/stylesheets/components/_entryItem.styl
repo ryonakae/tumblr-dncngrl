@@ -8,17 +8,13 @@
       padding 60px
       transition: all 600ms ease
 
-    &:hover
-      .link
-        text-decoration none
-        background-color $bgColor_inverse
-        border-color $borderColor_newsHover
-        color $textColor_inverse
-
-        +media-query($mq_tablet)
-          background-color transparent
-          border-color $borderColor_default
-          color $textColor_default
+    .is-pc &
+      &:hover
+        .link
+          text-decoration none
+          background-color $bgColor_inverse
+          border-color $borderColor_newsHover
+          color $textColor_inverse
 
     .info,
     .title
@@ -92,19 +88,20 @@
     &:first-child
       margin-top 0
 
-    &:hover
-      .image
-        // transform scale(1.05)
-        transform-origin 50% 50%
-        opacity 0.5
+    .is-pc &
+      &:hover
+        .image
+          // transform scale(1.05)
+          transform-origin 50% 50%
+          opacity 0.5
 
-      .title
-        margin-top -10px
-        opacity 1
+        .title
+          margin-top -10px
+          opacity 1
 
-      .notes
-        margin-top 40px
-        opacity 1
+        .notes
+          margin-top 40px
+          opacity 1
 
     .link
       display block
@@ -146,11 +143,6 @@
 
       .title
         font-size $fontSize_entryItemTitle * 0.9
-        margin-top -10px
-
-      .notes
-        opacity 1
-        margin-top 40px
 
     +media-query($mq_spLarge)
       max-width 320px
@@ -158,22 +150,8 @@
       .title
         font-size $fontSize_entryItemTitle * 0.7
 
-      .notes
-        margin-top 30px
-
-      &:hover
-        .notes
-          margin-top 30px
-
     +media-query($mq_sp)
       max-width 260px
 
       .title
         font-size $fontSize_entryItemTitle * 0.6
-
-      .notes
-        margin-top 25px
-
-      &:hover
-        .notes
-          margin-top 25px

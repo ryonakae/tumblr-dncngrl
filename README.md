@@ -41,4 +41,4 @@ Then, edit `source/javascripts/config.js`.
 
 ### Build
 
-    $ npm build
+    $ npm run build
