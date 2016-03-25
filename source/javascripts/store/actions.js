@@ -1,5 +1,9 @@
 import store from '../store/';
 
+import { vueRouter } from '../main.js';
+import UaManager from '../modules/UaManager';
+const uaManager = new UaManager();
+
 window.jQuery = window.$ = require('jquery');
 const moment = require('moment');
 
@@ -123,5 +127,48 @@ export default {
           });
       }
     });
+  },
+
+  onScrollTransition: ({ dispatch }, path, moreOrLess, quantity) => {
+    const ua = uaManager.device();
+    let moveAmount;
+
+    if (ua === 'pc') {
+      $(window).on('wheel.onScrollTransition', (e) => {
+        moveAmount = e.originalEvent.deltaY;
+
+        if (moreOrLess === 'more') {
+          if (window.pageYOffset === 0 && moveAmount > quantity) {
+            vueRouter.go({ path: path });
+          }
+        } else if (moreOrLess === 'less') {
+          if (window.pageYOffset === 0 && moveAmount < -quantity) {
+            vueRouter.go({ path: path });
+          }
+        }
+      });
+    } else if (ua === 'mobile') {
+      let touchStartY;
+      let touchMoveY;
+
+      $(window).on('touchstart.onScrollTransition', (e) => {
+        touchStartY = e.originalEvent.changedTouches[0].pageY;
+      });
+
+      $(window).on('touchmove.onScrollTransition', (e) => {
+        touchMoveY = e.originalEvent.changedTouches[0].pageY;
+        moveAmount = touchStartY - touchMoveY;
+
+        if (moreOrLess === 'more') {
+          if (window.pageYOffset === 0 && moveAmount > quantity) {
+            vueRouter.go({ path: path });
+          }
+        } else if (moreOrLess === 'less') {
+          if (window.pageYOffset === 0 && moveAmount < -quantity) {
+            vueRouter.go({ path: path });
+          }
+        }
+      });
+    }
   }
 };

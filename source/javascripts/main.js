@@ -2,7 +2,7 @@ import Vue from 'vue';
 window.jQuery = window.$ = require('jquery');
 
 // debug mode
-Vue.config.debug = true;
+// Vue.config.debug = true;
 
 // import vue-router
 import VueRouter from 'vue-router';
