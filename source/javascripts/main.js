@@ -2,7 +2,7 @@ import Vue from 'vue';
 window.jQuery = window.$ = require('jquery');
 
 // debug mode
-Vue.config.debug = true;
+// Vue.config.debug = true;
 
 // import vue-router
 import VueRouter from 'vue-router';
@@ -15,6 +15,11 @@ const router = new VueRouter({
   // abstract: true
 });
 export const vueRouter = router;
+
+// uaManager
+import UaManager from './modules/UaManager';
+const uaManager = new UaManager();
+export const myUaManager = uaManager;
 
 // import pages
 import Index from './pages/Index.vue';

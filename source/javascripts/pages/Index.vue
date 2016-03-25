@@ -9,7 +9,6 @@ section.page.js-page.index
 
 <script>
 import store from '../store/';
-import { vueRouter } from '../main.js';
 window.jQuery = window.$ = require('jquery');
 
 export default {
@@ -35,8 +34,8 @@ export default {
     deactivate: function(transition) {
       // console.log('index deactivate');
 
-      // wheelイベントをunbind
-      $(window).off('.transitionToWork');
+      // onScrollTransitionをunbind
+      $(window).off('.onScrollTransition');
 
       // タイトルロゴとボタン隠す
       $(this.$els.button).removeClass('is--visible');
@@ -79,12 +78,12 @@ export default {
       $('.js-naviOpen').addClass('is--visible');
 
       // 下へのスクロールがあったらworkへ遷移
-      $(window).on('wheel.transitionToWork', (e) => {
-        if (e.originalEvent.deltaY > 20) {
-          vueRouter.go({ path: '/work' });
-        }
-      });
+      this.onScrollTransition('/work', 'more', 30);
     }, 600);
+  },
+
+  methods: {
+    onScrollTransition: store.actions.onScrollTransition
   }
 };
 </script>

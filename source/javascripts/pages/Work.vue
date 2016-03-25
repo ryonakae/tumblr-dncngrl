@@ -11,7 +11,6 @@ section.page.js-page.archive
 
 <script>
 import store from '../store/';
-import { vueRouter } from '../main.js';
 import EntryItem from '../components/EntryItem.vue';
 
 window.jQuery = window.$ = require('jquery');
@@ -43,8 +42,8 @@ export default {
     deactivate: function(transition) {
       // console.log('work deactivate');
 
-      // wheelイベントをunbind
-      $(window).off('.transitionToIndex');
+      // onScrollTransitionを無効
+      $(window).off('.onScrollTransition');
 
       // infiniteScrollを無効
       $(window).off('.infiniteScroll');
@@ -147,11 +146,7 @@ export default {
             setTimeout(store.actions.infiniteScroll('photo', 4, false, false), 600);
 
             // ページの一番上の状態で、上へのスクロールがあったらindexへ遷移
-            $(window).on('wheel.transitionToIndex', (e) => {
-              if ($(window).scrollTop() === 0 && e.originalEvent.deltaY < -20) {
-                vueRouter.go({ path: '/' });
-              }
-            });
+            this.onScrollTransition('/', 'less', 30);
           });
         });
     }, 150+600);
@@ -159,7 +154,8 @@ export default {
 
   methods: {
     resetPageNum: store.actions.resetPageNum,
-    resetTotalPosts: store.actions.resetTotalPosts
+    resetTotalPosts: store.actions.resetTotalPosts,
+    onScrollTransition: store.actions.onScrollTransition
   }
 };
 </script>
