@@ -40,7 +40,7 @@ gulp.task 'imageSprite', ->
     retinaImgPath: '../images/sprite-2x.png'
 
   spriteData.img
-    .pipe gulpif env.isProduction == true, imagemin imageminOption
+    # .pipe gulpif env.isProduction == true, imagemin imageminOption
     .pipe gulp.dest path.build.images
 
   spriteData.css

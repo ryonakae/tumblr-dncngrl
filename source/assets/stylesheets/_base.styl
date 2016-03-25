@@ -1,5 +1,6 @@
 @import 'kouto-swiss'
 @import '_config'
+@import '_sprite'
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700')
 font-face( 'ProximaNova', '../fonts/ProximaNova-Regular', normal, normal, formats: woff )
@@ -52,8 +53,9 @@ a
   transition: all 300ms ease
   text-decoration none
 
-  &:hover
-    text-decoration underline
+  .is-pc &
+    &:hover
+      text-decoration none
 
 h1, h2, h3, h4, h5, h6
   line-height $lineHeight_title

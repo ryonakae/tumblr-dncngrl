@@ -13,11 +13,9 @@
     transition: all 300ms ease
     visibility hidden
 
-    &:hover
-      opacity 0.7
-
-      +media-query($mq_tablet)
-        opacity 1
+    .is-pc &
+      &:hover
+        opacity 0.7
 
     &:before,
     &:after
@@ -58,11 +56,9 @@
     transition: all 300ms ease
     visibility hidden
 
-    &:hover
-      opacity 0.7
-
-      +media-query($mq_tablet)
-        opacity 1
+    .is-pc &
+      &:hover
+        opacity 0.7
 
     .inner
       width 100%
@@ -138,13 +134,10 @@
       padding 15px 30px
       text-decoration none
 
-      &:hover
-        letter-spacing 0.5em
-        text-indent 0.5em
-
-        +media-query($mq_tablet)
-          letter-spacing inherit
-          text-indent 0
+      .is-pc &
+        &:hover
+          letter-spacing 0.5em
+          text-indent 0.5em
 
     +media-query($mq_spLarge)
       font-size $fontSize_naviItem * 0.7
