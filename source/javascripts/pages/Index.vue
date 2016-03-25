@@ -2,16 +2,15 @@
 section.page.js-page.index
   h1.index__title(v-el:title) Dancing Girl.
 
-  a.index__button.button(v-el:button, v-link='{path:"/work"}')
-    span WORK
-    .button__borderTop
-    .button__borderRight
-    .button__borderBottom
-    .button__borderLeft
+  a.index__more(v-el:button, v-link='{path:"/work"}')
+    span.text WORK
+    .icon
 </template>
 
 <script>
 import store from '../store/';
+import { vueRouter } from '../main.js';
+window.jQuery = window.$ = require('jquery');
 
 export default {
   route: {
@@ -35,6 +34,9 @@ export default {
     },
     deactivate: function(transition) {
       // console.log('index deactivate');
+
+      // wheelイベントをunbind
+      $(window).off('.transitionToWork');
 
       // タイトルロゴとボタン隠す
       $(this.$els.button).removeClass('is--visible');
@@ -75,11 +77,14 @@ export default {
     setTimeout(() => {
       $(this.$els.button).addClass('is--visible');
       $('.js-naviOpen').addClass('is--visible');
-    }, 600);
-  },
 
-  methods: {
-    transitionToWork: store.actions.transitionToWork
+      // 下へのスクロールがあったらworkへ遷移
+      $(window).on('wheel.transitionToWork', (e) => {
+        if (e.originalEvent.deltaY > 20) {
+          vueRouter.go({ path: '/work' });
+        }
+      });
+    }, 600);
   }
 };
 </script>

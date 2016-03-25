@@ -31,9 +31,9 @@
     height 63px
     background-size 260px 63px
 
-.index__button
+.index__more
   position absolute
-  bottom 80px
+  top calc('100% - 80px', 85%)
   left 50%
   opacity 0
   transform translate(-50%, 50px)
@@ -45,8 +45,23 @@
     transform translate(-50%, 0)
     filter blur(0px)
 
-  +media-query($mq_tablet)
-    bottom 60px
+  .is-pc &
+    &:hover
+      .icon
+        margin-top 3px
 
-  +media-query($mq_sp)
-    bottom 40px
+  .text
+    display block
+    font-family $fontFamily_title
+    font-size $fontSize_default
+    color $textColor_default
+    letter-spacing 0.3em
+    text-indent 0.3em
+
+  .icon
+    retinaSprite($icon_arrow_group)
+    position relative
+    left 50%
+    transform translateX(-50%)
+    margin-top 10px
+    transition: margin-top 100ms ease
