@@ -146,7 +146,7 @@ export default {
             setTimeout(store.actions.infiniteScroll('photo', 4, false, false), 600);
 
             // ページの一番上の状態で、上へのスクロールがあったらindexへ遷移
-            this.onScrollTransition('/', 'less', 30);
+            this.onScrollTransition('/', 'less', 10);
           });
         });
     }, 150+600);

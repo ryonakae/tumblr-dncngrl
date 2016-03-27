@@ -131,17 +131,26 @@ export default {
   onScrollTransition: ({ dispatch }, path, moreOrLess, quantity) => {
     const ua = myUaManager.device();
     let moveAmount;
+    let scrollPositionTop;
+    let scrollPositionBottom;
+    let documentHeight;
+
+    $(window).on('wheel.onScrollTransition touchmove.onScrollTransition resize.onScrollTransition', () => {
+      scrollPositionTop = window.pageYOffset;
+      scrollPositionBottom = scrollPositionTop + window.innerHeight;
+      documentHeight = document.body.clientHeight;
+    });
 
     if (ua === 'pc') {
       $(window).on('wheel.onScrollTransition', (e) => {
         moveAmount = e.originalEvent.deltaY;
 
         if (moreOrLess === 'more') {
-          if (window.pageYOffset === 0 && moveAmount > quantity) {
+          if (scrollPositionBottom === documentHeight && moveAmount > quantity) {
             vueRouter.go({ path: path });
           }
         } else if (moreOrLess === 'less') {
-          if (window.pageYOffset === 0 && moveAmount < -quantity) {
+          if (scrollPositionTop === 0 && moveAmount < -quantity) {
             vueRouter.go({ path: path });
           }
         }
@@ -159,11 +168,11 @@ export default {
         moveAmount = touchStartY - touchMoveY;
 
         if (moreOrLess === 'more') {
-          if (window.pageYOffset === 0 && moveAmount > quantity) {
+          if (scrollPositionBottom === documentHeight && moveAmount > quantity) {
             vueRouter.go({ path: path });
           }
         } else if (moreOrLess === 'less') {
-          if (window.pageYOffset === 0 && moveAmount < -quantity) {
+          if (scrollPositionTop === 0 && moveAmount < -quantity) {
             vueRouter.go({ path: path });
           }
         }
