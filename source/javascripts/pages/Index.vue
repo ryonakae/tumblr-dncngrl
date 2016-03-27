@@ -37,6 +37,9 @@ export default {
       // onScrollTransitionをunbind
       $(window).off('.onScrollTransition');
 
+      // fitWindowをunbind
+      $(window).off('.fitWindow');
+
       // タイトルロゴとボタン隠す
       $(this.$els.button).removeClass('is--visible');
       $(this.$els.title).removeClass('is--visible');
@@ -51,6 +54,12 @@ export default {
         transition.next();
       }, 600);
     }
+  },
+
+  data() {
+    return {
+      windowHeight: ''
+    };
   },
 
   computed: {
@@ -78,12 +87,19 @@ export default {
       $('.js-naviOpen').addClass('is--visible');
 
       // 下へのスクロールがあったらworkへ遷移
-      this.onScrollTransition('/work', 'more', 30);
+      this.onScrollTransition('/work', 'more', 10);
+
+      this.fitWindow();
+      $(window).on('resize.fitWindow orientationchange.fitWindow', this.fitWindow);
     }, 600);
   },
 
   methods: {
-    onScrollTransition: store.actions.onScrollTransition
+    onScrollTransition: store.actions.onScrollTransition,
+    fitWindow: function() {
+      this.windowHeight = $(window).height();
+      $('.js-page').css({ height: this.windowHeight });
+    }
   }
 };
 </script>
