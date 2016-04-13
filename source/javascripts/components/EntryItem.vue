@@ -17,16 +17,9 @@ article.entryItem.entryItem--news(v-el:entry-item, v-if='post.type === "text"')
 
 <script>
 import store from '../store/';
-window.jQuery = window.$ = require('jquery');
 
 export default {
   props: ['post'],
-
-  // data() {
-  //   return {
-  //     imageUrl: this.post.photos[0].original_size.url
-  //   };
-  // },
 
   computed: {
     imageUrl() {
@@ -35,13 +28,19 @@ export default {
       }
     },
     imageWidth() {
-      return $(this.$els.entryItem).width();
+      return this.$els.entryItem.clientWidth;
     },
     imageHeight() {
-      return $(this.$els.entryItem).height();
+      return this.$els.entryItem.clientHeight;
     },
     imageOffset() {
-      return $(this.$els.entryItem).offset();
+      const $element = this.$els.entryItem;
+      const rect = $element.getBoundingClientRect();
+      const offset = {
+        top: rect.top + window.pageYOffset,
+        left: rect.left + window.pageXOffset
+      };
+      return offset;
     },
   },
 

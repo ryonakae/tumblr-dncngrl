@@ -1,5 +1,5 @@
 <template lang='jade'>
-section.page.js-page.index
+section.page#js-page.js-page.index
   h1.index__title(v-el:title) Dancing Girl.
 
   a.index__more(v-el:button, v-link='{path:"/work"}')
@@ -16,13 +16,18 @@ export default {
     activate: function(transition) {
       // console.log('index activate');
 
+      // set DOM
+      this.$headerTitle = document.getElementById('js-headerTitle');
+      this.$cloneImage = document.getElementById('js-cloneImage');
+      this.$eyecatchImage = document.getElementById('js-eyecatchImage');
+
       // ヘッダータイトル隠す
-      $('.js-headerTitle').removeClass('is--visible');
+      this.$headerTitle.classList.remove('is--visible');
 
       // single -> indexに遷移するとき
       if (transition.from.name === 'post') {
-        $('.cloneImage').removeClass('is--zoomIn');
-        $('.js-eyecatchImage').removeClass('is--blur').removeClass('is--hidden');
+        this.$cloneImage.classList.remove('is--zoomIn');
+        this.$eyecatchImage.classList.remove('is--blur', 'is--hidden');
         setTimeout(() => {
           transition.next();
         }, 1000);
@@ -41,13 +46,13 @@ export default {
       $(window).off('.fitWindow');
 
       // タイトルロゴとボタン隠す
-      $(this.$els.button).removeClass('is--visible');
-      $(this.$els.title).removeClass('is--visible');
+      this.$els.button.classList.remove('is--visible');
+      this.$els.title.classList.remove('is--visible');
 
       // index -> workへ遷移するとき
       // index -> newsへ遷移するとき
       if (transition.to.path === '/work' || transition.to.path === '/news') {
-        $('.js-eyecatchImage').addClass('is--blur');
+        this.$eyecatchImage.classList.add('is--blur');
       }
 
       setTimeout(() => {
@@ -58,7 +63,10 @@ export default {
 
   data() {
     return {
-      windowHeight: ''
+      windowHeight: '',
+      $headerTitle: null,
+      $cloneImage: null,
+      $eyecatchImage: null
     };
   },
 
@@ -71,20 +79,24 @@ export default {
   ready() {
     // console.log('index ready');
 
+    // set DOM
+    const $grain = document.getElementById('js-grain');
+    const $naviOpen = document.getElementById('js-naviOpen');
+
     // ノイズ開始・表示する
     store.actions.changeGrainStatus('start');
-    $('.js-grain').removeClass('is--hidden');
+    $grain.classList.remove('is--hidden');
 
     // ページタイトルを変更
     store.actions.changePageTitle('Top');
 
     setTimeout(() => {
-      $(this.$els.title).addClass('is--visible');
+      this.$els.title.classList.add('is--visible');
     }, 100);
 
     setTimeout(() => {
-      $(this.$els.button).addClass('is--visible');
-      $('.js-naviOpen').addClass('is--visible');
+      this.$els.button.classList.add('is--visible');
+      $naviOpen.classList.add('is--visible');
 
       // 下へのスクロールがあったらworkへ遷移
       this.onScrollTransition('/work', 'more', 10);
@@ -96,9 +108,11 @@ export default {
 
   methods: {
     onScrollTransition: store.actions.onScrollTransition,
+
     fitWindow: function() {
-      this.windowHeight = $(window).height();
-      $('.js-page').css({ height: this.windowHeight });
+      const $page = document.getElementById('js-page');
+      this.windowHeight = window.document.documentElement.clientHeight;
+      $page.style.height = this.windowHeight + 'px';
     }
   }
 };

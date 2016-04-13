@@ -1,7 +1,7 @@
 <template lang='jade'>
 .eyecatch(v-el:eyecatch)
-  .image.js-eyecatchImage(v-bind:style='{ backgroundImage:"url("+eyecatch+")" }')
-  canvas.grain#grain.js-grain
+  .image#js-eyecatchImage.js-eyecatchImage(v-bind:style='{ backgroundImage:"url("+eyecatch+")" }')
+  canvas.grain#js-grain.js-grain
 </template>
 
 <script>
@@ -28,7 +28,7 @@ export default {
 
   methods: {
     grain: function() {
-      const canvas = document.getElementById('grain');
+      const canvas = document.getElementById('js-grain');
       const ctx = canvas.getContext('2d');
 
       // resize
