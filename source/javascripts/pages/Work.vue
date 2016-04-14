@@ -1,5 +1,5 @@
 <template lang='jade'>
-section.page.js-page.archive
+section.page#js-page.js-page.archive
   h1.archive__title(v-el:title)
     span WORK
 
@@ -23,14 +23,21 @@ export default {
     activate: function(transition) {
       // console.log('work activate');
 
-      $(window).scrollTop(0);
+      // set DOM
+      const $body = document.body;
+      this.$cloneImage = document.getElementById('js-cloneImage');
+      this.$eyecatchImage = document.getElementById('js-eyecatchImage');
+
+      // ブラウザバックとかでも絶対ページの一番上から表示
+      document.body.scrollTop = 0;
 
       // inアニメーション
-      $('.js-eyecatchImage').addClass('is--blur').removeClass('is--hidden');
+      this.$eyecatchImage.classList.add('is--blur');
+      this.$eyecatchImage.classList.remove('is--hidden');
 
       // single -> workに遷移するとき
       if (transition.from.name === 'post') {
-        $('.cloneImage').removeClass('is--zoomIn');
+        this.$cloneImage.classList.remove('is--zoomIn');
         setTimeout(() => {
           transition.next();
         }, 1000);
@@ -50,11 +57,11 @@ export default {
 
       // work -> single(photo)へ遷移するとき
       if (transition.to.name === 'post') {
-        $('body').addClass('is--disableScroll');
-        $('.js-eyecatchImage').addClass('is--hidden');
+        $body.classList.add('is--disableScroll');
+        this.$eyecatchImage.classList.add('is--hidden');
 
         setTimeout(() => {
-          $('.cloneImage').addClass('is--zoomIn');
+          this.$cloneImage.classList.add('is--zoomIn');
         }, 1000);
         setTimeout(() => {
           transition.next();
@@ -65,9 +72,9 @@ export default {
       // work -> aboutへ遷移するとき
       if (transition.to.path === '/' || transition.to.path === '/about') {
         // outアニメーション
-        $(this.$els.title).removeClass('is--visible');
-        $(this.$els.entryList).removeClass('is--visible');
-        $('.js-eyecatchImage').removeClass('is--blur');
+        this.$els.title.classList.remove('is--visible');
+        this.$els.entryList.remove('is--visible');
+        this.$eyecatchImage.classList.remove('is--blur');
         // アニメーション終了後に遷移
         setTimeout(() => {
           transition.next();
@@ -77,8 +84,8 @@ export default {
       // work -> newsへ遷移するとき
       if (transition.to.path === '/news') {
         // outアニメーション
-        $(this.$els.title).removeClass('is--visible');
-        $(this.$els.entryList).removeClass('is--visible');
+        this.$els.title.classList.remove('is--visible');
+        this.$els.entryList.remove('is--visible');
         // アニメーション終了後に遷移
         setTimeout(() => {
           transition.next();
@@ -89,6 +96,13 @@ export default {
 
   components: {
     'component-entryitem': EntryItem
+  },
+
+  data() {
+    return {
+      $cloneImage: null,
+      $eyecatchImage: null
+    };
   },
 
   computed: {
@@ -106,28 +120,33 @@ export default {
   ready() {
     // console.log('work ready');
 
+    // set DOM
+    const $grain = document.getElementById('js-grain');
+    const $headerTitle = document.getElementById('js-headerTitle');
+    const $naviOpen = document.getElementById('js-naviOpen');
+
     // eyecatch
-    $('.js-eyecatchImage').addClass('is--noanimation');
+    this.$eyecatchImage.classList.add('is--noanimation');
     setTimeout(() => {
-      $('.js-eyecatchImage').removeClass('is--noanimation');
+      this.$eyecatchImage.classList.remove('is--noanimation');
     }, 1000);
 
     // ノイズ停止・隠す
     store.actions.changeGrainStatus('stop');
-    $('.js-grain').addClass('is--hidden');
+    $grain.classList.add('is--hidden');
 
     // ページタイトルを変更
     store.actions.changePageTitle('Work');
 
     // ページタイトルをフェードイン
     setTimeout(() => {
-      $(this.$els.title).addClass('is--visible');
+      this.$els.title.classList.add('is--visible');
     }, 150);
 
     setTimeout(() => {
       // ヘッダータイトルとナビをフェードイン
-      $('.js-headerTitle').addClass('is--visible');
-      $('.js-naviOpen').addClass('is--visible');
+      $headerTitle.classList.add('is--visible');
+      $naviOpen.classList.add('is--visible');
 
       // totalPostsとpageNumをリセット
       this.resetPageNum();
@@ -140,7 +159,7 @@ export default {
             // console.log(this.posts);
 
             // show
-            $(this.$els.entryList).addClass('is--visible');
+            this.$els.entryList.classList.add('is--visible');
 
             // 無限スクロール
             setTimeout(store.actions.infiniteScroll('photo', 4, false, false), 600);
