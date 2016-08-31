@@ -22,8 +22,9 @@ const bundleScript = (isProduction) => {
   const srcFiles = glob.sync('./' + path.source.javascripts + '*.js');
   const srcPath = './' + path.source.javascripts;
   const destPath = './' + path.build.javascripts;
+  let isInitial = true;
 
-  srcFiles.forEach((file) => {
+  srcFiles.forEach((file, id) => {
     let b;
 
     const options = {
@@ -44,18 +45,17 @@ const bundleScript = (isProduction) => {
 
     // bundle function
     const bundle = () => {
-      // eslint
-      gulp
-        .src([
-          path.source.javascripts + '**/*.{js,jsx,vue}',
-          '!' + path.source.javascripts + 'lib/**/*'
-        ])
-        .pipe(plumber())
-        .pipe(esLint({
-          useEslintrc: true
-        }))
-        .pipe(esLint.format())
-        .pipe(esLint.failAfterError());
+      // ESLint
+      // 初回実行時だけ、各bundleが全部終わったタイミングでESLintを実行する
+      if (isInitial) {
+        if (id === srcFiles.length-1) {
+          gulp.start('esLint');
+          isInitial = false;
+        }
+      }
+      else {
+        gulp.start('esLint');
+      }
 
       const bundleFile = file.replace(/.+\/(.+)\.js/g, '$1') + '.js';
 

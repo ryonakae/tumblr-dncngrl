@@ -6,10 +6,6 @@ import runSequence from 'run-sequence';
 
 // watch
 gulp.task('watch', () => {
-  watch(path.source.root + '**/*.pug', (event) => {
-    gulp.start('pug');
-  });
-
   watch(path.source.root + '**/*.html', (event) => {
     gulp.start('include');
   });
