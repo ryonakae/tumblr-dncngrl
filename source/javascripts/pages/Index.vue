@@ -1,4 +1,4 @@
-<template lang='jade'>
+<template lang='pug'>
 section.page#js-page.js-page.index
   h1.index__title(v-el:title) Dancing Girl.
 

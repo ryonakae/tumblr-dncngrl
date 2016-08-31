@@ -1,4 +1,4 @@
-<template lang='jade'>
+<template lang='pug'>
 section.page.js-page.single
   //- photo
   article.entry.entry--photo(v-el:entry, v-if='post.type === "photo"')

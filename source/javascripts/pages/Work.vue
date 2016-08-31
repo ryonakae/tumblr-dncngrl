@@ -1,4 +1,4 @@
-<template lang='jade'>
+<template lang='pug'>
 section.page#js-page.js-page.archive
   h1.archive__title(v-el:title)
     span WORK

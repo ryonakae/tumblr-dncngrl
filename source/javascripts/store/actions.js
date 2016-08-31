@@ -1,7 +1,7 @@
 import store from '../store/';
 
-import { vueRouter } from '../main.js';
-import { myUaManager } from '../main.js';
+import { vueRouter } from '../bundle.js';
+import { myUaManager } from '../bundle.js';
 
 window.jQuery = window.$ = require('jquery');
 const moment = require('moment');

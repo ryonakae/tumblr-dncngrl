@@ -3,7 +3,7 @@
 
 * Tumblr API v2
 * Vue.js + Vuex + Vueify (with ES6)
-* Jade
+* pug
 * Stylus
 
 

@@ -1,4 +1,4 @@
-<template lang='jade'>
+<template lang='pug'>
   .cloneImage#js-cloneImage(v-bind:style='{ width:imageWidth+"px", height:imageHeight+"px", top:imageOffsetTop+"px" }')
     .image(v-bind:style='{ backgroundImage:"url("+imageUrl+")" }')
 </template>

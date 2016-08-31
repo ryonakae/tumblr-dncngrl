@@ -1,4 +1,4 @@
-<template lang='jade'>
+<template lang='pug'>
 .eyecatch(v-el:eyecatch)
   .image#js-eyecatchImage.js-eyecatchImage(v-bind:style='{ backgroundImage:"url("+eyecatch+")" }')
   canvas.grain#js-grain.js-grain

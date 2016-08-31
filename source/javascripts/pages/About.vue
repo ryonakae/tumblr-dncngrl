@@ -1,4 +1,4 @@
-<template lang='jade'>
+<template lang='pug'>
 section.page.js-page.about
   .about__content.js-aboutContent(v-el:content)
     article.entry(v-el:entry)

@@ -1,4 +1,4 @@
-<template lang='jade'>
+<template lang='pug'>
 //- photo
 article.entryItem.entryItem--photo(v-el:entry-item, v-if='post.type === "photo"')
   a.link(v-link='{ name: "post", params: { id: post.id, slug: post.slug }}', v-on:click='setEntryImage')

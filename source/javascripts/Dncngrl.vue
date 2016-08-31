@@ -1,4 +1,4 @@
-<template lang='jade'>
+<template lang='pug'>
 #Dncngrl
   component-eyecatch
   component-cloneimage
@@ -15,7 +15,7 @@ import Eyecatch from './components/Eyecatch.vue';
 import Header from './components/Header.vue';
 import CloneImage from './components/CloneImage.vue';
 
-import { myUaManager } from './main.js';
+import { myUaManager } from './bundle.js';
 
 export default {
   components: {
