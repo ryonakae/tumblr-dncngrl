@@ -31,7 +31,8 @@ export default {
         setTimeout(() => {
           transition.next();
         }, 1000);
-      } else {
+      }
+      else {
         // このページに遷移
         transition.next();
       }

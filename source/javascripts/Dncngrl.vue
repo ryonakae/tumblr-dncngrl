@@ -15,7 +15,7 @@ import Eyecatch from './components/Eyecatch.vue';
 import Header from './components/Header.vue';
 import CloneImage from './components/CloneImage.vue';
 
-import { myUaManager } from './bundle.js';
+import {myUaManager} from './bundle.js';
 
 export default {
   components: {
@@ -39,7 +39,8 @@ export default {
     this.$watch('pageTitle', () => {
       if (this.pageTitle === 'Top' || this.pageTitle === 'Index') {
         document.title = store.state.siteTitle;
-      } else {
+      }
+      else {
         document.title = this.pageTitle + ' | ' + store.state.siteTitle;
       }
     });

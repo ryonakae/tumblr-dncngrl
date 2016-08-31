@@ -61,7 +61,8 @@ export default {
         setTimeout(() => {
           transition.next();
         }, 2300);
-      } else {
+      }
+      else {
         setTimeout(() => {
           transition.next();
         }, 1300);

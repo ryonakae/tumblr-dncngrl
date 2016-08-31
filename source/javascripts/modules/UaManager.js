@@ -10,7 +10,8 @@ export default class UaManager {
   device() {
     if (ua.device.type === 'mobile' || ua.device.type === 'tablet') {
       return 'mobile';
-    } else {
+    }
+    else {
       return 'pc';
     }
   }
@@ -18,9 +19,11 @@ export default class UaManager {
   os() {
     if (ua.os.name === 'iOS') {
       return 'iOS';
-    } else if (ua.os.name === 'Android') {
+    }
+    else if (ua.os.name === 'Android') {
       return 'Android';
-    } else {
+    }
+    else {
       return 'Other';
     }
   }
@@ -32,10 +35,12 @@ export default class UaManager {
 
     if (this.device() === 'mobile' && this.os() === 'iOS') {
       $('body').addClass('is-ios');
-    } else if (this.device() === 'mobile' && this.os() === 'Android') {
+    }
+    else if (this.device() === 'mobile' && this.os() === 'Android') {
       $('body').addClass('is-android');
-    } else {
+    }
+    else {
       $('body').addClass('is-other');
     }
   }
-};
+}

@@ -66,7 +66,8 @@ export default {
         setTimeout(() => {
           transition.next();
         }, 1000);
-      } else {
+      }
+      else {
         setTimeout(() => {
           transition.next();
         }, 600);
@@ -119,7 +120,8 @@ export default {
           const timestamp = this.post.timestamp;
           const date = store.actions.formatDate(timestamp);
           store.actions.changePageTitle(date);
-        } else {
+        }
+        else {
           store.actions.changePageTitle(this.post.title);
         }
 
