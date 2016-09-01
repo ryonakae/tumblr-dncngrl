@@ -26,7 +26,7 @@
       background-color $textColor_default
       left 0
       opacity 0
-      transition: all 600ms easing('in-out-quart')
+      transition: all 700ms easing($easing)
 
     &:before
       top 0
@@ -63,7 +63,7 @@
     .inner
       width 100%
       height 100%
-      transition: all 600ms easing('in-out-quart')
+      transition: all 700ms easing($easing)
       opacity 0
       transform translateX(-40px) rotate(45deg)
       transform-origin 50% 50%
@@ -140,7 +140,7 @@
           text-indent 0.5em
 
     +media-query($mq_spLarge)
-      font-size $fontSize_naviItem * 0.7
+      font-size $fontSize_naviItem * 0.8
 
       a
         padding 10px 30px

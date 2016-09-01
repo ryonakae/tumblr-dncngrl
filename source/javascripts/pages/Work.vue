@@ -21,10 +21,7 @@ export default {
   // arrow function使うとthisが取れない
   route: {
     activate: function(transition) {
-      // console.log('work activate');
-
       // set DOM
-      const $body = document.body;
       this.$cloneImage = document.getElementById('js-cloneImage');
       this.$eyecatchImage = document.getElementById('js-eyecatchImage');
 
@@ -48,8 +45,6 @@ export default {
       }
     },
     deactivate: function(transition) {
-      // console.log('work deactivate');
-
       // onScrollTransitionを無効
       $(window).off('.onScrollTransition');
 
@@ -58,7 +53,7 @@ export default {
 
       // work -> single(photo)へ遷移するとき
       if (transition.to.name === 'post') {
-        $body.classList.add('is--disableScroll');
+        document.body.classList.add('is--disableScroll');
         this.$eyecatchImage.classList.add('is--hidden');
 
         setTimeout(() => {
@@ -119,57 +114,59 @@ export default {
   },
 
   ready() {
-    // console.log('work ready');
+    const $eyecatch = document.getElementById('js-eyecatch');
 
-    // set DOM
-    const $grain = document.getElementById('js-grain');
-    const $headerTitle = document.getElementById('js-headerTitle');
-    const $naviOpen = document.getElementById('js-naviOpen');
+    $($eyecatch).imagesLoaded({background: true}, ()=>{
+      // アイキャッチ表示
+      $eyecatch.classList.add('is--visible');
 
-    // eyecatch
-    this.$eyecatchImage.classList.add('is--noanimation');
-    setTimeout(() => {
-      this.$eyecatchImage.classList.remove('is--noanimation');
-    }, 1000);
+      // set DOM
+      const $grain = document.getElementById('js-grain');
+      const $headerTitle = document.getElementById('js-headerTitle');
+      const $naviOpen = document.getElementById('js-naviOpen');
 
-    // ノイズ停止・隠す
-    store.actions.changeGrainStatus('stop');
-    $grain.classList.add('is--hidden');
+      // eyecatch
+      this.$eyecatchImage.classList.add('is--noanimation');
+      setTimeout(() => {
+        this.$eyecatchImage.classList.remove('is--noanimation');
+      }, 1000);
 
-    // ページタイトルを変更
-    store.actions.changePageTitle('Work');
+      // ノイズ隠す
+      $grain.classList.add('is--hidden');
 
-    // ページタイトルをフェードイン
-    setTimeout(() => {
-      this.$els.title.classList.add('is--visible');
-    }, 150);
+      // ページタイトルを変更
+      store.actions.changePageTitle('Work');
 
-    setTimeout(() => {
-      // ヘッダータイトルとナビをフェードイン
-      $headerTitle.classList.add('is--visible');
-      $naviOpen.classList.add('is--visible');
+      // ページタイトルをフェードイン
+      setTimeout(() => {
+        this.$els.title.classList.add('is--visible');
+      }, 150);
 
-      // totalPostsとpageNumをリセット
-      this.resetPageNum();
-      this.resetTotalPosts();
+      setTimeout(() => {
+        // ヘッダータイトルとナビをフェードイン
+        $headerTitle.classList.add('is--visible');
+        $naviOpen.classList.add('is--visible');
 
-      // 記事取得・表示
-      store.actions.loadEntry('photo', 4, null, false, false)
-        .then(() => {
-          $('.entryList').imagesLoaded(() => {
-            // console.log(this.posts);
+        // totalPostsとpageNumをリセット
+        this.resetPageNum();
+        this.resetTotalPosts();
 
-            // show
-            this.$els.entryList.classList.add('is--visible');
+        // 記事取得・表示
+        store.actions.loadEntry('photo', 4, null, false, false)
+          .then(() => {
+            $('.entryList').imagesLoaded(() => {
+              // show
+              this.$els.entryList.classList.add('is--visible');
 
-            // 無限スクロール
-            setTimeout(store.actions.infiniteScroll('photo', 4, false, false), 600);
+              // 無限スクロール
+              setTimeout(store.actions.infiniteScroll('photo', 4, false, false), 600);
 
-            // ページの一番上の状態で、上へのスクロールがあったらindexへ遷移
-            this.onScrollTransition('/', 'less', 10);
+              // ページの一番上の状態で、上へのスクロールがあったらindexへ遷移
+              this.onScrollTransition('/', 'less', 10);
+            });
           });
-        });
-    }, 150+600);
+      }, 150+600);
+    });
   },
 
   methods: {
