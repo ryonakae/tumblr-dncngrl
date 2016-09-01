@@ -1,4 +1,4 @@
-<template lang='jade'>
+<template lang='pug'>
 header.header
   h1.header__title#js-headerTitle.js-headerTitle
     a(v-link='{path:"/"}') Dancing Girl.

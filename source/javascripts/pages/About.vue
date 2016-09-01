@@ -1,4 +1,4 @@
-<template lang='jade'>
+<template lang='pug'>
 section.page.js-page.about
   .about__content.js-aboutContent(v-el:content)
     article.entry(v-el:entry)
@@ -61,7 +61,8 @@ export default {
         setTimeout(() => {
           transition.next();
         }, 2300);
-      } else {
+      }
+      else {
         setTimeout(() => {
           transition.next();
         }, 1300);

@@ -1,4 +1,4 @@
-<template lang='jade'>
+<template lang='pug'>
 section.page#js-page.js-page.index
   h1.index__title(v-el:title) Dancing Girl.
 
@@ -31,7 +31,8 @@ export default {
         setTimeout(() => {
           transition.next();
         }, 1000);
-      } else {
+      }
+      else {
         // このページに遷移
         transition.next();
       }

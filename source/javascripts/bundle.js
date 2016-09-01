@@ -30,10 +30,10 @@ import Single from './pages/Single.vue';
 
 // vue-router mapping
 router.map({
-  '/': { component: Index },
-  '/about': { component: About },
-  '/work': { component: Work },
-  '/news': { component: News },
+  '/': {component: Index},
+  '/about': {component: About},
+  '/work': {component: Work},
+  '/news': {component: News},
   '/post/:id/:slug': {
     name: 'post',
     component: Single

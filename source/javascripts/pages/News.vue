@@ -1,4 +1,4 @@
-<template lang='jade'>
+<template lang='pug'>
 section.page.js-page.archive
   h1.archive__title(v-el:title)
     span NEWS
@@ -31,7 +31,8 @@ export default {
         setTimeout(() => {
           transition.next();
         }, 1000);
-      } else {
+      }
+      else {
         // このページに遷移
         transition.next();
       }
