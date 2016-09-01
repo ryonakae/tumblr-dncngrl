@@ -1,5 +1,5 @@
 <template lang='pug'>
-section.page.js-page.single
+section.page#js-page.js-page.single
   //- photo
   article.entry.entry--photo(v-el:entry, v-if='post.type === "photo"')
     .entry__photo
@@ -49,7 +49,6 @@ require('../lib/twitter_widgets.js');
 export default {
   route: {
     activate: function(transition) {
-      // console.log('single activate');
       this.$set('id', transition.to.params.id);
       this.$set('slug', transition.to.params.slug);
 
@@ -95,57 +94,60 @@ export default {
   },
 
   ready() {
-    // アイキャッチ隠す
-    $('.js-eyecatchImage').addClass('is--hidden');
+    const $eyecatch = document.getElementById('js-eyecatch');
 
-    // ノイズ停止・隠す
-    store.actions.changeGrainStatus('stop');
-    $('.js-grain').addClass('is--hidden');
+    $($eyecatch).imagesLoaded({background: true}, ()=>{
+      // アイキャッチ表示
+      $eyecatch.classList.add('is--visible');
 
-    // ヘッダータイトルとナビをフェードイン
-    setTimeout(() => {
-      $('.js-headerTitle').addClass('is--visible');
-      $('.js-naviOpen').addClass('is--visible');
-    }, 600);
+      // アイキャッチ隠す
+      $('.js-eyecatchImage').addClass('is--hidden');
 
-    store.actions.loadEntry(null, null, this.id, true, true)
-      .then(() => {
-        // storeから取得したpostsの最初のオブジェクトをdataのpostに入れる
-        this.post = this.posts[0];
-        // console.log(this.posts);
-        // console.log(this.post);
+      // ノイズ隠す
+      document.getElementById('js-grain').classList.add('is--hidden');
 
-        // ページタイトルを変更
-        if (this.post.type === 'photo') {
-          const timestamp = this.post.timestamp;
-          const date = store.actions.formatDate(timestamp);
-          store.actions.changePageTitle(date);
-        }
-        else {
-          store.actions.changePageTitle(this.post.title);
-        }
+      // ヘッダータイトルとナビをフェードイン
+      setTimeout(() => {
+        $('.js-headerTitle').addClass('is--visible');
+        $('.js-naviOpen').addClass('is--visible');
+      }, 600);
 
-        // 画像読み込み後にフェードイン
-        $(this.$els.entry).imagesLoaded(() => {
-          // Twitterの埋め込みツイートがあったら関数実行
-          if ($('body').find('.twitter-tweet')[0]) {
-            twttr.widgets.load(document.body);
+      store.actions.loadEntry(null, null, this.id, true, true)
+        .then(() => {
+          // storeから取得したpostsの最初のオブジェクトをdataのpostに入れる
+          this.post = this.posts[0];
+
+          // ページタイトルを変更
+          if (this.post.type === 'photo') {
+            const timestamp = this.post.timestamp;
+            const date = store.actions.formatDate(timestamp);
+            store.actions.changePageTitle(date);
+          }
+          else {
+            store.actions.changePageTitle(this.post.title);
           }
 
-          // 記事をフェードイン
-          setTimeout(() => {
-            $(this.$els.entry).addClass('is--visible');
-            // console.log(this.post.title);
-          }, 100);
+          // 画像読み込み後にフェードイン
+          $(this.$els.entry).imagesLoaded(() => {
+            // Twitterの埋め込みツイートがあったら関数実行
+            if ($('body').find('.twitter-tweet')[0]) {
+              twttr.widgets.load(document.body);
+            }
 
-          // 記事フェードイン後
-          setTimeout(() => {
-            store.actions.clearEntryImage();
-            $('.cloneImage').removeClass('is--zoomIn');
-            $('body').removeClass('is--disableScroll');
-          }, 700);
+            // 記事をフェードイン
+            setTimeout(() => {
+              $(this.$els.entry).addClass('is--visible');
+            }, 100);
+
+            // 記事フェードイン後
+            setTimeout(() => {
+              store.actions.clearEntryImage();
+              $('.cloneImage').removeClass('is--zoomIn');
+              $('body').removeClass('is--disableScroll');
+            }, 700);
+          });
         });
-      });
+    });
   },
 
   filters: {

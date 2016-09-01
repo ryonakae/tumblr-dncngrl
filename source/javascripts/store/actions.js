@@ -46,10 +46,6 @@ export default {
     dispatch('CHANGE_PAGE_TITLE', title);
   },
 
-  changeGrainStatus: ({dispatch}, status) => {
-    dispatch('CHANGE_GRAIN_STATUS', status);
-  },
-
   loadEntry: ({dispatch}, postType, limit, id, reblogInfo, notesInfo) => {
     return new Promise((resolve, reject) => {
       // ページ数増やす
@@ -75,7 +71,6 @@ export default {
           dispatch('CLEAR_POSTDATA');
 
           let newData = res.response.posts;
-          // console.log(newData);
 
           // データを日付順にソート
           newData.sort(function(a, b) {
@@ -102,9 +97,6 @@ export default {
       let windowHeight = $(window).height();
       let documentHeight = $(document).height();
 
-      // // console.log('scroll bottom line:', scrollTop + windowHeight);
-      // // console.log('document height:', documentHeight);
-
       // 記事数がtotal_post未満で、
       // スクロールが7割位になったら次のポストロード
       if (store.state.posts.length < store.state.totalPosts && scrollTop + windowHeight > documentHeight * 0.7) {
@@ -117,8 +109,6 @@ export default {
         // 記事取得
         store.actions.loadEntry(postType, limit, null, reblogInfo, notesInfo)
           .then(() => {
-            // console.log(store.state.posts);
-
             // lock解除
             setTimeout(() => {
               loadLock = false;

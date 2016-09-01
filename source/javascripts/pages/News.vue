@@ -1,5 +1,5 @@
 <template lang='pug'>
-section.page.js-page.archive
+section.page#js-page.js-page.archive
   h1.archive__title(v-el:title)
     span NEWS
 
@@ -18,8 +18,6 @@ window.jQuery = window.$ = require('jquery');
 export default {
   route: {
     activate: function(transition) {
-      // console.log('news activate');
-
       $(window).scrollTop(0);
 
       // inアニメーション
@@ -38,8 +36,6 @@ export default {
       }
     },
     deactivate: function(transition) {
-      // console.log('news deactivate');
-
       // infiniteScrollを無効
       $(window).off('.infiniteScroll');
 
@@ -97,44 +93,47 @@ export default {
   },
 
   ready() {
-    // console.log('news ready');
+    const $eyecatch = document.getElementById('js-eyecatch');
 
-    // eyecatch
-    $('.js-eyecatchImage').addClass('is--noanimation');
-    setTimeout(() => {
-      $('.js-eyecatchImage').removeClass('is--noanimation');
-    }, 1000);
+    $($eyecatch).imagesLoaded({background: true}, ()=>{
+      // アイキャッチ表示
+      $eyecatch.classList.add('is--visible');
 
-    // ノイズ停止・隠す
-    store.actions.changeGrainStatus('stop');
-    $('.js-grain').addClass('is--hidden');
+      // eyecatch
+      $('.js-eyecatchImage').addClass('is--noanimation');
+      setTimeout(() => {
+        $('.js-eyecatchImage').removeClass('is--noanimation');
+      }, 1000);
 
-    // ページタイトルを変更
-    store.actions.changePageTitle('News');
+      // ノイズ停止
+      document.getElementById('js-grain').classList.add('is--hidden');
 
-    // ページタイトルをフェードイン
-    setTimeout(() => {
-      $(this.$els.title).addClass('is--visible');
-    }, 150);
+      // ページタイトルを変更
+      store.actions.changePageTitle('News');
 
-    setTimeout(() => {
-      // ヘッダータイトルとナビをフェードイン
-      $('.js-headerTitle').addClass('is--visible');
-      $('.js-naviOpen').addClass('is--visible');
+      // ページタイトルをフェードイン
+      setTimeout(() => {
+        $(this.$els.title).addClass('is--visible');
+      }, 150);
 
-      // totalPostsとpageNumをリセット
-      this.resetPageNum();
-      this.resetTotalPosts();
+      setTimeout(() => {
+        // ヘッダータイトルとナビをフェードイン
+        $('.js-headerTitle').addClass('is--visible');
+        $('.js-naviOpen').addClass('is--visible');
 
-      store.actions.loadEntry('text', 4, null, false, true)
-        .then(() => {
-          // console.log(this.posts);
-          $(this.$els.entryList).addClass('is--visible');
+        // totalPostsとpageNumをリセット
+        this.resetPageNum();
+        this.resetTotalPosts();
 
-          // 無限スクロール
-          setTimeout(store.actions.infiniteScroll('text', 4, false, true), 600);
-        });
-    }, 150+600);
+        store.actions.loadEntry('text', 4, null, false, true)
+          .then(() => {
+            $(this.$els.entryList).addClass('is--visible');
+
+            // 無限スクロール
+            setTimeout(store.actions.infiniteScroll('text', 4, false, true), 600);
+          });
+      }, 150+600);
+    });
   },
 
   methods: {

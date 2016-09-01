@@ -1,6 +1,7 @@
 <template lang='pug'>
 section.page#js-page.js-page.index
-  h1.index__title(v-el:title) Dancing Girl.
+  h1.index__title(v-el:title)
+    span Dancing Girl.
 
   a.index__more(v-el:button, v-link='{path:"/work"}')
     span.text WORK
@@ -10,12 +11,12 @@ section.page#js-page.js-page.index
 <script>
 import store from '../store/';
 window.jQuery = window.$ = require('jquery');
+const imagesLoaded = require('imagesloaded');
+imagesLoaded.makeJQueryPlugin($);
 
 export default {
   route: {
     activate: function(transition) {
-      // console.log('index activate');
-
       // set DOM
       this.$headerTitle = document.getElementById('js-headerTitle');
       this.$cloneImage = document.getElementById('js-cloneImage');
@@ -38,8 +39,6 @@ export default {
       }
     },
     deactivate: function(transition) {
-      // console.log('index deactivate');
-
       // onScrollTransitionをunbind
       $(window).off('.onScrollTransition');
 
@@ -78,33 +77,37 @@ export default {
   },
 
   ready() {
-    // console.log('index ready');
+    const $eyecatch = document.getElementById('js-eyecatch');
 
-    // set DOM
-    const $grain = document.getElementById('js-grain');
-    const $naviOpen = document.getElementById('js-naviOpen');
+    $($eyecatch).imagesLoaded({background: true}, ()=>{
+      // set DOM
+      const $grain = document.getElementById('js-grain');
+      const $naviOpen = document.getElementById('js-naviOpen');
 
-    // ノイズ開始・表示する
-    store.actions.changeGrainStatus('start');
-    $grain.classList.remove('is--hidden');
+      // アイキャッチ表示
+      $eyecatch.classList.add('is--visible');
 
-    // ページタイトルを変更
-    store.actions.changePageTitle('Top');
+      // ノイズ表示する
+      $grain.classList.remove('is--hidden');
 
-    setTimeout(() => {
-      this.$els.title.classList.add('is--visible');
-    }, 100);
+      // ページタイトルを変更
+      store.actions.changePageTitle('Top');
 
-    setTimeout(() => {
-      this.$els.button.classList.add('is--visible');
-      $naviOpen.classList.add('is--visible');
+      setTimeout(() => {
+        this.$els.title.classList.add('is--visible');
+      }, 100);
 
-      // 下へのスクロールがあったらworkへ遷移
-      this.onScrollTransition('/work', 'more', 10);
+      setTimeout(() => {
+        this.$els.button.classList.add('is--visible');
+        $naviOpen.classList.add('is--visible');
 
-      this.fitWindow();
-      $(window).on('resize.fitWindow orientationchange.fitWindow', this.fitWindow);
-    }, 600);
+        // 下へのスクロールがあったらworkへ遷移
+        this.onScrollTransition('/work', 'more', 10);
+
+        this.fitWindow();
+        $(window).on('resize.fitWindow orientationchange.fitWindow', this.fitWindow);
+      }, 600);
+    });
   },
 
   methods: {

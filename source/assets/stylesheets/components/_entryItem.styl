@@ -6,14 +6,13 @@
       width 100%
       height 100%
       padding 60px
-      transition: all 600ms ease
+      transition: all 700ms ease
 
     .is-pc &
       &:hover
         .link
           text-decoration none
           background-color $bgColor_inverse
-          border-color $borderColor_newsHover
           color $textColor_inverse
 
     .info,
@@ -79,11 +78,10 @@
 
 
   &--photo
-    max-width 600px
+    max-width 700px
     margin 0 auto
     position relative
     overflow hidden
-    background-color #000
 
     &:first-child
       margin-top 0
@@ -93,65 +91,35 @@
         .image
           // transform scale(1.05)
           transform-origin 50% 50%
-          opacity 0.5
-
-        .title
-          margin-top -10px
-          opacity 1
-
-        .notes
-          margin-top 40px
-          opacity 1
+          opacity 0.75
 
     .link
       display block
       width 100%
       height 100%
       line-height 0
+      background-color #000
 
     .image
       width 100%
       height auto
-      transition: all 600ms ease
-      position relative
+      transition: all 700ms ease
       z-index 1
 
-    .title,
-    .notes
-      position absolute
-      top 50%
-      left 50%
-      transform translate(-50%, -50%)
-      z-index 3
-      color $textColor_default
-      transition: all 600ms easing('out-quint')
-
     .title
+      font-size $fontSize_default
       margin 0
-      line-height 1
-      font-size $fontSize_entryItemTitle
+      margin-top 10px
 
     .notes
       font-size $fontSize_info
-      font-family $fontFamily_title
-      transition-delay 100ms
-      margin-top 60px
-      opacity 0
+      margin-top 3px
 
     +media-query($mq_tablet)
       max-width 500px
 
-      .title
-        font-size $fontSize_entryItemTitle * 0.9
-
     +media-query($mq_spLarge)
       max-width 320px
 
-      .title
-        font-size $fontSize_entryItemTitle * 0.7
-
     +media-query($mq_sp)
       max-width 260px
-
-      .title
-        font-size $fontSize_entryItemTitle * 0.6

@@ -31,8 +31,6 @@ export default {
   },
 
   ready() {
-    // console.log('dncngrl ready');
-
     // UA見てbodyにclass付与
     myUaManager.init();
 

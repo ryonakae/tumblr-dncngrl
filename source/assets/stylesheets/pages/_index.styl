@@ -4,45 +4,48 @@
   height 100vh
 
 .index__title
-  hide-text()
   margin 0
   position absolute
   top 50%
   left 50%
-  background url('../images/index_logo.png') no-repeat
-  background-size (1060/2)px (246/2)px
-  width (1060/2)px
-  height (246/2)px
   opacity 0
   transform translate(-50%, -50%)
-  transition: opacity 600ms easing('in-out-quart')
-  transform-origin 50% 50%
+  transition: opacity 700ms easing($easing)
+
+  span
+    display block
+    hide-text()
+    background url('../images/index_logo.png') no-repeat
+    background-size cover
+    width (968px/2)
+    height (180px/2)
+
+    +media-query($mq_tablet)
+      width (968px/2) * 0.85
+      height (180px/2) * 0.85
+
+    +media-query($mq_spLarge)
+      width (968px/2) * 0.7
+      height (180px/2) * 0.7
+
+    +media-query($mq_sp)
+      width (968px/2) * 0.6
+      height (180px/2) * 0.6
+
+    +media-query($mq_spSmall)
+      width (968px/2) * 0.5
+      height (180px/2) * 0.5
 
   &.is--visible
     opacity 1
-
-  +media-query($mq_tablet)
-    width 412px
-    height 100px
-    background-size 412px 100px
-
-  +media-query($mq_spLarge)
-    width 300px
-    height 73px
-    background-size 300px 73px
-
-  +media-query($mq_sp)
-    width 260px
-    height 63px
-    background-size 260px 63px
 
 .index__more
   position absolute
   top calc('100% - 80px', 85%)
   left 50%
   opacity 0
-  transform translate(-50%, 50px)
-  transition: all 600ms easing('in-out-quart')
+  transform translate(-50%, 40px)
+  transition: all 700ms easing($easing)
   filter blur(20px)
 
   &.is--visible
