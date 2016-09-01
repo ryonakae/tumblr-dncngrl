@@ -1,5 +1,5 @@
 <template lang='pug'>
-.eyecatch(v-el:eyecatch)
+.eyecatch(ref='eyecatch')
   .image#js-eyecatchImage.js-eyecatchImage(v-bind:style='{ backgroundImage:"url("+eyecatch+")" }')
   canvas.grain#js-grain.js-grain
 </template>
@@ -20,7 +20,7 @@ export default {
     }
   },
 
-  ready() {
+  mounted() {
     store.actions.setEyecatch(this);
 
     this.$watch('grainStatus', this.grain);

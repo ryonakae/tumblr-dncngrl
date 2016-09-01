@@ -1,9 +1,9 @@
 <template lang='pug'>
 section.page.js-page.about
-  .about__content.js-aboutContent(v-el:content)
-    article.entry(v-el:entry)
+  .about__content.js-aboutContent(ref='content')
+    article.entry(ref='entry')
       h1.entry__title About
-      .entry__body {{{articleData}}}
+      .entry__body(v-html='articleData')
       //- .entry__body.
       //-   <p><img src="http://static.tumblr.com/xm1j4jr/GKXnym2bx/about_visual.png"/></p>
       //-
@@ -46,7 +46,7 @@ export default {
 
       // outアニメーション
       setTimeout(() => {
-        $(this.$els.content).removeClass('is--visible');
+        $(this.$refs.content).removeClass('is--visible');
       }, 150);
       setTimeout(() => {
         $('.js-eyecatchImage').removeClass('is--shiftLeft');
@@ -76,12 +76,12 @@ export default {
     };
   },
 
-  ready() {
+  mounted() {
     // console.log('about ready');
 
     // アイキャッチとコンテンツを移動
     setTimeout(() => {
-      $(this.$els.content).addClass('is--visible');
+      $(this.$refs.content).addClass('is--visible');
     }, 150);
     setTimeout(() => {
       $('.js-eyecatchImage').addClass('is--shiftLeft');
@@ -104,12 +104,12 @@ export default {
     this.getAboutContent()
       .then(() => {
         setTimeout(() => {
-          $(this.$els.entry).addClass('is--visible');
+          $(this.$refs.entry).addClass('is--visible');
         }, 1200);
       });
 
     // setTimeout(() => {
-    //   $(this.$els.entry).addClass('is--visible');
+    //   $(this.$refs.entry).addClass('is--visible');
     // }, 1200);
   },
 

@@ -49,7 +49,7 @@
     "stylus": "^0.54.5",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "vueify": "^8.3.5",
+    "vueify": "^9.2.2",
     "watchify": "^3.7.0"
   },
   "dependencies": {
@@ -58,8 +58,8 @@
     "moment": "^2.11.2",
     "ua-parser-js": "^0.7.10",
     "velocity-animate": "^1.2.3",
-    "vue": "^1.0.16",
-    "vue-router": "^0.7.11",
-    "vuex": "^0.3.0"
+    "vue": "^2.0.0-rc.4",
+    "vue-router": "^2.0.0-rc.4",
+    "vuex": "^2.0.0-rc.5"
   }
 }

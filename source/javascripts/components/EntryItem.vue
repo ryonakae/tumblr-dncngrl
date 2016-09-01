@@ -1,13 +1,13 @@
 <template lang='pug'>
 //- photo
-article.entryItem.entryItem--photo(v-el:entry-item, v-if='post.type === "photo"')
+article.entryItem.entryItem--photo(ref='entry-item', v-if='post.type === "photo"')
   a.link(v-link='{ name: "post", params: { id: post.id, slug: post.slug }}', v-on:click='setEntryImage')
     img.image(v-bind:src='post.photos[0].original_size.url')
     h1.title {{ post.timestamp | moment }}
     div.notes {{ post.note_count }} Notes
 
 //- news
-article.entryItem.entryItem--news(v-el:entry-item, v-if='post.type === "text"')
+article.entryItem.entryItem--news(ref='entry-item', v-if='post.type === "text"')
   a.link(v-link='{ name: "post", params: { id: post.id, slug: post.slug }}')
     .info
       small.date {{ post.timestamp | moment }}
@@ -28,13 +28,13 @@ export default {
       }
     },
     imageWidth() {
-      return this.$els.entryItem.clientWidth;
+      return this.$refs.entryItem.clientWidth;
     },
     imageHeight() {
-      return this.$els.entryItem.clientHeight;
+      return this.$refs.entryItem.clientHeight;
     },
     imageOffset() {
-      const $element = this.$els.entryItem;
+      const $element = this.$refs.entryItem;
       const rect = $element.getBoundingClientRect();
       const offset = {
         top: rect.top + window.pageYOffset,
@@ -44,7 +44,7 @@ export default {
     },
   },
 
-  ready() {
+  mounted() {
     // // console.log(this.image);
   },
 

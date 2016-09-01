@@ -1,20 +1,9 @@
 import Vue from 'vue';
-window.jQuery = window.$ = require('jquery');
-
-// debug mode
-// Vue.config.debug = true;
+// window.jQuery = window.$ = require('jquery');
 
 // import vue-router
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
-
-// vue-router initialize
-const router = new VueRouter({
-  history: true,
-  saveScrollPosition: false,
-  // abstract: true
-});
-export const vueRouter = router;
 
 // uaManager
 import UaManager from './modules/UaManager';
@@ -29,20 +18,28 @@ import News from './pages/News.vue';
 import Single from './pages/Single.vue';
 
 // vue-router mapping
-router.map({
-  '/': {component: Index},
-  '/about': {component: About},
-  '/work': {component: Work},
-  '/news': {component: News},
-  '/post/:id/:slug': {
-    name: 'post',
-    component: Single
-  }
+const routes = [
+  {path: '/', component: Index},
+  {path: '/about', component: About},
+  {path: '/work', component: Work},
+  {path: '/news', component: News},
+  {path: '/post/:id/:slug', component: Single, name: 'post'},
+];
+
+// vue-router initialize
+const router = new VueRouter({
+  routes: routes,
+  history: true,
+  saveScrollPosition: false,
+  // abstract: true
 });
+export const vueRouter = router;
 
 // import app
 import Dncngrl from './Dncngrl.vue';
 const App = Vue.extend(Dncngrl);
 
 // start app
-router.start(App, '#app');
+new Vue({
+  router: router,
+}).$mount('#app');

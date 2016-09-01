@@ -1,8 +1,8 @@
 <template lang='pug'>
 section.page#js-page.js-page.index
-  h1.index__title(v-el:title) Dancing Girl.
+  h1.index__title(ref='title') Dancing Girl.
 
-  a.index__more(v-el:button, v-link='{path:"/work"}')
+  a.index__more(ref='button', v-link='{path:"/work"}')
     span.text WORK
     .icon
 </template>
@@ -47,8 +47,8 @@ export default {
       $(window).off('.fitWindow');
 
       // タイトルロゴとボタン隠す
-      this.$els.button.classList.remove('is--visible');
-      this.$els.title.classList.remove('is--visible');
+      this.$refs.button.classList.remove('is--visible');
+      this.$refs.title.classList.remove('is--visible');
 
       // index -> workへ遷移するとき
       // index -> newsへ遷移するとき
@@ -77,7 +77,7 @@ export default {
     }
   },
 
-  ready() {
+  mounted() {
     // console.log('index ready');
 
     // set DOM
@@ -92,11 +92,11 @@ export default {
     store.actions.changePageTitle('Top');
 
     setTimeout(() => {
-      this.$els.title.classList.add('is--visible');
+      this.$refs.title.classList.add('is--visible');
     }, 100);
 
     setTimeout(() => {
-      this.$els.button.classList.add('is--visible');
+      this.$refs.button.classList.add('is--visible');
       $naviOpen.classList.add('is--visible');
 
       // 下へのスクロールがあったらworkへ遷移
@@ -108,7 +108,8 @@ export default {
   },
 
   methods: {
-    onScrollTransition: store.actions.onScrollTransition,
+    // onScrollTransition: store.actions.onScrollTransition,
+    onScrollTransition: null,
 
     fitWindow: function() {
       const $page = document.getElementById('js-page');

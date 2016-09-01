@@ -1,11 +1,11 @@
 <template lang='pug'>
 section.page#js-page.js-page.archive
-  h1.archive__title(v-el:title)
+  h1.archive__title(ref='title')
     span WORK
 
   .archive__content
-    ul.entryList.entryList--photo(v-el:entry-list)
-      li.entryList__item.entryList__item--photo(v-for='post in posts', track-by='id')
+    ul.entryList.entryList--photo(ref='entry-list')
+      li.entryList__item.entryList__item--photo(v-for='post in posts', :key='id')
         component-entryitem(:post='post')
 </template>
 
@@ -73,8 +73,8 @@ export default {
       // work -> aboutへ遷移するとき
       if (transition.to.path === '/' || transition.to.path === '/about') {
         // outアニメーション
-        this.$els.title.classList.remove('is--visible');
-        this.$els.entryList.remove('is--visible');
+        this.$refs.title.classList.remove('is--visible');
+        this.$refs.entryList.remove('is--visible');
         this.$eyecatchImage.classList.remove('is--blur');
         // アニメーション終了後に遷移
         setTimeout(() => {
@@ -85,8 +85,8 @@ export default {
       // work -> newsへ遷移するとき
       if (transition.to.path === '/news') {
         // outアニメーション
-        this.$els.title.classList.remove('is--visible');
-        this.$els.entryList.remove('is--visible');
+        this.$refs.title.classList.remove('is--visible');
+        this.$refs.entryList.remove('is--visible');
         // アニメーション終了後に遷移
         setTimeout(() => {
           transition.next();
@@ -118,7 +118,7 @@ export default {
     }
   },
 
-  ready() {
+  mounted() {
     // console.log('work ready');
 
     // set DOM
@@ -141,7 +141,7 @@ export default {
 
     // ページタイトルをフェードイン
     setTimeout(() => {
-      this.$els.title.classList.add('is--visible');
+      this.$refs.title.classList.add('is--visible');
     }, 150);
 
     setTimeout(() => {
@@ -160,7 +160,7 @@ export default {
             // console.log(this.posts);
 
             // show
-            this.$els.entryList.classList.add('is--visible');
+            this.$refs.entryList.classList.add('is--visible');
 
             // 無限スクロール
             setTimeout(store.actions.infiniteScroll('photo', 4, false, false), 600);
@@ -173,9 +173,12 @@ export default {
   },
 
   methods: {
-    resetPageNum: store.actions.resetPageNum,
-    resetTotalPosts: store.actions.resetTotalPosts,
-    onScrollTransition: store.actions.onScrollTransition
+    // resetPageNum: store.actions.resetPageNum,
+    // resetTotalPosts: store.actions.resetTotalPosts,
+    // onScrollTransition: store.actions.onScrollTransition
+    resetPageNum: null,
+    resetTotalPosts: null,
+    onScrollTransition: null
   }
 };
 </script>

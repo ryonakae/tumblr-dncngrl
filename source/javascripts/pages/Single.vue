@@ -1,7 +1,7 @@
 <template lang='pug'>
 section.page.js-page.single
   //- photo
-  article.entry.entry--photo(v-el:entry, v-if='post.type === "photo"')
+  article.entry.entry--photo(ref='entry', v-if='post.type === "photo"')
     .entry__photo
       img(v-for='photo in post.photos', v-bind:src='photo.original_size.url')
 
@@ -14,7 +14,7 @@ section.page.js-page.single
           small.tags
             span.tags__item(v-for='tag in post.tags') {{tag}}
 
-        .entry__body {{{post.caption}}}
+        .entry__body(v-html='post.caption')
         .entry__reblog
           a(v-bind:href='reblogUrl', target='_blank') Reblog this article
 
@@ -22,7 +22,7 @@ section.page.js-page.single
       a(v-link='{path:"/work"}') BACK TO WORK
 
   //- news
-  article.entry.entry--news(v-el:entry, v-if='post.type === "text"')
+  article.entry.entry--news(ref='entry', v-if='post.type === "text"')
     .entry__content
       h1.entry__title {{post.title}}
 
@@ -40,6 +40,7 @@ section.page.js-page.single
 </template>
 
 <script>
+import Vue from 'vue';
 import store from '../store/';
 window.jQuery = window.$ = require('jquery');
 const imagesLoaded = require('imagesloaded');
@@ -50,15 +51,15 @@ export default {
   route: {
     activate: function(transition) {
       // console.log('single activate');
-      this.$set('id', transition.to.params.id);
-      this.$set('slug', transition.to.params.slug);
+      Vue.set(this, 'id', transition.to.params.id);
+      Vue.set(this, 'slug', transition.to.params.slug);
 
       $('.js-eyecatchImage').addClass('is--blur');
 
       transition.next();
     },
     deactivate: function(transition) {
-      $(this.$els.entry).removeClass('is--visible');
+      $(this.$refs.entry).removeClass('is--visible');
 
       // single -> aboutへ遷移するとき
       if (transition.to.path === '/about') {
@@ -94,7 +95,7 @@ export default {
     }
   },
 
-  ready() {
+  mounted() {
     // アイキャッチ隠す
     $('.js-eyecatchImage').addClass('is--hidden');
 
@@ -126,7 +127,7 @@ export default {
         }
 
         // 画像読み込み後にフェードイン
-        $(this.$els.entry).imagesLoaded(() => {
+        $(this.$refs.entry).imagesLoaded(() => {
           // Twitterの埋め込みツイートがあったら関数実行
           if ($('body').find('.twitter-tweet')[0]) {
             twttr.widgets.load(document.body);
@@ -134,7 +135,7 @@ export default {
 
           // 記事をフェードイン
           setTimeout(() => {
-            $(this.$els.entry).addClass('is--visible');
+            $(this.$refs.entry).addClass('is--visible');
             // console.log(this.post.title);
           }, 100);
 

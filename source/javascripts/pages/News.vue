@@ -1,11 +1,11 @@
 <template lang='pug'>
 section.page.js-page.archive
-  h1.archive__title(v-el:title)
+  h1.archive__title(ref='title')
     span NEWS
 
   .archive__content
-    ul.entryList.entryList--news(v-el:entry-list)
-      li.entryList__item(v-for='post in posts', track-by='id')
+    ul.entryList.entryList--news(ref='entry-list')
+      li.entryList__item(v-for='post in posts', :key='id')
         component-entryitem(:post='post')
 </template>
 
@@ -45,8 +45,8 @@ export default {
 
       // news -> single(news)へ遷移するとき
       if (transition.to.name === 'post') {
-        $(this.$els.title).removeClass('is--visible');
-        $(this.$els.entryList).removeClass('is--visible');
+        $(this.$refs.title).removeClass('is--visible');
+        $(this.$refs.entryList).removeClass('is--visible');
         $('.js-eyecatchImage').addClass('is--hidden');
 
         setTimeout(() => {
@@ -58,8 +58,8 @@ export default {
       // news -> aboutへ遷移するとき
       if (transition.to.path === '/' || transition.to.path === '/about') {
         // outアニメーション
-        $(this.$els.title).removeClass('is--visible');
-        $(this.$els.entryList).removeClass('is--visible');
+        $(this.$refs.title).removeClass('is--visible');
+        $(this.$refs.entryList).removeClass('is--visible');
         $('.js-eyecatchImage').removeClass('is--blur');
         // アニメーション終了後に遷移
         setTimeout(() => {
@@ -70,8 +70,8 @@ export default {
       // news -> workへ遷移するとき
       if (transition.to.path === '/work') {
         // outアニメーション
-        $(this.$els.title).removeClass('is--visible');
-        $(this.$els.entryList).removeClass('is--visible');
+        $(this.$refs.title).removeClass('is--visible');
+        $(this.$refs.entryList).removeClass('is--visible');
         // アニメーション終了後に遷移
         setTimeout(() => {
           transition.next();
@@ -96,7 +96,7 @@ export default {
     }
   },
 
-  ready() {
+  mounted() {
     // console.log('news ready');
 
     // eyecatch
@@ -114,7 +114,7 @@ export default {
 
     // ページタイトルをフェードイン
     setTimeout(() => {
-      $(this.$els.title).addClass('is--visible');
+      $(this.$refs.title).addClass('is--visible');
     }, 150);
 
     setTimeout(() => {
@@ -129,7 +129,7 @@ export default {
       store.actions.loadEntry('text', 4, null, false, true)
         .then(() => {
           // console.log(this.posts);
-          $(this.$els.entryList).addClass('is--visible');
+          $(this.$refs.entryList).addClass('is--visible');
 
           // 無限スクロール
           setTimeout(store.actions.infiniteScroll('text', 4, false, true), 600);
@@ -138,8 +138,10 @@ export default {
   },
 
   methods: {
-    resetPageNum: store.actions.resetPageNum,
-    resetTotalPosts: store.actions.resetTotalPosts
+    // resetPageNum: store.actions.resetPageNum,
+    // resetTotalPosts: store.actions.resetTotalPosts
+    resetPageNum: null,
+    resetTotalPosts: null
   }
 };
 </script>

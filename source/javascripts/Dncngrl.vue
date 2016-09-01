@@ -30,7 +30,7 @@ export default {
     }
   },
 
-  ready() {
+  mounted() {
     // console.log('dncngrl ready');
 
     // UA見てbodyにclass付与
