@@ -10,9 +10,8 @@ Vue.use(VueRouter);
 
 // vue-router initialize
 const router = new VueRouter({
-  // history: true,
+  history: false,
   saveScrollPosition: false,
-  // abstract: true
 });
 export const vueRouter = router;
 

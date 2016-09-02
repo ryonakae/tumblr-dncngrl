@@ -19,7 +19,9 @@ import esLint from 'gulp-eslint';
 
 // bundleScript function
 const bundleScript = (isProduction) => {
-  const srcFiles = glob.sync('./' + path.source.javascripts + '*.js');
+  const srcFiles = glob.sync('./' + path.source.javascripts + '*.js', {
+    ignore: './' + path.source.javascripts + 'config.js' // config.jsは除外する
+  });
   const srcPath = './' + path.source.javascripts;
   const destPath = './' + path.build.javascripts;
   let isInitial = true;
@@ -66,6 +68,7 @@ const bundleScript = (isProduction) => {
         })
         .pipe(source(bundleFile))
         .pipe(buffer())
+        .pipe(gulpif(isProduction, replace('history: false', 'history: true'))) // vue-routerのhistoryオプションを切り替え
         .pipe(gulpif(isProduction, uglify({ preserveComments: 'some' })))
         .pipe(gulp.dest(destPath))
         .on('end', () => {
