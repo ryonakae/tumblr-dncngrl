@@ -15,7 +15,10 @@
 
     .is-pc &
       &:hover
-        opacity 0.7
+        &:before
+          transform translateY(1px)
+        &:after
+          transform translateY(-1px)
 
     &:before,
     &:after
@@ -136,8 +139,8 @@
 
       .is-pc &
         &:hover
-          letter-spacing 0.5em
-          text-indent 0.5em
+          letter-spacing 0.4em
+          text-indent 0.4em
 
     +media-query($mq_spLarge)
       font-size $fontSize_naviItem * 0.8

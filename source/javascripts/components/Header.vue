@@ -32,16 +32,11 @@ export default {
       const $naviOpen = document.getElementById('js-naviOpen');
       const $naviClose = document.getElementById('js-naviClose');
       const $page = document.getElementById('js-page');
-      const $grain = document.getElementById('js-grain');
 
       $body.classList.toggle('is--naviActive');
       $navi.classList.toggle('is--visible');
       $naviOpen.classList.toggle('is--visible');
       $naviClose.classList.toggle('is--visible');
-
-      if ($page.classList.contains('index')) {
-        $grain.classList.toggle('is--hidden');
-      }
     },
 
     naviClose: () => {

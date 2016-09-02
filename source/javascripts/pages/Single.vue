@@ -94,60 +94,50 @@ export default {
   },
 
   ready() {
-    const $eyecatch = document.getElementById('js-eyecatch');
+    // アイキャッチ隠す
+    $('.js-eyecatchImage').addClass('is--hidden');
 
-    $($eyecatch).imagesLoaded({background: true}, ()=>{
-      // アイキャッチ表示
-      $eyecatch.classList.add('is--visible');
+    // ヘッダータイトルとナビをフェードイン
+    setTimeout(() => {
+      $('.js-headerTitle').addClass('is--visible');
+      $('.js-naviOpen').addClass('is--visible');
+    }, 600);
 
-      // アイキャッチ隠す
-      $('.js-eyecatchImage').addClass('is--hidden');
+    store.actions.loadEntry(null, null, this.id, true, true)
+      .then(() => {
+        // storeから取得したpostsの最初のオブジェクトをdataのpostに入れる
+        this.post = this.posts[0];
 
-      // ノイズ隠す
-      document.getElementById('js-grain').classList.add('is--hidden');
+        // ページタイトルを変更
+        if (this.post.type === 'photo') {
+          const timestamp = this.post.timestamp;
+          const date = store.actions.formatDate(timestamp);
+          store.actions.changePageTitle(date);
+        }
+        else {
+          store.actions.changePageTitle(this.post.title);
+        }
 
-      // ヘッダータイトルとナビをフェードイン
-      setTimeout(() => {
-        $('.js-headerTitle').addClass('is--visible');
-        $('.js-naviOpen').addClass('is--visible');
-      }, 600);
-
-      store.actions.loadEntry(null, null, this.id, true, true)
-        .then(() => {
-          // storeから取得したpostsの最初のオブジェクトをdataのpostに入れる
-          this.post = this.posts[0];
-
-          // ページタイトルを変更
-          if (this.post.type === 'photo') {
-            const timestamp = this.post.timestamp;
-            const date = store.actions.formatDate(timestamp);
-            store.actions.changePageTitle(date);
-          }
-          else {
-            store.actions.changePageTitle(this.post.title);
+        // 画像読み込み後にフェードイン
+        $(this.$els.entry).imagesLoaded(() => {
+          // Twitterの埋め込みツイートがあったら関数実行
+          if ($('body').find('.twitter-tweet')[0]) {
+            twttr.widgets.load(document.body);
           }
 
-          // 画像読み込み後にフェードイン
-          $(this.$els.entry).imagesLoaded(() => {
-            // Twitterの埋め込みツイートがあったら関数実行
-            if ($('body').find('.twitter-tweet')[0]) {
-              twttr.widgets.load(document.body);
-            }
+          // 記事をフェードイン
+          setTimeout(() => {
+            $(this.$els.entry).addClass('is--visible');
+          }, 100);
 
-            // 記事をフェードイン
-            setTimeout(() => {
-              $(this.$els.entry).addClass('is--visible');
-            }, 100);
-
-            // 記事フェードイン後
-            setTimeout(() => {
-              store.actions.clearEntryImage();
-              $('.cloneImage').removeClass('is--zoomIn');
-              $('body').removeClass('is--disableScroll');
-            }, 700);
-          });
+          // 記事フェードイン後
+          setTimeout(() => {
+            store.actions.clearEntryImage();
+            $('.cloneImage').removeClass('is--zoomIn');
+            $('body').removeClass('is--disableScroll');
+          }, 700);
         });
-    });
+      });
   },
 
   filters: {

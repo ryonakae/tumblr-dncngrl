@@ -114,59 +114,48 @@ export default {
   },
 
   ready() {
-    const $eyecatch = document.getElementById('js-eyecatch');
+    // set DOM
+    const $headerTitle = document.getElementById('js-headerTitle');
+    const $naviOpen = document.getElementById('js-naviOpen');
 
-    $($eyecatch).imagesLoaded({background: true}, ()=>{
-      // アイキャッチ表示
-      $eyecatch.classList.add('is--visible');
+    // eyecatch
+    this.$eyecatchImage.classList.add('is--noanimation');
+    setTimeout(() => {
+      this.$eyecatchImage.classList.remove('is--noanimation');
+    }, 1000);
 
-      // set DOM
-      const $grain = document.getElementById('js-grain');
-      const $headerTitle = document.getElementById('js-headerTitle');
-      const $naviOpen = document.getElementById('js-naviOpen');
+    // ページタイトルを変更
+    store.actions.changePageTitle('Work');
 
-      // eyecatch
-      this.$eyecatchImage.classList.add('is--noanimation');
-      setTimeout(() => {
-        this.$eyecatchImage.classList.remove('is--noanimation');
-      }, 1000);
+    // ページタイトルをフェードイン
+    setTimeout(() => {
+      this.$els.title.classList.add('is--visible');
+    }, 150);
 
-      // ノイズ隠す
-      $grain.classList.add('is--hidden');
+    setTimeout(() => {
+      // ヘッダータイトルとナビをフェードイン
+      $headerTitle.classList.add('is--visible');
+      $naviOpen.classList.add('is--visible');
 
-      // ページタイトルを変更
-      store.actions.changePageTitle('Work');
+      // totalPostsとpageNumをリセット
+      this.resetPageNum();
+      this.resetTotalPosts();
 
-      // ページタイトルをフェードイン
-      setTimeout(() => {
-        this.$els.title.classList.add('is--visible');
-      }, 150);
+      // 記事取得・表示
+      store.actions.loadEntry('photo', 4, null, false, false)
+        .then(() => {
+          $('.entryList').imagesLoaded(() => {
+            // show
+            this.$els.entryList.classList.add('is--visible');
 
-      setTimeout(() => {
-        // ヘッダータイトルとナビをフェードイン
-        $headerTitle.classList.add('is--visible');
-        $naviOpen.classList.add('is--visible');
+            // 無限スクロール
+            setTimeout(store.actions.infiniteScroll('photo', 4, false, false), 600);
 
-        // totalPostsとpageNumをリセット
-        this.resetPageNum();
-        this.resetTotalPosts();
-
-        // 記事取得・表示
-        store.actions.loadEntry('photo', 4, null, false, false)
-          .then(() => {
-            $('.entryList').imagesLoaded(() => {
-              // show
-              this.$els.entryList.classList.add('is--visible');
-
-              // 無限スクロール
-              setTimeout(store.actions.infiniteScroll('photo', 4, false, false), 600);
-
-              // ページの一番上の状態で、上へのスクロールがあったらindexへ遷移
-              this.onScrollTransition('/', 'less', 10);
-            });
+            // ページの一番上の状態で、上へのスクロールがあったらindexへ遷移
+            this.onScrollTransition('/', 'less', 10);
           });
-      }, 150+600);
-    });
+        });
+    }, 150+600);
   },
 
   methods: {
