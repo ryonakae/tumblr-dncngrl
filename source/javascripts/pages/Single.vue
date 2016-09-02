@@ -120,6 +120,11 @@ export default {
 
         // 画像読み込み後にフェードイン
         $(this.$els.entry).imagesLoaded(() => {
+          // postTypeがnewsだったら、画像を大きいのに差し替える
+          if (this.post.type === 'text') {
+            this.replaceImage();
+          }
+
           // Twitterの埋め込みツイートがあったら関数実行
           if ($('body').find('.twitter-tweet')[0]) {
             twttr.widgets.load(document.body);
@@ -143,6 +148,21 @@ export default {
   filters: {
     moment: (timestamp) => {
       return store.actions.formatDate(timestamp);
+    }
+  },
+
+  methods: {
+    replaceImage: function(){
+      const images = $(this.$els.entry).find('img');
+
+      images.each((id, value)=>{
+        let src = $(value).attr('src');
+
+        if( /media\.tumblr\.com/.test(src) && !/(avatar|assets)/.test(src) && /\.(jpg|jpeg|png|bmp)$/.test(src) ) {
+          src = src.replace( /_\d{1,4}(\.)(jpg|jpeg|png|bmp)$/, '_1280$1$2' );
+          $(value).attr('src', src);
+        }
+      });
     }
   }
 };
