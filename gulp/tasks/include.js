@@ -6,10 +6,13 @@ import prettifyHtml from 'gulp-prettify';
 
 
 gulp.task('include', () => {
-  let env = 'development';
+  let environment;
 
   if (env.isProduction) {
-    env = 'production';
+    environment = 'production';
+  }
+  else {
+    environment = 'development';
   }
 
   return gulp
@@ -18,7 +21,7 @@ gulp.task('include', () => {
       prefix: '@@',
       basePath: '@file',
       context: {
-        env: env
+        env: environment
       }
     }))
     .pipe(prettifyHtml({
