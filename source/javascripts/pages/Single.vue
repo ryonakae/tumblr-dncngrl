@@ -158,7 +158,7 @@ export default {
       images.each((id, value)=>{
         let src = $(value).attr('src');
 
-        if( /media\.tumblr\.com/.test(src) && !/(avatar|assets)/.test(src) && /\.(jpg|jpeg|png|bmp)$/.test(src) ) {
+        if (/media\.tumblr\.com/.test(src) && !/(avatar|assets)/.test(src) && /\.(jpg|jpeg|png|bmp)$/.test(src)) {
           src = src.replace( /_\d{1,4}(\.)(jpg|jpeg|png|bmp)$/, '_1280$1$2' );
           $(value).attr('src', src);
         }
