@@ -1,5 +1,5 @@
-<template lang='jade'>
-section.page.js-page.archive
+<template lang='pug'>
+section.page#js-page.js-page.archive
   h1.archive__title(v-el:title)
     span NEWS
 
@@ -18,8 +18,6 @@ window.jQuery = window.$ = require('jquery');
 export default {
   route: {
     activate: function(transition) {
-      // console.log('news activate');
-
       $(window).scrollTop(0);
 
       // inアニメーション
@@ -31,14 +29,13 @@ export default {
         setTimeout(() => {
           transition.next();
         }, 1000);
-      } else {
+      }
+      else {
         // このページに遷移
         transition.next();
       }
     },
     deactivate: function(transition) {
-      // console.log('news deactivate');
-
       // infiniteScrollを無効
       $(window).off('.infiniteScroll');
 
@@ -96,17 +93,11 @@ export default {
   },
 
   ready() {
-    // console.log('news ready');
-
     // eyecatch
     $('.js-eyecatchImage').addClass('is--noanimation');
     setTimeout(() => {
       $('.js-eyecatchImage').removeClass('is--noanimation');
     }, 1000);
-
-    // ノイズ停止・隠す
-    store.actions.changeGrainStatus('stop');
-    $('.js-grain').addClass('is--hidden');
 
     // ページタイトルを変更
     store.actions.changePageTitle('News');
@@ -127,7 +118,6 @@ export default {
 
       store.actions.loadEntry('text', 4, null, false, true)
         .then(() => {
-          // console.log(this.posts);
           $(this.$els.entryList).addClass('is--visible');
 
           // 無限スクロール

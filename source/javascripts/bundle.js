@@ -10,9 +10,8 @@ Vue.use(VueRouter);
 
 // vue-router initialize
 const router = new VueRouter({
-  history: true,
+  history: false,
   saveScrollPosition: false,
-  // abstract: true
 });
 export const vueRouter = router;
 
@@ -30,10 +29,10 @@ import Single from './pages/Single.vue';
 
 // vue-router mapping
 router.map({
-  '/': { component: Index },
-  '/about': { component: About },
-  '/work': { component: Work },
-  '/news': { component: News },
+  '/': {component: Index},
+  '/about': {component: About},
+  '/work': {component: Work},
+  '/news': {component: News},
   '/post/:id/:slug': {
     name: 'post',
     component: Single

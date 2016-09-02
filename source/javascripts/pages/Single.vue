@@ -1,5 +1,5 @@
-<template lang='jade'>
-section.page.js-page.single
+<template lang='pug'>
+section.page#js-page.js-page.single
   //- photo
   article.entry.entry--photo(v-el:entry, v-if='post.type === "photo"')
     .entry__photo
@@ -49,7 +49,6 @@ require('../lib/twitter_widgets.js');
 export default {
   route: {
     activate: function(transition) {
-      // console.log('single activate');
       this.$set('id', transition.to.params.id);
       this.$set('slug', transition.to.params.slug);
 
@@ -66,7 +65,8 @@ export default {
         setTimeout(() => {
           transition.next();
         }, 1000);
-      } else {
+      }
+      else {
         setTimeout(() => {
           transition.next();
         }, 600);
@@ -97,10 +97,6 @@ export default {
     // アイキャッチ隠す
     $('.js-eyecatchImage').addClass('is--hidden');
 
-    // ノイズ停止・隠す
-    store.actions.changeGrainStatus('stop');
-    $('.js-grain').addClass('is--hidden');
-
     // ヘッダータイトルとナビをフェードイン
     setTimeout(() => {
       $('.js-headerTitle').addClass('is--visible');
@@ -111,15 +107,14 @@ export default {
       .then(() => {
         // storeから取得したpostsの最初のオブジェクトをdataのpostに入れる
         this.post = this.posts[0];
-        // console.log(this.posts);
-        // console.log(this.post);
 
         // ページタイトルを変更
         if (this.post.type === 'photo') {
           const timestamp = this.post.timestamp;
           const date = store.actions.formatDate(timestamp);
           store.actions.changePageTitle(date);
-        } else {
+        }
+        else {
           store.actions.changePageTitle(this.post.title);
         }
 
@@ -133,7 +128,6 @@ export default {
           // 記事をフェードイン
           setTimeout(() => {
             $(this.$els.entry).addClass('is--visible');
-            // console.log(this.post.title);
           }, 100);
 
           // 記事フェードイン後

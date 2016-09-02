@@ -1,11 +1,10 @@
-<template lang='jade'>
-  .cloneImage(v-bind:style='{ width:imageWidth+"px", height:imageHeight+"px", top:imageOffsetTop+"px" }')
+<template lang='pug'>
+  .cloneImage#js-cloneImage(v-bind:style='{ width:imageWidth+"px", height:imageHeight+"px", top:imageOffsetTop+"px" }')
     .image(v-bind:style='{ backgroundImage:"url("+imageUrl+")" }')
 </template>
 
 <script>
 import store from '../store/';
-window.jQuery = window.$ = require('jquery');
 
 export default {
   computed: {
@@ -20,7 +19,7 @@ export default {
     },
     imageOffsetTop() {
       let imageOffset = store.state.entryImage.offset.top;
-      let scrollTop = $(window).scrollTop();
+      let scrollTop = window.pageYOffset;
       return imageOffset - scrollTop;
     }
   }

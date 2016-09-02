@@ -4,7 +4,7 @@
   z-index 3
   opacity 0
   // visibility hidden
-  transition: all 600ms easing('in-out-quart')
+  transition: all 700ms easing($easing)
 
   &.is--visible
     opacity 1
@@ -44,6 +44,15 @@
       margin 0 auto
 
   &--news
+    margin-top 130px
+    background $bgColor_single
+
+    +media-query($mq_tablet)
+      margin-top 110px
+
+    +media-query($mq_spLarge)
+      margin-top 87px
+
     .entry__title
       font-size $fontSize_entryNewsTitle
 
@@ -54,22 +63,16 @@
         font-size $fontSize_entryNewsTitle * 0.8
 
     .entry__content
-      background $bgColor_single
       color $textColor_inverse
-      max-width 640px
-      margin 130px auto
+      max-width 700px
+      margin 0 auto
       padding 55px 60px 60px
-      border-radius 6px
 
       +media-query($mq_tablet)
-        margin 110px auto
         padding 40px
 
       +media-query($mq_spLarge)
-        width 100%
         padding 30px
-        margin 87px 0 0
-        border-radius 0
 
 
 // photo, news, aboutで共通
@@ -206,11 +209,8 @@
   left 50%
   transform translateX(-50%)
   line-height 1
-
-  .is-pc &
-    &:hover
-      letter-spacing 0.15em
-      text-indent 0.15em
+  letter-spacing 0.09em
+  text-indent 0.09em
 
   a
     color $textColor_default

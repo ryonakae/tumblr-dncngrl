@@ -16,55 +16,55 @@ $header_logo_x = 0px;
 $header_logo_y = 0px;
 $header_logo_offset_x = 0px;
 $header_logo_offset_y = 0px;
-$header_logo_width = 190px;
-$header_logo_height = 46px;
-$header_logo_total_width = 190px;
-$header_logo_total_height = 68px;
+$header_logo_width = 237px;
+$header_logo_height = 43px;
+$header_logo_total_width = 237px;
+$header_logo_total_height = 65px;
 $header_logo_image = '../images/sprite.png';
-$header_logo = 0px 0px 0px 0px 190px 46px 190px 68px '../images/sprite.png' 'header_logo';
+$header_logo = 0px 0px 0px 0px 237px 43px 237px 65px '../images/sprite.png' 'header_logo';
 $icon_arrow_name = 'icon_arrow';
 $icon_arrow_x = 0px;
-$icon_arrow_y = 56px;
+$icon_arrow_y = 53px;
 $icon_arrow_offset_x = 0px;
-$icon_arrow_offset_y = -56px;
+$icon_arrow_offset_y = -53px;
 $icon_arrow_width = 22px;
 $icon_arrow_height = 12px;
-$icon_arrow_total_width = 190px;
-$icon_arrow_total_height = 68px;
+$icon_arrow_total_width = 237px;
+$icon_arrow_total_height = 65px;
 $icon_arrow_image = '../images/sprite.png';
-$icon_arrow = 0px 56px 0px -56px 22px 12px 190px 68px '../images/sprite.png' 'icon_arrow';
+$icon_arrow = 0px 53px 0px -53px 22px 12px 237px 65px '../images/sprite.png' 'icon_arrow';
 $header_logo_2x_name = 'header_logo-2x';
 $header_logo_2x_x = 0px;
 $header_logo_2x_y = 0px;
 $header_logo_2x_offset_x = 0px;
 $header_logo_2x_offset_y = 0px;
-$header_logo_2x_width = 380px;
-$header_logo_2x_height = 92px;
-$header_logo_2x_total_width = 380px;
-$header_logo_2x_total_height = 136px;
+$header_logo_2x_width = 474px;
+$header_logo_2x_height = 86px;
+$header_logo_2x_total_width = 474px;
+$header_logo_2x_total_height = 130px;
 $header_logo_2x_image = '../images/sprite-2x.png';
-$header_logo_2x = 0px 0px 0px 0px 380px 92px 380px 136px '../images/sprite-2x.png' 'header_logo-2x';
+$header_logo_2x = 0px 0px 0px 0px 474px 86px 474px 130px '../images/sprite-2x.png' 'header_logo-2x';
 $icon_arrow_2x_name = 'icon_arrow-2x';
 $icon_arrow_2x_x = 0px;
-$icon_arrow_2x_y = 112px;
+$icon_arrow_2x_y = 106px;
 $icon_arrow_2x_offset_x = 0px;
-$icon_arrow_2x_offset_y = -112px;
+$icon_arrow_2x_offset_y = -106px;
 $icon_arrow_2x_width = 44px;
 $icon_arrow_2x_height = 24px;
-$icon_arrow_2x_total_width = 380px;
-$icon_arrow_2x_total_height = 136px;
+$icon_arrow_2x_total_width = 474px;
+$icon_arrow_2x_total_height = 130px;
 $icon_arrow_2x_image = '../images/sprite-2x.png';
-$icon_arrow_2x = 0px 112px 0px -112px 44px 24px 380px 136px '../images/sprite-2x.png' 'icon_arrow-2x';
-$spritesheet_width = 190px;
-$spritesheet_height = 68px;
+$icon_arrow_2x = 0px 106px 0px -106px 44px 24px 474px 130px '../images/sprite-2x.png' 'icon_arrow-2x';
+$spritesheet_width = 237px;
+$spritesheet_height = 65px;
 $spritesheet_image = '../images/sprite.png';
 $spritesheet_sprites = $header_logo $icon_arrow;
-$spritesheet = 190px 68px '../images/sprite.png' $spritesheet_sprites;
-$retina_spritesheet_width = 380px;
-$retina_spritesheet_height = 136px;
+$spritesheet = 237px 65px '../images/sprite.png' $spritesheet_sprites;
+$retina_spritesheet_width = 474px;
+$retina_spritesheet_height = 130px;
 $retina_spritesheet_image = '../images/sprite-2x.png';
 $retina_spritesheet_sprites = $header_logo_2x $icon_arrow_2x;
-$retina_spritesheet = 380px 136px '../images/sprite-2x.png' $retina_spritesheet_sprites;
+$retina_spritesheet = 474px 130px '../images/sprite-2x.png' $retina_spritesheet_sprites;
 
 /*
 These "retina group" variables are mappings for the naming and pairing of normal and retina sprites.
@@ -88,13 +88,20 @@ The provided mixins are intended to be used with the array-like variables
   sprite($icon_email)
 }
 
-Here are example usages in HTML:
+Example usage in HTML:
 
 `display: block` sprite:
 <div class="icon-home"></div>
 
-`display: inline-block` sprite:
-<img class="icon-home" />
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
 */
 spriteWidth($sprite) {
   width: $sprite[4];

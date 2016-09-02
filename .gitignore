@@ -29,3 +29,4 @@ node_modules
 .DS_Store
 build
 source/javascripts/config.js
+source/assets/stylesheets/_sprite.styl

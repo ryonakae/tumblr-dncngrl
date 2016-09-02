@@ -1,10 +1,10 @@
-<template lang='jade'>
+<template lang='pug'>
 //- photo
 article.entryItem.entryItem--photo(v-el:entry-item, v-if='post.type === "photo"')
   a.link(v-link='{ name: "post", params: { id: post.id, slug: post.slug }}', v-on:click='setEntryImage')
     img.image(v-bind:src='post.photos[0].original_size.url')
-    h1.title {{ post.timestamp | moment }}
-    div.notes {{ post.note_count }} Notes
+  h1.title {{ post.timestamp | moment }}
+  div.notes {{ post.note_count }} Notes
 
 //- news
 article.entryItem.entryItem--news(v-el:entry-item, v-if='post.type === "text"')
@@ -17,16 +17,9 @@ article.entryItem.entryItem--news(v-el:entry-item, v-if='post.type === "text"')
 
 <script>
 import store from '../store/';
-window.jQuery = window.$ = require('jquery');
 
 export default {
   props: ['post'],
-
-  // data() {
-  //   return {
-  //     imageUrl: this.post.photos[0].original_size.url
-  //   };
-  // },
 
   computed: {
     imageUrl() {
@@ -35,18 +28,23 @@ export default {
       }
     },
     imageWidth() {
-      return $(this.$els.entryItem).width();
+      return this.$els.entryItem.clientWidth;
     },
     imageHeight() {
-      return $(this.$els.entryItem).height();
+      return this.$els.entryItem.clientHeight;
     },
     imageOffset() {
-      return $(this.$els.entryItem).offset();
+      const $element = this.$els.entryItem;
+      const rect = $element.getBoundingClientRect();
+      const offset = {
+        top: rect.top + window.pageYOffset,
+        left: rect.left + window.pageXOffset
+      };
+      return offset;
     },
   },
 
   ready() {
-    // // console.log(this.image);
   },
 
   methods: {

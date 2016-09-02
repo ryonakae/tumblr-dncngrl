@@ -11,33 +11,34 @@
     display block
     line-height 0
     position absolute
-    top 50%
+    top 42%
     left 0
     width 100%
     text-align center
     font-size $fontSize_archiveTitle
     opacity 0
-    transform scale(1.15) translateY(-50%)
-    transition: all 600ms easing('in-out-quart')
-    letter-spacing 0.2em
-    text-indent 0.2em
+    transform translateY(-50%)
+    transition: all 700ms easing($easing)
+    letter-spacing 0.4em
+    text-indent 0.4em
     filter blur(20px)
+
+    +media-query($mq_tablet)
+      font-size $fontSize_archiveTitle * 0.8
+
+    +media-query($mq_spLarge)
+      font-size $fontSize_archiveTitle * 0.6
+
+    +media-query($mq_sp)
+      font-size $fontSize_archiveTitle * 0.5
 
   &.is--visible
     span
       opacity 1
-      transform scale(1) translateY(-50%)
-      letter-spacing 0.06em
-      text-indent 0.06em
+      // transform scale(1) translateY(-50%)
+      letter-spacing 0.07em
+      text-indent 0.07em
       filter blur(0px)
-
-  +media-query($mq_spLarge)
-    span
-      font-size $fontSize_archiveTitle * 0.7
-
-  +media-query($mq_sp)
-    span
-      font-size $fontSize_archiveTitle * 0.6
 
 .archive__content
   position relative
@@ -47,7 +48,7 @@
   transform translateY(150+(110/2)px)
 
   +media-query($mq_spLarge)
-    transform translateY(150+(110*0.7/2)px)
+    transform translateY(150+(110*0.6/2)px)
 
   +media-query($mq_sp)
-    transform translateY(150+(110*0.6/2)px)
+    transform translateY(150+(110*0.5/2)px)
