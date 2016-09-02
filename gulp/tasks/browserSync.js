@@ -15,7 +15,8 @@ gulp.task('bs:init', () => {
       baseDir: path.build.root,
       // logLevel: 'debug',
       // logConnections: true
-    }
+    },
+    ghostMode: false
   });
 });
 

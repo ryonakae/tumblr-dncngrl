@@ -93,47 +93,37 @@ export default {
   },
 
   ready() {
-    const $eyecatch = document.getElementById('js-eyecatch');
+    // eyecatch
+    $('.js-eyecatchImage').addClass('is--noanimation');
+    setTimeout(() => {
+      $('.js-eyecatchImage').removeClass('is--noanimation');
+    }, 1000);
 
-    $($eyecatch).imagesLoaded({background: true}, ()=>{
-      // アイキャッチ表示
-      $eyecatch.classList.add('is--visible');
+    // ページタイトルを変更
+    store.actions.changePageTitle('News');
 
-      // eyecatch
-      $('.js-eyecatchImage').addClass('is--noanimation');
-      setTimeout(() => {
-        $('.js-eyecatchImage').removeClass('is--noanimation');
-      }, 1000);
+    // ページタイトルをフェードイン
+    setTimeout(() => {
+      $(this.$els.title).addClass('is--visible');
+    }, 150);
 
-      // ノイズ停止
-      document.getElementById('js-grain').classList.add('is--hidden');
+    setTimeout(() => {
+      // ヘッダータイトルとナビをフェードイン
+      $('.js-headerTitle').addClass('is--visible');
+      $('.js-naviOpen').addClass('is--visible');
 
-      // ページタイトルを変更
-      store.actions.changePageTitle('News');
+      // totalPostsとpageNumをリセット
+      this.resetPageNum();
+      this.resetTotalPosts();
 
-      // ページタイトルをフェードイン
-      setTimeout(() => {
-        $(this.$els.title).addClass('is--visible');
-      }, 150);
+      store.actions.loadEntry('text', 4, null, false, true)
+        .then(() => {
+          $(this.$els.entryList).addClass('is--visible');
 
-      setTimeout(() => {
-        // ヘッダータイトルとナビをフェードイン
-        $('.js-headerTitle').addClass('is--visible');
-        $('.js-naviOpen').addClass('is--visible');
-
-        // totalPostsとpageNumをリセット
-        this.resetPageNum();
-        this.resetTotalPosts();
-
-        store.actions.loadEntry('text', 4, null, false, true)
-          .then(() => {
-            $(this.$els.entryList).addClass('is--visible');
-
-            // 無限スクロール
-            setTimeout(store.actions.infiniteScroll('text', 4, false, true), 600);
-          });
-      }, 150+600);
-    });
+          // 無限スクロール
+          setTimeout(store.actions.infiniteScroll('text', 4, false, true), 600);
+        });
+    }, 150+600);
   },
 
   methods: {

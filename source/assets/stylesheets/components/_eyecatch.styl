@@ -8,10 +8,6 @@
   z-index -1
   overflow hidden
   transition: all 1000ms easing($easing)
-  opacity 0
-
-  &.is--visible
-    opacity 1
 
   &:after
     content ''
@@ -61,11 +57,6 @@
     background-size 300px
     mix-blend-mode screen
     transition: all 1000ms easing($easing)
-
-    &.is--hidden
-      opacity 0
-      // display none
-      // visibility hidden
 
   +media-query($mq_tablet)
     .image

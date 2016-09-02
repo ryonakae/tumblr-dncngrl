@@ -17,23 +17,23 @@
     hide-text()
     background url('../images/index_logo.png') no-repeat
     background-size cover
-    width (968px/2)
+    width (976px/2)
     height (180px/2)
 
     +media-query($mq_tablet)
-      width (968px/2) * 0.85
+      width (976px/2) * 0.85
       height (180px/2) * 0.85
 
     +media-query($mq_spLarge)
-      width (968px/2) * 0.7
+      width (976px/2) * 0.7
       height (180px/2) * 0.7
 
     +media-query($mq_sp)
-      width (968px/2) * 0.6
+      width (976px/2) * 0.6
       height (180px/2) * 0.6
 
     +media-query($mq_spSmall)
-      width (968px/2) * 0.5
+      width (976px/2) * 0.5
       height (180px/2) * 0.5
 
   &.is--visible
@@ -55,8 +55,10 @@
 
   .is-pc &
     &:hover
+      .text
+        transform translateY(2px)
       .icon
-        margin-top 3px
+        transform translate(-50%, 2px)
 
   .text
     display block
@@ -65,6 +67,7 @@
     color $textColor_default
     letter-spacing 0.3em
     text-indent 0.3em
+    transition: all 400ms easing($easing)
 
   .icon
     retinaSprite($icon_arrow_group)
@@ -72,4 +75,4 @@
     left 50%
     transform translateX(-50%)
     margin-top 10px
-    transition: margin-top 100ms ease
+    transition: all 400ms easing($easing)

@@ -49,40 +49,30 @@ export default {
   },
 
   ready() {
-    const $eyecatch = document.getElementById('js-eyecatch');
+    // アイキャッチとコンテンツを移動
+    setTimeout(() => {
+      $(this.$els.content).addClass('is--visible');
+    }, 150);
+    setTimeout(() => {
+      $('.js-eyecatchImage').addClass('is--shiftLeft');
+    }, 300);
 
-    $($eyecatch).imagesLoaded({background: true}, ()=>{
-      // アイキャッチ表示
-      $eyecatch.classList.add('is--visible');
+    // ページタイトルを変更
+    store.actions.changePageTitle('About');
 
-      // アイキャッチとコンテンツを移動
-      setTimeout(() => {
-        $(this.$els.content).addClass('is--visible');
-      }, 150);
-      setTimeout(() => {
-        $('.js-eyecatchImage').addClass('is--shiftLeft');
-      }, 300);
+    // ヘッダータイトルとナビをフェードイン
+    setTimeout(() => {
+      $('.js-headerTitle').addClass('is--visible');
+      $('.js-naviOpen').addClass('is--visible');
+    }, 600);
 
-      // ノイズ隠す
-      document.getElementById('js-grain').classList.add('is--hidden');
-
-      // ページタイトルを変更
-      store.actions.changePageTitle('About');
-
-      // ヘッダータイトルとナビをフェードイン
-      setTimeout(() => {
-        $('.js-headerTitle').addClass('is--visible');
-        $('.js-naviOpen').addClass('is--visible');
-      }, 600);
-
-      // ページ内容取得してフェードイン
-      this.getAboutContent()
-        .then(() => {
-          setTimeout(() => {
-            $(this.$els.entry).addClass('is--visible');
-          }, 1200);
-        });
-    });
+    // ページ内容取得してフェードイン
+    this.getAboutContent()
+      .then(() => {
+        setTimeout(() => {
+          $(this.$els.entry).addClass('is--visible');
+        }, 1200);
+      });
   },
 
   methods: {

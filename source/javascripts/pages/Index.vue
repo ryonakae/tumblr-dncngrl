@@ -11,8 +11,6 @@ section.page#js-page.js-page.index
 <script>
 import store from '../store/';
 window.jQuery = window.$ = require('jquery');
-const imagesLoaded = require('imagesloaded');
-imagesLoaded.makeJQueryPlugin($);
 
 export default {
   route: {
@@ -77,37 +75,27 @@ export default {
   },
 
   ready() {
-    const $eyecatch = document.getElementById('js-eyecatch');
+    // pageの高さをwindowの高さにする
+    this.fitWindow();
+    $(window).on('resize.fitWindow orientationchange.fitWindow', this.fitWindow);
 
-    $($eyecatch).imagesLoaded({background: true}, ()=>{
-      // set DOM
-      const $grain = document.getElementById('js-grain');
-      const $naviOpen = document.getElementById('js-naviOpen');
+    // set DOM
+    const $naviOpen = document.getElementById('js-naviOpen');
 
-      // アイキャッチ表示
-      $eyecatch.classList.add('is--visible');
+    // ページタイトルを変更
+    store.actions.changePageTitle('Top');
 
-      // ノイズ表示する
-      $grain.classList.remove('is--hidden');
+    setTimeout(() => {
+      this.$els.title.classList.add('is--visible');
+    }, 100);
 
-      // ページタイトルを変更
-      store.actions.changePageTitle('Top');
+    setTimeout(() => {
+      this.$els.button.classList.add('is--visible');
+      $naviOpen.classList.add('is--visible');
 
-      setTimeout(() => {
-        this.$els.title.classList.add('is--visible');
-      }, 100);
-
-      setTimeout(() => {
-        this.$els.button.classList.add('is--visible');
-        $naviOpen.classList.add('is--visible');
-
-        // 下へのスクロールがあったらworkへ遷移
-        this.onScrollTransition('/work', 'more', 10);
-
-        this.fitWindow();
-        $(window).on('resize.fitWindow orientationchange.fitWindow', this.fitWindow);
-      }, 600);
-    });
+      // 下へのスクロールがあったらworkへ遷移
+      this.onScrollTransition('/work', 'more', 10);
+    }, 600);
   },
 
   methods: {
