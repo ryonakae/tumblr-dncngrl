@@ -75,6 +75,10 @@ export default {
   },
 
   ready() {
+    // pageの高さをwindowの高さにする
+    this.fitWindow();
+    $(window).on('resize.fitWindow orientationchange.fitWindow', this.fitWindow);
+
     // set DOM
     const $naviOpen = document.getElementById('js-naviOpen');
 
@@ -91,9 +95,6 @@ export default {
 
       // 下へのスクロールがあったらworkへ遷移
       this.onScrollTransition('/work', 'more', 10);
-
-      this.fitWindow();
-      $(window).on('resize.fitWindow orientationchange.fitWindow', this.fitWindow);
     }, 600);
   },
 
