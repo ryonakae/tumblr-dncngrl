@@ -14,6 +14,7 @@ const state = {
   pageNum: 0,
   totalPosts: 0,
   eyecatch: {},
+  eyecatchImage: {},
   entryImage: {
     url: '',
     width: 0,

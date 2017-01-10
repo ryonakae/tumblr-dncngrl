@@ -34,10 +34,14 @@ export default {
     state.totalPosts = 0;
   },
 
-  // アイキャッチのVMを取得
-  // していろんなとこで使い回す
+  // アイキャッチのVMを取得していろんなとこで使い回す
   SET_EYECATCH(state, vm) {
     state.eyecatch = vm.$els.eyecatch;
+  },
+
+  // アイキャッチ画像をセット
+  SET_EYECATCH_IMAGE(state, dom) {
+    state.eyecatchImage = dom;
   },
 
   // 記事の画像を取得してurlを取得

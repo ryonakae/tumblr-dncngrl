@@ -6,26 +6,37 @@ import runSequence from 'run-sequence';
 
 // watch
 gulp.task('watch', () => {
+  // html
   watch(path.source.root + '**/*.html', (event) => {
     gulp.start('include');
   });
 
+  // stylus
   watch(path.source.stylesheets + '**/*.styl', (event) => {
     gulp.start('stylus');
   });
 
+  // image
+  watch(path.source.images + '*', (event) => {
+    gulp.start('image:min');
+  });
+  watch(path.source.sprite + '*', (event) => {
+    runSequence('image:sprite', 'stylus');
+  });
+
+  // js
+  watch([
+    path.source.javascripts + '**/*.{js,jsx,vue}',
+    '!' + path.source.javascripts + 'lib/**/*'
+  ], (event) => {
+    gulp.start('esLint');
+  });
+
+  // other file
   watch([
     path.source.fonts + '*',
     // path.source.root + 'assets/videos/**/*'
   ], (event) => {
     runSequence('copyFile', 'stylus');
-  });
-
-  watch(path.source.images + '*', (event) => {
-    gulp.start('image:min');
-  });
-
-  watch(path.source.sprite + '*', (event) => {
-    runSequence('image:sprite', 'stylus');
   });
 });

@@ -1,6 +1,6 @@
 <template lang='pug'>
-.eyecatch#js-eyecatch(v-el:eyecatch)
-  .image#js-eyecatchImage.js-eyecatchImage(v-bind:style='{ backgroundImage:"url("+eyecatch+")" }')
+.eyecatch#js-eyecatch.is--hidden(v-el:eyecatch)
+  .image#js-eyecatchImage.js-eyecatchImage(v-bind:style='{ backgroundImage:"url("+eyecatch+")" }', v-el:eyecatch-image)
   .grain#js-grain
 </template>
 
@@ -16,6 +16,7 @@ export default {
 
   ready() {
     store.actions.setEyecatch(this);
+    store.actions.setEyecatchImage(this.$els.eyecatchImage);
   }
 };
 </script>

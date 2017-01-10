@@ -5,7 +5,7 @@
 
   "parser": "babel-eslint",
 
-  "extends": "eslint:recommended",
+  "extends": [ "eslint:recommended" ],
 
   "env": {
     "browser": true,
@@ -13,13 +13,13 @@
     "es6": true,
     "jquery": true
   },
-
   "rules": {
     "strict": 0,
     "semi": 2,
     "indent": [
       "error",
-      2, { "SwitchCase": 1 }
+      2,
+      { "SwitchCase": 1 }
     ],
     "linebreak-style": [
       "error",
@@ -38,6 +38,8 @@
     }],
     "no-console": 0,
     "no-var": 2,
+    "no-unused-vars": 0,
+    "no-undef": 0,
     "no-new-require": 2,
     "no-multiple-empty-lines": [2, {
       "max": 2
@@ -50,8 +52,6 @@
         "AssignmentExpression": true
       }
     }],
-    "no-unused-vars": 0,
-    "no-undef": 0,
   },
 
   "ecmaFeatures": {

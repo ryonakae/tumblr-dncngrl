@@ -17,6 +17,10 @@ import CloneImage from './components/CloneImage.vue';
 
 import {myUaManager} from './bundle.js';
 
+window.jQuery = window.$ = require('jquery');
+const imagesLoaded = require('imagesloaded');
+imagesLoaded.makeJQueryPlugin($);
+
 export default {
   components: {
     'component-eyecatch': Eyecatch,
@@ -41,6 +45,14 @@ export default {
       else {
         document.title = this.pageTitle + ' | ' + store.state.siteTitle;
       }
+    });
+
+    // eyecatch画像がロードされたら表示
+    console.log(store.state.eyecatchImage);
+    $(store.state.eyecatchImage).imagesLoaded({background: true}, ()=>{
+      setTimeout(()=>{
+        $('#js-eyecatch').removeClass('is--hidden');
+      }, 100);
     });
   }
 };

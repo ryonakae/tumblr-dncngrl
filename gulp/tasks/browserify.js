@@ -14,7 +14,6 @@ import gulpif from 'gulp-if';
 import uglify from 'gulp-uglify';
 import bs from './browserSync';
 import replace from 'gulp-replace';
-import esLint from 'gulp-eslint';
 
 
 // bundleScript function
@@ -24,9 +23,8 @@ const bundleScript = (isProduction) => {
   });
   const srcPath = './' + path.source.javascripts;
   const destPath = './' + path.build.javascripts;
-  let isInitial = true;
 
-  srcFiles.forEach((file, id) => {
+  srcFiles.forEach((file) => {
     let b;
 
     const options = {
@@ -47,18 +45,6 @@ const bundleScript = (isProduction) => {
 
     // bundle function
     const bundle = () => {
-      // ESLint
-      // 初回実行時だけ、各bundleが全部終わったタイミングでESLintを実行する
-      if (isInitial) {
-        if (id === srcFiles.length-1) {
-          gulp.start('esLint');
-          isInitial = false;
-        }
-      }
-      else {
-        gulp.start('esLint');
-      }
-
       const bundleFile = file.replace(/.+\/(.+)\.js/g, '$1') + '.js';
 
       b
@@ -68,7 +54,6 @@ const bundleScript = (isProduction) => {
         })
         .pipe(source(bundleFile))
         .pipe(buffer())
-        .pipe(gulpif(isProduction, replace('history: false', 'history: true'))) // vue-routerのhistoryオプションを切り替え
         .pipe(gulpif(isProduction, uglify({ preserveComments: 'some' })))
         .pipe(gulp.dest(destPath))
         .on('end', () => {

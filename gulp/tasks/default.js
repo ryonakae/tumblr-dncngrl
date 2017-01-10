@@ -8,11 +8,11 @@ import runSequence from 'run-sequence';
 gulp.task('default', () => {
   // development
   if(!env.isProduction){
-    runSequence('cleanBuild', ['copyFile', 'image:sprite'], ['stylus', 'browserify', 'image:min'], 'include', 'bs:init', 'watch');
+    runSequence('cleanBuild', ['copyFile', 'image:sprite'], 'esLint', ['stylus', 'browserify', 'image:min'], 'include', 'bs:init', 'watch');
   }
 
   // production
   else {
-    runSequence('clearCache', 'cleanBuild', ['copyFile', 'image:sprite'], ['stylus', 'browserify', 'image:min'], 'include');
+    runSequence('clearCache', 'cleanBuild', ['copyFile', 'image:sprite'], 'esLint', ['stylus', 'browserify', 'image:min'], 'include');
   }
 });

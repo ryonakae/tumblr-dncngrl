@@ -31,6 +31,10 @@ export default {
     dispatch('SET_EYECATCH', vm);
   },
 
+  setEyecatchImage: ({dispatch}, dom) => {
+    dispatch('SET_EYECATCH_IMAGE', dom);
+  },
+
   setEntryImage: ({dispatch}, url, width, height, offset) => {
     return new Promise((resolve, reject) => {
       dispatch('SET_ENTRY_IMAGE', url, width, height, offset);
@@ -65,6 +69,7 @@ export default {
           type: postType
         },
         dataType: 'jsonp',
+        cache: true,
         timeout: 10000,
         success: (res) => {
           // 関数実行のたびに配列を空にする
